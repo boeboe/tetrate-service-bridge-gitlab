@@ -4,15 +4,17 @@
 #
 ROOT_DIR="$( cd -- "$(dirname "${0}")" >/dev/null 2>&1 ; pwd -P )"
 source ${ROOT_DIR}/helpers.sh
+source ${ROOT_DIR}/gitlab-api.sh
 
 ACTION=${1}
 
 GITLAB_HOME=/tmp/gitlab
 GITLAB_NETWORK="gitlab" 
-GITLAB_NAME="gitlab-ee"
+GITLAB_CONTAINER_NAME="gitlab-ee"
 
 GITLAB_ROOT_EMAIL="root@local"
 GITLAB_ROOT_PASSWORD="Tetrate123."
+GITLAB_ROOT_TOKEN="01234567890123456789"
 GITLAB_OMNIBUS_CONFIG="
     external_url 'http://127.0.0.1'
     registry_external_url 'http://127.0.0.1:5050'
@@ -36,15 +38,13 @@ function start_local_gitlab {
     print_info "Going to start local repo ${2} in docker network ${1} for the first time"
     mkdir -p ${GITLAB_HOME}
     mkdir -p ${GITLAB_HOME}/data/git-data/repositories
-    # On MacOS we need to manually fix a permission issue!
-    if [[ $(uname -s) == Darwin* ]] ; then sudo chmod -R -v 2770 ${GITLAB_HOME}/data/git-data/repositories ; fi
     docker run --detach \
       --env GITLAB_ROOT_EMAIL="${GITLAB_ROOT_EMAIL}" \
       --env GITLAB_ROOT_PASSWORD="${GITLAB_ROOT_PASSWORD}" \
       --env GITLAB_OMNIBUS_CONFIG="${GITLAB_OMNIBUS_CONFIG}" \
-      --hostname "${GITLAB_NAME}" \
+      --hostname "${GITLAB_CONTAINER_NAME}" \
       --publish 443:443 --publish 80:80 --publish 2222:22 --publish 5000:5050 \
-      --name "${GITLAB_NAME}" \
+      --name "${GITLAB_CONTAINER_NAME}" \
       --net ${1} \
       --restart always \
       --volume ${GITLAB_HOME}/config:/etc/gitlab \
@@ -85,12 +85,12 @@ function remove_local_gitlab {
 # Get local gitlab http endpoint
 #   args:
 #     (1) gitlab name
-function get_gitlab_http_endpoint {
+function get_gitlab_http_url {
   if ! IP=$(docker inspect --format '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' ${1}  2>/dev/null ); then
     print_error "Local docker repo not running" ; 
     exit 1 ;
   fi
-  echo "${IP}:80" ;
+  echo "http://${IP}:80" ;
 }
 
 # Get local gitlab docker endpoint
@@ -106,16 +106,16 @@ function get_gitlab_docker_endpoint {
 
 # Wait for gitlab UI to become available
 #   args:
-#     (1) gitlab http endpoint
+#     (1) gitlab http url
 function wait_gitlab_ui_ready {
   echo "Waiting for gitlab to be ready (initially ca 12 minutes)..."
-  while ! curl http://${1} -k 2>/dev/null | grep "You are being" &>/dev/null;
+  while ! curl ${1} -k 2>/dev/null | grep "You are being" &>/dev/null;
   do
     sleep 1 ;
     echo -n "." ;
   done
   echo "DONE"
-  echo "The gitlab GUI is available at http://${1}"
+  echo "The gitlab GUI is available at ${1}"
 }
 
 # Add local docker repo as docker insecure registry
@@ -140,30 +140,41 @@ function add_insecure_registry {
 
 if [[ ${ACTION} = "start" ]]; then
   
-  start_local_gitlab ${GITLAB_NETWORK} ${GITLAB_NAME} ;
+  start_local_gitlab ${GITLAB_NETWORK} ${GITLAB_CONTAINER_NAME} ;
 
-  GITLAB_HTTP_ENDPOINT=$(get_gitlab_http_endpoint ${GITLAB_NAME})
-  echo ">>>>>> ${GITLAB_HTTP_ENDPOINT}"
-  wait_gitlab_ui_ready ${GITLAB_HTTP_ENDPOINT}
+  GITLAB_HTTP_URL=$(get_gitlab_http_url ${GITLAB_CONTAINER_NAME})
+  wait_gitlab_ui_ready ${GITLAB_HTTP_URL} ;
 
-  GITLAB_DOCKER_ENDPOINT==$(get_gitlab_docker_endpoint ${GITLAB_NAME})
+  GITLAB_DOCKER_ENDPOINT=$(get_gitlab_docker_endpoint ${GITLAB_CONTAINER_NAME})
   add_insecure_registry ${GITLAB_DOCKER_ENDPOINT} ;
 
   exit 0
 fi
 
+if [[ ${ACTION} = "config" ]]; then
+  
+  gitlab_set_user_token ${GITLAB_CONTAINER_NAME} "root" ${GITLAB_ROOT_TOKEN} "Automation Token" ;
+  GITLAB_HTTP_URL=$(get_gitlab_http_url ${GITLAB_CONTAINER_NAME})
+
+  gitlab_create_group ${GITLAB_HTTP_URL} ${GITLAB_ROOT_TOKEN} "tsb" ;
+  gitlab_create_project_in_group ${GITLAB_HTTP_URL} ${GITLAB_ROOT_TOKEN} "tsb" "images" "TSB container images" ;
+  
+  exit 0
+fi
+
 if [[ ${ACTION} = "stop" ]]; then
-  stop_local_gitlab ${GITLAB_NAME} ;
+  stop_local_gitlab ${GITLAB_CONTAINER_NAME} ;
   exit 0
 fi
 
 if [[ ${ACTION} = "remove" ]]; then
-  remove_local_gitlab ${GITLAB_NETWORK} ${GITLAB_NAME} ;
+  remove_local_gitlab ${GITLAB_NETWORK} ${GITLAB_CONTAINER_NAME} ;
   exit 0
 fi
 
 echo "Please specify one of the following action:"
 echo "  - start"
+echo "  - config"
 echo "  - stop"
 echo "  - remove"
 exit 1

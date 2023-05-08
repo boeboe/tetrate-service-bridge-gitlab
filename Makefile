@@ -12,6 +12,10 @@ help: ## This help
 gitlab-start: ## Start gitlab cicd server
 	@/bin/sh -c './gitlab.sh start'
 
+.PHONY: gitlab-config
+gitlab-config: ## Configure gitlab cicd server
+	@/bin/sh -c './gitlab.sh config'
+
 .PHONY: gitlab-stop
 gitlab-stop: ## Stop gitlab cicd server
 	@/bin/sh -c './gitlab.sh stop'
