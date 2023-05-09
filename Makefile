@@ -12,14 +12,6 @@ help: ## This help
 gitlab-start: ## Start gitlab cicd server
 	@/bin/sh -c './gitlab.sh start'
 
-.PHONY: gitlab-config
-gitlab-config: ## Configure gitlab cicd server
-	@/bin/sh -c './gitlab.sh config'
-
-.PHONY: gitlab-sync-images
-gitlab-sync-images: ## Sync TSB images into gitlab docker repo
-	@/bin/sh -c './gitlab.sh sync-images'
-
 .PHONY: gitlab-stop
 gitlab-stop: ## Stop gitlab cicd server
 	@/bin/sh -c './gitlab.sh stop'
@@ -28,3 +20,11 @@ gitlab-stop: ## Stop gitlab cicd server
 gitlab-remove: ## Remove gitlab cicd server
 	@/bin/sh -c './gitlab.sh remove'
 
+
+.PHONY: repo-sync-images
+repo-sync-images: ## Sync TSB images into gitlab docker repo
+	@/bin/sh -c './repo.sh sync-images'
+
+.PHONY: repo-config
+repo-config: ## Configure gitlab groups, projects and repos
+	@/bin/sh -c './repo.sh config-repos'

@@ -1,0 +1,14 @@
+[
+  {
+    "description": "Minikube cluster management",
+    "directory": "infra_minikube",
+    "group": "infra",
+    "project": "minikube"
+  },
+  {
+    "description": "TSB Container Images",
+    "directory": "tsb_images",
+    "group": "tsb",
+    "project": "images"
+  }
+]
