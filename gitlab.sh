@@ -11,13 +11,14 @@ ACTION=${1}
 GITLAB_HOME=/tmp/gitlab
 GITLAB_NETWORK="gitlab" 
 GITLAB_CONTAINER_NAME="gitlab-ee"
+GITLAB_DOCKER_PORT=5050
 
 GITLAB_ROOT_EMAIL="root@local"
 GITLAB_ROOT_PASSWORD="Tetrate123."
 GITLAB_ROOT_TOKEN="01234567890123456789"
 GITLAB_OMNIBUS_CONFIG="
     external_url 'http://127.0.0.1'
-    registry_external_url 'http://127.0.0.1:5050'
+    registry_external_url 'http://127.0.0.1:${GITLAB_DOCKER_PORT}'
   "
 
 # Start local gitlab instance
@@ -43,7 +44,7 @@ function start_local_gitlab {
       --env GITLAB_ROOT_PASSWORD="${GITLAB_ROOT_PASSWORD}" \
       --env GITLAB_OMNIBUS_CONFIG="${GITLAB_OMNIBUS_CONFIG}" \
       --hostname "${GITLAB_CONTAINER_NAME}" \
-      --publish 443:443 --publish 80:80 --publish 2222:22 --publish 5000:5050 \
+      --publish 443:443 --publish 80:80 --publish 2222:22 --publish ${GITLAB_DOCKER_PORT}:${GITLAB_DOCKER_PORT} \
       --name "${GITLAB_CONTAINER_NAME}" \
       --net ${1} \
       --restart always \
@@ -79,7 +80,7 @@ function remove_local_gitlab {
     docker network rm ${1} &>/dev/null ;
     print_info "Local docker repo network removed"
   fi
-  rm -rf ${GITLAB_HOME}
+  sudo rm -rf ${GITLAB_HOME}
 }
 
 # Get local gitlab http endpoint
@@ -101,14 +102,14 @@ function get_gitlab_docker_endpoint {
     print_error "Local docker repo not running" ; 
     exit 1 ;
   fi
-  echo "${IP}:5000" ;
+  echo "${IP}:${GITLAB_DOCKER_PORT}" ;
 }
 
 # Wait for gitlab UI to become available
 #   args:
 #     (1) gitlab http url
 function wait_gitlab_ui_ready {
-  echo "Waiting for gitlab to be ready (initially ca 12 minutes)..."
+  echo "Waiting for gitlab to be ready..."
   while ! curl ${1} -k 2>/dev/null | grep "You are being" &>/dev/null;
   do
     sleep 1 ;
@@ -137,6 +138,51 @@ function add_insecure_registry {
   fi
 }
 
+# Sync tsb docker images into gitlab docker repo (if not yet available)
+#   args:
+#     (1) gitlab docker repo endpoint
+function sync_tsb_images {
+    # Sync all tsb images locally
+    for image in `tctl install image-sync --just-print --raw --accept-eula 2>/dev/null` ; do
+      image_without_repo=$(echo ${image} | sed "s|containers.dl.tetrate.io/||")
+      image_name=$(echo ${image_without_repo} | awk -F: '{print $1}')
+      image_tag=$(echo ${image_without_repo} | awk -F: '{print $2}')
+      if ! docker image inspect ${image} &>/dev/null ; then
+        docker pull ${image} ;
+      fi
+      if ! docker image inspect ${1}/${image_without_repo} &>/dev/null ; then
+        docker tag ${image} ${1}/${image_without_repo} ;
+      fi
+      if ! curl -s -X GET ${1}/v2/${image_name}/tags/list | grep "${image_tag}" &>/dev/null ; then
+        docker push ${1}/${image_without_repo} ;
+      fi
+    done
+
+    # Sync image for application deployment
+    if ! docker image inspect containers.dl.tetrate.io/obs-tester-server:1.0 &>/dev/null ; then
+      docker pull containers.dl.tetrate.io/obs-tester-server:1.0 ;
+    fi
+    if ! docker image inspect ${1}/obs-tester-server:1.0 &>/dev/null ; then
+      docker tag containers.dl.tetrate.io/obs-tester-server:1.0 ${1}/obs-tester-server:1.0 ;
+    fi
+    if ! curl -s -X GET ${1}/v2/obs-tester-server/tags/list | grep "1.0" &>/dev/null ; then
+      docker push ${1}/obs-tester-server:1.0 ;
+    fi
+
+    # Sync image for debugging
+    if ! docker image inspect containers.dl.tetrate.io/netshoot &>/dev/null ; then
+      docker pull containers.dl.tetrate.io/netshoot ;
+    fi
+    if ! docker image inspect ${1}/netshoot &>/dev/null ; then
+      docker tag containers.dl.tetrate.io/netshoot ${1}/netshoot ;
+    fi
+    if ! curl -s -X GET ${1}/v2/netshoot/tags/list | grep "latest" &>/dev/null ; then
+      docker push ${1}/netshoot ;
+    fi
+
+    print_info "All tsb images synced and available in the local repo"
+}
+
 
 if [[ ${ACTION} = "start" ]]; then
   
@@ -162,6 +208,21 @@ if [[ ${ACTION} = "config" ]]; then
   exit 0
 fi
 
+if [[ ${ACTION} = "sync-images" ]]; then
+  GITLAB_DOCKER_ENDPOINT=$(get_gitlab_docker_endpoint ${GITLAB_CONTAINER_NAME})
+
+  if ! docker login ${GITLAB_DOCKER_ENDPOINT} --username "root" --password ${GITLAB_ROOT_PASSWORD} 2>/dev/null; then
+    echo "Failed to login to docker registry at ${GITLAB_DOCKER_ENDPOINT}. Check your credentials (root/${GITLAB_ROOT_PASSWORD})"
+    exit 1
+  fi
+
+  GITLAB_DOCKER_IMAGES_ENDPOINT=${GITLAB_DOCKER_ENDPOINT}/tsb/images
+  print_info "Going to sync tsb images to repo ${GITLAB_DOCKER_IMAGES_ENDPOINT}"
+  sync_tsb_images ${GITLAB_DOCKER_IMAGES_ENDPOINT} ;
+  print_info "Finished to sync tsb images to repo ${GITLAB_DOCKER_IMAGES_ENDPOINT}"
+  exit 0
+fi
+
 if [[ ${ACTION} = "stop" ]]; then
   stop_local_gitlab ${GITLAB_CONTAINER_NAME} ;
   exit 0
@@ -175,6 +236,7 @@ fi
 echo "Please specify one of the following action:"
 echo "  - start"
 echo "  - config"
+echo "  - sync-images"
 echo "  - stop"
 echo "  - remove"
 exit 1

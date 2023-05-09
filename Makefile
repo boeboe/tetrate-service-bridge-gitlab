@@ -16,6 +16,10 @@ gitlab-start: ## Start gitlab cicd server
 gitlab-config: ## Configure gitlab cicd server
 	@/bin/sh -c './gitlab.sh config'
 
+.PHONY: gitlab-sync-images
+gitlab-sync-images: ## Sync TSB images into gitlab docker repo
+	@/bin/sh -c './gitlab.sh sync-images'
+
 .PHONY: gitlab-stop
 gitlab-stop: ## Stop gitlab cicd server
 	@/bin/sh -c './gitlab.sh stop'
