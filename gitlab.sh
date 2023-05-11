@@ -95,13 +95,19 @@ function remove_gitlab {
 function start_gitlab_runner {
   mkdir -p ${1} ;
   sudo gitlab-runner install --working-directory="${1}" --user="gitlab-runner" ;
-  sudo gitlab-runner start ;
-  sudo gitlab-runner register \
-    --executor shell \
-    --name local-shell-runner \
-    --non-interactive \
-    --url "${2}" \
-    --registration-token "${3}" ;
+
+  if ! $(sudo gitlab-runner status &>/dev/null) ; then
+    echo "Starting gitlab runner"
+    sudo gitlab-runner start ;
+    sudo gitlab-runner register \
+      --executor shell \
+      --name local-shell-runner \
+      --non-interactive \
+      --url "${2}" \
+      --registration-token "${3}" ;
+  else
+    echo "Ggitlab runner was already running"
+  fi
 }
 
 # Stop gitlab local runner
