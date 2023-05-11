@@ -110,6 +110,7 @@ function start_gitlab_runner {
   fi
 
   if [[ $(gitlab_get_shared_runner_id ${2} ${3} "local-shell-runner") == "" ]] ; then
+    echo "Going to register gitlab runner with description 'local-shell-runner'"
     shared_runner_token=$(gitlab_get_shared_runner_token ${4})
     sudo gitlab-runner register \
       --executor shell \
