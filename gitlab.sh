@@ -28,14 +28,14 @@ GITLAB_OMNIBUS_CONFIG="
 # Start gitlab server
 #   args:
 #     (1) gitlab docker network
-#     (2) gitlab name
+#     (2) gitlab container name
 function start_gitlab {
   if ! docker network inspect ${1} &>/dev/null ; then
     docker network create ${1} --subnet="192.168.47.0/24" ;
   fi
 
   if docker ps --filter "status=running" | grep ${2} &>/dev/null ; then
-    echo "Do nothing, local repo ${2} in docker network ${1} is already running"
+    echo "Do nothing, container '${2}' in docker network '${1}' is already running"
   elif docker ps --filter "status=exited" | grep ${2} &>/dev/null ; then
     print_info "Going to start local repo ${2} in docker network ${1} again"
     docker start ${2} ;
@@ -47,9 +47,9 @@ function start_gitlab {
       --env GITLAB_ROOT_EMAIL="${GITLAB_ROOT_EMAIL}" \
       --env GITLAB_ROOT_PASSWORD="${GITLAB_ROOT_PASSWORD}" \
       --env GITLAB_OMNIBUS_CONFIG="${GITLAB_OMNIBUS_CONFIG}" \
-      --hostname "${GITLAB_CONTAINER_NAME}" \
+      --hostname "${2}" \
       --publish 443:443 --publish 80:80 --publish 2222:22 --publish ${GITLAB_DOCKER_PORT}:${GITLAB_DOCKER_PORT} \
-      --name "${GITLAB_CONTAINER_NAME}" \
+      --name "${2}" \
       --net ${1} \
       --restart always \
       --volume ${GITLAB_HOME}/config:/etc/gitlab \
@@ -62,7 +62,7 @@ function start_gitlab {
 
 # Stop gitlab server
 #   args:
-#     (1) gitlab name
+#     (1) gitlab container name
 function stop_gitlab {
   if docker inspect ${1} &>/dev/null ; then
     docker stop ${1} &>/dev/null ;
