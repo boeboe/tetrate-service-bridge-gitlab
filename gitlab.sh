@@ -136,7 +136,7 @@ function remove_gitlab_runner {
   sudo gitlab-runner stop ;
   sudo gitlab-runner unregister \
     --url ${2} \
-    --name local-shell-runner ;
+    --name "local-shell-runner" ;
   sudo gitlab-runner uninstall ;
   rm -rf ${1} ;
 }

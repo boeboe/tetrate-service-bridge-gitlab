@@ -18,7 +18,7 @@ function gitlab_set_root_api_token {
     echo "Going to configure gitlab root api token"
     docker exec ${1} gitlab-rails runner \
       "token = User.find_by_username('root').personal_access_tokens.create(scopes: [:api, :sudo], name: 'Root API Token'); 
-       token.set_token('${2}');
+       token.set_token('${3}');
        token.save"
   fi
 }
