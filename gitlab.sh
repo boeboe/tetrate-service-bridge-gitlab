@@ -14,6 +14,7 @@ GITLAB_ROOT_PASSWORD=$(cat ${ROOT_DIR}/env.json | jq -r ".gitlab.root.password")
 GITLAB_ROOT_TOKEN=$(cat ${ROOT_DIR}/env.json | jq -r ".gitlab.root.token") ;
 
 GITLAB_HOME=/tmp/gitlab
+GITLAB_RUNNER_WORKDIR=/tmp/gitlab-runner
 GITLAB_NETWORK="gitlab" 
 GITLAB_CONTAINER_NAME="gitlab-ee"
 GITLAB_DOCKER_PORT=5050
@@ -22,7 +23,7 @@ GITLAB_OMNIBUS_CONFIG="
     registry_external_url 'http://127.0.0.1:${GITLAB_DOCKER_PORT}'
   "
 
-# Start local gitlab instance
+# Start gitlab server
 #   args:
 #     (1) gitlab docker network
 #     (2) gitlab name
@@ -38,8 +39,8 @@ function start_gitlab {
     docker start ${2} ;
   else
     print_info "Going to start local repo ${2} in docker network ${1} for the first time"
-    mkdir -p ${GITLAB_HOME}
-    mkdir -p ${GITLAB_HOME}/data/git-data/repositories
+    mkdir -p ${GITLAB_HOME} ;
+    mkdir -p ${GITLAB_HOME}/data/git-data/repositories ;
     docker run --detach \
       --env GITLAB_ROOT_EMAIL="${GITLAB_ROOT_EMAIL}" \
       --env GITLAB_ROOT_PASSWORD="${GITLAB_ROOT_PASSWORD}" \
@@ -53,11 +54,11 @@ function start_gitlab {
       --volume ${GITLAB_HOME}/logs:/var/log/gitlab \
       --volume ${GITLAB_HOME}/data:/var/opt/gitlab \
       --shm-size 512m \
-      gitlab/gitlab-ee:latest
+      gitlab/gitlab-ee:latest ;
   fi
 }
 
-# Stop local gitlab instance
+# Stop gitlab server
 #   args:
 #     (1) gitlab name
 function stop_gitlab {
@@ -67,7 +68,7 @@ function stop_gitlab {
   fi
 }
 
-# Remove local gitlab instance
+# Remove gitlab server
 #   args:
 #     (1) gitlab docker network
 #     (2) gitlab name
@@ -81,7 +82,42 @@ function remove_gitlab {
     docker network rm ${1} &>/dev/null ;
     print_info "Local docker repo network removed"
   fi
-  sudo rm -rf ${GITLAB_HOME}
+  sudo rm -rf ${GITLAB_HOME} ;
+}
+
+# Start gitlab local runner
+#   args:
+#     (1) gitlab runner working directory
+#     (2) gitlab server url
+#     (3) gitlab shared runner registration token
+function start_gitlab_runner {
+  mkdir -p ${1} ;
+  sudo gitlab-runner install --working-directory="${1}" --user="gitlab-runner" ;
+  sudo gitlab-runner start ;
+  sudo gitlab-runner register \
+    --executor shell \
+    --name local-shell-runner \
+    --non-interactive \
+    --url "${2}" \
+    --registration-token "${3}" ;
+}
+
+# Stop gitlab local runner
+function stop_gitlab_runner {
+  sudo gitlab-runner stop ;
+}
+
+# Remove gitlab local runner
+#   args:
+#     (1) gitlab runner working directory
+#     (2) gitlab server url
+function remove_gitlab_runner {
+  sudo gitlab-runner stop ;
+  sudo gitlab-runner unregister \
+    --url ${2} \
+    --name local-shell-runner ;
+  sudo gitlab-runner uninstall ;
+  rm -rf ${1} ;
 }
 
 # Get local gitlab http endpoint
@@ -142,25 +178,38 @@ function add_insecure_registry {
 
 if [[ ${ACTION} = "start" ]]; then
   
+  # Start gitlab server
   start_gitlab ${GITLAB_NETWORK} ${GITLAB_CONTAINER_NAME} ;
-
   GITLAB_HTTP_URL=$(get_gitlab_http_url ${GITLAB_CONTAINER_NAME})
   wait_gitlab_ui_ready ${GITLAB_HTTP_URL} ;
-
   GITLAB_DOCKER_ENDPOINT=$(get_gitlab_docker_endpoint ${GITLAB_CONTAINER_NAME})
   add_insecure_registry ${GITLAB_DOCKER_ENDPOINT} ;
-
   gitlab_set_user_token ${GITLAB_CONTAINER_NAME} "root" ${GITLAB_ROOT_TOKEN} "Automation Token" ;
+
+  # Start gitlab runner
+  SHARED_RUNNER_TOKEN=$(gitlab_get_shared_runner_token ${GITLAB_CONTAINER_NAME})
+  start_gitlab_runner ${GITLAB_RUNNER_WORKDIR} ${GITLAB_HTTP_URL} ${SHARED_RUNNER_TOKEN} ;
 
   exit 0
 fi
 
 if [[ ${ACTION} = "stop" ]]; then
+
+  # Stop gitlab runner
+  stop_gitlab_runner ;
+
+  # Stop gitlab server
   stop_gitlab ${GITLAB_CONTAINER_NAME} ;
   exit 0
 fi
 
 if [[ ${ACTION} = "remove" ]]; then
+
+  # Remove gitlab runner
+  GITLAB_HTTP_URL=$(get_gitlab_http_url ${GITLAB_CONTAINER_NAME})
+  remove_gitlab_runner ${GITLAB_RUNNER_WORKDIR} ${GITLAB_HTTP_URL} ;
+
+  # Remove gitlab server
   remove_gitlab ${GITLAB_NETWORK} ${GITLAB_CONTAINER_NAME} ;
   exit 0
 fi

@@ -19,30 +19,16 @@ prereq-install: ## Install prerequisites
 ###
 
 .PHONY: gitlab-start
-gitlab-start: ## Start gitlab cicd server
+gitlab-start: ## Start gitlab server and runner
 	@/bin/sh -c './gitlab.sh start'
 
 .PHONY: gitlab-stop
-gitlab-stop: ## Stop gitlab cicd server
+gitlab-stop: ## Stop gitlab server and runner
 	@/bin/sh -c './gitlab.sh stop'
 
 .PHONY: gitlab-remove
-gitlab-remove: ## Remove gitlab cicd server
+gitlab-remove: ## Remove gitlab server and runner
 	@/bin/sh -c './gitlab.sh remove'
-
-###
-
-.PHONY: gitlab-runner-start
-gitlab-runner-start: ## Start gitlab-runner
-	@/bin/sh -c './gitlab-runner.sh start'
-
-.PHONY: gitlab-runner-stop
-gitlab-runner-stop: ## Stop gitlab-runner
-	@/bin/sh -c './gitlab-runner.sh stop'
-
-.PHONY: gitlab-runner-remove
-gitlab-runner-remove: ## Remove gitlab-runner
-	@/bin/sh -c './gitlab-runner.sh remove'
 
 ###
 
