@@ -5,7 +5,8 @@
       "password": "Tetrate123.",
       "token": "01234567890123456789"
     },
-    "version": "15.11.0"
+    "runner_version": "15.11.3",
+    "server_version": "15.11.0"
   },
   "tsb": {
     "istio_version": "1.15.7",

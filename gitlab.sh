@@ -12,7 +12,8 @@ if [[ ! -f "${ROOT_DIR}/env.json" ]] ; then echo "env.json not found, exiting...
 GITLAB_ROOT_EMAIL=$(cat ${ROOT_DIR}/env.json | jq -r ".gitlab.root.email") ;
 GITLAB_ROOT_PASSWORD=$(cat ${ROOT_DIR}/env.json | jq -r ".gitlab.root.password") ;
 GITLAB_ROOT_TOKEN=$(cat ${ROOT_DIR}/env.json | jq -r ".gitlab.root.token") ;
-GITLAB_VERSION=$(cat ${ROOT_DIR}/env.json | jq -r ".gitlab.version") ;
+GITLAB_RUNNER_VERSION=$(cat ${ROOT_DIR}/env.json | jq -r ".gitlab.runner_version") ;
+GITLAB_SERVER_VERSION=$(cat ${ROOT_DIR}/env.json | jq -r ".gitlab.server_version") ;
 
 GITLAB_HOME=/tmp/gitlab
 GITLAB_RUNNER_WORKDIR=/tmp/gitlab-runner
@@ -55,7 +56,7 @@ function start_gitlab {
       --volume ${GITLAB_HOME}/logs:/var/log/gitlab \
       --volume ${GITLAB_HOME}/data:/var/opt/gitlab \
       --shm-size 512m \
-      gitlab/gitlab-ee:${GITLAB_VERSION}-ee.0 ;
+      gitlab/gitlab-ee:${GITLAB_SERVER_VERSION}-ee.0 ;
   fi
 }
 

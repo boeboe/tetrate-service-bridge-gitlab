@@ -6,7 +6,7 @@ ACTION=${1}
 
 if [[ ! -f "${ROOT_DIR}/env.json" ]] ; then echo "env.json not found, exiting..." ; exit 1 ; fi
 ISTIOCTL_VERSION=$(cat ${ROOT_DIR}/env.json | jq -r ".tsb.istio_version") ;
-GITLAB_VERSION=$(cat ${ROOT_DIR}/env.json | jq -r ".gitlab.version") ;
+GITLAB_RUNNER_VERSION=$(cat ${ROOT_DIR}/env.json | jq -r ".gitlab.version") ;
 TSB_VERSION=$(cat ${ROOT_DIR}/env.json | jq -r ".tsb.version") ;
 TSB_REPO_URL=$(cat ${ROOT_DIR}/env.json | jq -r ".tsb.tetrate_repo.url") ;
 TSB_REPO_USER=$(cat ${ROOT_DIR}/env.json | jq -r ".tsb.tetrate_repo.user") ;
@@ -108,7 +108,7 @@ if [[ ${ACTION} = "install" ]]; then
   rm -f /tmp/tctl ;
 
   print_info "Installing gitlab-runner"
-  curl -Lo /tmp/gitlab-runner "https://gitlab-runner-downloads.s3.amazonaws.com/v${GITLAB_VERSION}/binaries/gitlab-runner-linux-amd64" ;
+  curl -Lo /tmp/gitlab-runner "https://gitlab-runner-downloads.s3.amazonaws.com/v${GITLAB_RUNNER_VERSION}/binaries/gitlab-runner-linux-amd64" ;
   chmod +x /tmp/gitlab-runner ;
   sudo install /tmp/gitlab-runner /usr/local/bin/gitlab-runner ;
   rm -f /tmp/gitlab-runner ;
