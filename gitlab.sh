@@ -92,7 +92,7 @@ function remove_gitlab {
 #     (1) gitlab runner working directory
 #     (2) gitlab api url
 #     (3) gitlab api token
-#     (4) gitlab shared runner registration token
+#     (4) gitlab container name
 function start_gitlab_runner {
   mkdir -p ${1} ;
 
@@ -110,12 +110,13 @@ function start_gitlab_runner {
   fi
 
   if [[ $(gitlab_get_shared_runner_id ${2} ${3} "local-shell-runner") == "" ]] ; then
+    shared_runner_token=$(gitlab_get_shared_runner_token ${4})
     sudo gitlab-runner register \
       --executor shell \
       --description "local-shell-runner" \
       --non-interactive \
       --url "${2}" \
-      --registration-token "${4}" ;
+      --registration-token "${shared_runner_token}" ;
   else
     echo "Gitlab runner with description 'local-shell-runner' already registered"
   fi
@@ -206,8 +207,7 @@ if [[ ${ACTION} = "start" ]]; then
   gitlab_set_user_token ${GITLAB_CONTAINER_NAME} "root" ${GITLAB_ROOT_TOKEN} "Automation Token" ;
 
   # Start gitlab runner
-  SHARED_RUNNER_TOKEN=$(gitlab_get_shared_runner_token ${GITLAB_CONTAINER_NAME})
-  start_gitlab_runner ${GITLAB_RUNNER_WORKDIR} ${GITLAB_HTTP_URL} ${GITLAB_ROOT_TOKEN} ${SHARED_RUNNER_TOKEN} ;
+  start_gitlab_runner ${GITLAB_RUNNER_WORKDIR} ${GITLAB_HTTP_URL} ${GITLAB_ROOT_TOKEN} ${GITLAB_CONTAINER_NAME} ;
 
   exit 0
 fi
