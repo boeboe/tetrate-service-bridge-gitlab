@@ -8,7 +8,7 @@ source ${ROOT_DIR}/gitlab-api.sh
 
 ACTION=${1}
 
-if [[ ! -f "${ROOT_DIR}/env.json" ]] ; then ; echo "env.json not found, exiting..." ; exit 1 ; fi
+if [[ ! -f "${ROOT_DIR}/env.json" ]] ; then echo "env.json not found, exiting..." ; exit 1 ; fi
 GITLAB_ROOT_EMAIL=$(cat ${ROOT_DIR}/env.json | jq -r ".gitlab.root.email") ;
 GITLAB_ROOT_PASSWORD=$(cat ${ROOT_DIR}/env.json | jq -r ".gitlab.root.password") ;
 GITLAB_ROOT_TOKEN=$(cat ${ROOT_DIR}/env.json | jq -r ".gitlab.root.token") ;

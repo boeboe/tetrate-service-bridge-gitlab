@@ -1,11 +1,10 @@
 #!/usr/bin/env bash
 ROOT_DIR="$( cd -- "$(dirname "${0}")" >/dev/null 2>&1 ; pwd -P )"
-source ${ROOT_DIR}/env.sh ${ROOT_DIR}
 source ${ROOT_DIR}/helpers.sh
 
 ACTION=${1}
 
-if [[ ! -f "${ROOT_DIR}/env.json" ]] ; then ; echo "env.json not found, exiting..." ; exit 1 ; fi
+if [[ ! -f "${ROOT_DIR}/env.json" ]] ; then echo "env.json not found, exiting..." ; exit 1 ; fi
 ISTIOCTL_VERSION=$(cat ${ROOT_DIR}/env.json | jq -r ".tsb.istio_version") ;
 GITLAB_VERSION=$(cat ${ROOT_DIR}/env.json | jq -r ".gitlab.version") ;
 TSB_VERSION=$(cat ${ROOT_DIR}/env.json | jq -r ".tsb.version") ;
