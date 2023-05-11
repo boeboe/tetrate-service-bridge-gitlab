@@ -66,7 +66,7 @@ fi
 
 if [[ ${ACTION} = "install" ]]; then
 
-  echo "Installing apt packages"
+  print_info "Installing apt packages"
   sudo apt-get -y update ; sudo apt-get -y upgrade ;
   sudo apt-get -y install curl docker.io jq expect net-tools ;
   sudo systemctl enable docker ;
@@ -74,45 +74,46 @@ if [[ ${ACTION} = "install" ]]; then
   sudo usermod -aG docker $USER ;
   echo "Log out of this session and log back in to have docker access"
 
-  echo "Installing kubectl"
-  curl -Lo /tmp/kubectl "https://dl.k8s.io/release/v${K8S_VERSION}/bin/linux/amd64/kubectl" ;
+  print_info "Installing kubectl"
+  # curl -Lo /tmp/kubectl "https://dl.k8s.io/release/v${K8S_VERSION}/bin/linux/amd64/kubectl" ;
+  curl -Lo /tmp/kubectl "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
   chmod +x /tmp/kubectl ;
   sudo install /tmp/kubectl /usr/local/bin/kubectl ;
   rm -f /tmp/kubectl ;
 
-  echo "Installing k9s"
+  print_info "Installing k9s"
   curl -Lo /tmp/k9s.tar.gz "https://github.com/derailed/k9s/releases/latest/download/k9s_Linux_amd64.tar.gz" ;
   tar xvfz /tmp/k9s.tar.gz -C /tmp ;
   chmod +x /tmp/k9s ;
   sudo install /tmp/k9s /usr/local/bin/k9s ;
   rm -f /tmp/k9s* ;
 
-  echo "Installing minikube"
+  print_info "Installing minikube"
   curl -Lo /tmp/minikube "https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64" ;
   chmod +x /tmp/minikube ;
   sudo install /tmp/minikube /usr/local/bin/minikube ;
   rm -f /tmp/minikube ;
 
-  echo "Installing istioctl"
+  print_info "Installing istioctl"
   curl -Lo /tmp/istioctl.tar.gz "https://github.com/istio/istio/releases/download/${ISTIOCTL_VERSION}/istioctl-${ISTIOCTL_VERSION}-linux-amd64.tar.gz" ;
   tar xvfz /tmp/istioctl.tar.gz -C /tmp ;
   chmod +x /tmp/istioctl ;
   sudo install /tmp/istioctl /usr/local/bin/istioctl ;
   rm -f /tmp/istioctl* ;
 
-  echo "Installing tctl"
+  print_info "Installing tctl"
   curl -Lo /tmp/tctl "https://binaries.dl.tetrate.io/public/raw/versions/linux-amd64-${TSB_VERSION}/tctl" ;
   chmod +x /tmp/tctl ;
   sudo install /tmp/tctl /usr/local/bin/tctl ;
   rm -f /tmp/tctl ;
 
-  echo "Installing gitlab-runner"
+  print_info "Installing gitlab-runner"
   curl -Lo /tmp/gitlab-runner "https://gitlab-runner-downloads.s3.amazonaws.com/v${GITLAB_VERSION}/binaries/gitlab-runner-linux-amd64" ;
   chmod +x /tmp/gitlab-runner ;
   sudo install /tmp/gitlab-runner /usr/local/bin/gitlab-runner ;
   rm -f /tmp/gitlab-runner ;
 
-  echo "Creating and configuring gitlab-runner user"
+  print_info "Creating and configuring gitlab-runner user"
   sudo useradd --comment 'GitLab Runner' --create-home gitlab-runner --shell /bin/bash
   sudo usermod -aG sudo gitlab-runner
   sudo usermod -aG docker gitlab-runner
@@ -134,7 +135,7 @@ alias k=kubectl
 END
   fi
 
-  echo "All prerequisites have been installed"
+  print_info "All prerequisites have been installed"
   exit 0
 fi
 
