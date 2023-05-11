@@ -10,7 +10,6 @@ ACTION=${1}
 
 GITLAB_CONTAINER_NAME="gitlab-ee"
 
-GITLAB_RUNNER_BINARY=/usr/local/bin/gitlab-runner
 GITLAB_RUNNER_WORKDIR=/tmp/gitlab-runner
 GITLAB_RUNNER_NAME=local-shell-runner
 GITLAB_RUNNER_USER=gitlab-runner  
@@ -26,27 +25,12 @@ function get_gitlab_http_url {
   echo "http://${IP}:80" ;
 }
 
-
-if [[ ${ACTION} = "install" ]]; then
-
-  if [[ -f "${GITLAB_RUNNER_BINARY}" ]]; then
-    echo "File ${GITLAB_RUNNER_BINARY} already exists" ;
-  else
-    # Download runner
-    sudo curl -L --output ${GITLAB_RUNNER_BINARY} https://gitlab-runner-downloads.s3.amazonaws.com/latest/binaries/gitlab-runner-linux-amd64 ;
-    sudo chmod +x ${GITLAB_RUNNER_BINARY} ;
-  fi
-
-  exit 0
-fi
-
 if [[ ${ACTION} = "start" ]]; then
 
   GITLAB_HTTP_URL=$(get_gitlab_http_url ${GITLAB_CONTAINER_NAME})
   SHARED_RUNNER_TOKEN=$(gitlab_get_shared_runner_token ${GITLAB_CONTAINER_NAME})
 
   # Install, run as a service and register runner
-  sudo useradd --comment 'GitLab Runner' --create-home ${GITLAB_RUNNER_USER} --shell /bin/bash
   mkdir -p ${GITLAB_RUNNER_WORKDIR}
   sudo gitlab-runner install --working-directory=${GITLAB_RUNNER_WORKDIR} --user=${GITLAB_RUNNER_USER}
   sudo gitlab-runner start
@@ -80,7 +64,6 @@ if [[ ${ACTION} = "remove" ]]; then
 fi
 
 echo "Please specify one of the following action:"
-echo "  - install"
 echo "  - start"
 echo "  - stop"
 echo "  - remove"

@@ -16,6 +16,8 @@ prereq-check: ## Check if prerequisites are installed
 prereq-install: ## Install prerequisites
 	@/bin/sh -c './prereq.sh install'
 
+###
+
 .PHONY: gitlab-start
 gitlab-start: ## Start gitlab cicd server
 	@/bin/sh -c './gitlab.sh start'
@@ -28,6 +30,7 @@ gitlab-stop: ## Stop gitlab cicd server
 gitlab-remove: ## Remove gitlab cicd server
 	@/bin/sh -c './gitlab.sh remove'
 
+###
 
 .PHONY: gitlab-runner-start
 gitlab-runner-start: ## Start gitlab-runner
@@ -41,6 +44,7 @@ gitlab-runner-stop: ## Stop gitlab-runner
 gitlab-runner-remove: ## Remove gitlab-runner
 	@/bin/sh -c './gitlab-runner.sh remove'
 
+###
 
 .PHONY: repo-sync-images
 repo-sync-images: ## Sync TSB images into gitlab docker repo

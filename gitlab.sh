@@ -8,14 +8,15 @@ source ${ROOT_DIR}/gitlab-api.sh
 
 ACTION=${1}
 
+if [[ ! -f "${ROOT_DIR}/env.json" ]] ; then ; echo "env.json not found, exiting..." ; exit 1 ; fi
+GITLAB_ROOT_EMAIL=$(cat ${ROOT_DIR}/env.json | jq -r ".gitlab.root.email") ;
+GITLAB_ROOT_PASSWORD=$(cat ${ROOT_DIR}/env.json | jq -r ".gitlab.root.password") ;
+GITLAB_ROOT_TOKEN=$(cat ${ROOT_DIR}/env.json | jq -r ".gitlab.root.token") ;
+
 GITLAB_HOME=/tmp/gitlab
 GITLAB_NETWORK="gitlab" 
 GITLAB_CONTAINER_NAME="gitlab-ee"
 GITLAB_DOCKER_PORT=5050
-
-GITLAB_ROOT_EMAIL="root@local"
-GITLAB_ROOT_PASSWORD="Tetrate123."
-GITLAB_ROOT_TOKEN="01234567890123456789"
 GITLAB_OMNIBUS_CONFIG="
     external_url 'http://127.0.0.1'
     registry_external_url 'http://127.0.0.1:${GITLAB_DOCKER_PORT}'
@@ -25,9 +26,9 @@ GITLAB_OMNIBUS_CONFIG="
 #   args:
 #     (1) gitlab docker network
 #     (2) gitlab name
-function start_local_gitlab {
+function start_gitlab {
   if ! docker network inspect ${1} &>/dev/null ; then
-    docker network create ${1} --subnet=192.168.47.0/24 ;
+    docker network create ${1} --subnet="192.168.47.0/24" ;
   fi
 
   if docker ps --filter "status=running" | grep ${2} &>/dev/null ; then
@@ -59,7 +60,7 @@ function start_local_gitlab {
 # Stop local gitlab instance
 #   args:
 #     (1) gitlab name
-function stop_local_gitlab {
+function stop_gitlab {
   if docker inspect ${1} &>/dev/null ; then
     docker stop ${1} &>/dev/null ;
     print_info "Local docker repo ${1} stopped"
@@ -70,7 +71,7 @@ function stop_local_gitlab {
 #   args:
 #     (1) gitlab docker network
 #     (2) gitlab name
-function remove_local_gitlab {
+function remove_gitlab {
   if docker inspect ${2} &>/dev/null ; then
     docker stop ${2} &>/dev/null ;
     docker rm ${2} &>/dev/null ;
@@ -141,7 +142,7 @@ function add_insecure_registry {
 
 if [[ ${ACTION} = "start" ]]; then
   
-  start_local_gitlab ${GITLAB_NETWORK} ${GITLAB_CONTAINER_NAME} ;
+  start_gitlab ${GITLAB_NETWORK} ${GITLAB_CONTAINER_NAME} ;
 
   GITLAB_HTTP_URL=$(get_gitlab_http_url ${GITLAB_CONTAINER_NAME})
   wait_gitlab_ui_ready ${GITLAB_HTTP_URL} ;
@@ -155,12 +156,12 @@ if [[ ${ACTION} = "start" ]]; then
 fi
 
 if [[ ${ACTION} = "stop" ]]; then
-  stop_local_gitlab ${GITLAB_CONTAINER_NAME} ;
+  stop_gitlab ${GITLAB_CONTAINER_NAME} ;
   exit 0
 fi
 
 if [[ ${ACTION} = "remove" ]]; then
-  remove_local_gitlab ${GITLAB_NETWORK} ${GITLAB_CONTAINER_NAME} ;
+  remove_gitlab ${GITLAB_NETWORK} ${GITLAB_CONTAINER_NAME} ;
   exit 0
 fi
 

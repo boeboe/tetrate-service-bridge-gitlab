@@ -8,12 +8,12 @@ source ${ROOT_DIR}/gitlab-api.sh
 
 ACTION=${1}
 
+if [[ ! -f "${ROOT_DIR}/env.json" ]] ; then ; echo "env.json not found, exiting..." ; exit 1 ; fi
+GITLAB_ROOT_PASSWORD=$(cat ${ROOT_DIR}/env.json | jq -r ".gitlab.root.password") ;
+GITLAB_ROOT_TOKEN=$(cat ${ROOT_DIR}/env.json | jq -r ".gitlab.root.token") ;
+
 GITLAB_CONTAINER_NAME="gitlab-ee"
 GITLAB_DOCKER_PORT=5050
-
-GITLAB_ROOT_PASSWORD="Tetrate123."
-GITLAB_ROOT_TOKEN="01234567890123456789"
-
 GITLAB_REPOS_DIR=${ROOT_DIR}/repos
 GITLAB_REPOS_CONFIG=${GITLAB_REPOS_DIR}/repos.json
 GITLAB_REPOS_TEMPDIR=/tmp/repos
