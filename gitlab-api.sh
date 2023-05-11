@@ -8,18 +8,16 @@ source ${ROOT_DIR}/helpers.sh
 # Set gitlab user token
 #   args:
 #     (1) gitlab container name
-#     (2) gitlab user
-#     (3) gitlab token
-#     (4) gitlab token name
-function gitlab_set_user_token {
-  if [[ $(docker exec gitlab-ee gitlab-rails runner "puts User.find_by_username('${2}').personal_access_tokens.any? { |token| token.name == '${4}' }") == "false" ]] ;
-  then
-    docker exec ${1} gitlab-rails runner \
-      "token = User.find_by_username('${2}').personal_access_tokens.create(scopes: [:api, :sudo], name: '${4}'); 
-       token.set_token('${3}');
-       token.save"
+#     (2) gitlab api url
+#     (3) gitlab root api token
+function gitlab_set_root_api_token {
+  if [[ $(curl --silent --request GET --header "PRIVATE-TOKEN: ${3}" --header 'Content-Type: application/json' --url "${2}/api/v4/metadata" -w "%{http_code}" -o /dev/null) == "200" ]] ; then
+    echo "Root api token already configured and working"
   else
-    echo "User '${2}' already has a token named '${4}'"
+    docker exec ${1} gitlab-rails runner \
+      "token = User.find_by_username('root').personal_access_tokens.create(scopes: [:api, :sudo], name: 'Root API Token'); 
+       token.set_token('${2}');
+       token.save"
   fi
 }
 

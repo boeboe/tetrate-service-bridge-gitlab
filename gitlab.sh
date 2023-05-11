@@ -205,7 +205,7 @@ if [[ ${ACTION} = "start" ]]; then
   wait_gitlab_ui_ready ${GITLAB_HTTP_URL} ;
   GITLAB_DOCKER_ENDPOINT=$(get_gitlab_docker_endpoint ${GITLAB_CONTAINER_NAME})
   add_insecure_registry ${GITLAB_DOCKER_ENDPOINT} ;
-  gitlab_set_user_token ${GITLAB_CONTAINER_NAME} "root" ${GITLAB_ROOT_TOKEN} "Automation Token" ;
+  gitlab_set_root_api_token ${GITLAB_CONTAINER_NAME} ${GITLAB_HTTP_URL} ${GITLAB_ROOT_TOKEN}  ;
 
   # Start gitlab runner
   start_gitlab_runner ${GITLAB_RUNNER_WORKDIR} ${GITLAB_HTTP_URL} ${GITLAB_ROOT_TOKEN} ${GITLAB_CONTAINER_NAME} ;
