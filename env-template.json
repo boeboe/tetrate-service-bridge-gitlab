@@ -1,0 +1,11 @@
+{
+  "tsb": {
+    "istio_version": "1.15.7",
+    "tetrate_repo": {
+      "password": "<TSB_REPO_APIKEY>",
+      "url": "containers.dl.tetrate.io",
+      "user": "<TSB_REPO_USERNAME>"
+    },
+    "version": "1.6.1"
+  }
+}

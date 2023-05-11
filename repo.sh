@@ -97,25 +97,6 @@ function sync_tsb_images {
     print_info "All tsb images synced and available in the local repo"
 }
 
-# Add local docker repo as docker insecure registry
-#   args:
-#     (1) repo endpoint
-function add_insecure_registry {
-  DOCKER_JSON="{\"insecure-registries\" : [\"http://${1}\"]}"   
-  # In case no local docker configuration file yet, create new from scratch
-  if [[ ! -f /etc/docker/daemon.json ]]; then
-    sudo sh -c "echo '${DOCKER_JSON}' > /etc/docker/daemon.json"
-    sudo systemctl restart docker 
-    print_info "Insecure registry configured"
-  elif cat /etc/docker/daemon.json | grep ${1} &>/dev/null; then
-    print_info "Insecure registry already configured"
-  else
-    print_warning "File /etc/docker/daemon.json already exists"
-    print_warning "Please merge ${DOCKER_JSON} manually and restart docker with 'sudo systemctl restart docker'"
-    exit 1
-  fi
-}
-
 
 if [[ ${ACTION} = "sync-images" ]]; then
   GITLAB_DOCKER_ENDPOINT=$(get_gitlab_docker_endpoint ${GITLAB_CONTAINER_NAME})
@@ -158,7 +139,8 @@ if [[ ${ACTION} = "config-repos" ]]; then
 
       print_info "Going add, commit and push new code to project '${project}' in group '${group}'"
       cd ${GITLAB_REPOS_TEMPDIR}/${project}
-      cp -r ${GITLAB_REPOS_DIR}/${directory}/* .
+
+      cp -a ${GITLAB_REPOS_DIR}/${directory}/. ${GITLAB_REPOS_TEMPDIR}/${project}
       git add -A
       git commit -m "initial commit"
       git push -u origin main

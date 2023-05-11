@@ -108,6 +108,36 @@ function wait_gitlab_ui_ready {
   echo "The gitlab GUI is available at ${1}"
 }
 
+# Get local gitlab docker endpoint
+#   args:
+#     (1) gitlab name
+function get_gitlab_docker_endpoint {
+  if ! IP=$(docker inspect --format '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' ${1}  2>/dev/null ); then
+    print_error "Local docker repo not running" ; 
+    exit 1 ;
+  fi
+  echo "${IP}:${GITLAB_DOCKER_PORT}" ;
+}
+
+# Add local docker repo as docker insecure registry
+#   args:
+#     (1) repo endpoint
+function add_insecure_registry {
+  DOCKER_JSON="{\"insecure-registries\" : [\"http://${1}\"]}"   
+  # In case no local docker configuration file yet, create new from scratch
+  if [[ ! -f /etc/docker/daemon.json ]]; then
+    sudo sh -c "echo '${DOCKER_JSON}' > /etc/docker/daemon.json"
+    sudo systemctl restart docker 
+    print_info "Insecure registry configured"
+  elif cat /etc/docker/daemon.json | grep ${1} &>/dev/null; then
+    print_info "Insecure registry already configured"
+  else
+    print_warning "File /etc/docker/daemon.json already exists"
+    print_warning "Please merge ${DOCKER_JSON} manually and restart docker with 'sudo systemctl restart docker'"
+    exit 1
+  fi
+}
+
 
 if [[ ${ACTION} = "start" ]]; then
   
@@ -133,6 +163,7 @@ if [[ ${ACTION} = "remove" ]]; then
   remove_local_gitlab ${GITLAB_NETWORK} ${GITLAB_CONTAINER_NAME} ;
   exit 0
 fi
+
 
 echo "Please specify one of the following action:"
 echo "  - start"

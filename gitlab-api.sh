@@ -23,6 +23,13 @@ function gitlab_set_user_token {
   fi
 }
 
+# Set gitlab shared runner token
+#   args:
+#     (1) gitlab container name
+function gitlab_get_shared_runner_token {
+  docker exec -it ${1} gitlab-rails runner "puts Gitlab::CurrentSettings.current_application_settings.runners_registration_token"
+}
+
 # Create gitlab group
 #   args:
 #     (1) gitlab url
