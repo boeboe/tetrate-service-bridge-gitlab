@@ -11,7 +11,6 @@ source ${ROOT_DIR}/helpers.sh
 #     (2) gitlab api url
 #     (3) gitlab root api token
 function gitlab_set_root_api_token {
-  set -x
   if [[ $(curl --silent --request GET --header "PRIVATE-TOKEN: ${3}" --header 'Content-Type: application/json' --url "${2}/api/v4/metadata" -w "%{http_code}" -o /dev/null) == "200" ]] ; then
     echo "Gitlab root api token already configured and working"
   else
