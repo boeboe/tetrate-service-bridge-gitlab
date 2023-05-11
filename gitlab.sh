@@ -133,9 +133,7 @@ function stop_gitlab_runner {
 #     (1) gitlab runner working directory
 #     (2) gitlab server url
 function remove_gitlab_runner {
-  sudo gitlab-runner unregister \
-    --url ${2} \
-    --name "local-shell-runner" ;
+  sudo gitlab-runner unregister --url ${2} --all-runners ;
   sudo gitlab-runner stop ;
   sudo gitlab-runner uninstall ;
   rm -rf ${1} ;
