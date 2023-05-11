@@ -90,23 +90,34 @@ function remove_gitlab {
 # Start gitlab local runner
 #   args:
 #     (1) gitlab runner working directory
-#     (2) gitlab server url
-#     (3) gitlab shared runner registration token
+#     (2) gitlab api url
+#     (3) gitlab api token
+#     (4) gitlab shared runner registration token
 function start_gitlab_runner {
   mkdir -p ${1} ;
-  sudo gitlab-runner install --working-directory="${1}" --user="gitlab-runner" ;
 
-  if ! $(sudo gitlab-runner status &>/dev/null) ; then
+  if [[ -f "/etc/systemd/system/gitlab-runner.service "]]; then
+    echo "Gitlab runner is already installed properly"
+  else
+    sudo gitlab-runner install --working-directory="${1}" --user="gitlab-runner" ;
+  fi
+
+  if $(sudo gitlab-runner status &>/dev/null) ; then
+    echo "Gitlab runner is already running"
+  else
     echo "Starting gitlab runner"
     sudo gitlab-runner start ;
+  fi
+
+  if [[ $(gitlab_get_shared_runner_id ${2} ${3} "local-shell-runner" == "") ]] ; then
     sudo gitlab-runner register \
       --executor shell \
-      --name local-shell-runner \
+      --description "local-shell-runner" \
       --non-interactive \
       --url "${2}" \
-      --registration-token "${3}" ;
+      --registration-token "${4}" ;
   else
-    echo "Ggitlab runner was already running"
+    echo "Gitlab runner with description 'local-shell-runner' already registered"
   fi
 }
 
@@ -196,7 +207,7 @@ if [[ ${ACTION} = "start" ]]; then
 
   # Start gitlab runner
   SHARED_RUNNER_TOKEN=$(gitlab_get_shared_runner_token ${GITLAB_CONTAINER_NAME})
-  start_gitlab_runner ${GITLAB_RUNNER_WORKDIR} ${GITLAB_HTTP_URL} ${SHARED_RUNNER_TOKEN} ;
+  start_gitlab_runner ${GITLAB_RUNNER_WORKDIR} ${GITLAB_HTTP_URL} ${GITLAB_ROOT_TOKEN} ${SHARED_RUNNER_TOKEN} ;
 
   exit 0
 fi

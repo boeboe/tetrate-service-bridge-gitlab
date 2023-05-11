@@ -30,10 +30,21 @@ function gitlab_get_shared_runner_token {
   docker exec -it ${1} gitlab-rails runner "puts Gitlab::CurrentSettings.current_application_settings.runners_registration_token"
 }
 
+# Get gitlab shared runner id
+#   args:
+#     (1) gitlab api url
+#     (2) gitlab api token
+#     (2) gitlab runner description
+function gitlab_get_shared_runner_id {
+  curl --silent --request GET --header "PRIVATE-TOKEN: ${2}" \
+    --header 'Content-Type: application/json' \
+    --url "${1}/api/v4/runners/all?type=instance_type" | jq ".[] | select(.description==\"${3}\")" | jq -r '.id'
+}
+
 # Create gitlab group
 #   args:
-#     (1) gitlab url
-#     (2) gitlab token
+#     (1) gitlab api url
+#     (2) gitlab api token
 #     (3) gitlab group name
 function gitlab_create_group {
   group_id=$(gitlab_get_group_id ${1} ${2} ${3})
@@ -56,8 +67,8 @@ BODY`
 
 # Get gitlab group id
 #   args:
-#     (1) gitlab url
-#     (2) gitlab token
+#     (1) gitlab api url
+#     (2) gitlab api token
 #     (3) gitlab group name
 function gitlab_get_group_id {
   curl --silent --request GET --header "PRIVATE-TOKEN: ${2}" \
@@ -67,8 +78,8 @@ function gitlab_get_group_id {
 
 # Create gitlab project
 #   args:
-#     (1) gitlab url
-#     (2) gitlab token
+#     (1) gitlab api url
+#     (2) gitlab api token
 #     (3) gitlab group name
 #     (4) gitlab project name
 #     (5) gitlab project description
@@ -101,8 +112,8 @@ BODY`
 
 # Get gitlab project id in group
 #   args:
-#     (1) gitlab url
-#     (2) gitlab token
+#     (1) gitlab api url
+#     (2) gitlab api token
 #     (3) gitlab group name
 #     (4) gitlab project name
 function gitlab_get_project_id_in_group {
