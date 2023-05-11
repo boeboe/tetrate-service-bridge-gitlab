@@ -109,7 +109,7 @@ function start_gitlab_runner {
     sudo gitlab-runner start ;
   fi
 
-  if [[ $(gitlab_get_shared_runner_id ${2} ${3} "local-shell-runner" == "") ]] ; then
+  if [[ $(gitlab_get_shared_runner_id ${2} ${3} "local-shell-runner") == "" ]] ; then
     sudo gitlab-runner register \
       --executor shell \
       --description "local-shell-runner" \
