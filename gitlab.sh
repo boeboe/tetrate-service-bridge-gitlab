@@ -96,7 +96,7 @@ function remove_gitlab {
 function start_gitlab_runner {
   mkdir -p ${1} ;
 
-  if [[ -f "/etc/systemd/system/gitlab-runner.service "]]; then
+  if [[ -f "/etc/systemd/system/gitlab-runner.service" ]]; then
     echo "Gitlab runner is already installed properly"
   else
     sudo gitlab-runner install --working-directory="${1}" --user="gitlab-runner" ;
