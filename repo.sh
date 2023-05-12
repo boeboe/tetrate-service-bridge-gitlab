@@ -21,7 +21,7 @@ GITLAB_REPOS_TEMPDIR=/tmp/repos
 
 # Get local gitlab http endpoint
 #   args:
-#     (1) gitlab name
+#     (1) gitlab container name
 function get_gitlab_http_url {
   if ! IP=$(docker inspect --format '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' ${1}  2>/dev/null ); then
     print_error "Local docker repo not running" ; 
@@ -32,7 +32,7 @@ function get_gitlab_http_url {
 
 # Get local gitlab http endpoint with credentials
 #   args:
-#     (1) gitlab name
+#     (1) gitlab container name
 function get_gitlab_http_url_with_credentials {
   if ! IP=$(docker inspect --format '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' ${1}  2>/dev/null ); then
     print_error "Local docker repo not running" ; 
@@ -41,77 +41,6 @@ function get_gitlab_http_url_with_credentials {
   echo "http://root:${GITLAB_ROOT_PASSWORD}@${IP}:80" ;
 }
 
-# Get local gitlab docker endpoint
-#   args:
-#     (1) gitlab name
-function get_gitlab_docker_endpoint {
-  if ! IP=$(docker inspect --format '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' ${1}  2>/dev/null ); then
-    print_error "Local docker repo not running" ; 
-    exit 1 ;
-  fi
-  echo "${IP}:${GITLAB_DOCKER_PORT}" ;
-}
-
-# Sync tsb docker images into gitlab docker repo (if not yet available)
-#   args:
-#     (1) gitlab docker repo endpoint
-function sync_tsb_images {
-    # Sync all tsb images locally
-    for image in `tctl install image-sync --just-print --raw --accept-eula 2>/dev/null` ; do
-      image_without_repo=$(echo ${image} | sed "s|containers.dl.tetrate.io/||")
-      image_name=$(echo ${image_without_repo} | awk -F: '{print $1}')
-      image_tag=$(echo ${image_without_repo} | awk -F: '{print $2}')
-      if ! docker image inspect ${image} &>/dev/null ; then
-        docker pull ${image} ;
-      fi
-      if ! docker image inspect ${1}/${image_without_repo} &>/dev/null ; then
-        docker tag ${image} ${1}/${image_without_repo} ;
-      fi
-      if ! curl -s -X GET ${1}/v2/${image_name}/tags/list | grep "${image_tag}" &>/dev/null ; then
-        docker push ${1}/${image_without_repo} ;
-      fi
-    done
-
-    # Sync image for application deployment
-    if ! docker image inspect containers.dl.tetrate.io/obs-tester-server:1.0 &>/dev/null ; then
-      docker pull containers.dl.tetrate.io/obs-tester-server:1.0 ;
-    fi
-    if ! docker image inspect ${1}/obs-tester-server:1.0 &>/dev/null ; then
-      docker tag containers.dl.tetrate.io/obs-tester-server:1.0 ${1}/obs-tester-server:1.0 ;
-    fi
-    if ! curl -s -X GET ${1}/v2/obs-tester-server/tags/list | grep "1.0" &>/dev/null ; then
-      docker push ${1}/obs-tester-server:1.0 ;
-    fi
-
-    # Sync image for debugging
-    if ! docker image inspect containers.dl.tetrate.io/netshoot &>/dev/null ; then
-      docker pull containers.dl.tetrate.io/netshoot ;
-    fi
-    if ! docker image inspect ${1}/netshoot &>/dev/null ; then
-      docker tag containers.dl.tetrate.io/netshoot ${1}/netshoot ;
-    fi
-    if ! curl -s -X GET ${1}/v2/netshoot/tags/list | grep "latest" &>/dev/null ; then
-      docker push ${1}/netshoot ;
-    fi
-
-    print_info "All tsb images synced and available in the local repo"
-}
-
-
-if [[ ${ACTION} = "sync-images" ]]; then
-  GITLAB_DOCKER_ENDPOINT=$(get_gitlab_docker_endpoint ${GITLAB_CONTAINER_NAME})
-
-  if ! docker login ${GITLAB_DOCKER_ENDPOINT} --username "root" --password ${GITLAB_ROOT_PASSWORD} 2>/dev/null; then
-    echo "Failed to login to docker registry at ${GITLAB_DOCKER_ENDPOINT}. Check your credentials (root/${GITLAB_ROOT_PASSWORD})"
-    exit 1
-  fi
-
-  GITLAB_DOCKER_IMAGES_ENDPOINT=${GITLAB_DOCKER_ENDPOINT}/tsb/images
-  print_info "Going to sync tsb images to repo ${GITLAB_DOCKER_IMAGES_ENDPOINT}"
-  sync_tsb_images ${GITLAB_DOCKER_IMAGES_ENDPOINT} ;
-  print_info "Finished to sync tsb images to repo ${GITLAB_DOCKER_IMAGES_ENDPOINT}"
-  exit 0
-fi
 
 if [[ ${ACTION} = "config-repos" ]]; then
 
@@ -150,6 +79,5 @@ if [[ ${ACTION} = "config-repos" ]]; then
 fi
 
 echo "Please specify one of the following action:"
-echo "  - sync-images"
 echo "  - config-repos"
 exit 1

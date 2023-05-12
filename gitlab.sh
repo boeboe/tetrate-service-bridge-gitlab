@@ -15,6 +15,10 @@ GITLAB_ROOT_TOKEN=$(cat ${ROOT_DIR}/env.json | jq -r ".gitlab.root.token") ;
 GITLAB_RUNNER_VERSION=$(cat ${ROOT_DIR}/env.json | jq -r ".gitlab.runner_version") ;
 GITLAB_SERVER_VERSION=$(cat ${ROOT_DIR}/env.json | jq -r ".gitlab.server_version") ;
 
+TSB_REPO_URL=$(cat ${ROOT_DIR}/env.json | jq -r ".tsb.tetrate_repo.url") ;
+TSB_REPO_USER=$(cat ${ROOT_DIR}/env.json | jq -r ".tsb.tetrate_repo.user") ;
+TSB_REPO_PW=$(cat ${ROOT_DIR}/env.json | jq -r ".tsb.tetrate_repo.password") ;
+
 GITLAB_HOME=/tmp/gitlab
 GITLAB_RUNNER_WORKDIR=/tmp/gitlab-runner
 GITLAB_NETWORK="gitlab" 
@@ -114,6 +118,9 @@ function start_gitlab_runner {
     echo "Going to register gitlab runner with description 'local-shell-runner'"
     shared_runner_token=$(gitlab_get_shared_runner_token ${4})
     sudo gitlab-runner register \
+      --env "TETRATE_REGISTRY_USER=${TSB_REPO_USER}" \
+      --env "TETRATE_REGISTRY_PASSWORD=${TSB_REPO_PW}" \
+      --env "TETRATE_REGISTRY=${TSB_REPO_URL}" \
       --executor shell \
       --description "local-shell-runner" \
       --non-interactive \
@@ -131,13 +138,12 @@ function stop_gitlab_runner {
 
 # Remove gitlab local runner
 #   args:
-#     (1) gitlab runner working directory
-#     (2) gitlab server url
+#     (1) gitlab server url
 function remove_gitlab_runner {
-  sudo gitlab-runner unregister --url ${2} --all-runners ;
+  sudo gitlab-runner unregister --url ${1} --all-runners ;
   sudo gitlab-runner stop ;
   sudo gitlab-runner uninstall ;
-  rm -rf ${1} ;
+  sudo rm -rf ${GITLAB_RUNNER_WORKDIR} ;
 }
 
 # Get local gitlab http endpoint
@@ -226,7 +232,7 @@ if [[ ${ACTION} = "remove" ]]; then
 
   # Remove gitlab runner
   GITLAB_HTTP_URL=$(get_gitlab_http_url ${GITLAB_CONTAINER_NAME})
-  remove_gitlab_runner ${GITLAB_RUNNER_WORKDIR} ${GITLAB_HTTP_URL} ;
+  remove_gitlab_runner ${GITLAB_HTTP_URL} ;
 
   # Remove gitlab server
   remove_gitlab ${GITLAB_NETWORK} ${GITLAB_CONTAINER_NAME} ;

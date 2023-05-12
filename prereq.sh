@@ -124,7 +124,9 @@ END
 
   # https://docs.gitlab.com/runner/shells/index.html#shell-profile-loading
   print_info "Fix gitlab-runner bash profile logout issue"
-  sudo mv /home/gitlab-runner/.bash_logout /home/gitlab-runner/.bash_logout~
+  if [[ -f "/home/gitlab-runner/.bash_logout" ]] ; then
+    sudo mv /home/gitlab-runner/.bash_logout /home/gitlab-runner/.bash_logout~
+  fi
 
   if ! cat ~/.bashrc | grep "# Autocompletion for tsb-demo-minikube" &>/dev/null ; then
     echo "Enabling bash completion and add some alias"
