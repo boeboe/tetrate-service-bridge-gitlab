@@ -19,31 +19,10 @@ function print_info {
   echo -e "${purpleb}${1}${end}"
 }
 
-# Generate a self signed root certificate
-function generate_root_cert {
-  mkdir -p ${CERT_OUTPUT_DIR} ;
-  if [[ -f "${CERT_OUTPUT_DIR}/root-cert.pem" ]]; then
-    echo "File ${CERT_OUTPUT_DIR}/root-cert.pem already exists... skipping root certificate generation"
-    return
-  fi
-
-  openssl req -newkey rsa:4096 -sha512 -nodes \
-    -keyout ${CERT_OUTPUT_DIR}/root-key.pem \
-    -subj "/CN=Root CA/O=Istio" \
-    -out ${CERT_OUTPUT_DIR}/root-cert.csr ;
-  openssl x509 -req -sha512 -days 3650 \
-    -signkey ${CERT_OUTPUT_DIR}/root-key.pem \
-    -in ${CERT_OUTPUT_DIR}/root-cert.csr \
-    -extfile <(printf "subjectKeyIdentifier=hash\nbasicConstraints=critical,CA:true\nkeyUsage=critical,digitalSignature,nonRepudiation,keyEncipherment,keyCertSign") \
-    -out ${CERT_OUTPUT_DIR}/root-cert.pem ;
-  echo "New root certificate generated at ${CERT_OUTPUT_DIR}/root-cert.pem"
-}
-
 # Generate an intermediate istio certificate signed by the self signed root certificate
 #   args:
 #     (1) cluster name
 function generate_istio_cert {
-  if [[ ! -f "${CERT_OUTPUT_DIR}/root-cert.pem" ]]; then generate_root_cert ; fi
   if [[ -f "${CERT_OUTPUT_DIR}/${1}/ca-cert.pem" ]]; then 
     echo "File ${CERT_OUTPUT_DIR}/${1}/ca-cert.pem already exists... skipping istio certificate generation" ;
     return ;
@@ -71,6 +50,8 @@ if [[ ${ACTION} = "install" ]]; then
   mp_cluster_ctx=`jq -r '.k8s_context' ${TSB_MP_CLUSTER_CONFIG}`
   mp_cluster_name=`jq -r '.cluster_name' ${TSB_MP_CLUSTER_CONFIG}`
   print_info "Start installation of tsb demo management/control plane in k8s cluster context '${mp_cluster_ctx}'"
+
+  generate_istio_cert ${mp_cluster_name} ;
 
   exit 0
 fi

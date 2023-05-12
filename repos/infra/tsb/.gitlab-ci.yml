@@ -6,11 +6,21 @@ variables:
     TERM: "xterm" # Use Unix ASCII color codes on Nuke
 
 mp:
+    artifacts:
+        paths:
+            - output/*
+        exclude:
+            - output/.gitignore
     stage: mp
     script:
         - "./mp.sh install"
 
 cp:
+    artifacts:
+        paths:
+            - output/*
+        exclude:
+            - output/.gitignore
     needs: ["mp"]
     stage: cp
     script:

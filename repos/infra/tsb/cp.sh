@@ -54,6 +54,8 @@ if [[ ${ACTION} = "install" ]]; then
     cp_cluster_name=`jq -r '.['$i'].cluster_name' ${TSB_CP_CLUSTERS_CONFIG}`
     print_info "Start installation of tsb control plane in k8s cluster context '${cp_cluster_ctx}'"
   
+    generate_istio_cert ${cp_cluster_name} ;
+
   done
 
   exit 0
