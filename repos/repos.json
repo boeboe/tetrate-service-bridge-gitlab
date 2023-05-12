@@ -1,13 +1,13 @@
 [
   {
     "description": "Minikube cluster management",
-    "directory": "infra_minikube",
+    "directory": "infra/minikube",
     "group": "infra",
     "project": "minikube"
   },
   {
     "description": "TSB Container Images",
-    "directory": "tsb_images",
+    "directory": "tsb/images",
     "group": "tsb",
     "project": "images"
   }
