@@ -8,28 +8,29 @@ ACTION=${1}
 
 if [[ ${ACTION} = "build" ]]; then
   echo "Running build stage"
-  echo ${ROOT_DIR}
-  pwd
-  ls -la
-  whoami
-  sudo whoami
-  which minikube
-  minikube start
-  docker ps
+  echo "ROOT_DIR == ${ROOT_DIR}"
+  echo "PATH == ${PATH}"
+  echo "CI_REGISTRY_USER == ${CI_REGISTRY_USER}"
+  echo "CI_REGISTRY_PASSWORD == ${CI_REGISTRY_PASSWORD}"
+  echo "CI_REGISTRY == ${CI_REGISTRY}"
+  echo ">> env" ; env
+  echo ">> pwd" ; pwd
+  echo ">> ls -la" ; ls -la
+  echo ">> whoami" ; whoami
+  echo ">> sudo whoami" ; sudo whoami
+  echo ">> which minikube" ; which minikube
+  echo ">> minikube start" ; minikube start
+  echo ">> docker ps" ; docker ps
   exit 0
 fi
 
 if [[ ${ACTION} = "test" ]]; then
   echo "Running test stage"
-  echo ${ROOT_DIR}
-  pwd
-  ls -la
-  whoami
-  sudo whoami
   echo "TEST_VAR == ${TEST_VAR}"
-  minikube version
-  minikube status
-  minikube profile list
+  echo ">> minikube version" ; minikube version
+  echo ">> minikube status" ; minikube status
+  echo ">> minikube profile list" ; minikube profile list
+  echo ">> minikube stop" ; minikube stop
   docker ps
   exit 0
 fi

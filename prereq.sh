@@ -6,7 +6,7 @@ ACTION=${1}
 
 if [[ ! -f "${ROOT_DIR}/env.json" ]] ; then echo "env.json not found, exiting..." ; exit 1 ; fi
 ISTIOCTL_VERSION=$(cat ${ROOT_DIR}/env.json | jq -r ".tsb.istio_version") ;
-GITLAB_RUNNER_VERSION=$(cat ${ROOT_DIR}/env.json | jq -r ".gitlab.version") ;
+GITLAB_RUNNER_VERSION=$(cat ${ROOT_DIR}/env.json | jq -r ".gitlab.runner_version") ;
 TSB_VERSION=$(cat ${ROOT_DIR}/env.json | jq -r ".tsb.version") ;
 TSB_REPO_URL=$(cat ${ROOT_DIR}/env.json | jq -r ".tsb.tetrate_repo.url") ;
 TSB_REPO_USER=$(cat ${ROOT_DIR}/env.json | jq -r ".tsb.tetrate_repo.user") ;
