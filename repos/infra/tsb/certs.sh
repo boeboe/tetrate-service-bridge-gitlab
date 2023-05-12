@@ -48,16 +48,14 @@ function generate_istio_cert {
 
 if [[ ${ACTION} = "generate" ]]; then
 
-  mp_cluster_ctx=`jq -r '.k8s_context' ${TSB_MP_CLUSTER_CONFIG}`
   mp_cluster_name=`jq -r '.cluster_name' ${TSB_MP_CLUSTER_CONFIG}`
-  print_info "Going to generate istio certs for managementplane cluster '${mp_cluster_ctx}'"
+  print_info "Going to generate istio certs for managementplane cluster '${mp_cluster_name}'"
   generate_istio_cert ${mp_cluster_name} ;
 
   cp_cluster_count=`jq '. | length' ${TSB_CP_CLUSTERS_CONFIG}`
   for ((i=0; i<$cp_cluster_count; i++)); do
-    cp_cluster_ctx=`jq -r '.['$i'].k8s_context' ${TSB_CP_CLUSTERS_CONFIG}`
     cp_cluster_name=`jq -r '.['$i'].cluster_name' ${TSB_CP_CLUSTERS_CONFIG}`
-    print_info "Going to generate istio certs for controlplane cluster '${cp_cluster_ctx}'"
+    print_info "Going to generate istio certs for controlplane cluster '${cp_cluster_name}'"
     generate_istio_cert ${cp_cluster_name} ;
   done
 

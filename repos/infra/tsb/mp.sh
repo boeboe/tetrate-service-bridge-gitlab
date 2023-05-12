@@ -24,9 +24,23 @@ if [[ ${ACTION} = "install" ]]; then
 
   mp_cluster_ctx=`jq -r '.k8s_context' ${TSB_MP_CLUSTER_CONFIG}`
   mp_cluster_name=`jq -r '.cluster_name' ${TSB_MP_CLUSTER_CONFIG}`
-  print_info "Start installation of tsb demo management/control plane in k8s cluster '${mp_cluster_ctx}'"
+  print_info "Start installation of tsb demo management/control plane in k8s cluster '${mp_cluster_name}'"
 
-  tree ${CERT_OUTPUT_DIR}
+  if kubectl --context ${mp_cluster_ctx} get ns istio-system &>/dev/null; then
+    echo "Namespace 'istio-system' already exists in cluster ${mp_cluster_name}"
+  else
+    kubectl --context ${mp_cluster_ctx} create ns istio-system ;
+  fi
+  if kubectl --context ${mp_cluster_ctx} -n istio-system get secret cacerts &>/dev/null; then
+    echo "Secret 'cacerts' in namespace 'istio-system' already exists in cluster ${mp_cluster_name}"
+  else
+    kubectl --context ${mp_cluster_ctx} create secret generic cacerts -n istio-system \
+      --from-file=${CERT_OUTPUT_DIR}/${mp_cluster_name}/ca-cert.pem \
+      --from-file=${CERT_OUTPUT_DIR}/${mp_cluster_name}/ca-key.pem \
+      --from-file=${CERT_OUTPUT_DIR}/${mp_cluster_name}/root-cert.pem \
+      --from-file=${CERT_OUTPUT_DIR}/${mp_cluster_name}/cert-chain.pem ;
+  fi
+
   exit 0
 fi
 
