@@ -1,23 +1,10 @@
 stages:
-    - build
-    - test
-    - pack
+    - up
 
 variables:
     TERM: "xterm" # Use Unix ASCII color codes on Nuke
 
-# before_script:
-#     - CHCP 65001  # Set correct code page to avoid charset issues
-
-
-build:
-    stage: build
+up:
+    stage: up
     script:
-        - "./run.sh build"
-
-test:
-    stage: test
-    script:
-        - "./run.sh test"
-    variables:
-        TEST_VAR: "HELLLLLLOOOOO"
+        - "./run.sh up"

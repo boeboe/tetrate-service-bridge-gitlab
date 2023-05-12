@@ -7,11 +7,14 @@ ROOT_DIR="$( cd -- "$(dirname "${0}")" >/dev/null 2>&1 ; pwd -P )"
 ACTION=${1}
 
 # Print info messages
-purpleb="\033[1;35m"
-end="\033[0m"
+#   args:
+#     (1) message
 function print_info {
+  purpleb="\033[1;35m"
+  end="\033[0m"
   echo -e "${purpleb}${1}${end}"
 }
+
 
 if [[ ${ACTION} = "sync" ]]; then
   print_info "Going fetch list of TSB container images"
