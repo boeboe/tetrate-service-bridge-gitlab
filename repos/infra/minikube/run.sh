@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# Helper script to create gitlab groups, projects and repo code
+# Helper script to manage minikube based kubernetes clusters
 #
 ROOT_DIR="$( cd -- "$(dirname "${0}")" >/dev/null 2>&1 ; pwd -P )"
 

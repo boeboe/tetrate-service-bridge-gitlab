@@ -1,0 +1,16 @@
+stages:
+    - mp
+    - cp
+
+variables:
+    TERM: "xterm" # Use Unix ASCII color codes on Nuke
+
+mp:
+    stage: mp
+    script:
+        - "./mp.sh install"
+
+cp:
+    stage: cp
+    script:
+        - "./cp.sh install"

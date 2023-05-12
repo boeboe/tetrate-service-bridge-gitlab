@@ -1,0 +1,17 @@
+[
+  {
+    "k8s_context":"mgmt",
+    "cluster_name": "mgmt",
+    "cluster_type": "mp"
+  },
+  {
+    "k8s_context":"active",
+    "cluster_name": "active",
+    "cluster_type": "cp"
+  },
+  {
+    "k8s_context":"standby",
+    "cluster_name": "standby",
+    "cluster_type": "cp"
+  }
+]

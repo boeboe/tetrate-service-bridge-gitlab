@@ -1,9 +1,14 @@
 [
   {
-    "description": "Minikube cluster management",
+    "description": "Minikube Cluster Management",
     "directory": "infra/minikube",
     "group": "infra",
     "project": "minikube"
+  },{
+    "description": "TSB Cluster Installation",
+    "directory": "infra/tsb",
+    "group": "infra",
+    "project": "tsb"
   },
   {
     "description": "TSB Container Images",
