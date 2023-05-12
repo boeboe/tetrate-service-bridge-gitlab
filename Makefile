@@ -32,10 +32,6 @@ gitlab-remove: ## Remove gitlab server and runner
 
 ###
 
-.PHONY: repo-sync-images
-repo-sync-images: ## Sync TSB images into gitlab docker repo
-	@/bin/sh -c './repo.sh sync-images'
-
 .PHONY: repo-config
 repo-config: ## Configure gitlab groups, projects and repos
 	@/bin/sh -c './repo.sh config-repos'
