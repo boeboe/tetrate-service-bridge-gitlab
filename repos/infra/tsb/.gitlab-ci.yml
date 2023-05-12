@@ -1,21 +1,33 @@
 stages:
+  - certs
   - mp
   - cp
 variables:
   TERM: xterm
+certs:
+  artifacts:
+    paths:
+      - output/istio-certs
+  cache:
+    key: istio-certs
+    paths:
+      - output/istio-certs
+  stage: certs
+  script:
+    - ./certs.sh generate
 mp:
   artifacts:
-    untracked: true
     paths:
-      - output/istio-certs/*
+      - output/istio-certs
+  needs:
+    - certs
   stage: mp
   script:
     - ./mp.sh install
 cp:
   artifacts:
-    untracked: true
     paths:
-      - output/istio-certs/*
+      - output/istio-certs
   needs:
     - mp
   stage: cp
