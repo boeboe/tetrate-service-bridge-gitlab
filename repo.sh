@@ -44,6 +44,7 @@ function get_gitlab_http_url_with_credentials {
 
 if [[ ${ACTION} = "config-repos" ]]; then
 
+  rm -rf ${GITLAB_REPOS_TEMPDIR}
   mkdir -p ${GITLAB_REPOS_TEMPDIR}
 
   GITLAB_HTTP_URL=$(get_gitlab_http_url ${GITLAB_CONTAINER_NAME})
