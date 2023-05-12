@@ -25,8 +25,8 @@ GITLAB_NETWORK="gitlab"
 GITLAB_CONTAINER_NAME="gitlab-ee"
 GITLAB_DOCKER_PORT=5050
 GITLAB_OMNIBUS_CONFIG="
-    external_url 'http://127.0.0.1'
-    registry_external_url 'http://127.0.0.1:${GITLAB_DOCKER_PORT}'
+    external_url 'http://192.168.47.2'
+    registry_external_url 'http://192.168.47.2:${GITLAB_DOCKER_PORT}'
   "
 
 # Start gitlab server

@@ -35,9 +35,13 @@ DONE
 #   args:
 #     (1) cluster name
 function configure_docker_access {
-  minikube --profile ${1} ssh -- docker login "192.168.47.2:5050" --username "root" --password "Tetrate123." &>/dev/null ;
-  minikube --profile ${1} ssh -- sudo cp /home/docker/.docker/config.json /var/lib/kubelet ;
-  minikube --profile ${1} ssh -- sudo systemctl restart kubelet ;
+  if $(minikube --profile ${1} ssh -- sudo cat /var/lib/kubelet/config.json | grep "192.168.47.2:5050" &>/dev/null) ; then
+    echo "Docker access to '192.168.47.2:5050' already configured"
+  else
+    minikube --profile ${1} ssh -- docker login "192.168.47.2:5050" --username "root" --password "Tetrate123." &>/dev/null ;
+    minikube --profile ${1} ssh -- sudo cp /home/docker/.docker/config.json /var/lib/kubelet ;
+    minikube --profile ${1} ssh -- sudo systemctl restart kubelet ;
+  fi
 }
 
 
@@ -49,12 +53,13 @@ if [[ ${ACTION} = "up" ]]; then
     cluster_name=`jq -r '.['$i'].name' ${MINIKUBE_CLUSTER_CONFIG}`
     cluster_region=`jq -r '.['$i'].region' ${MINIKUBE_CLUSTER_CONFIG}`
     cluster_zone=`jq -r '.['$i'].zone' ${MINIKUBE_CLUSTER_CONFIG}`
+    print_info "================================================== ${cluster_name} =================================================="
 
     # Start cluster if needed
+    print_info "Starting minikube cluster '${cluster_name}'"
     if minikube profile list 2>/dev/null | grep ${cluster_name} | grep "Running" &>/dev/null ; then
       echo "Minikube cluster '${cluster_name}' already running"
     else
-      print_info "Starting minikube cluster '${cluster_name}'"
       minikube start --kubernetes-version=v${k8s_version} --profile ${cluster_name} --network ${cluster_name} ${MINIKUBE_OPTS} ;
     fi
 
@@ -62,10 +67,10 @@ if [[ ${ACTION} = "up" ]]; then
     docker_subnet=$(docker network inspect ${cluster_name} --format '{{(index .IPAM.Config 0).Subnet}}' | awk -F '.' '{ print $1"."$2"."$3;}')
 
     # Configure and enable metallb in the cluster
+    print_info "Enable metallb addon in minikube cluster '${cluster_name}'"
     if minikube --profile ${cluster_name} addons list | grep "metallb" | grep "enabled" &>/dev/null ; then
       echo "Minikube cluster '${cluster_name}' has metallb addon already enabled"
     else
-      print_info "Enable metallb addon in minikube cluster '${cluster_name}'"
       configure_metallb ${cluster_name} ${docker_subnet} ;
       minikube --profile ${cluster_name} addons enable metallb ;
     fi
