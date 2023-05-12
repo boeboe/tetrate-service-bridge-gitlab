@@ -87,12 +87,12 @@ if [[ ${ACTION} = "up" ]]; then
     # Add nodes labels for locality based routing (region and zone)
     print_info "Configure region and zone for minikube cluster '${cluster_name}'"
     if kubectl --context ${cluster_name} get nodes ${cluster_name} --show-labels | grep "topology.kubernetes.io/region=${cluster_region}" &>/dev/null ; then
-      echo "Minikube cluster '${cluster_name}' already has cluster region '${cluster_region}' configured"
+      echo "Minikube cluster '${cluster_name}' already has region '${cluster_region}' configured"
     else
       kubectl --context ${cluster_name} label node ${cluster_name} topology.kubernetes.io/region=${cluster_region} --overwrite=true ;
     fi
     if kubectl --context ${cluster_name} get nodes ${cluster_name} --show-labels | grep "topology.kubernetes.io/zone=${cluster_zone}" &>/dev/null ; then
-      echo "Minikube cluster '${cluster_name}' already has cluster zone '${cluster_zone}' configured"
+      echo "Minikube cluster '${cluster_name}' already has zone '${cluster_zone}' configured"
     else
       kubectl --context ${cluster_name} label node ${cluster_name} topology.kubernetes.io/zone=${cluster_zone} --overwrite=true ;
     fi
