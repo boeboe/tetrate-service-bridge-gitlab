@@ -95,6 +95,7 @@ function remove_gitlab {
 #     (4) gitlab container name
 function start_gitlab_runner {
   mkdir -p ${1} ;
+  sudo chown -R gitlab-runner:gitlab-runner ${1} ;
 
   if [[ -f "/etc/systemd/system/gitlab-runner.service" ]]; then
     echo "Gitlab runner is already installed properly"
