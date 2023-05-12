@@ -11,6 +11,7 @@ mp:
         - "./mp.sh install"
 
 cp:
+    needs: ["mp"]
     stage: cp
     script:
         - "./cp.sh install"
