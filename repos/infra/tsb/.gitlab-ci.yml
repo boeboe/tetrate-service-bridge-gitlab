@@ -7,8 +7,6 @@ mp:
   artifacts:
     paths:
       - output/*
-    exclude:
-      - output/.gitignore
   stage: mp
   script:
     - ./mp.sh install
@@ -16,8 +14,6 @@ cp:
   artifacts:
     paths:
       - output/*
-    exclude:
-      - output/.gitignore
   needs:
     - mp
   stage: cp
