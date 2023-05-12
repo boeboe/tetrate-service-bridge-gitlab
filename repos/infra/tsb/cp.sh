@@ -45,7 +45,6 @@ if [[ ${ACTION} = "install" ]]; then
 
   done
 
-  tree ${CERT_OUTPUT_DIR}
   exit 0
 fi
 
