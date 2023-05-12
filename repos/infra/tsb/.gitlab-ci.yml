@@ -5,15 +5,17 @@ variables:
   TERM: xterm
 mp:
   artifacts:
+    untracked: true
     paths:
-      - output/*
+      - output/
   stage: mp
   script:
     - ./mp.sh install
 cp:
   artifacts:
+    untracked: true
     paths:
-      - output/*
+      - output/
   needs:
     - mp
   stage: cp
