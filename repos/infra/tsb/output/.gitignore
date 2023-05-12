@@ -1,4 +1,4 @@
 *
-!root-cert.csr
-!root-cert.pem
-!root-key.pem
+!istio-certs/root-cert.csr
+!istio-certs/root-cert.pem
+!istio-certs/root-key.pem
