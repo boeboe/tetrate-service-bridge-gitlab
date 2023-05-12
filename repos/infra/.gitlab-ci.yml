@@ -1,0 +1,41 @@
+stages:
+    - build
+    - test
+    - pack
+
+variables:
+    TERM: "xterm" # Use Unix ASCII color codes on Nuke
+
+# before_script:
+#     - CHCP 65001  # Set correct code page to avoid charset issues
+
+.job_template: &job_definition
+  except:
+    - tags
+
+build:
+    <<: *job_definition
+    stage: build
+    script:
+        - "./run.sh build"
+
+test:
+    <<: *job_definition
+    stage: test
+    script:
+        - "./run.sh test"
+    variables:
+        TEST_VAR: "HELLLLLLOOOOO"
+
+pack:
+    <<: *job_definition
+    stage: pack
+    script:
+        - "./run.sh pack"
+    variables:
+        GIT_CHECKOUT: "false"
+    only:
+        - master
+    artifacts:
+        paths:
+            - output/

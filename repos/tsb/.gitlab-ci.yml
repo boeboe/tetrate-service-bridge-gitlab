@@ -1,0 +1,10 @@
+stages:
+    - sync
+
+variables:
+    TERM: "xterm" # Use Unix ASCII color codes
+
+sync:
+    stage: sync
+    script:
+        - "./run.sh sync"
