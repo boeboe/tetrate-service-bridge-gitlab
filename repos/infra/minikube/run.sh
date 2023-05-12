@@ -53,7 +53,7 @@ if [[ ${ACTION} = "up" ]]; then
     cluster_name=`jq -r '.['$i'].name' ${MINIKUBE_CLUSTER_CONFIG}`
     cluster_region=`jq -r '.['$i'].region' ${MINIKUBE_CLUSTER_CONFIG}`
     cluster_zone=`jq -r '.['$i'].zone' ${MINIKUBE_CLUSTER_CONFIG}`
-    print_info "================================================== ${cluster_name} =================================================="
+    print_info "================================================== ${cluster_name} cluster =================================================="
 
     # Start cluster if needed
     print_info "Starting minikube cluster '${cluster_name}'"
