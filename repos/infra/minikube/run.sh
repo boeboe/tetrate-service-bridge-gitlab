@@ -65,7 +65,7 @@ if [[ ${ACTION} = "up" ]]; then
     if minikube --profile ${cluster_name} addons list | grep "metallb" | grep "enabled" &>/dev/null ; then
       echo "Minikube cluster '${cluster_name}' has metallb addon already enabled"
     else
-      print_info "Enable metallb addon in minikube cluster '${MP_CLUSTER_NAME}'"
+      print_info "Enable metallb addon in minikube cluster '${cluster_name}'"
       configure_metallb ${cluster_name} ${docker_subnet} ;
       minikube --profile ${cluster_name} addons enable metallb ;
     fi
