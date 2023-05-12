@@ -7,7 +7,7 @@ mp:
   artifacts:
     untracked: true
     paths:
-      - output/
+      - output/istio-certs/*
   stage: mp
   script:
     - ./mp.sh install
@@ -15,7 +15,7 @@ cp:
   artifacts:
     untracked: true
     paths:
-      - output/
+      - output/istio-certs/*
   needs:
     - mp
   stage: cp
