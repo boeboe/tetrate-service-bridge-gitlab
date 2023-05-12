@@ -44,7 +44,6 @@ function get_gitlab_http_url_with_credentials {
 
 if [[ ${ACTION} = "config-repos" ]]; then
 
-  rm -rf ${GITLAB_REPOS_TEMPDIR}
   mkdir -p ${GITLAB_REPOS_TEMPDIR}
 
   GITLAB_HTTP_URL=$(get_gitlab_http_url ${GITLAB_CONTAINER_NAME})
@@ -53,27 +52,27 @@ if [[ ${ACTION} = "config-repos" ]]; then
   repo_count=`jq '. | length' ${GITLAB_REPOS_CONFIG}`
 
   for ((i=0; i<$repo_count; i++)); do
-      description=`jq -r '.['$i'].description' ${GITLAB_REPOS_CONFIG}`
-      directory=`jq -r '.['$i'].directory' ${GITLAB_REPOS_CONFIG}`
-      group=`jq -r '.['$i'].group' ${GITLAB_REPOS_CONFIG}`
-      project=`jq -r '.['$i'].project' ${GITLAB_REPOS_CONFIG}`
-      
-      print_info "Going configure gitlab project '${project}' in group '${group}'"
-      gitlab_create_group ${GITLAB_HTTP_URL} ${GITLAB_ROOT_TOKEN} ${group} ;
-      gitlab_create_project_in_group ${GITLAB_HTTP_URL} ${GITLAB_ROOT_TOKEN} ${group} ${project} "${description}" ;
-      
-      print_info "Going to clone gitlab project '${project}' in group '${group}' to ${GITLAB_REPOS_TEMPDIR}/${project}"
-      cd ${GITLAB_REPOS_TEMPDIR}
-      rm -rf ./${project}
-      git clone ${GITLAB_HTTP_URL_CREDS}/${group}/${project}.git
+    description=`jq -r '.['$i'].description' ${GITLAB_REPOS_CONFIG}`
+    group=`jq -r '.['$i'].group' ${GITLAB_REPOS_CONFIG}`
+    project=`jq -r '.['$i'].project' ${GITLAB_REPOS_CONFIG}`
+    
+    print_info "Going configure gitlab project '${project}' in group '${group}'"
+    gitlab_create_group ${GITLAB_HTTP_URL} ${GITLAB_ROOT_TOKEN} ${group} ;
+    gitlab_create_project_in_group ${GITLAB_HTTP_URL} ${GITLAB_ROOT_TOKEN} ${group} ${project} "${description}" ;
+    
+    print_info "Going to clone gitlab project '${project}' in group '${group}' to ${GITLAB_REPOS_TEMPDIR}/${group}/${project}"
+    mkdir -p ${GITLAB_REPOS_TEMPDIR}/${group}
+    cd ${GITLAB_REPOS_TEMPDIR}/${group}
+    rm -rf ${GITLAB_REPOS_TEMPDIR}/${group}/${project}
+    git clone ${GITLAB_HTTP_URL_CREDS}/${group}/${project}.git
 
-      print_info "Going add, commit and push new code to project '${project}' in group '${group}'"
-      cd ${GITLAB_REPOS_TEMPDIR}/${project}
+    print_info "Going add, commit and push new code to project '${project}' in group '${group}'"
+    cd ${GITLAB_REPOS_TEMPDIR}/${group}/${project}
 
-      cp -a ${GITLAB_REPOS_DIR}/${directory}/. ${GITLAB_REPOS_TEMPDIR}/${project}
-      git add -A
-      git commit -m "initial commit"
-      git push -u origin main
+    cp -a ${GITLAB_REPOS_DIR}/${group}/${project}/. ${GITLAB_REPOS_TEMPDIR}/${group}/${project}
+    git add -A
+    git commit -m "initial commit"
+    git push -u origin main
   done
   
   exit 0
