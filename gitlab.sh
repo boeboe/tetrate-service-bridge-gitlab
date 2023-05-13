@@ -82,13 +82,18 @@ function remove_gitlab {
   if docker inspect ${2} &>/dev/null ; then
     docker stop ${2} &>/dev/null ;
     docker rm ${2} &>/dev/null ;
-    print_info "Local docker repo stopped and removed"
+    echo "Local docker repo stopped and removed"
   fi
   if docker network inspect ${1} &>/dev/null ; then
     docker network rm ${1} &>/dev/null ;
-    print_info "Local docker repo network removed"
+    echo "Local docker repo network removed"
   fi
   sudo rm -rf ${GITLAB_HOME} ;
+
+  for profile in $(sudo -u gitlab-runner minikube profile list -o json | jq -r '.valid[].Name') ; do
+    echo "Deleting minikube profile '${profile}'"
+    sudo -u gitlab-runner minikube --profile ${profile} delete ;
+  done
 }
 
 # Start gitlab local runner
