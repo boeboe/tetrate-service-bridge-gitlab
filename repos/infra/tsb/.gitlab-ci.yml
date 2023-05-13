@@ -13,11 +13,13 @@ certs:
     key: istio-certs
     paths:
       - output/istio-certs
-  # needs:
-  #   - job: sync
-  #     pipeline: tsb/images
-  #   - job: up
-  #     pipeline: infra/minikube
+  needs:
+    - job: sync
+      pipeline: tsb/images
+      artifacts: false
+    - job: up
+      pipeline: infra/minikube
+      artifacts: false
   stage: certs
   script:
     - ./certs.sh generate
