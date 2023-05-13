@@ -1,10 +1,4 @@
-stages:
-  - certs
-  - install-mp
-  - install-cp
-  - config-tsb
-variables:
-  TERM: xterm
+---
 certs:
   artifacts:
     paths:
@@ -14,36 +8,17 @@ certs:
     paths:
       - output/istio-certs
   needs:
-    - job: sync
-      pipeline: tsb/images
-      artifacts: false
-    - job: up
-      pipeline: infra/minikube
-      artifacts: false
-  stage: certs
+    - artifacts: false
+      job: sync
+      project: tsb/images
+      ref: main
+    - artifacts: false
+      job: up
+      project: infra/minikube
+      ref: main 
   script:
     - ./certs.sh generate
-install-mp:
-  artifacts:
-    paths:
-      - output/istio-certs
-      - output/tsb
-  needs:
-    - certs
-  stage: install-mp
-  script:
-    - ./mp.sh install
-install-cp:
-  artifacts:
-    paths:
-      - output/istio-certs
-      - output/tsb
-  needs:
-    - certs
-    - install-mp
-  stage: install-cp
-  script:
-    - ./cp.sh install
+  stage: certs
 config-tsb:
   artifacts:
     paths:
@@ -52,7 +27,34 @@ config-tsb:
   needs:
     - install-mp
     - install-cp
-  stage: config-tsb
   script:
     - ./tsb.sh config
-
+  stage: config-tsb
+install-cp:
+  artifacts:
+    paths:
+      - output/istio-certs
+      - output/tsb
+  needs:
+    - certs
+    - install-mp
+  script:
+    - ./cp.sh install
+  stage: install-cp
+install-mp:
+  artifacts:
+    paths:
+      - output/istio-certs
+      - output/tsb
+  needs:
+    - certs
+  script:
+    - ./mp.sh install
+  stage: install-mp
+stages:
+  - certs
+  - install-mp
+  - install-cp
+  - config-tsb
+variables:
+  TERM: xterm
