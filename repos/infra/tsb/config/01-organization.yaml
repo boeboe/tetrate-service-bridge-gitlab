@@ -10,9 +10,6 @@ metadata:
   name: tetrate-settings
   organization: tetrate
 spec:
-  defaultSecuritySetting:
-  defaultTrafficSetting:
   networkSettings:
     networkReachability:
       tier1: tier2
-  regionalFailover:
