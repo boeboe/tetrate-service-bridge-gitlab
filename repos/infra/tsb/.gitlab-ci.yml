@@ -19,6 +19,7 @@ mp:
   artifacts:
     paths:
       - output/istio-certs
+      - output/tsb
   needs:
     - certs
   stage: mp
@@ -28,6 +29,7 @@ cp:
   artifacts:
     paths:
       - output/istio-certs
+      - output/tsb
   needs:
     - mp
   stage: cp
