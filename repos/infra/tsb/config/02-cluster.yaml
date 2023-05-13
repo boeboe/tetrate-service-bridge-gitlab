@@ -7,7 +7,6 @@ metadata:
 spec:
   locality:
     region: region1
-  namespaceScope:
   network: tier1
   tier1Cluster: true
   tokenTtl: 31536000s
@@ -21,7 +20,6 @@ metadata:
 spec:
   locality:
     region: region1
-  namespaceScope:
   network: tier2
   tier1Cluster: false
   tokenTtl: 31536000s
@@ -35,7 +33,6 @@ metadata:
 spec:
   locality:
     region: region2
-  namespaceScope:
   network: tier2
   tier1Cluster: false
   tokenTtl: 31536000s
