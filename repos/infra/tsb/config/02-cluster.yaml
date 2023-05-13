@@ -1,0 +1,42 @@
+---
+apiVersion: api.tsb.tetrate.io/v2
+kind: Cluster
+metadata:
+  name: mgmt
+  organization: tetrate
+spec:
+  locality:
+    region: region1
+  namespaceScope: {}
+  network: tier1
+  tier1Cluster: true
+  tokenTtl: 31536000s
+  trustDomain: mgmt
+---
+apiVersion: api.tsb.tetrate.io/v2
+kind: Cluster
+metadata:
+  name: active
+  organization: tetrate
+spec:
+  locality:
+    region: region1
+  namespaceScope: {}
+  network: tier2
+  tier1Cluster: false
+  tokenTtl: 31536000s
+  trustDomain: active
+---
+apiVersion: api.tsb.tetrate.io/v2
+kind: Cluster
+metadata:
+  name: standby
+  organization: tetrate
+spec:
+  locality:
+    region: region2
+  namespaceScope: {}
+  network: tier2
+  tier1Cluster: false
+  tokenTtl: 31536000s
+  trustDomain: standby

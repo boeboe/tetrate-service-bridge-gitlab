@@ -1,7 +1,8 @@
 stages:
   - certs
-  - mp
-  - cp
+  - install-mp
+  - install-cp
+  - config-tsb
 variables:
   TERM: xterm
 certs:
@@ -15,24 +16,36 @@ certs:
   stage: certs
   script:
     - ./certs.sh generate
-mp:
+install-mp:
   artifacts:
     paths:
       - output/istio-certs
       - output/tsb
   needs:
     - certs
-  stage: mp
+  stage: install-mp
   script:
     - ./mp.sh install
-cp:
+install-cp:
   artifacts:
     paths:
       - output/istio-certs
       - output/tsb
   needs:
-    - mp
-  stage: cp
+    - certs
+    - install-mp
+  stage: install-cp
   script:
     - ./cp.sh install
+config-tsb:
+  artifacts:
+    paths:
+      - output/istio-certs
+      - output/tsb
+  needs:
+    - install-mp
+    - install-cp
+  stage: config-tsb
+  script:
+    - ./tsb.sh config
 
