@@ -20,6 +20,8 @@ certs:
     key: istio-certs
     paths:
       - output/istio-certs
+  needs:
+    - prereq
   script:
     - ./certs.sh generate
   stage: certs

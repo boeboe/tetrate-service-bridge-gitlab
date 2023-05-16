@@ -1,0 +1,22 @@
+---
+spec:
+  template:
+    spec:
+      containers:
+      - name: ldap
+        env:
+        - name: LDAP_CUSTOM_LDIF_DIR
+          value: "/tmp/ldif"
+        volumeMounts:
+        - mountPath: "/tmp/ldif"
+          name: ldif-config
+      volumes:
+      - name: ldif-config
+        projected:
+          sources:
+          - configMap:
+              name: organization-ldif
+          - configMap:
+              name: people-ldif
+          - configMap:
+              name: group-ldif

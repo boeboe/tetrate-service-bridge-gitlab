@@ -1,0 +1,37 @@
+---
+kind: ConfigMap 
+apiVersion: v1 
+metadata:
+  name: group-ldif
+  namespace: tsb
+data:
+  03-group.ldif: |
+    ############
+    ## Groups ##
+    ############
+
+    dn: cn=Platform,ou=Engineering,dc=tetrate,dc=io
+    objectclass: groupOfUniqueNames
+    objectclass: top
+    cn: Platform
+    owner: cn=Zack Butcher,ou=People,dc=tetrate,dc=io
+    uniquemember: cn=Zack Butcher,ou=People,dc=tetrate,dc=io
+    uniquemember: cn=Security,ou=Engineering,dc=tetrate,dc=io
+
+    dn: cn=Security,ou=Engineering,dc=tetrate,dc=io
+    objectclass: groupOfUniqueNames
+    objectclass: top
+    cn: Security
+    owner: cn=Ignasi Barrera,ou=People,dc=tetrate,dc=io
+    uniquemember: cn=Ignasi Barrera,ou=People,dc=tetrate,dc=io
+    uniquemember: cn=Zack Butcher,ou=People,dc=tetrate,dc=io
+    uniquemember: cn=Observability,ou=Engineering,dc=tetrate,dc=io
+
+    dn: cn=Observability,ou=Engineering,dc=tetrate,dc=io
+    objectclass: groupOfUniqueNames
+    objectclass: top
+    cn: Observability
+    owner: cn=Wu Sheng,ou=People,dc=tetrate,dc=io
+    uniquemember: cn=Wu Sheng,ou=People,dc=tetrate,dc=io
+    uniquemember: cn=Zack Butcher,ou=People,dc=tetrate,dc=io
+    uniquemember: cn=Bart Van Bos,ou=People,dc=tetrate,dc=io

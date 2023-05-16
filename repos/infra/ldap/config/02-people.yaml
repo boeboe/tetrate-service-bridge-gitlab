@@ -1,0 +1,59 @@
+---
+kind: ConfigMap 
+apiVersion: v1 
+metadata:
+  name: people-ldif
+  namespace: tsb
+data:
+  02-people.ldif: |
+    ############
+    ## People ##
+    ############
+
+    dn: cn=Zack Butcher,ou=People,dc=tetrate,dc=io
+    objectclass: person
+    objectclass: organizationalPerson
+    objectclass: inetOrgPerson
+    objectclass: top
+    cn: Zack Butcher
+    givenname: Zack
+    sn: Butcher
+    uid: zack
+    mail: zack@tetrate.io
+    userpassword: zack-pass
+
+    dn: cn=Ignasi Barrera,ou=People,dc=tetrate,dc=io
+    objectclass: person
+    objectclass: organizationalPerson
+    objectclass: inetOrgPerson
+    objectclass: top
+    cn: Ignasi Barrera
+    givenname: Ignasi
+    sn: Barrera
+    uid: nacx
+    mail: ignasi@tetrate.io
+    userpassword: nacx-pass
+
+    dn: cn=Wu Sheng,ou=People,dc=tetrate,dc=io
+    objectclass: person
+    objectclass: organizationalPerson
+    objectclass: inetOrgPerson
+    objectclass: top
+    cn: Wu Sheng
+    givenname: Wu
+    sn: Sheng
+    uid: wusheng
+    mail: wusheng@tetrate.io
+    userpassword: wusheng-pass
+
+    dn: cn=Bart Van Bos,ou=People,dc=tetrate,dc=io
+    objectclass: person
+    objectclass: organizationalPerson
+    objectclass: inetOrgPerson
+    objectclass: top
+    cn: Bart Van Bos
+    givenname: Bart
+    sn: Van Bos
+    uid: bart
+    mail: bart@tetrate.io
+    userpassword: bart-pass

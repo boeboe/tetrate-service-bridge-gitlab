@@ -1,0 +1,32 @@
+---
+kind: ConfigMap 
+apiVersion: v1 
+metadata:
+  name: organization-ldif
+  namespace: tsb
+data:
+  01-organization.ldif: |
+    ############################
+    ## Organization structure ##
+    ############################
+
+    dn: dc=tetrate,dc=io
+    dc: tetrate
+    objectClass: dcObject
+    objectClass: organizationalUnit
+    ou: Tetrate
+
+    dn: ou=People,dc=tetrate,dc=io
+    objectClass: organizationalUnit
+    objectClass: top
+    ou: People
+
+    dn: ou=Engineering,dc=tetrate,dc=io
+    objectClass: organizationalUnit
+    objectClass: top
+    ou: Engineering
+
+    dn: ou=Marketing,dc=tetrate,dc=io
+    objectClass: organizationalUnit
+    objectClass: top
+    ou: Marketing
