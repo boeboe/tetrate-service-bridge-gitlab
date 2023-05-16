@@ -1,17 +1,17 @@
 ---
 stages:
-  - manual
+  - prereq
   - certs
   - install-mp
   - install-cp
   - config-tsb
 variables:
   TERM: xterm
-manual:
+prereq:
   allow_failure: false
-  stage: manual
-  script: ./prereq.sh check
-  when: manual
+  script: 
+    - ./prereq.sh check
+  stage: prereq
 certs:
   artifacts:
     paths:
