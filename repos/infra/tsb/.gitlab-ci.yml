@@ -1,4 +1,16 @@
 ---
+stages:
+  - manual
+  - certs
+  - install-mp
+  - install-cp
+  - config-tsb
+variables:
+  TERM: xterm
+manual:
+  stage: manual
+  script: echo "This is a manual trigger"
+  when: manual
 certs:
   artifacts:
     paths:
@@ -8,28 +20,10 @@ certs:
     paths:
       - output/istio-certs
   needs:
-    - artifacts: false
-      job: sync
-      project: tsb/images
-      ref: main
-    - artifacts: false
-      job: up
-      project: infra/minikube
-      ref: main 
+    - manual
   script:
     - ./certs.sh generate
   stage: certs
-config-tsb:
-  artifacts:
-    paths:
-      - output/istio-certs
-      - output/tsb
-  needs:
-    - install-mp
-    - install-cp
-  script:
-    - ./tsb.sh config
-  stage: config-tsb
 install-cp:
   artifacts:
     paths:
@@ -51,10 +45,14 @@ install-mp:
   script:
     - ./mp.sh install
   stage: install-mp
-stages:
-  - certs
-  - install-mp
-  - install-cp
-  - config-tsb
-variables:
-  TERM: xterm
+config-tsb:
+  artifacts:
+    paths:
+      - output/istio-certs
+      - output/tsb
+  needs:
+    - install-mp
+    - install-cp
+  script:
+    - ./tsb.sh config
+  stage: config-tsb

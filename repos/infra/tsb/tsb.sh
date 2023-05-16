@@ -53,7 +53,7 @@ if [[ ${ACTION} = "config" ]]; then
   for configfile in ${CONFIG_DIR}/* ; do
     echo "Applying tsb configuration of '${configfile}'" ;
     tctl apply -f ${configfile} ;
-    sleep 3 ;
+    sleep 5 ;
   done
 
   # Wait for clusters to be onboarded to avoid race conditions
