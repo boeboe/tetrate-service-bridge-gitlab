@@ -1,0 +1,20 @@
+---
+stages:
+  - prereq
+  - users
+  - teams
+variables:
+  TERM: xterm
+prereq:
+  allow_failure: false
+  script: 
+    - ./prereq.sh check
+  stage: prereq
+users:
+  script:
+    - ./config.sh users
+  stage: users
+teams:
+  script:
+    - ./config.sh teams
+  stage: teams

@@ -1,0 +1,23 @@
+---
+apiVersion: api.tsb.tetrate.io/v2
+kind: Team
+metadata:
+  name: dev-abc-team
+  organization: tetrate
+spec:
+  members:
+    - organizations/tetrate/users/dev-abc
+  sourceType: LOCAL
+---
+apiVersion: api.tsb.tetrate.io/v2
+kind: Team
+metadata:
+  name: all-users
+  organization: tetrate
+spec:
+  members:
+    - organizations/tetrate/teams/dev-abc-team
+    - organizations/tetrate/users/alice
+    - organizations/tetrate/users/bob
+    - organizations/tetrate/users/john
+  sourceType: LOCAL
