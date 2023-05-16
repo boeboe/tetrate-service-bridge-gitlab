@@ -48,7 +48,7 @@ function gitlab_get_shared_runner_id {
 function gitlab_create_group {
   group_id=$(gitlab_get_group_id ${1} ${2} ${3})
   if [[ ${group_id} == "" ]] ; then
-    response=`curl "${1}/api/v4/groups/" --silent --request POST --header "PRIVATE-TOKEN: ${2}" \
+    response=`curl --url "${1}/api/v4/groups/" --silent --request POST --header "PRIVATE-TOKEN: ${2}" \
       --header "Content-Type: application/json" \
       --data @- <<BODY
 {
@@ -88,10 +88,9 @@ function gitlab_create_project_in_group {
     gitlab_create_group ${1} ${2} ${3} ;
   fi
 
-  group_id=$(gitlab_get_group_id ${1} ${2} ${3})
-  project_id=$(gitlab_get_project_id_in_group ${1} ${2} ${group_id} ${4})
+  project_id=$(gitlab_get_project_id_in_group ${1} ${2} ${3} ${4})
   if [[ ${project_id} == "" ]]; then
-    response=`curl "${1}/api/v4/projects/" --silent --request POST --header "PRIVATE-TOKEN: ${2}" \
+    response=`curl --url "${1}/api/v4/projects/" --silent --request POST --header "PRIVATE-TOKEN: ${2}" \
       --header "Content-Type: application/json" \
       --data @- <<BODY
 {
@@ -116,14 +115,8 @@ BODY`
 #     (3) gitlab group name
 #     (4) gitlab project name
 function gitlab_get_project_id_in_group {
-  if ! curl --fail --silent --request GET --header "PRIVATE-TOKEN: ${2}" --header 'Content-Type: application/json' --url "${1}/api/v4/groups/${3}" &>/dev/null; then
-    # Group does not exist
-    return
-  else
-    curl --silent --request GET --header "PRIVATE-TOKEN: ${2}" \
-      --header 'Content-Type: application/json' \
-      --url "${1}/api/v4/groups/${3}/projects" | jq ".[] | select(.name==\"${4}\")" | jq -r '.id'
-  fi
+  curl --url "${1}/api/v4/projects" --silent --request GET --header "PRIVATE-TOKEN: ${2}" \
+    | jq ".[] | select(.namespace.name=\"${3}\") | select(.name==\"${4}\")" | jq -r '.id'
 }
 
 

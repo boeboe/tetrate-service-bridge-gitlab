@@ -8,8 +8,9 @@ stages:
 variables:
   TERM: xterm
 manual:
+  allow_failure: false
   stage: manual
-  script: echo "This is a manual trigger"
+  script: ./prereq.sh check
   when: manual
 certs:
   artifacts:
@@ -19,8 +20,6 @@ certs:
     key: istio-certs
     paths:
       - output/istio-certs
-  needs:
-    - manual
   script:
     - ./certs.sh generate
   stage: certs
