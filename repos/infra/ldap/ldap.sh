@@ -26,7 +26,7 @@ if [[ ${ACTION} = "sync" ]]; then
   kubectl --context mgmt apply -f ${CONFIG_DIR}
 
   # Patch LDAP deployment
-  print_info "Patch and restart LDAP deployment" ;
+  print_info "Patch and restart demo LDAP deployment" ;
   kubectl --context mgmt patch deployment ldap --patch-file ${PATCH_DIR}/ldap-deployment.yaml -n tsb
   kubectl --context mgmt rollout restart deployment ldap -n tsb
 
