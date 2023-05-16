@@ -2,6 +2,7 @@
 stages:
   - prereq
   - ldap
+  - ui
 variables:
   TERM: xterm
 prereq:
@@ -15,3 +16,9 @@ ldap:
   script:
     - ./ldap.sh sync
   stage: ldap
+ui:
+  needs:
+    - ldap
+  script:
+    - ./ldap.sh ui
+  stage: ui

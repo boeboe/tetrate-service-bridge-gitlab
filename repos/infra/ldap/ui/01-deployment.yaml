@@ -1,0 +1,39 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ldap-ui
+  namespace: tsb
+spec:
+  selector:
+   matchLabels:
+    app: ldap-ui
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: ldap-ui
+    spec:
+      containers:
+        - name: ldap-ui
+          image: dnknth/ldap-ui
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: LDAP_URL
+              value: ldap://ldap.tsb.svc.cluster.local:389
+            - name: BASE_DN
+              value: "dc=tetrate,dc=io"
+            - name: BIND_DN
+              value: "cn=admin,dc=tetrate,dc=io"
+            - name: BIND_PASSWORD
+              value: admin
+          ports:
+            - containerPort: 5000
+              name: http
+          resources:
+            limits:
+              cpu: 250m
+              memory: 512Mi
+            requests:
+              cpu: 100m
+              memory: 256Mi
