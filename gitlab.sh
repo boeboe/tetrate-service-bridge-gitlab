@@ -21,6 +21,7 @@ TSB_REPO_PW=$(cat ${ROOT_DIR}/env.json | jq -r ".tsb.tetrate_repo.password") ;
 
 GITLAB_HOME=/tmp/gitlab
 GITLAB_RUNNER_WORKDIR=/tmp/gitlab-runner
+GITLAB_RUNNER_COUNT=3
 GITLAB_NETWORK="gitlab" 
 GITLAB_CONTAINER_NAME="gitlab-ee"
 GITLAB_DOCKER_PORT=5050
@@ -119,21 +120,24 @@ function start_gitlab_runner {
     sudo gitlab-runner start ;
   fi
 
-  if [[ $(gitlab_get_shared_runner_id ${2} ${3} "local-shell-runner") == "" ]] ; then
-    echo "Going to register gitlab runner with description 'local-shell-runner'"
-    shared_runner_token=$(gitlab_get_shared_runner_token ${4})
-    sudo gitlab-runner register \
-      --env "TETRATE_REGISTRY_USER=${TSB_REPO_USER}" \
-      --env "TETRATE_REGISTRY_PASSWORD=${TSB_REPO_PW}" \
-      --env "TETRATE_REGISTRY=${TSB_REPO_URL}" \
-      --executor shell \
-      --description "local-shell-runner" \
-      --non-interactive \
-      --url "${2}" \
-      --registration-token "${shared_runner_token}" ;
-  else
-    echo "Gitlab runner with description 'local-shell-runner' already registered"
-  fi
+  for ((i=0; i<$GITLAB_RUNNER_COUNT; i++)); do
+    runner_name="shell-runner-$((i+1))"
+    if [[ $(gitlab_get_shared_runner_id ${2} ${3} ${runner_name}) == "" ]] ; then
+      echo "Going to register gitlab runner with description '${runner_name}'"
+      shared_runner_token=$(gitlab_get_shared_runner_token ${4})
+      sudo gitlab-runner register \
+        --env "TETRATE_REGISTRY_USER=${TSB_REPO_USER}" \
+        --env "TETRATE_REGISTRY_PASSWORD=${TSB_REPO_PW}" \
+        --env "TETRATE_REGISTRY=${TSB_REPO_URL}" \
+        --executor shell \
+        --description "${runner_name}" \
+        --non-interactive \
+        --url "${2}" \
+        --registration-token "${shared_runner_token}" ;
+    else
+      echo "Gitlab runner with description '${runner_name}' already registered"
+    fi
+  done
 }
 
 # Stop gitlab local runner
