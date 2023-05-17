@@ -30,23 +30,31 @@ function gitlab_get_pipeline_status {
 
 if [[ ${ACTION} = "check" ]]; then
 
-  print_info "Check if TSB container images are available (pipeline tsb/images)"
-  status_tsb_images=$(gitlab_get_pipeline_status ${CI_API_V4_URL} "01234567890123456789" "tsb" "images")
-  if [[ ${status_tsb_images} == "success" ]] ; then
-    echo "Upstream pipeline tsb/images status: success"
-  else
-    echo "Upstream pipeline tsb/images status: '${status_tsb_images}', exiting..."
-    exit 1
-  fi
+  print_info "Wait for TSB container images to be available (pipeline tsb/images)"
+  while true; do  
+    status_tsb_images=$(gitlab_get_pipeline_status ${CI_API_V4_URL} "01234567890123456789" "tsb" "images")
+    if [[ ${status_tsb_images} == "success" ]] ; then
+      echo "OK"
+      break
+    else
+      echo -n "."
+      sleep 5 ;
+      continue
+    fi
+  done
 
-  print_info "Check if minikube based kubernetes clusters are available (pipeline infra/minikube)"
-  status_infra_minikube=$(gitlab_get_pipeline_status ${CI_API_V4_URL} "01234567890123456789" "infra" "minikube")
-  if [[ ${status_infra_minikube} == "success" ]] ; then
-    echo "Status pipeline infra/minikube: success"
-  else
-    echo "Upstream pipeline infra/minikube status: '${status_infra_minikube}', exiting..."
-    exit 1
-  fi
+  print_info "Wait for minikube based kubernetes clusters to be available (pipeline infra/minikube)"
+  while true; do  
+    status_infra_minikube=$(gitlab_get_pipeline_status ${CI_API_V4_URL} "01234567890123456789" "infra" "minikube")
+    if [[ ${status_infra_minikube} == "success" ]] ; then
+      echo "OK"
+      break
+    else
+      echo -n "."
+      sleep 5 ;
+      continue
+    fi
+  done
 
   exit 0
 fi

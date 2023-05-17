@@ -1,8 +1,8 @@
 stages:
-  - sync
+  - sync-imgs
 variables:
   TERM: xterm
-sync:
-  stage: sync
+sync-imgs:
+  stage: sync-imgs
   script:
-    - ./run.sh sync
+    - ./run.sh sync-imgs

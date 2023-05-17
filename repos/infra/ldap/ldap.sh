@@ -20,7 +20,7 @@ function print_info {
   echo -e "${purpleb}${1}${end}"
 }
 
-if [[ ${ACTION} = "sync" ]]; then
+if [[ ${ACTION} = "ldap-sync" ]]; then
 
    # Create LDAP configmaps
   print_info "Create LDAP configmaps containing organization, people and groups" ;
@@ -38,7 +38,7 @@ if [[ ${ACTION} = "sync" ]]; then
   exit 0
 fi
 
-if [[ ${ACTION} = "ui" ]]; then
+if [[ ${ACTION} = "ldap-ui" ]]; then
 
    # Going to deploy LDAP UI for demo purposes
   print_info "Going to deploy demo LDAP UI" ;
@@ -52,6 +52,6 @@ if [[ ${ACTION} = "ui" ]]; then
 fi
 
 echo "Please specify one of the following action:"
-echo "  - sync"
-echo "  - ui"
+echo "  - ldap-sync"
+echo "  - ldap-ui"
 exit 1

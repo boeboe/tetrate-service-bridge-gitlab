@@ -16,7 +16,7 @@ function print_info {
 }
 
 
-if [[ ${ACTION} = "sync" ]]; then
+if [[ ${ACTION} = "sync-imgs" ]]; then
   print_info "Going fetch list of TSB container images"
   CONTAINER_LIST=$(tctl install image-sync --just-print --raw --accept-eula 2>/dev/null)
   CONTAINER_LIST="${CONTAINER_LIST} containers.dl.tetrate.io/obs-tester-server:1.0"
@@ -47,5 +47,5 @@ fi
 
 
 echo "Please specify one of the following action:"
-echo "  - sync"
+echo "  - sync-imgs"
 exit 1

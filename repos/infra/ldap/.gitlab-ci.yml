@@ -1,8 +1,8 @@
 ---
 stages:
   - prereq
-  - ldap
-  - ui
+  - ldap-sync
+  - ldap-ui
 variables:
   TERM: xterm
 prereq:
@@ -10,15 +10,16 @@ prereq:
   script: 
     - ./prereq.sh check
   stage: prereq
-ldap:
+  timeout: 15m
+ldap-sync:
   needs:
     - prereq
   script:
-    - ./ldap.sh sync
-  stage: ldap
-ui:
+    - ./ldap.sh ldap-sync
+  stage: ldap-sync
+ldap-ui:
   needs:
-    - ldap
+    - prereq
   script:
-    - ./ldap.sh ui
-  stage: ui
+    - ./ldap.sh ldap-ui
+  stage: ldap-ui

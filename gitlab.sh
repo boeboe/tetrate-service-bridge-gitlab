@@ -21,7 +21,8 @@ TSB_REPO_PW=$(cat ${ROOT_DIR}/env.json | jq -r ".tsb.tetrate_repo.password") ;
 
 GITLAB_HOME=/tmp/gitlab
 GITLAB_RUNNER_WORKDIR=/tmp/gitlab-runner
-GITLAB_RUNNER_COUNT=3
+GITLAB_RUNNER_COUNT=1
+GITLAB_RUNNER_CONCURRENCY=5
 GITLAB_NETWORK="gitlab" 
 GITLAB_CONTAINER_NAME="gitlab-ee"
 GITLAB_DOCKER_PORT=5050
@@ -120,11 +121,23 @@ function start_gitlab_runner {
     sudo gitlab-runner start ;
   fi
 
-  for ((i=0; i<$GITLAB_RUNNER_COUNT; i++)); do
+  if $(sudo cat /etc/gitlab-runner/config.toml | grep "concurrent = ${GITLAB_RUNNER_CONCURRENCY}" &>/dev/null) ; then
+    echo "Gitlab concurrency already set correctly at ${GITLAB_RUNNER_CONCURRENCY}"
+  else
+    echo "Patching gitlab runner concurrency"
+    sudo sed -i "s/concurrent = .*/concurrent = ${GITLAB_RUNNER_CONCURRENCY}/" /etc/gitlab-runner/config.toml
+    sudo service gitlab-runner restart
+  fi
+
+  for ((i=0; i<${GITLAB_RUNNER_COUNT}; i++)); do
     runner_name="shell-runner-$((i+1))"
     if [[ $(gitlab_get_shared_runner_id ${2} ${3} ${runner_name}) == "" ]] ; then
       echo "Going to register gitlab runner with description '${runner_name}'"
-      shared_runner_token=$(gitlab_get_shared_runner_token ${4})
+      if [[ -z ${shared_runner_token} ]] ; then
+        shared_runner_token=$(gitlab_get_shared_runner_token ${4}) ;
+      else
+        echo "Gitlab shared runner token already set, re-using that one..."
+      fi
       sudo gitlab-runner register \
         --env "TETRATE_REGISTRY_USER=${TSB_REPO_USER}" \
         --env "TETRATE_REGISTRY_PASSWORD=${TSB_REPO_PW}" \

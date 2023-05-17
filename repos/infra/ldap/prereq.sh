@@ -30,14 +30,18 @@ function gitlab_get_pipeline_status {
 
 if [[ ${ACTION} = "check" ]]; then
 
-  print_info "Check if TSB has been installed correctly (pipeline tsb/installation)"
-  status_tsb_installation=$(gitlab_get_pipeline_status ${CI_API_V4_URL} "01234567890123456789" "tsb" "installation")
-  if [[ ${status_tsb_installation} == "success" ]] ; then
-    echo "Upstream pipeline tsb/installation status: success"
-  else
-    echo "Upstream pipeline tsb/installation status: '${status_tsb_installation}', exiting..."
-    exit 1
-  fi
+  print_info "Wait for TSB to be installed correctly (pipeline tsb/installation)"
+  while true; do
+    status_tsb_installation=$(gitlab_get_pipeline_status ${CI_API_V4_URL} "01234567890123456789" "tsb" "installation")
+    if [[ ${status_tsb_installation} == "success" ]] ; then
+      echo "OK"
+      break
+    else
+      echo -n "."
+      sleep 5 ;
+      continue
+    fi
+  done
 
   exit 0
 fi

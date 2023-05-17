@@ -12,6 +12,7 @@ prereq:
   script: 
     - ./prereq.sh check
   stage: prereq
+  timeout: 15m
 certs:
   artifacts:
     paths:

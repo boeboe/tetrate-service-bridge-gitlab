@@ -1,8 +1,8 @@
 stages:
-  - up
+  - minikube-up
 variables:
   TERM: xterm
-up:
-  stage: up
+minikube-up:
+  stage: minikube-up
   script:
-    - ./run.sh up
+    - ./minikube.sh up
