@@ -15,5 +15,9 @@
     "description": "TSB Cluster Installation",
     "group": "tsb",
     "project": "installation"
+  },{
+    "description": "TSB RBAC Management",
+    "group": "tsb",
+    "project": "rbac"
   }
 ]

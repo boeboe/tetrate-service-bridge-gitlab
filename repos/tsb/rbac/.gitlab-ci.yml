@@ -1,0 +1,22 @@
+---
+stages:
+  - prereq
+  - config-tsb
+variables:
+  TERM: xterm
+prereq:
+  allow_failure: false
+  script: 
+    - ./prereq.sh check
+  stage: prereq
+  timeout: 15m
+config-tsb:
+  artifacts:
+    paths:
+      - output/istio-certs
+      - output/tsb
+  needs:
+    - prereq
+  script:
+    - ./tsb.sh config
+  stage: config-tsb
