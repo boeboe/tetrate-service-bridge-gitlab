@@ -9,3 +9,4 @@ spec:
   - organizations/tetrate/users/dev-d
   - organizations/tetrate/users/dev-e
   - organizations/tetrate/users/dev-f
+  - organizations/tetrate/users/mngr-def

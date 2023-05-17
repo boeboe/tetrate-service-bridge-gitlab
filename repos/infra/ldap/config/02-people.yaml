@@ -94,6 +94,18 @@ data:
     mail: dev-c@tetrate.io
     userpassword: dev-c-pass
 
+    dn: cn=Manager AppABC,ou=People,dc=tetrate,dc=io
+    objectclass: person
+    objectclass: organizationalPerson
+    objectclass: inetOrgPerson
+    objectclass: top
+    cn: Manager AppABC
+    givenname: Manager
+    sn: AppABC
+    uid: mngr-abc
+    mail: mngr-abc@tetrate.io
+    userpassword: mngr-abc-pass
+
     dn: cn=Developer AppD,ou=People,dc=tetrate,dc=io
     objectclass: person
     objectclass: organizationalPerson
@@ -129,3 +141,15 @@ data:
     uid: dev-f
     mail: dev-f@tetrate.io
     userpassword: dev-f-pass
+
+    dn: cn=Manager AppDEF,ou=People,dc=tetrate,dc=io
+    objectclass: person
+    objectclass: organizationalPerson
+    objectclass: inetOrgPerson
+    objectclass: top
+    cn: Manager AppDEF
+    givenname: Manager
+    sn: AppDEF
+    uid: mngr-def
+    mail: mngr-def@tetrate.io
+    userpassword: mngr-def-pass
