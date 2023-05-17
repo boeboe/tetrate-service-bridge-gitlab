@@ -2,7 +2,7 @@
 apiVersion: api.tsb.tetrate.io/v2
 kind: ServiceAccount
 metadata:
-  name: cicd-dev-abc
+  name: cicd-prod-abc
   organization: tetrate
 spec:
   displayName: CICD_PROD_ABC ServiceAccount
