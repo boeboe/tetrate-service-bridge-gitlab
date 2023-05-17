@@ -11,6 +11,8 @@ TEAM_DIR=${CONFIG_DIR}/03-team
 SERVICEACCOUNT_DIR=${CONFIG_DIR}/04-serviceaccount
 ACCESSBINDING_DIR=${CONFIG_DIR}/05-accessbinding
 
+OUTPUT_DIR=${ROOT_DIR}/output
+
 ACTION=${1}
 
 
@@ -34,6 +36,25 @@ function login_tsb_admin {
 DONE
 }
 
+# Revoke all serviceaccount keys
+#   args:
+#     (1) serviceaccount name
+function sa_revoke_all_keys {
+  for key_id in $(tctl get serviceaccount ${1} -o json | jq -r '.spec.keys[].id'); do
+    echo "Revoking key pair with id '${key_id}' from serviceaccount '${1}'"
+    tctl x sa revoke-key ${1} --id ${key_id} ;
+  done
+  
+}
+
+# Generate new serviceaccount key
+#   args:
+#     (1) serviceaccount name
+#     (2) output file
+function sa_generate_new_key {
+  echo "Generating new key pair at '${2}' for serviceaccount '${1}'"
+  tctl x sa gen-key ${1} > ${2}
+}
 
 if [[ ${ACTION} = "config" ]]; then
 
@@ -46,7 +67,7 @@ if [[ ${ACTION} = "config" ]]; then
   for role_file in ${ROLE_DIR}/* ; do
     echo "Applying tsb configuration of '${role_file}'" ;
     tctl apply -f ${role_file} ;
-    sleep 5 ;
+    sleep 1 ;
   done
 
   # Configure tsb tenants
@@ -54,7 +75,7 @@ if [[ ${ACTION} = "config" ]]; then
   for tenant_file in ${TENANT_DIR}/* ; do
     echo "Applying tsb configuration of '${tenant_file}'" ;
     tctl apply -f ${tenant_file} ;
-    sleep 5 ;
+    sleep 1 ;
   done
 
   # Configure tsb teams
@@ -62,7 +83,7 @@ if [[ ${ACTION} = "config" ]]; then
   for team_file in ${TEAM_DIR}/* ; do
     echo "Applying tsb configuration of '${team_file}'" ;
     tctl apply -f ${team_file} ;
-    sleep 5 ;
+    sleep 1 ;
   done
 
   # Configure tsb roles
@@ -70,7 +91,12 @@ if [[ ${ACTION} = "config" ]]; then
   for serviceaccount_file in ${SERVICEACCOUNT_DIR}/* ; do
     echo "Applying tsb configuration of '${serviceaccount_file}'" ;
     tctl apply -f ${serviceaccount_file} ;
-    sleep 5 ;
+
+    serviceaccount=$(cat ${serviceaccount_file} | grep "name: " | awk '{print $2}') ;
+    sa_revoke_all_keys ${serviceaccount} ;
+    mkdir -p ${OUTPUT_DIR}/${serviceaccount} ;
+    sa_generate_new_key ${serviceaccount} ${OUTPUT_DIR}/${serviceaccount}/private-key.jwk ;
+    sleep 1 ;
   done
 
   # Configure tsb accessbindings
@@ -78,7 +104,7 @@ if [[ ${ACTION} = "config" ]]; then
   for accessbinding_file in ${ACCESSBINDING_DIR}/* ; do
     echo "Applying tsb configuration of '${accessbinding_file}'" ;
     tctl apply -f ${accessbinding_file} ;
-    sleep 5 ;
+    sleep 1 ;
   done
 
   exit 0

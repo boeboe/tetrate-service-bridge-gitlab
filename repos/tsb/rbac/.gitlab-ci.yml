@@ -13,8 +13,7 @@ prereq:
 config-tsb:
   artifacts:
     paths:
-      - output/istio-certs
-      - output/tsb
+      - output
   needs:
     - prereq
   script:
