@@ -1,0 +1,21 @@
+---
+apiVersion: rbac.tsb.tetrate.io/v2
+kind: AccessBindings
+metadata:
+  fqn: organizations/tetrate
+spec:
+  allow:
+  - role: rbac/admin
+    subjects:
+    - serviceAccount: organizations/tetrate/serviceaccounts/cluster-mgmt
+    - serviceAccount: organizations/tetrate/serviceaccounts/cluster-active
+    - serviceAccount: organizations/tetrate/serviceaccounts/cluster-standby
+  - role: rbac/cluster-reader
+    subjects:
+    - team: organizations/tetrate/teams/everyone
+  - role: rbac/registryreader
+    subjects:
+    - team: organizations/tetrate/teams/everyone
+  - role: rbac/user-reader
+    subjects:
+    - team: organizations/tetrate/teams/everyone
