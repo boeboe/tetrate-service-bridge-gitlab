@@ -10,12 +10,6 @@ spec:
     - serviceAccount: organizations/tetrate/serviceaccounts/cluster-mgmt
     - serviceAccount: organizations/tetrate/serviceaccounts/cluster-active
     - serviceAccount: organizations/tetrate/serviceaccounts/cluster-standby
-  - role: rbac/cluster-reader
-    subjects:
-    - team: organizations/tetrate/teams/everyone
-  - role: rbac/registryreader
-    subjects:
-    - team: organizations/tetrate/teams/everyone
-  - role: rbac/user-reader
+  - role: rbac/reader
     subjects:
     - team: organizations/tetrate/teams/everyone
