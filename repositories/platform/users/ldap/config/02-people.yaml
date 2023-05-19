@@ -58,6 +58,8 @@ data:
     mail: bart@tetrate.io
     userpassword: bart-pass
 
+    ################## ABC ##################
+
     dn: cn=Developer AppA,ou=People,dc=tetrate,dc=io
     objectclass: person
     objectclass: organizationalPerson
@@ -106,6 +108,8 @@ data:
     mail: mngr-abc@tetrate.io
     userpassword: mngr-abc-pass
 
+    ################## DEF ##################
+
     dn: cn=Developer AppD,ou=People,dc=tetrate,dc=io
     objectclass: person
     objectclass: organizationalPerson
@@ -153,3 +157,103 @@ data:
     uid: mngr-def
     mail: mngr-def@tetrate.io
     userpassword: mngr-def-pass
+
+    ################## UVW ##################
+
+    dn: cn=Developer AppU,ou=People,dc=tetrate,dc=io
+    objectclass: person
+    objectclass: organizationalPerson
+    objectclass: inetOrgPerson
+    objectclass: top
+    cn: Developer AppU
+    givenname: Developer
+    sn: AppU
+    uid: dev-u
+    mail: dev-u@tetrate.io
+    userpassword: dev-u-pass
+
+    dn: cn=Developer AppV,ou=People,dc=tetrate,dc=io
+    objectclass: person
+    objectclass: organizationalPerson
+    objectclass: inetOrgPerson
+    objectclass: top
+    cn: Developer AppV
+    givenname: Developer
+    sn: AppV
+    uid: dev-v
+    mail: dev-v@tetrate.io
+    userpassword: dev-v-pass
+
+    dn: cn=Developer AppW,ou=People,dc=tetrate,dc=io
+    objectclass: person
+    objectclass: organizationalPerson
+    objectclass: inetOrgPerson
+    objectclass: top
+    cn: Developer AppW
+    givenname: Developer
+    sn: AppW
+    uid: dev-w
+    mail: dev-w@tetrate.io
+    userpassword: dev-w-pass
+
+    dn: cn=Manager AppUVW,ou=People,dc=tetrate,dc=io
+    objectclass: person
+    objectclass: organizationalPerson
+    objectclass: inetOrgPerson
+    objectclass: top
+    cn: Manager AppUVW
+    givenname: Manager
+    sn: AppUVW
+    uid: mngr-uvw
+    mail: mngr-uvw@tetrate.io
+    userpassword: mngr-uvw-pass
+
+    ################## XYZ ##################
+
+    dn: cn=Developer AppX,ou=People,dc=tetrate,dc=io
+    objectclass: person
+    objectclass: organizationalPerson
+    objectclass: inetOrgPerson
+    objectclass: top
+    cn: Developer AppX
+    givenname: Developer
+    sn: AppX
+    uid: dev-x
+    mail: dev-x@tetrate.io
+    userpassword: dev-x-pass
+
+    dn: cn=Developer AppY,ou=People,dc=tetrate,dc=io
+    objectclass: person
+    objectclass: organizationalPerson
+    objectclass: inetOrgPerson
+    objectclass: top
+    cn: Developer AppY
+    givenname: Developer
+    sn: AppY
+    uid: dev-y
+    mail: dev-y@tetrate.io
+    userpassword: dev-y-pass
+
+    dn: cn=Developer AppZ,ou=People,dc=tetrate,dc=io
+    objectclass: person
+    objectclass: organizationalPerson
+    objectclass: inetOrgPerson
+    objectclass: top
+    cn: Developer AppZ
+    givenname: Developer
+    sn: AppZ
+    uid: dev-z
+    mail: dev-z@tetrate.io
+    userpassword: dev-z-pass
+
+    dn: cn=Manager AppXYZ,ou=People,dc=tetrate,dc=io
+    objectclass: person
+    objectclass: organizationalPerson
+    objectclass: inetOrgPerson
+    objectclass: top
+    cn: Manager AppXYZ
+    givenname: Manager
+    sn: AppXYZ
+    uid: mngr-xyz
+    mail: mngr-xyz@tetrate.io
+    userpassword: mngr-xyz-pass
