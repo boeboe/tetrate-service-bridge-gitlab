@@ -1,9 +1,0 @@
----
-apiVersion: api.tsb.tetrate.io/v2
-kind: ServiceAccount
-metadata:
-  name: cicd-dev-def
-  organization: tetrate
-spec:
-  displayName: CICD_DEV_DEF ServiceAccount
-  description: ServiceAccount used for GitLab CICD deployment of DEF in Development
