@@ -1,8 +1,0 @@
----
-apiVersion: api.tsb.tetrate.io/v2
-kind: TenantSetting
-metadata:
-  name: dev-settings
-  organization: tetrate
-  tenant: dev
-spec: {}

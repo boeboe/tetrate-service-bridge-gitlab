@@ -7,7 +7,7 @@ ROOT_DIR="$( cd -- "$(dirname "${0}")" >/dev/null 2>&1 ; pwd -P )"
 TSB_MP_CLUSTER_CONFIG=${ROOT_DIR}/tsb-mp-cluster.json
 CERT_OUTPUT_DIR=${ROOT_DIR}/output/istio-certs
 TSB_OUTPUT_DIR=${ROOT_DIR}/output/tsb
-INSTALL_REPO_URL=${CI_REGISTRY}/tsb/images
+INSTALL_REPO_URL=${CI_REGISTRY}/platform/tsb/images
 
 ACTION=${1}
 
