@@ -1,0 +1,87 @@
+[
+  {
+    "description": "Minikube Cluster Management",
+    "group_path": "platform/infrastructure",
+    "name": "minikube"
+  },{
+    "description": "Manage LDAP Users and Teams",
+    "group_path": "platform/users",
+    "name": "ldap"
+  },{
+    "description": "TSB Container Images",
+    "group_path": "platform/tsb",
+    "name": "images"
+  },{
+    "description": "TSB Cluster Installation",
+    "group_path": "platform/tsb",
+    "name": "installation"
+  },{
+    "description": "TSB RBAC Management",
+    "group_path": "platform/tsb",
+    "name": "rbac"
+  },{
+    "description": "MicroService A of Application ABC for Public Banking",
+    "group_path": "applications/publicbanking/app-abc",
+    "name": "svc-a"
+  },{
+    "description": "MicroService B of Application ABC for Public Banking",
+    "group_path": "applications/publicbanking/app-abc",
+    "name": "svc-b"
+  },{
+    "description": "MicroService C of Application ABC for Public Banking",
+    "group_path": "applications/publicbanking/app-abc",
+    "name": "svc-c"
+  },{
+    "description": "TSB Management of Application ABC for Public Banking",
+    "group_path": "applications/publicbanking/app-abc",
+    "name": "tsb"
+  },{
+    "description": "MicroService D of Application DEF for Public Banking",
+    "group_path": "applications/publicbanking/app-def",
+    "name": "svc-d"
+  },{
+    "description": "MicroService E of Application DEF for Public Banking",
+    "group_path": "applications/publicbanking/app-def",
+    "name": "svc-e"
+  },{
+    "description": "MicroService F of Application DEF for Public Banking",
+    "group_path": "applications/publicbanking/app-def",
+    "name": "svc-f"
+  },{
+    "description": "TSB Management of Application DEF for Public Banking",
+    "group_path": "applications/publicbanking/app-def",
+    "name": "tsb"
+  },{
+    "description": "MicroService U of Application UVW for Private Banking",
+    "group_path": "applications/privatebanking/app-uvw",
+    "name": "svc-u"
+  },{
+    "description": "MicroService V of Application UVW for Private Banking",
+    "group_path": "applications/privatebanking/app-uvw",
+    "name": "svc-v"
+  },{
+    "description": "MicroService W of Application UVW for Private Banking",
+    "group_path": "applications/privatebanking/app-uvw",
+    "name": "svc-w"
+  },{
+    "description": "TSB Management of Application UVW for Private Banking",
+    "group_path": "applications/privatebanking/app-uvw",
+    "name": "tsb"
+  },{
+    "description": "MicroService X of Application XYZ for Private Banking",
+    "group_path": "applications/privatebanking/app-xyz",
+    "name": "svc-x"
+  },{
+    "description": "MicroService Y of Application XYZ for Private Banking",
+    "group_path": "applications/privatebanking/app-xyz",
+    "name": "svc-y"
+  },{
+    "description": "MicroService Z of Application XYZ for Private Banking",
+    "group_path": "applications/privatebanking/app-xyz",
+    "name": "svc-z"
+  },{
+    "description": "TSB Management of Application XYZ for Private Banking",
+    "group_path": "applications/privatebanking/app-xyz",
+    "name": "tsb"
+  }
+]

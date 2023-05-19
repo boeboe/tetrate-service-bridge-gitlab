@@ -45,22 +45,54 @@ function gitlab_get_shared_runner_id {
 #     (1) gitlab api url
 #     (2) gitlab api token
 #     (3) gitlab group name
+#     (4) gitlab group path
+#     (5) gitlab group description
 function gitlab_create_group {
-  group_id=$(gitlab_get_group_id ${1} ${2} ${3})
+  group_id=$(gitlab_get_group_id ${1} ${2} ${3} ${4})
+
   if [[ ${group_id} == "" ]] ; then
-    response=`curl --url "${1}/api/v4/groups/" --silent --request POST --header "PRIVATE-TOKEN: ${2}" \
-      --header "Content-Type: application/json" \
-      --data @- <<BODY
+    if [[ "${3}" == "${4}" ]] ; then
+      # Toplevel group
+      echo "Going to create toplevel gitlab group '${3}'"
+      response=`curl --url "${1}/api/v4/groups" --silent --request POST --header "PRIVATE-TOKEN: ${2}" \
+        --header "Content-Type: application/json" \
+        --data @- <<BODY
 {
+  "description": "${5}",
   "path": "${3}",
   "name": "${3}",
   "visibility": "public"
 }
 BODY`
 
-    echo ${response} | jq
+      echo ${response} | jq
+    else
+      # Subgroup
+      parent_group_path=$(echo ${4} | rev | cut -d"/" -f2-  | rev)
+      parent_group_name=$(echo ${parent_group_path} | rev | cut -d"/" -f1  | rev)
+      parent_group_id=$(gitlab_get_group_id ${1} ${2} ${parent_group_name} ${parent_group_path})
+
+      if [[ ${parent_group_id} == "" ]] ; then
+        echo "Gitlab parent group '${parent_group_name}' with path '${parent_group_path}' does not exist"
+      else
+        echo "Going to create gitlab subgroup '${3}' in path '${parent_group_path}'"
+        response=`curl --url "${1}/api/v4/groups" --silent --request POST --header "PRIVATE-TOKEN: ${2}" \
+          --header "Content-Type: application/json" \
+          --data @- <<BODY
+{
+  "description": "${5}",
+  "parent_id": "${parent_group_id}",
+  "path": "${3}",
+  "name": "${3}",
+  "visibility": "public"
+}
+BODY`
+
+        echo ${response} | jq
+      fi
+    fi
   else
-    echo "Gitlab group '${3}' (id: ${group_id}) already exists "
+    echo "Gitlab group with name '${3}' and path '${4}' already exists (group_id: ${group_id})"
   fi
 }
 
@@ -69,30 +101,33 @@ BODY`
 #     (1) gitlab api url
 #     (2) gitlab api token
 #     (3) gitlab group name
+#     (4) gitlab group path
 function gitlab_get_group_id {
   curl --silent --request GET --header "PRIVATE-TOKEN: ${2}" \
     --header 'Content-Type: application/json' \
-    --url "${1}/api/v4/groups/" | jq ".[] | select(.name==\"${3}\")" | jq -r '.id'
+    --url "${1}/api/v4/groups?per_page=100" | jq ".[] | select(.name==\"${3}\") | select(.full_path==\"${4}\")" | jq -r '.id'
 }
 
 # Create gitlab project
 #   args:
 #     (1) gitlab api url
 #     (2) gitlab api token
-#     (3) gitlab group name
+#     (3) gitlab group path
 #     (4) gitlab project name
 #     (5) gitlab project description
-function gitlab_create_project_in_group {
-  group_id=$(gitlab_get_group_id ${1} ${2} ${3})
-  if [[ ${group_id} == "" ]] ; then
-    gitlab_create_group ${1} ${2} ${3} ;
-  fi
+function gitlab_create_project_in_group_path {
+  group_name=$(echo ${3} | rev | cut -d"/" -f1  | rev)
+  group_id=$(gitlab_get_group_id ${1} ${2} ${group_name} ${3})
 
-  project_id=$(gitlab_get_project_id_in_group ${1} ${2} ${3} ${4})
-  if [[ ${project_id} == "" ]]; then
-    response=`curl --url "${1}/api/v4/projects/" --silent --request POST --header "PRIVATE-TOKEN: ${2}" \
-      --header "Content-Type: application/json" \
-      --data @- <<BODY
+  if [[ ${group_id} == "" ]] ; then
+    echo "Gitlab group '${group_name}' with path '${3}' does not exist"
+  else
+    project_id=$(gitlab_get_project_id_in_group_path ${1} ${2} ${3} ${4})
+    if [[ ${project_id} == "" ]]; then
+      echo "Going to create gitlab project '${4}' in group with path '${3}'"
+      response=`curl --url "${1}/api/v4/projects" --silent --request POST --header "PRIVATE-TOKEN: ${2}" \
+        --header "Content-Type: application/json" \
+        --data @- <<BODY
 {
   "description": "${5}",
   "name": "${4}",
@@ -102,9 +137,10 @@ function gitlab_create_project_in_group {
 }
 BODY`
 
-    echo ${response} | jq
-  else
-    echo "Gitlab project '${4}' (id: ${project_id}) already exists in group '${3}' (id: ${group_id})"
+      echo ${response} | jq
+    else
+      echo "Gitlab project '${4}' (project_id: ${project_id}) already exists in group with path '${3}' (group_id: ${group_id})"
+    fi
   fi
 }
 
@@ -112,28 +148,9 @@ BODY`
 #   args:
 #     (1) gitlab api url
 #     (2) gitlab api token
-#     (3) gitlab group name
+#     (3) gitlab group path
 #     (4) gitlab project name
-function gitlab_get_project_id_in_group {
-  curl --url "${1}/api/v4/projects" --silent --request GET --header "PRIVATE-TOKEN: ${2}" \
-    | jq ".[] | select(.namespace.name=\"${3}\") | select(.name==\"${4}\")" | jq -r '.id'
+function gitlab_get_project_id_in_group_path {
+  curl --url "${1}/api/v4/projects?per_page=100" --silent --request GET --header "PRIVATE-TOKEN: ${2}" \
+    | jq ".[] | select(.name==\"${4}\") | select(.namespace.full_path==\"${3}\")" | jq -r '.id'
 }
-
-
-# Tests
-
-# gitlab_create_group "http://192.168.47.2:80" "01234567890123456789" "boeboe" ;
-
-# gitlab_get_group_id "http://192.168.47.2:80" "01234567890123456789" "boeboe" ;
-# gitlab_get_group_id "http://192.168.47.2:80" "01234567890123456789" "boeboe123" ;
-
-# gitlab_create_project_in_group "http://192.168.47.2:80" "01234567890123456789" "boeboe" "test" "This is a test project" ;
-
-# gitlab_get_project_id_in_group "http://192.168.47.2:80" "01234567890123456789" "boeboe" "test" ;
-# gitlab_get_project_id_in_group "http://192.168.47.2:80" "01234567890123456789" "boeboe123" "test" ;
-# gitlab_get_project_id_in_group "http://192.168.47.2:80" "01234567890123456789" "boeboe" "test123" ;
-
-# gitlab_create_project_in_group "http://192.168.47.2:80" "01234567890123456789" "boeboe" "testbis" "This is a test bis project" ;
-# gitlab_get_project_id_in_group "http://192.168.47.2:80" "01234567890123456789" "boeboe" "testbis" ;
-# gitlab_create_project_in_group "http://192.168.47.2:80" "01234567890123456789" "boeboe" "testtris" "This is a test tris project" ;
-# gitlab_get_project_id_in_group "http://192.168.47.2:80" "01234567890123456789" "boeboe" "testtris" ;

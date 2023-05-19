@@ -1,0 +1,47 @@
+[
+  {
+    "description": "Platform Management",
+    "name": "platform",
+    "path": "platform"
+  },{
+    "description": "Platform Infrastructure Management",
+    "name": "infrastructure",
+    "path": "platform/infrastructure"
+  },{
+    "description": "Platform User Management",
+    "name": "users",
+    "path": "platform/users"
+  },{
+    "description": "Platform TSB Management",
+    "name": "tsb",
+    "path": "platform/tsb"
+  },{
+    "description": "Application Management",
+    "name": "applications",
+    "path": "applications"
+  },{
+    "description": "Application Management for PublicBanking",
+    "name": "publicbanking",
+    "path": "applications/publicbanking"
+  },{
+    "description": "Application ABC Management for PublicBanking",
+    "name": "app-abc",
+    "path": "applications/publicbanking/app-abc"
+  },{
+    "description": "Application DEF Management for PublicBanking",
+    "name": "app-def",
+    "path": "applications/publicbanking/app-def"
+  },{
+    "description": "Application Management for PrivateBanking",
+    "name": "privatebanking",
+    "path": "applications/privatebanking"
+  },{
+    "description": "Application UVW Management for PrivateBanking",
+    "name": "app-uvw",
+    "path": "applications/privatebanking/app-uvw"
+  },{
+    "description": "Application XYZ Management for PrivateBanking",
+    "name": "app-xyz",
+    "path": "applications/privatebanking/app-xyz"
+  }
+]

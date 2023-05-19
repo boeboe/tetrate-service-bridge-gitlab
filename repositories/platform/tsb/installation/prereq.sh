@@ -16,24 +16,24 @@ function print_info {
   echo -e "${purpleb}${1}${end}"
 }
 
-# Get gitlab project id in group
+# Get gitlab project id in group with path
 #   args:
 #     (1) gitlab api url
 #     (2) gitlab api token
-#     (3) gitlab group name
+#     (3) gitlab group path
 #     (4) gitlab project name
 function gitlab_get_pipeline_status {
-  project_id=$(curl --silent --request GET --header "PRIVATE-TOKEN: ${2}" --url "${1}/projects" | jq ".[] | select(.namespace.name=\"${3}\") | select(.name==\"${4}\")" | jq -r '.id')
+  project_id=$(curl --silent --request GET --header "PRIVATE-TOKEN: ${2}" --url "${1}/projects" | jq ".[] | select(.name==\"${4}\") | select(.namespace.full_path==\"${3}\") " | jq -r '.id')
   curl --silent --request GET --header "PRIVATE-TOKEN: ${2}" --url "${1}/projects/${project_id}/pipelines/latest" | jq -r ".status"
 }
 
 
 if [[ ${ACTION} = "check" ]]; then
 
-  print_info "Wait for TSB container images to be available (pipeline tsb/images)"
+  print_info "Wait for TSB container images to be available (pipeline platform/tsb/images)"
   while true; do  
-    status_tsb_images=$(gitlab_get_pipeline_status ${CI_API_V4_URL} "01234567890123456789" "tsb" "images")
-    if [[ ${status_tsb_images} == "success" ]] ; then
+    status_platform_tsb_images=$(gitlab_get_pipeline_status ${CI_API_V4_URL} "01234567890123456789" "platform/tsb" "images")
+    if [[ ${status_platform_tsb_images} == "success" ]] ; then
       echo "OK"
       break
     else
@@ -43,10 +43,10 @@ if [[ ${ACTION} = "check" ]]; then
     fi
   done
 
-  print_info "Wait for minikube based kubernetes clusters to be available (pipeline infra/minikube)"
+  print_info "Wait for minikube based kubernetes clusters to be available (pipeline platform/infrastructure/minikube)"
   while true; do  
-    status_infra_minikube=$(gitlab_get_pipeline_status ${CI_API_V4_URL} "01234567890123456789" "infra" "minikube")
-    if [[ ${status_infra_minikube} == "success" ]] ; then
+    status_platform_infrastructure_minikube=$(gitlab_get_pipeline_status ${CI_API_V4_URL} "01234567890123456789" "platform/infrastructure" "minikube")
+    if [[ ${status_platform_infrastructure_minikube} == "success" ]] ; then
       echo "OK"
       break
     else
