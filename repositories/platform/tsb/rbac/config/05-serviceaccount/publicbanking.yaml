@@ -4,6 +4,7 @@ kind: ServiceAccount
 metadata:
   name: publicbanking
   organization: tetrate
+  tenant: publicbanking
 spec:
   displayName: PublicBankingSA
   description: ServiceAccount used for CICD driven TSB Management of Tenant PublicBanking

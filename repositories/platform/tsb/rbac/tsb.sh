@@ -7,9 +7,10 @@ ROOT_DIR="$( cd -- "$(dirname "${0}")" >/dev/null 2>&1 ; pwd -P )"
 CONFIG_DIR=${ROOT_DIR}/config
 ROLE_DIR=${CONFIG_DIR}/01-role
 TENANT_DIR=${CONFIG_DIR}/02-tenant
-TEAM_DIR=${CONFIG_DIR}/03-team
-SERVICEACCOUNT_DIR=${CONFIG_DIR}/04-serviceaccount
-ACCESSBINDING_DIR=${CONFIG_DIR}/05-accessbinding
+TENANTSETTING_DIR=${CONFIG_DIR}/03-tenantsetting
+TEAM_DIR=${CONFIG_DIR}/04-team
+SERVICEACCOUNT_DIR=${CONFIG_DIR}/05-serviceaccount
+ACCESSBINDING_DIR=${CONFIG_DIR}/06-accessbinding
 
 OUTPUT_DIR=${ROOT_DIR}/output
 
@@ -56,7 +57,7 @@ function sa_generate_new_key {
   tctl x sa gen-key ${1} > ${2}
 }
 
-if [[ ${ACTION} = "config" ]]; then
+if [[ ${ACTION} = "config-roles" ]]; then
 
    # Login again as tsb admin in case of a session time-out
   print_info "Login again as tsb admin in case of a session time-out" ;
@@ -70,6 +71,15 @@ if [[ ${ACTION} = "config" ]]; then
     sleep 1 ;
   done
 
+  exit 0
+fi
+
+if [[ ${ACTION} = "config-tenants" ]]; then
+
+   # Login again as tsb admin in case of a session time-out
+  print_info "Login again as tsb admin in case of a session time-out" ;
+  login_tsb_admin tetrate ;
+
   # Configure tsb tenants
   print_info "Configure tsb tenants" ;
   for tenant_file in ${TENANT_DIR}/* ; do
@@ -77,6 +87,32 @@ if [[ ${ACTION} = "config" ]]; then
     tctl apply -f ${tenant_file} ;
     sleep 1 ;
   done
+
+  exit 0
+fi
+
+if [[ ${ACTION} = "config-tenantsettings" ]]; then
+
+   # Login again as tsb admin in case of a session time-out
+  print_info "Login again as tsb admin in case of a session time-out" ;
+  login_tsb_admin tetrate ;
+
+  # Configure tsb tenantsettings
+  print_info "Configure tsb tenantsettings" ;
+  for tenantsetting_file in ${TENANTSETTING_DIR}/* ; do
+    echo "Applying tsb configuration of '${tenantsetting_file}'" ;
+    tctl apply -f ${tenantsetting_file} ;
+    sleep 1 ;
+  done
+
+  exit 0
+fi
+
+if [[ ${ACTION} = "config-teams" ]]; then
+
+   # Login again as tsb admin in case of a session time-out
+  print_info "Login again as tsb admin in case of a session time-out" ;
+  login_tsb_admin tetrate ;
 
   # Configure tsb teams
   print_info "Configure tsb teams" ;
@@ -86,7 +122,16 @@ if [[ ${ACTION} = "config" ]]; then
     sleep 1 ;
   done
 
-  # Configure tsb roles
+  exit 0
+fi
+
+if [[ ${ACTION} = "config-serviceaccounts" ]]; then
+
+   # Login again as tsb admin in case of a session time-out
+  print_info "Login again as tsb admin in case of a session time-out" ;
+  login_tsb_admin tetrate ;
+
+  # Configure tsb serviceaccounts
   print_info "Configure tsb serviceaccounts" ;
   for serviceaccount_file in ${SERVICEACCOUNT_DIR}/* ; do
     echo "Applying tsb configuration of '${serviceaccount_file}'" ;
@@ -98,6 +143,15 @@ if [[ ${ACTION} = "config" ]]; then
     sa_generate_new_key ${serviceaccount} ${OUTPUT_DIR}/${serviceaccount}/private-key.jwk ;
     sleep 1 ;
   done
+
+  exit 0
+fi
+
+if [[ ${ACTION} = "config-accessbindings" ]]; then
+
+   # Login again as tsb admin in case of a session time-out
+  print_info "Login again as tsb admin in case of a session time-out" ;
+  login_tsb_admin tetrate ;
 
   # Configure tsb accessbindings
   print_info "Configure tsb accessbindings" ;
@@ -111,5 +165,10 @@ if [[ ${ACTION} = "config" ]]; then
 fi
 
 echo "Please specify one of the following action:"
-echo "  - config"
+echo "  - config-roles"
+echo "  - config-tenants"
+echo "  - config-tenantsettings"
+echo "  - config-teams"
+echo "  - config-serviceaccounts"
+echo "  - config-accessbindings"
 exit 1

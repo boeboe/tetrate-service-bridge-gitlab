@@ -1,7 +1,12 @@
 ---
 stages:
   - prereq
-  - config-tsb
+  - tsb-roles
+  - tsb-tenants
+  - tsb-tenantsettings
+  - tsb-teams
+  - tsb-serviceaccounts
+  - tsb-accessbindings
 variables:
   TERM: xterm
 prereq:
@@ -10,12 +15,63 @@ prereq:
     - ./prereq.sh check
   stage: prereq
   timeout: 15m
-config-tsb:
+tsb-roles:
   artifacts:
     paths:
       - output
   needs:
     - prereq
   script:
-    - ./tsb.sh config
-  stage: config-tsb
+    - ./tsb.sh config-roles
+  stage: tsb-roles
+tsb-tenants:
+  artifacts:
+    paths:
+      - output
+  needs:
+    - prereq
+  script:
+    - ./tsb.sh config-tenants
+  stage: tsb-tenants
+tsb-tenantsettings:
+  artifacts:
+    paths:
+      - output
+  needs:
+    - prereq
+    - tsb-tenants
+  script:
+    - ./tsb.sh config-tenantsettings
+  stage: tsb-tenantsettings
+tsb-teams:
+  artifacts:
+    paths:
+      - output
+  needs:
+    - prereq
+  script:
+    - ./tsb.sh config-teams
+  stage: tsb-teams
+tsb-serviceaccounts:
+  artifacts:
+    paths:
+      - output
+  needs:
+    - prereq
+    - tsb-tenants
+  script:
+    - ./tsb.sh config-serviceaccounts
+  stage: tsb-serviceaccounts
+tsb-accessbindings:
+  artifacts:
+    paths:
+      - output
+  needs:
+    - prereq
+    - tsb-roles
+    - tsb-tenants
+    - tsb-teams
+    - tsb-serviceaccounts
+  script:
+    - ./tsb.sh config-accessbindings
+  stage: tsb-accessbindings
