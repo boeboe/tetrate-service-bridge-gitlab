@@ -33,7 +33,11 @@ if [[ ${ACTION} = "ldap-sync" ]]; then
 
   # Force TSB to sync users and teams from LDAP
   print_info "Force TSB to sync users and teams from LDAP" ;
-  kubectl --context mgmt create job --from=cronjob/teamsync teamsync-$(date +%Y-%m-%d-%H-%M-%S) -n tsb ;
+  job_name="teamsync-$(date +%Y-%m-%d-%H-%M-%S)"
+  kubectl --context mgmt create job --from=cronjob/teamsync ${job_name} -n tsb ;
+
+  print_info "Wait for TSB job to sync users and teams from LDAP" ;
+  kubectl --context mgmt wait --for=condition=complete --timeout=10m job/${job_name} -n tsb ;
 
   exit 0
 fi
