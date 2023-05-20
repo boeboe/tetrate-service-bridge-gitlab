@@ -1,0 +1,38 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  annotations:
+    tsb-tenant: privatebanking
+    tsb-workspace: app-xyz
+  labels:
+    istio-injection: enabled
+  name: ns-x
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  annotations:
+    tsb-tenant: privatebanking
+    tsb-workspace: app-xyz
+  labels:
+    istio-injection: enabled
+  name: ns-y
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  annotations:
+    tsb-tenant: privatebanking
+    tsb-workspace: app-xyz
+  labels:
+    istio-injection: enabled
+  name: ns-z
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  annotations:
+    tsb-tenant: privatebanking
+    tsb-workspace: app-xyz
+  name: gateway-xyz

@@ -1,0 +1,17 @@
+---
+apiversion: api.tsb.tetrate.io/v2
+kind: Workspace
+metadata:
+  organization: tetrate
+  tenant: publicbanking
+  name: app-def
+spec:
+  description: Workspace for Application DEF
+  displayName: AppDEF
+  namespaceSelector:
+    names:
+      - "mgmt/tier1-gw-def"
+      - "*/gateway-def"
+      - "*/ns-d"
+      - "*/ns-e"
+      - "*/ns-f"

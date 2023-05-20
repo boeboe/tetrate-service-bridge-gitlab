@@ -52,6 +52,10 @@
     "group_path": "applications/publicbanking/app-def",
     "name": "tsb"
   },{
+    "description": "Tenant Management of Public Banking",
+    "group_path": "applications/publicbanking",
+    "name": "tenant-admin"
+  },{
     "description": "MicroService U of Application UVW for Private Banking",
     "group_path": "applications/privatebanking/app-uvw",
     "name": "svc-u"
@@ -83,5 +87,9 @@
     "description": "TSB Management of Application XYZ for Private Banking",
     "group_path": "applications/privatebanking/app-xyz",
     "name": "tsb"
+  },{
+    "description": "Tenant Management of Private Banking",
+    "group_path": "applications/privatebanking",
+    "name": "tenant-admin"
   }
 ]

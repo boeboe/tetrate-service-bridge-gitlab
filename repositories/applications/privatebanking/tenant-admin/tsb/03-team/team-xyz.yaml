@@ -1,0 +1,12 @@
+---
+apiVersion: api.tsb.tetrate.io/v2
+kind: Team
+metadata:
+  organization: tetrate
+  name: team-xyz
+spec:
+  members:
+  - organizations/tetrate/users/dev-x
+  - organizations/tetrate/users/dev-y
+  - organizations/tetrate/users/dev-z
+  - organizations/tetrate/users/mngr-xyz

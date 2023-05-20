@@ -5,4 +5,5 @@ metadata:
   organization: tetrate
   name: publicbanking
 spec:
+  description: Tenant for Public Banking Applications
   displayName: PublicBanking

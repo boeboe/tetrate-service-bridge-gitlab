@@ -16,7 +16,7 @@ function print_info {
   echo -e "${purpleb}${1}${end}"
 }
 
-# Get gitlab project id in group with path
+# Get gitlab project's latest pipeline status
 #   args:
 #     (1) gitlab api url
 #     (2) gitlab api token
@@ -26,7 +26,6 @@ function gitlab_get_pipeline_status {
   project_id=$(curl --silent --request GET --header "PRIVATE-TOKEN: ${2}" --url "${1}/projects?per_page=100" | jq ".[] | select(.name==\"${4}\") | select(.namespace.full_path==\"${3}\") " | jq -r '.id')
   curl --silent --request GET --header "PRIVATE-TOKEN: ${2}" --url "${1}/projects/${project_id}/pipelines/latest" | jq -r ".status"
 }
-
 
 if [[ ${ACTION} = "check" ]]; then
 

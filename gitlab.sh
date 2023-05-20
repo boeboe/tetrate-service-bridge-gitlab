@@ -21,7 +21,7 @@ TSB_REPO_PW=$(cat ${ROOT_DIR}/env.json | jq -r ".tsb.tetrate_repo.password") ;
 
 GITLAB_HOME=/tmp/gitlab
 GITLAB_RUNNER_WORKDIR=/tmp/gitlab-runner
-GITLAB_RUNNER_COUNT=1
+GITLAB_RUNNER_COUNT=2
 GITLAB_RUNNER_CONCURRENCY=5
 GITLAB_NETWORK="gitlab" 
 GITLAB_CONTAINER_NAME="gitlab-ee"

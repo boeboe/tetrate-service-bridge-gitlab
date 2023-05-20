@@ -5,4 +5,5 @@ metadata:
   organization: tetrate
   name: privatebanking
 spec:
+  description: Tenant for Private Banking Applications
   displayName: PrivateBanking

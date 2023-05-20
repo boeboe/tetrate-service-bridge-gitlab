@@ -1,18 +1,4 @@
 ---
-stages:
-  - prereq
-  - certs
-  - install-mp
-  - install-cp
-  - config-tsb
-variables:
-  TERM: xterm
-prereq:
-  allow_failure: false
-  script: 
-    - ./prereq.sh check
-  stage: prereq
-  timeout: 15m
 certs:
   artifacts:
     paths:
@@ -26,14 +12,31 @@ certs:
   script:
     - ./certs.sh generate
   stage: certs
+config-tsb:
+  artifacts:
+    paths:
+      - output/istio-certs
+      - output/tsb
+  environment:
+    name: tctl
+  needs:
+    - install-mp
+    - install-cp
+  resource_group: tctl
+  script:
+    - ./tsb.sh config
+  stage: config-tsb
 install-cp:
   artifacts:
     paths:
       - output/istio-certs
       - output/tsb
+  environment:
+    name: tctl
   needs:
     - certs
     - install-mp
+  resource_group: tctl
   script:
     - ./cp.sh install
   stage: install-cp
@@ -42,19 +45,25 @@ install-mp:
     paths:
       - output/istio-certs
       - output/tsb
+  environment:
+    name: tctl
   needs:
     - certs
+  resource_group: tctl
   script:
     - ./mp.sh install
   stage: install-mp
-config-tsb:
-  artifacts:
-    paths:
-      - output/istio-certs
-      - output/tsb
-  needs:
-    - install-mp
-    - install-cp
+prereq:
+  allow_failure: false
   script:
-    - ./tsb.sh config
-  stage: config-tsb
+    - ./prereq.sh check
+  stage: prereq
+  timeout: 15m
+stages:
+  - prereq
+  - certs
+  - install-mp
+  - install-cp
+  - config-tsb
+variables:
+  TERM: xterm

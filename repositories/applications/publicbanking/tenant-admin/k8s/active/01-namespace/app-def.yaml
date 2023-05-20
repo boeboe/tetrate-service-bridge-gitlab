@@ -1,0 +1,38 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  annotations:
+    tsb-tenant: publicbanking
+    tsb-workspace: app-def
+  labels:
+    istio-injection: enabled
+  name: ns-d
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  annotations:
+    tsb-tenant: publicbanking
+    tsb-workspace: app-def
+  labels:
+    istio-injection: enabled
+  name: ns-e
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  annotations:
+    tsb-tenant: publicbanking
+    tsb-workspace: app-def
+  labels:
+    istio-injection: enabled
+  name: ns-f
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  annotations:
+    tsb-tenant: publicbanking
+    tsb-workspace: app-def
+  name: gateway-def

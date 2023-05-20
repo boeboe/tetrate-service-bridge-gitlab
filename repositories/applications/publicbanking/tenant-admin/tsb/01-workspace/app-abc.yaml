@@ -1,0 +1,17 @@
+---
+apiversion: api.tsb.tetrate.io/v2
+kind: Workspace
+metadata:
+  organization: tetrate
+  tenant: publicbanking
+  name: app-abc
+spec:
+  description: Workspace for Application ABC
+  displayName: AppABC
+  namespaceSelector:
+    names:
+      - "mgmt/tier1-gw-abc"
+      - "*/gateway-abc"
+      - "*/ns-a"
+      - "*/ns-b"
+      - "*/ns-c"

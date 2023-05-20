@@ -1,0 +1,17 @@
+---
+apiversion: api.tsb.tetrate.io/v2
+kind: Workspace
+metadata:
+  organization: tetrate
+  tenant: privatebanking
+  name: app-uvw
+spec:
+  description: Workspace for Application UVW
+  displayName: AppUVW
+  namespaceSelector:
+    names:
+      - "mgmt/tier1-gw-uvw"
+      - "*/gateway-uvw"
+      - "*/ns-u"
+      - "*/ns-v"
+      - "*/ns-w"

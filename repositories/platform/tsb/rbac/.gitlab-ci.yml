@@ -1,4 +1,10 @@
 ---
+prereq:
+  allow_failure: false
+  script:
+    - ./prereq.sh check
+  stage: prereq
+  timeout: 15m
 stages:
   - prereq
   - tsb-roles
@@ -7,29 +13,68 @@ stages:
   - tsb-teams
   - tsb-serviceaccounts
   - tsb-accessbindings
-variables:
-  TERM: xterm
-prereq:
-  allow_failure: false
-  script: 
-    - ./prereq.sh check
-  stage: prereq
-  timeout: 15m
+tsb-accessbindings:
+  artifacts:
+    paths:
+      - output
+  environment:
+    name: tctl
+  needs:
+    - prereq
+    - tsb-roles
+    - tsb-tenants
+    - tsb-teams
+    - tsb-serviceaccounts
+  resource_group: tctl
+  script:
+    - ./tsb.sh config-accessbindings
+  stage: tsb-accessbindings
 tsb-roles:
   artifacts:
     paths:
       - output
+  environment:
+    name: tctl
   needs:
     - prereq
+  resource_group: tctl
   script:
     - ./tsb.sh config-roles
   stage: tsb-roles
+tsb-serviceaccounts:
+  artifacts:
+    paths:
+      - output
+  environment:
+    name: tctl
+  needs:
+    - prereq
+    - tsb-tenants
+  resource_group: tctl
+  script:
+    - ./tsb.sh config-serviceaccounts
+  stage: tsb-serviceaccounts
+tsb-teams:
+  artifacts:
+    paths:
+      - output
+  environment:
+    name: tctl
+  needs:
+    - prereq
+  resource_group: tctl
+  script:
+    - ./tsb.sh config-teams
+  stage: tsb-teams
 tsb-tenants:
   artifacts:
     paths:
       - output
+  environment:
+    name: tctl
   needs:
     - prereq
+  resource_group: tctl
   script:
     - ./tsb.sh config-tenants
   stage: tsb-tenants
@@ -37,41 +82,14 @@ tsb-tenantsettings:
   artifacts:
     paths:
       - output
+  environment:
+    name: tctl
   needs:
     - prereq
     - tsb-tenants
+  resource_group: tctl
   script:
     - ./tsb.sh config-tenantsettings
   stage: tsb-tenantsettings
-tsb-teams:
-  artifacts:
-    paths:
-      - output
-  needs:
-    - prereq
-  script:
-    - ./tsb.sh config-teams
-  stage: tsb-teams
-tsb-serviceaccounts:
-  artifacts:
-    paths:
-      - output
-  needs:
-    - prereq
-    - tsb-tenants
-  script:
-    - ./tsb.sh config-serviceaccounts
-  stage: tsb-serviceaccounts
-tsb-accessbindings:
-  artifacts:
-    paths:
-      - output
-  needs:
-    - prereq
-    - tsb-roles
-    - tsb-tenants
-    - tsb-teams
-    - tsb-serviceaccounts
-  script:
-    - ./tsb.sh config-accessbindings
-  stage: tsb-accessbindings
+variables:
+  TERM: xterm
