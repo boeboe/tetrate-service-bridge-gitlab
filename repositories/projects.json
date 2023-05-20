@@ -32,9 +32,9 @@
     "group_path": "applications/publicbanking/app-abc",
     "name": "svc-c"
   },{
-    "description": "TSB Management of Application ABC for Public Banking",
+    "description": "Workspace Management of Application ABC for Public Banking",
     "group_path": "applications/publicbanking/app-abc",
-    "name": "tsb"
+    "name": "workspace-admin"
   },{
     "description": "MicroService D of Application DEF for Public Banking",
     "group_path": "applications/publicbanking/app-def",
@@ -48,9 +48,9 @@
     "group_path": "applications/publicbanking/app-def",
     "name": "svc-f"
   },{
-    "description": "TSB Management of Application DEF for Public Banking",
+    "description": "Workspace Management of Application DEF for Public Banking",
     "group_path": "applications/publicbanking/app-def",
-    "name": "tsb"
+    "name": "workspace-admin"
   },{
     "description": "Tenant Management of Public Banking",
     "group_path": "applications/publicbanking",
@@ -68,9 +68,9 @@
     "group_path": "applications/privatebanking/app-uvw",
     "name": "svc-w"
   },{
-    "description": "TSB Management of Application UVW for Private Banking",
+    "description": "Workspace Management of Application UVW for Private Banking",
     "group_path": "applications/privatebanking/app-uvw",
-    "name": "tsb"
+    "name": "workspace-admin"
   },{
     "description": "MicroService X of Application XYZ for Private Banking",
     "group_path": "applications/privatebanking/app-xyz",
@@ -84,9 +84,9 @@
     "group_path": "applications/privatebanking/app-xyz",
     "name": "svc-z"
   },{
-    "description": "TSB Management of Application XYZ for Private Banking",
+    "description": "Workspace Management of Application XYZ for Private Banking",
     "group_path": "applications/privatebanking/app-xyz",
-    "name": "tsb"
+    "name": "workspace-admin"
   },{
     "description": "Tenant Management of Private Banking",
     "group_path": "applications/privatebanking",
