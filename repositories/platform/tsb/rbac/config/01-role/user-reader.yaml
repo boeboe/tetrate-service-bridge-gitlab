@@ -4,6 +4,7 @@ kind: Role
 metadata:
   name: user-reader
 spec:
+  description: Read permissions on user resources
   displayName: UserReader
   rules:
   - permissions:

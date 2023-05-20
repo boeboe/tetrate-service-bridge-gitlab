@@ -4,6 +4,7 @@ kind: Role
 metadata:
   name: cluster-reader
 spec:
+  description: Read permissions on cluster resources
   displayName: ClusterReader
   rules:
   - permissions:

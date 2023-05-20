@@ -4,6 +4,7 @@ kind: Role
 metadata:
   name: tenant-reader
 spec:
+  description: Read permissions on tenant resources
   displayName: TenantReader
   rules:
   - permissions:
