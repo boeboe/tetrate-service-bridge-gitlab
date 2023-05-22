@@ -25,6 +25,17 @@ function print_info {
   echo -e "${greenb}${1}${end}"
 }
 
+if [[ ${ACTION} = "install" ]]; then
+  print_info "Installing docker apt packages"
+  sudo apt-get -y update ; sudo apt-get -y upgrade ;
+  sudo apt-get -y install curl docker.io jq expect net-tools ;
+  sudo systemctl enable docker ;
+  sudo systemctl start docker ;
+  sudo usermod -aG docker $USER ;
+  print_info "Log out of this session and log back in to have docker access"
+  exit 0
+fi
+
 if [[ ${ACTION} = "login" ]]; then
   print_info "docker login ${CONTAINER_REPO}"
   docker login ${CONTAINER_REPO}
@@ -64,6 +75,7 @@ if [[ ${ACTION} = "pull" ]]; then
 fi
 
 echo "Please specify one of the following action:"
+echo "  - install"
 echo "  - login"
 echo "  - push"
 echo "  - pull"
