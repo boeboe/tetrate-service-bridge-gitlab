@@ -10,7 +10,6 @@ GROUPSETTING_DIR=${TSB_CONFIG_DIR}/02-groupsetting
 TEAM_DIR=${TSB_CONFIG_DIR}/03-team
 SERVICEACCOUNT_DIR=${TSB_CONFIG_DIR}/04-serviceaccount
 ACCESSBINDING_DIR=${TSB_CONFIG_DIR}/05-accessbinding
-GATEWAY_DIR=${TSB_CONFIG_DIR}/06-gateway
 
 OUTPUT_DIR=${ROOT_DIR}/output/tsb
 
@@ -147,22 +146,6 @@ if [[ ${ACTION} = "config-accessbindings" ]]; then
   exit 0
 fi
 
-if [[ ${ACTION} = "config-gateways" ]]; then
-
-   # Login again as tsb admin in case of a session time-out
-  print_info "Login again as tsb admin in case of a session time-out" ;
-  login_tsb_admin tetrate ;
-
-  # Configure tsb gateways
-  print_info "Configure tsb gateways" ;
-  for gateway_file in ${GATEWAY_DIR}/* ; do
-    echo "Applying tsb configuration of '${gateway_file}'" ;
-    tctl apply -f ${gateway_file} ;
-    sleep 1 ;
-  done
-
-  exit 0
-fi
 
 echo "Please specify one of the following action:"
 echo "  - config-groups"
@@ -170,5 +153,4 @@ echo "  - config-groupsettings"
 echo "  - config-teams"
 echo "  - config-serviceaccounts"
 echo "  - config-accessbindings"
-echo "  - config-gateways"
 exit 1

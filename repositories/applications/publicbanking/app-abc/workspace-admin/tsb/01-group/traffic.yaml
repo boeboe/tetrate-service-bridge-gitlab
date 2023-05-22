@@ -1,0 +1,17 @@
+---
+apiVersion: traffic.tsb.tetrate.io/v2
+kind: Group
+metadata:
+  organization: tetrate
+  tenant: publicbanking
+  workspace: app-abc
+  name: trafgroup-abc
+spec:
+  description: Traffic Group for Application ABC
+  displayName: TrafficGroupABC
+  namespaceSelector:
+    names:
+      - "*/ns-a"
+      - "*/ns-b"
+      - "*/ns-c"
+  configMode: BRIDGED

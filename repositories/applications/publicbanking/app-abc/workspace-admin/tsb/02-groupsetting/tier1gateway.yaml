@@ -3,12 +3,13 @@ apiVersion: gateway.tsb.tetrate.io/v2
 kind: Tier1Gateway
 metadata:
   organization: tetrate
-  tenant: prod
-  workspace: gw-tier1-ws
-  group: gw-tier1-group
+  tenant: publicbanking
+  workspace: app-abc
+  group: gwgroup-tier1-abc
   name: gw-tier1-abc
 spec:
-  displayName: AppABC_Tier1GW
+  description: Tier1 Gateway Group for Application ABC
+  displayName: Tier1GwABC
   workloadSelector:
     namespace: gateway-tier1
     labels:
@@ -21,5 +22,5 @@ spec:
       mode: SIMPLE
       secretName: app-abc-cert
     clusters:
-    - name: active-cluster
-    - name: standby-cluster
+    - name: active
+    - name: standby

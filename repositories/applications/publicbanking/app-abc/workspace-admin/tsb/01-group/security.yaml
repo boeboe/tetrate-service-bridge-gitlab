@@ -1,0 +1,75 @@
+---
+apiVersion: security.tsb.tetrate.io/v2
+kind: Group
+metadata:
+  organization: tetrate
+  tenant: publicbanking
+  workspace: app-abc
+  name: secgroup-tier1-abc
+spec:
+  description: Security Group for Tier1Gateway ABC
+  displayName: SecurityGroupTier1ABC
+  namespaceSelector:
+    names:
+      - "mgmt/tier1-gw-abc"
+  configMode: BRIDGED
+---
+apiVersion: security.tsb.tetrate.io/v2
+kind: Group
+metadata:
+  organization: tetrate
+  tenant: publicbanking
+  workspace: app-abc
+  name: secgroup-ingress-abc
+spec:
+  description: Security Group for IngressGateway ABC
+  displayName: SecurityGroupIngressABC
+  namespaceSelector:
+    names:
+      - "*/gateway-abc"
+  configMode: BRIDGED
+---
+apiVersion: security.tsb.tetrate.io/v2
+kind: Group
+metadata:
+  organization: tetrate
+  tenant: publicbanking
+  workspace: app-abc
+  name: secgroup-a
+spec:
+  description: Security Group for MicroService A
+  displayName: SecurityGroupA
+  namespaceSelector:
+    names:
+      - "*/ns-a"
+  configMode: BRIDGED
+---
+apiVersion: security.tsb.tetrate.io/v2
+kind: Group
+metadata:
+  organization: tetrate
+  tenant: publicbanking
+  workspace: app-abc
+  name: secgroup-b
+spec:
+  description: Security Group for MicroService B
+  displayName: SecurityGroupB
+  namespaceSelector:
+    names:
+      - "*/ns-b"
+  configMode: BRIDGED
+---
+apiVersion: security.tsb.tetrate.io/v2
+kind: Group
+metadata:
+  organization: tetrate
+  tenant: publicbanking
+  workspace: app-abc
+  name: secgroup-c
+spec:
+  description: Security Group for MicroService C
+  displayName: SecurityGroupC
+  namespaceSelector:
+    names:
+      - "*/ns-c"
+  configMode: BRIDGED

@@ -2,11 +2,11 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: svc-b
+  name: app-b
   namespace: ns-b
   labels:
-    app: svc-b
-    service: svc-b
+    app: app-b
+    service: app-b
 spec:
   ports:
     - port: 80
@@ -16,4 +16,4 @@ spec:
       targetPort: 3000
       name: tcp
   selector:
-    app: svc-b
+    app: app-b

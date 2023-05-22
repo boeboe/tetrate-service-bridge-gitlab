@@ -22,7 +22,6 @@ stages:
   - tsb-teams
   - tsb-serviceaccounts
   - tsb-accessbindings
-  - tsb-gateways
 tsb-accessbindings:
   artifacts:
     paths:
@@ -38,19 +37,6 @@ tsb-accessbindings:
   script:
     - ./tsb.sh config-accessbindings
   stage: tsb-accessbindings
-tsb-gateways:
-  artifacts:
-    paths:
-      - output
-  environment:
-    name: tctl
-  needs:
-    - prereq
-    - k8s-gateways
-  resource_group: tctl
-  script:
-    - ./tsb.sh config-gateways
-  stage: tsb-gateways
 tsb-groups:
   artifacts:
     paths:

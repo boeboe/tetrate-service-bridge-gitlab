@@ -2,24 +2,24 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: svc-a-v1
+  name: app-a-v1
   namespace: ns-a
   labels:
-    app: svc-a
+    app: app-a
     version: v1
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: svc-a
+      app: app-a
       version: v1
   template:
     metadata:
       labels:
-        app: svc-a
+        app: app-a
         version: v1
     spec:
-      serviceAccountName: sa-svc-a
+      serviceAccountName: sa-app-a
       containers:
         - name: obs-tester
           image: $TSB_INSTALL_REPO_URL/obs-tester-server:1.0
@@ -36,7 +36,7 @@ spec:
             - '--zipkin-singlehost-spans' # Envoy does not work well with Zipkin's default shared spans
           env:
             - name: SVCNAME
-              value: svc-a
+              value: app-a
           ports:
             - name: http
               containerPort: 8000

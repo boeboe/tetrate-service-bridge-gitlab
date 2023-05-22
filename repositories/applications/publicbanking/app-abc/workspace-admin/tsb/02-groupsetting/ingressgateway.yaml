@@ -3,12 +3,13 @@ apiVersion: gateway.tsb.tetrate.io/v2
 kind: IngressGateway
 metadata:
   organization: tetrate
-  tenant: prod
-  workspace: gw-abc-ws
-  group: gw-abc-group
+  tenant: publicbanking
+  workspace: app-abc
+  group: gwgroup-ingress-abc
   name: gw-ingress-abc
 spec:
-  displayName: AppABC_IngressGW
+  description: Ingress Gateway for Application ABC
+  displayName: IngressGwABC
   workloadSelector:
     namespace: gateway-abc
     labels:

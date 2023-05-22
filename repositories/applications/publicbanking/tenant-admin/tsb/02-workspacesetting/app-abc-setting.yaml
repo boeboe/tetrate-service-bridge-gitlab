@@ -14,14 +14,14 @@ spec:
           app: gw-eastwest-abc
       exposedServices:
       - serviceLabels:
-          app: svc-a
-          service: svc-a
+          app: app-a
+          service: app-a
       - serviceLabels:
-          app: svc-b
-          service: svc-b
+          app: app-b
+          service: app-b
       - serviceLabels:
-          app: svc-c
-          service: svc-c
+          app: app-c
+          service: app-c
   defaultTrafficSetting:
     reachability:
       hosts:
