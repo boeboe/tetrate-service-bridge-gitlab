@@ -8,7 +8,7 @@ metadata:
   name: trafgroup-abc
 spec:
   description: Traffic Group for Application ABC
-  displayName: TrafficGroupABC
+  displayName: AppABC
   namespaceSelector:
     names:
       - "*/ns-a"

@@ -8,7 +8,7 @@ metadata:
   name: gwgroup-tier1-abc
 spec:
   description: Tier1 Gateway Group for Application ABC
-  displayName: GatewayGroupABC
+  displayName: Tier1ABC
   namespaceSelector:
     names:
       - "mgmt/tier1-gw-abc"
@@ -23,7 +23,7 @@ metadata:
   name: gwgroup-ingress-abc
 spec:
   description: Ingress Gateway Group for Application ABC
-  displayName: GatewayGroupABC
+  displayName: IngressABC
   namespaceSelector:
     names:
       - "*/gateway-abc"

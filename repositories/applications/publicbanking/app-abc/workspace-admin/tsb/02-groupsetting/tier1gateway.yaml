@@ -6,14 +6,14 @@ metadata:
   tenant: publicbanking
   workspace: app-abc
   group: gwgroup-tier1-abc
-  name: gw-tier1-abc
+  name: tier1-gw-abc
 spec:
   description: Tier1 Gateway Group for Application ABC
   displayName: Tier1GwABC
   workloadSelector:
-    namespace: gateway-tier1
+    namespace: tier1-gw-abc
     labels:
-      app: gw-tier1-abc
+      app: tier1-gw-abc
   externalServers:
   - name: abc-https
     hostname: abc.demo.tetrate.io

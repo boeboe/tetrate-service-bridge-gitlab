@@ -11,7 +11,7 @@ spec:
     - workloadSelector:
         namespace: gateway-abc
         labels:
-          app: gw-eastwest-abc
+          app: eastwest-gw-abc
       exposedServices:
       - serviceLabels:
           app: app-a

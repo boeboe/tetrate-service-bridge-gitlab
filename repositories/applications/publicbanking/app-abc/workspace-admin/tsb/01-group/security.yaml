@@ -8,7 +8,7 @@ metadata:
   name: secgroup-tier1-abc
 spec:
   description: Security Group for Tier1Gateway ABC
-  displayName: SecurityGroupTier1ABC
+  displayName: Tier1ABC
   namespaceSelector:
     names:
       - "mgmt/tier1-gw-abc"
@@ -23,7 +23,7 @@ metadata:
   name: secgroup-ingress-abc
 spec:
   description: Security Group for IngressGateway ABC
-  displayName: SecurityGroupIngressABC
+  displayName: IngressABC
   namespaceSelector:
     names:
       - "*/gateway-abc"
@@ -38,7 +38,7 @@ metadata:
   name: secgroup-a
 spec:
   description: Security Group for MicroService A
-  displayName: SecurityGroupA
+  displayName: AppA
   namespaceSelector:
     names:
       - "*/ns-a"
@@ -53,7 +53,7 @@ metadata:
   name: secgroup-b
 spec:
   description: Security Group for MicroService B
-  displayName: SecurityGroupB
+  displayName: AppB
   namespaceSelector:
     names:
       - "*/ns-b"
@@ -68,7 +68,7 @@ metadata:
   name: secgroup-c
 spec:
   description: Security Group for MicroService C
-  displayName: SecurityGroupC
+  displayName: AppC
   namespaceSelector:
     names:
       - "*/ns-c"
