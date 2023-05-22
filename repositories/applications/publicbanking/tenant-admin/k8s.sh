@@ -21,7 +21,7 @@ function print_info {
 }
 
 
-if [[ ${ACTION} = "config-namespaces" ]]; then
+if [[ ${ACTION} = "deploy" ]]; then
 
   # Configure k8s namespaces
   print_info "Configure k8s namespaces" ;
@@ -39,5 +39,5 @@ fi
 
 
 echo "Please specify one of the following action:"
-echo "  - config-namespaces"
+echo "  - deploy"
 exit 1

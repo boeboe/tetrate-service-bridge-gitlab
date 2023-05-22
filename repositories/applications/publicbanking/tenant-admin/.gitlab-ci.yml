@@ -1,13 +1,13 @@
 ---
-k8s-namespaces:
+k8s-deploy:
   artifacts:
     paths:
       - output
   needs:
     - prereq
   script:
-    - ./k8s.sh config-namespaces
-  stage: k8s-namespaces
+    - ./k8s.sh deploy
+  stage: k8s-deploy
 prereq:
   allow_failure: false
   script:
@@ -16,13 +16,9 @@ prereq:
   timeout: 15m
 stages:
   - prereq
-  - k8s-namespaces
-  - tsb-workspaces
-  - tsb-workspacesettings
-  - tsb-teams
-  - tsb-serviceaccounts
-  - tsb-accessbindings
-tsb-accessbindings:
+  - k8s-deploy
+  - tsb-deploy
+tsb-deploy:
   artifacts:
     paths:
       - output
@@ -30,63 +26,10 @@ tsb-accessbindings:
     name: tctl
   needs:
     - prereq
-    - tsb-workspaces
-    - tsb-teams
-    - tsb-serviceaccounts
+    - k8s-deploy
   resource_group: tctl
   script:
-    - ./tsb.sh config-accessbindings
-  stage: tsb-accessbindings
-tsb-serviceaccounts:
-  artifacts:
-    paths:
-      - output
-  environment:
-    name: tctl
-  needs:
-    - prereq
-    - tsb-workspaces
-  resource_group: tctl
-  script:
-    - ./tsb.sh config-serviceaccounts
-  stage: tsb-serviceaccounts
-tsb-teams:
-  artifacts:
-    paths:
-      - output
-  environment:
-    name: tctl
-  needs:
-    - prereq
-  resource_group: tctl
-  script:
-    - ./tsb.sh config-teams
-  stage: tsb-teams
-tsb-workspaces:
-  artifacts:
-    paths:
-      - output
-  environment:
-    name: tctl
-  needs:
-    - prereq
-    - k8s-namespaces
-  resource_group: tctl
-  script:
-    - ./tsb.sh config-workspaces
-  stage: tsb-workspaces
-tsb-workspacesettings:
-  artifacts:
-    paths:
-      - output
-  environment:
-    name: tctl
-  needs:
-    - prereq
-    - tsb-workspaces
-  resource_group: tctl
-  script:
-    - ./tsb.sh config-workspacesettings
-  stage: tsb-workspacesettings
+    - ./tsb.sh deploy
+  stage: tsb-deploy
 variables:
   TERM: xterm

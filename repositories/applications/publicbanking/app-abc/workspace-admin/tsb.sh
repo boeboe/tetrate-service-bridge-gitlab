@@ -56,7 +56,7 @@ function sa_generate_new_key {
   tctl x sa gen-key ${1} > ${2}
 }
 
-if [[ ${ACTION} = "config-groups" ]]; then
+if [[ ${ACTION} = " deploy" ]]; then
 
    # Login again as tsb admin in case of a session time-out
   print_info "Login again as tsb admin in case of a session time-out" ;
@@ -70,15 +70,6 @@ if [[ ${ACTION} = "config-groups" ]]; then
     sleep 1 ;
   done
 
-  exit 0
-fi
-
-if [[ ${ACTION} = "config-groupsettings" ]]; then
-
-   # Login again as tsb admin in case of a session time-out
-  print_info "Login again as tsb admin in case of a session time-out" ;
-  login_tsb_admin tetrate ;
-
   # Configure tsb groupsettings
   print_info "Configure tsb groupsettings" ;
   for groupsetting_file in ${GROUPSETTING_DIR}/* ; do
@@ -87,15 +78,6 @@ if [[ ${ACTION} = "config-groupsettings" ]]; then
     sleep 1 ;
   done
 
-  exit 0
-fi
-
-if [[ ${ACTION} = "config-teams" ]]; then
-
-   # Login again as tsb admin in case of a session time-out
-  print_info "Login again as tsb admin in case of a session time-out" ;
-  login_tsb_admin tetrate ;
-
   # Configure tsb teams
   print_info "Configure tsb teams" ;
   for team_file in ${TEAM_DIR}/* ; do
@@ -103,15 +85,6 @@ if [[ ${ACTION} = "config-teams" ]]; then
     tctl apply -f ${team_file} ;
     sleep 1 ;
   done
-
-  exit 0
-fi
-
-if [[ ${ACTION} = "config-serviceaccounts" ]]; then
-
-   # Login again as tsb admin in case of a session time-out
-  print_info "Login again as tsb admin in case of a session time-out" ;
-  login_tsb_admin tetrate ;
 
   # Configure tsb serviceaccounts
   print_info "Configure tsb serviceaccounts" ;
@@ -126,15 +99,6 @@ if [[ ${ACTION} = "config-serviceaccounts" ]]; then
     sleep 1 ;
   done
 
-  exit 0
-fi
-
-if [[ ${ACTION} = "config-accessbindings" ]]; then
-
-   # Login again as tsb admin in case of a session time-out
-  print_info "Login again as tsb admin in case of a session time-out" ;
-  login_tsb_admin tetrate ;
-
   # Configure tsb accessbindings
   print_info "Configure tsb accessbindings" ;
   for accessbinding_file in ${ACCESSBINDING_DIR}/* ; do
@@ -148,9 +112,5 @@ fi
 
 
 echo "Please specify one of the following action:"
-echo "  - config-groups"
-echo "  - config-groupsettings"
-echo "  - config-teams"
-echo "  - config-serviceaccounts"
-echo "  - config-accessbindings"
+echo "  - deploy"
 exit 1

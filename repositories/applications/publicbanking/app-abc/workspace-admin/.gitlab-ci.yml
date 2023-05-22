@@ -1,13 +1,13 @@
 ---
-k8s-gateways:
+k8s-deploy:
   artifacts:
     paths:
       - output
   needs:
     - prereq
   script:
-    - ./k8s.sh config-gateways
-  stage: k8s-gateways
+    - ./k8s.sh deploy
+  stage: k8s-deploy
 prereq:
   allow_failure: false
   script:
@@ -16,13 +16,9 @@ prereq:
   timeout: 15m
 stages:
   - prereq
-  - k8s-gateways
-  - tsb-groups
-  - tsb-groupsettings
-  - tsb-teams
-  - tsb-serviceaccounts
-  - tsb-accessbindings
-tsb-accessbindings:
+  - k8s-deploy
+  - tsb-deploy
+tsb-deploy:
   artifacts:
     paths:
       - output
@@ -30,62 +26,10 @@ tsb-accessbindings:
     name: tctl
   needs:
     - prereq
-    - tsb-groups
-    - tsb-teams
-    - tsb-serviceaccounts
+    - k8s-deploy
   resource_group: tctl
   script:
-    - ./tsb.sh config-accessbindings
-  stage: tsb-accessbindings
-tsb-groups:
-  artifacts:
-    paths:
-      - output
-  environment:
-    name: tctl
-  needs:
-    - prereq
-  resource_group: tctl
-  script:
-    - ./tsb.sh config-groups
-  stage: tsb-groups
-tsb-groupsettings:
-  artifacts:
-    paths:
-      - output
-  environment:
-    name: tctl
-  needs:
-    - prereq
-    - tsb-groups
-  resource_group: tctl
-  script:
-    - ./tsb.sh config-groupsettings
-  stage: tsb-groupsettings
-tsb-serviceaccounts:
-  artifacts:
-    paths:
-      - output
-  environment:
-    name: tctl
-  needs:
-    - prereq
-    - tsb-groups
-  resource_group: tctl
-  script:
-    - ./tsb.sh config-serviceaccounts
-  stage: tsb-serviceaccounts
-tsb-teams:
-  artifacts:
-    paths:
-      - output
-  environment:
-    name: tctl
-  needs:
-    - prereq
-  resource_group: tctl
-  script:
-    - ./tsb.sh config-teams
-  stage: tsb-teams
+    - ./tsb.sh deploy
+  stage: tsb-deploy
 variables:
   TERM: xterm

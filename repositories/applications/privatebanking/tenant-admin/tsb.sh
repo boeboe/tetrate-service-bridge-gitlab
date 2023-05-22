@@ -44,6 +44,7 @@ function sa_revoke_all_keys {
     echo "Revoking key pair with id '${key_id}' from serviceaccount '${1}'"
     tctl x sa revoke-key ${1} --id ${key_id} ;
   done
+  
 }
 
 # Generate new serviceaccount key
@@ -55,7 +56,7 @@ function sa_generate_new_key {
   tctl x sa gen-key ${1} > ${2}
 }
 
-if [[ ${ACTION} = "config-workspaces" ]]; then
+if [[ ${ACTION} = "deploy" ]]; then
 
    # Login again as tsb admin in case of a session time-out
   print_info "Login again as tsb admin in case of a session time-out" ;
@@ -69,15 +70,6 @@ if [[ ${ACTION} = "config-workspaces" ]]; then
     sleep 1 ;
   done
 
-  exit 0
-fi
-
-if [[ ${ACTION} = "config-workspacesettings" ]]; then
-
-   # Login again as tsb admin in case of a session time-out
-  print_info "Login again as tsb admin in case of a session time-out" ;
-  login_tsb_admin tetrate ;
-
   # Configure tsb workspacesettings
   print_info "Configure tsb workspacesettings" ;
   for workspacesetting_file in ${WORKSPACESETTING_DIR}/* ; do
@@ -86,15 +78,6 @@ if [[ ${ACTION} = "config-workspacesettings" ]]; then
     sleep 1 ;
   done
 
-  exit 0
-fi
-
-if [[ ${ACTION} = "config-teams" ]]; then
-
-   # Login again as tsb admin in case of a session time-out
-  print_info "Login again as tsb admin in case of a session time-out" ;
-  login_tsb_admin tetrate ;
-
   # Configure tsb teams
   print_info "Configure tsb teams" ;
   for team_file in ${TEAM_DIR}/* ; do
@@ -102,15 +85,6 @@ if [[ ${ACTION} = "config-teams" ]]; then
     tctl apply -f ${team_file} ;
     sleep 1 ;
   done
-
-  exit 0
-fi
-
-if [[ ${ACTION} = "config-serviceaccounts" ]]; then
-
-   # Login again as tsb admin in case of a session time-out
-  print_info "Login again as tsb admin in case of a session time-out" ;
-  login_tsb_admin tetrate ;
 
   # Configure tsb serviceaccounts
   print_info "Configure tsb serviceaccounts" ;
@@ -125,15 +99,6 @@ if [[ ${ACTION} = "config-serviceaccounts" ]]; then
     sleep 1 ;
   done
 
-  exit 0
-fi
-
-if [[ ${ACTION} = "config-accessbindings" ]]; then
-
-   # Login again as tsb admin in case of a session time-out
-  print_info "Login again as tsb admin in case of a session time-out" ;
-  login_tsb_admin tetrate ;
-
   # Configure tsb accessbindings
   print_info "Configure tsb accessbindings" ;
   for accessbinding_file in ${ACCESSBINDING_DIR}/* ; do
@@ -146,9 +111,5 @@ if [[ ${ACTION} = "config-accessbindings" ]]; then
 fi
 
 echo "Please specify one of the following action:"
-echo "  - config-workspaces"
-echo "  - config-workspacesettings"
-echo "  - config-teams"
-echo "  - config-serviceaccounts"
-echo "  - config-accessbindings"
+echo "  - deploy"
 exit 1

@@ -21,7 +21,7 @@ function print_info {
 }
 
 
-if [[ ${ACTION} = "config-gateways" ]]; then
+if [[ ${ACTION} = "deploy" ]]; then
 
   # Configure k8s gateways
   print_info "Configure k8s gateways" ;
@@ -39,5 +39,5 @@ fi
 
 
 echo "Please specify one of the following action:"
-echo "  - config-gateways"
+echo "  - deploy"
 exit 1
