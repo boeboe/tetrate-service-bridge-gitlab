@@ -56,7 +56,7 @@ function sa_generate_new_key {
   tctl x sa gen-key ${1} > ${2}
 }
 
-if [[ ${ACTION} = " deploy" ]]; then
+if [[ ${ACTION} = "deploy" ]]; then
 
    # Login again as tsb admin in case of a session time-out
   print_info "Login again as tsb admin in case of a session time-out" ;
