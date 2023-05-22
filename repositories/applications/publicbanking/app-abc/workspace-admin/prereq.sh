@@ -29,10 +29,10 @@ function gitlab_get_pipeline_status {
 
 if [[ ${ACTION} = "check" ]]; then
 
-  print_info "Wait for LDAP to be synchronized correctly (pipeline platform/tsb/rbac)"
+  print_info "Wait for tenant publicbanking to be configured correctly (pipeline applications/publicbanking/tenant-admin)"
   while true; do
-    status_platform_tsb_rbac=$(gitlab_get_pipeline_status ${CI_API_V4_URL} "01234567890123456789" "platform/tsb" "rbac")
-    if [[ ${status_platform_tsb_rbac} == "success" ]] ; then
+    status_publicbanking_tenant=$(gitlab_get_pipeline_status ${CI_API_V4_URL} "01234567890123456789" "applications/publicbanking" "tenant-admin")
+    if [[ ${status_publicbanking_tenant} == "success" ]] ; then
       echo "OK"
       break
     else

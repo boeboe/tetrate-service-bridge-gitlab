@@ -5,11 +5,12 @@
 ROOT_DIR="$( cd -- "$(dirname "${0}")" >/dev/null 2>&1 ; pwd -P )"
 
 TSB_CONFIG_DIR=${ROOT_DIR}/tsb
-WORKSPACE_DIR=${TSB_CONFIG_DIR}/01-workspace
-WORKSPACESETTING_DIR=${TSB_CONFIG_DIR}/02-workspacesetting
+GROUP_DIR=${TSB_CONFIG_DIR}/01-group
+GROUPSETTING_DIR=${TSB_CONFIG_DIR}/02-groupsetting
 TEAM_DIR=${TSB_CONFIG_DIR}/03-team
 SERVICEACCOUNT_DIR=${TSB_CONFIG_DIR}/04-serviceaccount
 ACCESSBINDING_DIR=${TSB_CONFIG_DIR}/05-accessbinding
+GATEWAY_DIR=${TSB_CONFIG_DIR}/06-gateway
 
 OUTPUT_DIR=${ROOT_DIR}/output/tsb
 
@@ -56,34 +57,34 @@ function sa_generate_new_key {
   tctl x sa gen-key ${1} > ${2}
 }
 
-if [[ ${ACTION} = "config-workspaces" ]]; then
+if [[ ${ACTION} = "config-groups" ]]; then
 
    # Login again as tsb admin in case of a session time-out
   print_info "Login again as tsb admin in case of a session time-out" ;
   login_tsb_admin tetrate ;
 
-  # Configure tsb workspaces
-  print_info "Configure tsb workspaces" ;
-  for workspace_file in ${WORKSPACE_DIR}/* ; do
-    echo "Applying tsb configuration of '${workspace_file}'" ;
-    tctl apply -f ${workspace_file} ;
+  # Configure tsb groups
+  print_info "Configure tsb groups" ;
+  for group_file in ${GROUP_DIR}/* ; do
+    echo "Applying tsb configuration of '${group_file}'" ;
+    tctl apply -f ${group_file} ;
     sleep 1 ;
   done
 
   exit 0
 fi
 
-if [[ ${ACTION} = "config-workspacesettings" ]]; then
+if [[ ${ACTION} = "config-groupsettings" ]]; then
 
    # Login again as tsb admin in case of a session time-out
   print_info "Login again as tsb admin in case of a session time-out" ;
   login_tsb_admin tetrate ;
 
-  # Configure tsb workspacesettings
-  print_info "Configure tsb workspacesettings" ;
-  for workspacesetting_file in ${WORKSPACESETTING_DIR}/* ; do
-    echo "Applying tsb configuration of '${workspacesetting_file}'" ;
-    tctl apply -f ${workspacesetting_file} ;
+  # Configure tsb groupsettings
+  print_info "Configure tsb groupsettings" ;
+  for groupsetting_file in ${GROUPSETTING_DIR}/* ; do
+    echo "Applying tsb configuration of '${groupsetting_file}'" ;
+    tctl apply -f ${groupsetting_file} ;
     sleep 1 ;
   done
 
@@ -146,10 +147,28 @@ if [[ ${ACTION} = "config-accessbindings" ]]; then
   exit 0
 fi
 
+if [[ ${ACTION} = "config-gateways" ]]; then
+
+   # Login again as tsb admin in case of a session time-out
+  print_info "Login again as tsb admin in case of a session time-out" ;
+  login_tsb_admin tetrate ;
+
+  # Configure tsb gateways
+  print_info "Configure tsb gateways" ;
+  for gateway_file in ${GATEWAY_DIR}/* ; do
+    echo "Applying tsb configuration of '${gateway_file}'" ;
+    tctl apply -f ${gateway_file} ;
+    sleep 1 ;
+  done
+
+  exit 0
+fi
+
 echo "Please specify one of the following action:"
-echo "  - config-workspaces"
-echo "  - config-workspacesettings"
+echo "  - config-groups"
+echo "  - config-groupsettings"
 echo "  - config-teams"
 echo "  - config-serviceaccounts"
 echo "  - config-accessbindings"
+echo "  - config-gateways"
 exit 1

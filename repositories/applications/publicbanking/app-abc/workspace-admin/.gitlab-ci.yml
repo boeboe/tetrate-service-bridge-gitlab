@@ -17,11 +17,12 @@ prereq:
 stages:
   - prereq
   - k8s-gateways
-  - tsb-workspaces
-  - tsb-workspacesettings
+  - tsb-groups
+  - tsb-groupsettings
   - tsb-teams
   - tsb-serviceaccounts
   - tsb-accessbindings
+  - tsb-gateways
 tsb-accessbindings:
   artifacts:
     paths:
@@ -30,13 +31,51 @@ tsb-accessbindings:
     name: tctl
   needs:
     - prereq
-    - tsb-workspaces
+    - tsb-groups
     - tsb-teams
     - tsb-serviceaccounts
   resource_group: tctl
   script:
     - ./tsb.sh config-accessbindings
   stage: tsb-accessbindings
+tsb-gateways:
+  artifacts:
+    paths:
+      - output
+  environment:
+    name: tctl
+  needs:
+    - prereq
+    - k8s-gateways
+  resource_group: tctl
+  script:
+    - ./tsb.sh config-gateways
+  stage: tsb-gateways
+tsb-groups:
+  artifacts:
+    paths:
+      - output
+  environment:
+    name: tctl
+  needs:
+    - prereq
+  resource_group: tctl
+  script:
+    - ./tsb.sh config-groups
+  stage: tsb-groups
+tsb-groupsettings:
+  artifacts:
+    paths:
+      - output
+  environment:
+    name: tctl
+  needs:
+    - prereq
+    - tsb-groups
+  resource_group: tctl
+  script:
+    - ./tsb.sh config-groupsettings
+  stage: tsb-groupsettings
 tsb-serviceaccounts:
   artifacts:
     paths:
@@ -45,7 +84,7 @@ tsb-serviceaccounts:
     name: tctl
   needs:
     - prereq
-    - tsb-workspaces
+    - tsb-groups
   resource_group: tctl
   script:
     - ./tsb.sh config-serviceaccounts
@@ -62,31 +101,5 @@ tsb-teams:
   script:
     - ./tsb.sh config-teams
   stage: tsb-teams
-tsb-workspaces:
-  artifacts:
-    paths:
-      - output
-  environment:
-    name: tctl
-  needs:
-    - prereq
-    - k8s-namespaces
-  resource_group: tctl
-  script:
-    - ./tsb.sh config-workspaces
-  stage: tsb-workspaces
-tsb-workspacesettings:
-  artifacts:
-    paths:
-      - output
-  environment:
-    name: tctl
-  needs:
-    - prereq
-    - tsb-workspaces
-  resource_group: tctl
-  script:
-    - ./tsb.sh config-workspacesettings
-  stage: tsb-workspacesettings
 variables:
   TERM: xterm
