@@ -3,6 +3,7 @@ apiVersion: api.tsb.tetrate.io/v2
 kind: Team
 metadata:
   organization: tetrate
+  tenant: privatebanking
   name: team-uvw
 spec:
   members:
