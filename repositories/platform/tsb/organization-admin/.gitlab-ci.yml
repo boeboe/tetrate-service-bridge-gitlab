@@ -4,7 +4,7 @@ prereq:
   script:
     - ./prereq.sh check
   stage: prereq
-  timeout: 15m
+  timeout: 20m
 stages:
   - prereq
   - tsb-deploy
