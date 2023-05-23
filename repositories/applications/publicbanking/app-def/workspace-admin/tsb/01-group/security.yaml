@@ -1,0 +1,75 @@
+---
+apiVersion: security.tsb.tetrate.io/v2
+kind: Group
+metadata:
+  organization: tetrate
+  tenant: publicbanking
+  workspace: app-def
+  name: secgroup-tier1-def
+spec:
+  description: Security Group for Tier1Gateway DEF
+  displayName: Tier1DEF
+  namespaceSelector:
+    names:
+      - "mgmt/tier1-gw-def"
+  configMode: BRIDGED
+---
+apiVersion: security.tsb.tetrate.io/v2
+kind: Group
+metadata:
+  organization: tetrate
+  tenant: publicbanking
+  workspace: app-def
+  name: secgroup-ingress-def
+spec:
+  description: Security Group for IngressGateway DEF
+  displayName: IngressDEF
+  namespaceSelector:
+    names:
+      - "*/gateway-def"
+  configMode: BRIDGED
+---
+apiVersion: security.tsb.tetrate.io/v2
+kind: Group
+metadata:
+  organization: tetrate
+  tenant: publicbanking
+  workspace: app-def
+  name: secgroup-d
+spec:
+  description: Security Group for MicroService D
+  displayName: AppD
+  namespaceSelector:
+    names:
+      - "*/ns-d"
+  configMode: BRIDGED
+---
+apiVersion: security.tsb.tetrate.io/v2
+kind: Group
+metadata:
+  organization: tetrate
+  tenant: publicbanking
+  workspace: app-def
+  name: secgroup-e
+spec:
+  description: Security Group for MicroService E
+  displayName: AppE
+  namespaceSelector:
+    names:
+      - "*/ns-e"
+  configMode: BRIDGED
+---
+apiVersion: security.tsb.tetrate.io/v2
+kind: Group
+metadata:
+  organization: tetrate
+  tenant: publicbanking
+  workspace: app-def
+  name: secgroup-f
+spec:
+  description: Security Group for MicroService F
+  displayName: AppF
+  namespaceSelector:
+    names:
+      - "*/ns-f"
+  configMode: BRIDGED

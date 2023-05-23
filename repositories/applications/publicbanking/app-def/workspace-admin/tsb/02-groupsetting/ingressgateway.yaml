@@ -1,0 +1,28 @@
+---
+apiVersion: gateway.tsb.tetrate.io/v2
+kind: IngressGateway
+metadata:
+  organization: tetrate
+  tenant: publicbanking
+  workspace: app-def
+  group: gwgroup-ingress-def
+  name: ingress-gw-def
+spec:
+  description: Ingress Gateway for Application DEF
+  displayName: IngressGwDEF
+  workloadSelector:
+    namespace: gateway-def
+    labels:
+      app: ingress-gw-def
+  http:
+  - name: def
+    hostname: def.demo.tetrate.io
+    port: 443
+    tls:
+      mode: SIMPLE
+      secretName: app-def-cert
+    routing:
+      rules:
+      - route:
+          host: ns-d/app-d.ns-d.svc.cluster.local
+          port: 80
