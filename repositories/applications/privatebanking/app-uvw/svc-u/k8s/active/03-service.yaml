@@ -1,0 +1,19 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-u
+  namespace: ns-u
+  labels:
+    app: app-u
+    service: app-u
+spec:
+  ports:
+    - port: 80
+      targetPort: 8000
+      name: http
+    - port: 3000
+      targetPort: 3000
+      name: tcp
+  selector:
+    app: app-u

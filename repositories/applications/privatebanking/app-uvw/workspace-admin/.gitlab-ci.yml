@@ -1,0 +1,55 @@
+---
+k8s-deploy:
+  artifacts:
+    paths:
+      - output
+  needs:
+    - prereq
+  script:
+    - ./k8s.sh deploy
+  stage: k8s-deploy
+prereq:
+  allow_failure: false
+  artifacts:
+    paths:
+      - output
+  cache:
+    key: output
+    paths:
+      - output
+  script:
+    - ./prereq.sh check
+  stage: prereq
+  timeout: 20m
+stages:
+  - prereq
+  - k8s-deploy
+  - tsb-deploy
+  - test-curl
+test-curl:
+  artifacts:
+    paths:
+      - output
+  needs:
+    - prereq
+  script:
+    - ./test.sh curl
+  stage: test-curl
+  when: manual
+  variables:
+    CURL_COUNT: 20
+tsb-deploy:
+  artifacts:
+    paths:
+      - output
+  environment:
+    name: tctl
+  needs:
+    - prereq
+    - k8s-deploy
+  resource_group: tctl
+  script:
+    - ./tsb.sh deploy
+  stage: tsb-deploy
+variables:
+  TERM: xterm

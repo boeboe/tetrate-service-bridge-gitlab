@@ -1,0 +1,30 @@
+---
+apiVersion: gateway.tsb.tetrate.io/v2
+kind: Group
+metadata:
+  organization: tetrate
+  tenant: privatebanking
+  workspace: app-xyz
+  name: gwgroup-tier1-xyz
+spec:
+  description: Tier1 Gateway Group for Application XYZ
+  displayName: Tier1XYZ
+  namespaceSelector:
+    names:
+      - "mgmt/tier1-gw-xyz"
+  configMode: BRIDGED
+---
+apiVersion: gateway.tsb.tetrate.io/v2
+kind: Group
+metadata:
+  organization: tetrate
+  tenant: privatebanking
+  workspace: app-xyz
+  name: gwgroup-ingress-xyz
+spec:
+  description: Ingress Gateway Group for Application XYZ
+  displayName: IngressXYZ
+  namespaceSelector:
+    names:
+      - "*/gateway-xyz"
+  configMode: BRIDGED

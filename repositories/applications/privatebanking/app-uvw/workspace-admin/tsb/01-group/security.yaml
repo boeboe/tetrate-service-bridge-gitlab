@@ -1,0 +1,75 @@
+---
+apiVersion: security.tsb.tetrate.io/v2
+kind: Group
+metadata:
+  organization: tetrate
+  tenant: privatebanking
+  workspace: app-uvw
+  name: secgroup-tier1-uvw
+spec:
+  description: Security Group for Tier1Gateway UVW
+  displayName: Tier1UVW
+  namespaceSelector:
+    names:
+      - "mgmt/tier1-gw-uvw"
+  configMode: BRIDGED
+---
+apiVersion: security.tsb.tetrate.io/v2
+kind: Group
+metadata:
+  organization: tetrate
+  tenant: privatebanking
+  workspace: app-uvw
+  name: secgroup-ingress-uvw
+spec:
+  description: Security Group for IngressGateway UVW
+  displayName: IngressUVW
+  namespaceSelector:
+    names:
+      - "*/gateway-uvw"
+  configMode: BRIDGED
+---
+apiVersion: security.tsb.tetrate.io/v2
+kind: Group
+metadata:
+  organization: tetrate
+  tenant: privatebanking
+  workspace: app-uvw
+  name: secgroup-u
+spec:
+  description: Security Group for MicroService U
+  displayName: AppU
+  namespaceSelector:
+    names:
+      - "*/ns-u"
+  configMode: BRIDGED
+---
+apiVersion: security.tsb.tetrate.io/v2
+kind: Group
+metadata:
+  organization: tetrate
+  tenant: privatebanking
+  workspace: app-uvw
+  name: secgroup-v
+spec:
+  description: Security Group for MicroService V
+  displayName: AppV
+  namespaceSelector:
+    names:
+      - "*/ns-v"
+  configMode: BRIDGED
+---
+apiVersion: security.tsb.tetrate.io/v2
+kind: Group
+metadata:
+  organization: tetrate
+  tenant: privatebanking
+  workspace: app-uvw
+  name: secgroup-w
+spec:
+  description: Security Group for MicroService W
+  displayName: AppW
+  namespaceSelector:
+    names:
+      - "*/ns-w"
+  configMode: BRIDGED

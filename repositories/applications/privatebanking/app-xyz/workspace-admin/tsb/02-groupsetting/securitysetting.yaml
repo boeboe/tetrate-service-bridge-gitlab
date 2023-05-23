@@ -1,0 +1,80 @@
+---
+apiVersion: security.tsb.tetrate.io/v2
+kind: SecuritySetting
+metadata:
+  organization: tetrate
+  tenant: privatebanking
+  workspace: app-xyz
+  group: secgroup-ingress-xyz
+  name: tier1-to-ingress
+spec:
+  authenticationSettings:
+    trafficMode: REQUIRED
+  authorization:
+    mode: RULES
+    rules:
+      allow:
+       - from:
+           fqn: organizations/tetrate/tenants/privatebanking/workspaces/app-xyz/securitygroups/secgroup-tier1-xyz
+         to:
+           fqn: organizations/tetrate/tenants/privatebanking/workspaces/app-xyz/securitygroups/secgroup-ingress-xyz
+---
+apiVersion: security.tsb.tetrate.io/v2
+kind: SecuritySetting
+metadata:
+  organization: tetrate
+  tenant: privatebanking
+  workspace: app-xyz
+  group: secgroup-x
+  name: ingress-to-x
+spec:
+  authenticationSettings:
+    trafficMode: REQUIRED
+  authorization:
+    mode: RULES
+    rules:
+      allow:
+       - from:
+           fqn: organizations/tetrate/tenants/privatebanking/workspaces/app-xyz/securitygroups/secgroup-ingress-xyz
+         to:
+           fqn: organizations/tetrate/tenants/privatebanking/workspaces/app-xyz/securitygroups/secgroup-x
+---
+apiVersion: security.tsb.tetrate.io/v2
+kind: SecuritySetting
+metadata:
+  organization: tetrate
+  tenant: privatebanking
+  workspace: app-xyz
+  group: secgroup-y
+  name: x-to-y
+spec:
+  authenticationSettings:
+    trafficMode: REQUIRED
+  authorization:
+    mode: RULES
+    rules:
+      allow:
+       - from:
+           fqn: organizations/tetrate/tenants/privatebanking/workspaces/app-xyz/securitygroups/secgroup-x
+         to:
+           fqn: organizations/tetrate/tenants/privatebanking/workspaces/app-xyz/securitygroups/secgroup-y
+---
+apiVersion: security.tsb.tetrate.io/v2
+kind: SecuritySetting
+metadata:
+  organization: tetrate
+  tenant: privatebanking
+  workspace: app-xyz
+  group: secgroup-z
+  name: y-to-z
+spec:
+  authenticationSettings:
+    trafficMode: REQUIRED
+  authorization:
+    mode: RULES
+    rules:
+      allow:
+       - from:
+           fqn: organizations/tetrate/tenants/privatebanking/workspaces/app-xyz/securitygroups/secgroup-y
+         to:
+           fqn: organizations/tetrate/tenants/privatebanking/workspaces/app-xyz/securitygroups/secgroup-z

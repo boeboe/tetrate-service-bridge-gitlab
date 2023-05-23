@@ -1,0 +1,26 @@
+---
+apiVersion: gateway.tsb.tetrate.io/v2
+kind: Tier1Gateway
+metadata:
+  organization: tetrate
+  tenant: privatebanking
+  workspace: app-uvw
+  group: gwgroup-tier1-uvw
+  name: tier1-gw-uvw
+spec:
+  description: Tier1 Gateway Group for Application UVW
+  displayName: Tier1GwUVW
+  workloadSelector:
+    namespace: tier1-gw-uvw
+    labels:
+      app: tier1-gw-uvw
+  externalServers:
+  - name: uvw-mtls
+    hostname: uvw.demo.tetrate.io
+    port: 443
+    tls:
+      mode: MUTUAL
+      secretName: app-uvw-cert
+    clusters:
+    - name: active
+    - name: standby

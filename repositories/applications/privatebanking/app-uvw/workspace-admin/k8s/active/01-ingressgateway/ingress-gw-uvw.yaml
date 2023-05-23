@@ -1,0 +1,8 @@
+---
+apiVersion: install.tetrate.io/v1alpha1
+kind: IngressGateway
+metadata:
+  name: ingress-gw-uvw
+  namespace: gateway-uvw
+spec:
+  eastWestOnly: false
