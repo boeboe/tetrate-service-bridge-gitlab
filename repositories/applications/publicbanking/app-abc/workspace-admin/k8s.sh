@@ -6,7 +6,10 @@ ROOT_DIR="$( cd -- "$(dirname "${0}")" >/dev/null 2>&1 ; pwd -P )"
 
 K8S_CONFIG_DIR=${ROOT_DIR}/k8s
 
+INGRESSGATEWAY_DIR="01-ingressgateway"
+
 OUTPUT_DIR=${ROOT_DIR}/output/k8s
+CERTS_BASE_DIR=${ROOT_DIR}/output/ingress-certs/server/abc
 
 ACTION=${1}
 
@@ -23,13 +26,36 @@ function print_info {
 
 if [[ ${ACTION} = "deploy" ]]; then
 
-  # Configure k8s gateways
-  print_info "Configure k8s gateways" ;
+  # Configure k8s secrets
+  print_info "Configure tier1 gateway k8s mutual tls secrets" ;
+  if kubectl --context mgmt -n tier1-gw-abc get secret app-abc-cert &>/dev/null; then
+    echo "Secret 'app-abc-cert' in namespace 'tier1-gw-abc' already exists in cluster 'mgmt'"
+  else
+    echo "Creating secret 'app-abc-cert' in namespace 'tier1-gw-abc' in cluster 'mgmt'"
+    kubectl --context mgmt create secret generic app-abc-cert -n tier1-gw-abc \
+      --from-file=tls.key=${CERTS_BASE_DIR}/abc.demo.tetrate.io-key.pem \
+      --from-file=tls.crt=${CERTS_BASE_DIR}/abc.demo.tetrate.io-cert.pem \
+      --from-file=ca.crt=${CERTS_BASE_DIR}/root-cert.pem ;
+  fi
+  print_info "Configure ingress gateway k8s single tls secrets" ;
+  for cluster_name in active standby ; do
+    if kubectl --context ${cluster_name} -n gateway-abc get secret app-abc-cert &>/dev/null; then
+      echo "Secret 'app-abc-cert' in namespace 'gateway-abc' already exists in cluster '${cluster_name}'"
+    else
+      echo "Creating secret 'app-abc-cert' in namespace 'gateway-abc' in cluster '${cluster_name}'"
+      kubectl --context ${cluster_name} create secret tls app-abc-cert -n gateway-abc \
+        --key ${CERTS_BASE_DIR}/abc.demo.tetrate.io-key.pem \
+        --cert ${CERTS_BASE_DIR}/abc.demo.tetrate.io-cert.pem ;
+    fi
+  done
+
+  # Configure k8s ingressgateways
+  print_info "Configure k8s ingressgateways" ;
   for cluster in $(ls -1 ${K8S_CONFIG_DIR}); do
-    print_info "Configure k8s gateways in cluster '${cluster}'" ;
-    for gateway_file in ${K8S_CONFIG_DIR}/${cluster}/* ; do
-      echo "Applying k8s configuration of '${gateway_file}' in cluster '${cluster}'" ;
-      kubectl --context ${cluster} apply -f ${gateway_file} ;
+    print_info "Configure k8s ingressgateways in cluster '${cluster}'" ;
+    for ingressgateway_file in $(ls -1 ${K8S_CONFIG_DIR}/${cluster}/${INGRESSGATEWAY_DIR}) ; do
+      echo "Applying k8s configuration of '${K8S_CONFIG_DIR}/${cluster}/${INGRESSGATEWAY_DIR}/${ingressgateway_file}' in cluster '${cluster}'" ;
+      kubectl --context ${cluster} apply -f ${K8S_CONFIG_DIR}/${cluster}/${INGRESSGATEWAY_DIR}/${ingressgateway_file} ;
       sleep 1 ;
     done    
   done

@@ -64,35 +64,35 @@ if [[ ${ACTION} = "deploy" ]]; then
 
   # Configure tsb groups
   print_info "Configure tsb groups" ;
-  for group_file in ${GROUP_DIR}/* ; do
-    echo "Applying tsb configuration of '${group_file}'" ;
-    tctl apply -f ${group_file} ;
+  for group_file in $(ls -1 ${GROUP_DIR}) ; do
+    echo "Applying tsb configuration of '${GROUP_DIR}/${group_file}'" ;
+    tctl apply -f ${GROUP_DIR}/${group_file} ;
     sleep 1 ;
   done
 
   # Configure tsb groupsettings
   print_info "Configure tsb groupsettings" ;
-  for groupsetting_file in ${GROUPSETTING_DIR}/* ; do
-    echo "Applying tsb configuration of '${groupsetting_file}'" ;
-    tctl apply -f ${groupsetting_file} ;
+  for groupsetting_file in $(ls -1 ${GROUPSETTING_DIR}) ; do
+    echo "Applying tsb configuration of '${GROUPSETTING_DIR}/${groupsetting_file}'" ;
+    tctl apply -f ${GROUPSETTING_DIR}/${groupsetting_file} ;
     sleep 1 ;
   done
 
   # Configure tsb teams
   print_info "Configure tsb teams" ;
-  for team_file in ${TEAM_DIR}/* ; do
-    echo "Applying tsb configuration of '${team_file}'" ;
-    tctl apply -f ${team_file} ;
+  for team_file in $(ls -1 ${TEAM_DIR}) ; do
+    echo "Applying tsb configuration of '${TEAM_DIR}/${team_file}'" ;
+    tctl apply -f ${TEAM_DIR}/${team_file} ;
     sleep 1 ;
   done
 
   # Configure tsb serviceaccounts
   print_info "Configure tsb serviceaccounts" ;
-  for serviceaccount_file in ${SERVICEACCOUNT_DIR}/* ; do
-    echo "Applying tsb configuration of '${serviceaccount_file}'" ;
-    tctl apply -f ${serviceaccount_file} ;
+  for serviceaccount_file in $(ls -1 ${SERVICEACCOUNT_DIR}) ; do
+    echo "Applying tsb configuration of '${SERVICEACCOUNT_DIR}/${serviceaccount_file}'" ;
+    tctl apply -f ${SERVICEACCOUNT_DIR}/${serviceaccount_file} ;
 
-    serviceaccount=$(cat ${serviceaccount_file} | grep "name: " | awk '{print $2}') ;
+    serviceaccount=$(cat ${SERVICEACCOUNT_DIR}/${serviceaccount_file} | grep "name: " | awk '{print $2}') ;
     sa_revoke_all_keys ${serviceaccount} ;
     mkdir -p ${OUTPUT_DIR}/${serviceaccount} ;
     sa_generate_new_key ${serviceaccount} ${OUTPUT_DIR}/${serviceaccount}/private-key.jwk ;
@@ -101,9 +101,9 @@ if [[ ${ACTION} = "deploy" ]]; then
 
   # Configure tsb accessbindings
   print_info "Configure tsb accessbindings" ;
-  for accessbinding_file in ${ACCESSBINDING_DIR}/* ; do
-    echo "Applying tsb configuration of '${accessbinding_file}'" ;
-    tctl apply -f ${accessbinding_file} ;
+  for accessbinding_file in $(ls -1 ${ACCESSBINDING_DIR}) ; do
+    echo "Applying tsb configuration of '${ACCESSBINDING_DIR}/${accessbinding_file}'" ;
+    tctl apply -f ${ACCESSBINDING_DIR}/${accessbinding_file} ;
     sleep 1 ;
   done
 

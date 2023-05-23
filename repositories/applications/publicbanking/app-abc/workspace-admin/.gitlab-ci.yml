@@ -10,6 +10,13 @@ k8s-deploy:
   stage: k8s-deploy
 prereq:
   allow_failure: false
+  artifacts:
+    paths:
+      - output
+  cache:
+    key: output
+    paths:
+      - output
   script:
     - ./prereq.sh check
   stage: prereq

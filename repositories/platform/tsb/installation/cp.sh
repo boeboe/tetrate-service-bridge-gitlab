@@ -63,12 +63,12 @@ if [[ ${ACTION} = "install" ]]; then
     #   REF: https://docs.tetrate.io/service-bridge/1.6.x/en-us/setup/self_managed/onboarding-clusters#intermediate-istio-ca-certificates
     print_info "Bootstrap cluster '${cp_cluster_name}' with self signed certificate that shares a common root certificate"
     if kubectl --context ${cp_cluster_name} get ns istio-system &>/dev/null; then
-      echo "Namespace 'istio-system' already exists in cluster ${cp_cluster_name}"
+      echo "Namespace 'istio-system' already exists in cluster '${cp_cluster_name}'"
     else
       kubectl --context ${cp_cluster_name} create ns istio-system ;
     fi
     if kubectl --context ${cp_cluster_name} -n istio-system get secret cacerts &>/dev/null; then
-      echo "Secret 'cacerts' in namespace 'istio-system' already exists in cluster ${cp_cluster_name}"
+      echo "Secret 'cacerts' in namespace 'istio-system' already exists in cluster '${cp_cluster_name}'"
     else
       kubectl --context ${cp_cluster_name} create secret generic cacerts -n istio-system \
         --from-file=${CERT_OUTPUT_DIR}/${cp_cluster_name}/ca-cert.pem \

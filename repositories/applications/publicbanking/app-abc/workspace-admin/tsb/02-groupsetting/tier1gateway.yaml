@@ -19,7 +19,7 @@ spec:
     hostname: abc.demo.tetrate.io
     port: 443
     tls:
-      mode: SIMPLE
+      mode: MUTUAL
       secretName: app-abc-cert
     clusters:
     - name: active

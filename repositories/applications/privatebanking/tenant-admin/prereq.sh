@@ -29,9 +29,9 @@ function gitlab_get_pipeline_status {
 
 if [[ ${ACTION} = "check" ]]; then
 
-  print_info "Wait for LDAP to be synchronized correctly (pipeline platform/tsb/rbac)"
+  print_info "Wait for TSB organization to be configured correctly (pipeline platform/tsb/organization-admin)"
   while true; do
-    status_platform_tsb_rbac=$(gitlab_get_pipeline_status ${CI_API_V4_URL} "01234567890123456789" "platform/tsb" "rbac")
+    status_platform_tsb_rbac=$(gitlab_get_pipeline_status ${CI_API_V4_URL} "01234567890123456789" "platform/tsb" "organization-admin")
     if [[ ${status_platform_tsb_rbac} == "success" ]] ; then
       echo "OK"
       break

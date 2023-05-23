@@ -27,7 +27,6 @@ function gitlab_get_pipeline_status {
   curl --silent --request GET --header "PRIVATE-TOKEN: ${2}" --url "${1}/projects/${project_id}/pipelines/latest" | jq -r ".status"
 }
 
-
 # Get gitlab project's latest pipeline status
 #   args:
 #     (1) gitlab api url

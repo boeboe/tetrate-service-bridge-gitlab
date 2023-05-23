@@ -15,9 +15,9 @@ spec:
     rules:
       allow:
        - from:
-           fqn: organizations/tetrate/tenants/prod/workspaces/app-abc/securitygroups/secgroup-tier1-abc
+           fqn: organizations/tetrate/tenants/publicbanking/workspaces/app-abc/securitygroups/secgroup-tier1-abc
          to:
-           fqn: organizations/tetrate/tenants/prod/workspaces/app-abc/securitygroups/secgroup-ingress-abc
+           fqn: organizations/tetrate/tenants/publicbanking/workspaces/app-abc/securitygroups/secgroup-ingress-abc
 ---
 apiVersion: security.tsb.tetrate.io/v2
 kind: SecuritySetting
@@ -35,9 +35,9 @@ spec:
     rules:
       allow:
        - from:
-           fqn: organizations/tetrate/tenants/prod/workspaces/app-abc/securitygroups/secgroup-ingress-abc
+           fqn: organizations/tetrate/tenants/publicbanking/workspaces/app-abc/securitygroups/secgroup-ingress-abc
          to:
-           fqn: organizations/tetrate/tenants/prod/workspaces/app-abc/securitygroups/secgroup-a
+           fqn: organizations/tetrate/tenants/publicbanking/workspaces/app-abc/securitygroups/secgroup-a
 ---
 apiVersion: security.tsb.tetrate.io/v2
 kind: SecuritySetting
@@ -55,9 +55,9 @@ spec:
     rules:
       allow:
        - from:
-           fqn: organizations/tetrate/tenants/prod/workspaces/app-abc/securitygroups/secgroup-a
+           fqn: organizations/tetrate/tenants/publicbanking/workspaces/app-abc/securitygroups/secgroup-a
          to:
-           fqn: organizations/tetrate/tenants/prod/workspaces/app-abc/securitygroups/secgroup-b
+           fqn: organizations/tetrate/tenants/publicbanking/workspaces/app-abc/securitygroups/secgroup-b
 ---
 apiVersion: security.tsb.tetrate.io/v2
 kind: SecuritySetting
@@ -75,6 +75,6 @@ spec:
     rules:
       allow:
        - from:
-           fqn: organizations/tetrate/tenants/prod/workspaces/app-abc/securitygroups/secgroup-b
+           fqn: organizations/tetrate/tenants/publicbanking/workspaces/app-abc/securitygroups/secgroup-b
          to:
-           fqn: organizations/tetrate/tenants/prod/workspaces/app-abc/securitygroups/secgroup-c
+           fqn: organizations/tetrate/tenants/publicbanking/workspaces/app-abc/securitygroups/secgroup-c
