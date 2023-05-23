@@ -6,6 +6,7 @@ metadata:
   name: everyone
 spec:
   members:
+  - organizations/tetrate/users/mngr-pubbank
   - organizations/tetrate/users/dev-a
   - organizations/tetrate/users/dev-b
   - organizations/tetrate/users/dev-c
@@ -14,6 +15,7 @@ spec:
   - organizations/tetrate/users/dev-e
   - organizations/tetrate/users/dev-f
   - organizations/tetrate/users/mngr-def
+  - organizations/tetrate/users/mngr-privbank
   - organizations/tetrate/users/dev-u
   - organizations/tetrate/users/dev-v
   - organizations/tetrate/users/dev-w

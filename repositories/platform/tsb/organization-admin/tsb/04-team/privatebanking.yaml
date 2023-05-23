@@ -6,6 +6,7 @@ metadata:
   name: privatebanking
 spec:
   members:
+  - organizations/tetrate/users/mngr-privbank
   - organizations/tetrate/users/dev-u
   - organizations/tetrate/users/dev-v
   - organizations/tetrate/users/dev-w

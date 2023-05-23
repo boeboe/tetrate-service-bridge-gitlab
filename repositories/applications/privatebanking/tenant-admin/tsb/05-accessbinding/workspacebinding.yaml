@@ -8,6 +8,7 @@ spec:
   - role: rbac/admin
     subjects:
     - serviceAccount: organizations/tetrate/serviceaccounts/sa-uvw
+    - user: organizations/tetrate/users/mngr-uvw
 ---
 apiVersion: rbac.tsb.tetrate.io/v2
 kind: AccessBindings
@@ -18,3 +19,4 @@ spec:
   - role: rbac/admin
     subjects:
     - serviceAccount: organizations/tetrate/serviceaccounts/sa-xyz
+    - user: organizations/tetrate/users/mngr-xyz

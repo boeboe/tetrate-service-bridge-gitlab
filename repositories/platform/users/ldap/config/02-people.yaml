@@ -58,6 +58,20 @@ data:
     mail: bart@tetrate.io
     userpassword: bart-pass
 
+    #################################### publicbanking ####################################
+
+    dn: cn=Manager PubBank,ou=People,dc=tetrate,dc=io
+    objectclass: person
+    objectclass: organizationalPerson
+    objectclass: inetOrgPerson
+    objectclass: top
+    cn: Manager PubBank
+    givenname: Manager
+    sn: PubBank
+    uid: mngr-pubbank
+    mail: mngr-pubbank@tetrate.io
+    userpassword: mngr-pubbank-pass
+
     ################## ABC ##################
 
     dn: cn=Developer AppA,ou=People,dc=tetrate,dc=io
@@ -157,6 +171,20 @@ data:
     uid: mngr-def
     mail: mngr-def@tetrate.io
     userpassword: mngr-def-pass
+
+    #################################### privatebanking ####################################
+
+    dn: cn=Manager PrivBank,ou=People,dc=tetrate,dc=io
+    objectclass: person
+    objectclass: organizationalPerson
+    objectclass: inetOrgPerson
+    objectclass: top
+    cn: Manager PrivBank
+    givenname: Manager
+    sn: PrivBank
+    uid: mngr-privbank
+    mail: mngr-privbank@tetrate.io
+    userpassword: mngr-privbank-pass
 
     ################## UVW ##################
 

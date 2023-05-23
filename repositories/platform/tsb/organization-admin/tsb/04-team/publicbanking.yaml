@@ -6,6 +6,7 @@ metadata:
   name: publicbanking
 spec:
   members:
+  - organizations/tetrate/users/mngr-pubbank
   - organizations/tetrate/users/dev-a
   - organizations/tetrate/users/dev-b
   - organizations/tetrate/users/dev-c
