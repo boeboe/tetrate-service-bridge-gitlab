@@ -15,7 +15,7 @@ TSB_REPO_PW=$(cat ${ROOT_DIR}/env.json | jq -r ".tsb.tetrate_repo.password") ;
 
 if [[ ${ACTION} = "check" ]]; then
 
-  DEPENDENCIES=( tctl minikube expect docker kubectl jq awk curl nc gitlab-runner )
+  DEPENDENCIES=( tctl minikube expect docker kubectl jq awk curl nc unzip gitlab-runner )
 
   # check necessary dependencies are installed
   echo "Checking if all software dependencies installed : ok"
