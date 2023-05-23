@@ -30,15 +30,11 @@ function print_info {
   echo -e "${purpleb}${1}${end}"
 }
 
-# Login as admin into tsb
+# Login as a serviceaccount into tsb
 #   args:
-#     (1) organization
-function login_tsb_admin {
-  expect <<DONE
-  spawn tctl login --username admin --password admin --org ${1}
-  expect "Tenant:" { send "\\r" }
-  expect eof
-DONE
+#     (1) serviceaccount name
+function login_tsb_serviceaccount {
+  tctl config users set ${1} --token $(tctl x sa token ${1} --key-path ${OUTPUT_DIR}/${1}/private-key.jwk --expiration 1h0m0s)
 }
 
 # Revoke all serviceaccount keys
@@ -63,9 +59,9 @@ function sa_generate_new_key {
 
 if [[ ${ACTION} = "deploy" ]]; then
 
-   # Login again as tsb admin in case of a session time-out
-  print_info "Login again as tsb admin in case of a session time-out" ;
-  login_tsb_admin tetrate ;
+   # Login with tsb serviceaccount publicbanking
+  print_info "Login with tsb serviceaccount 'publicbanking'" ;
+  login_tsb_serviceaccount publicbanking ;
 
   # Configure tsb workspaces
   print_info "Configure tsb workspaces" ;
