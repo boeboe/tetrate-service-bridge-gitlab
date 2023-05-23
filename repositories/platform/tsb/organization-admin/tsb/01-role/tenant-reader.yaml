@@ -1,0 +1,15 @@
+---
+apiVersion: rbac.tsb.tetrate.io/v2
+kind: Role
+metadata:
+  name: tenant-reader
+spec:
+  description: Read permissions on tenant resources
+  displayName: TenantReader
+  rules:
+  - permissions:
+    - READ
+    types:
+    - apiGroup: api.tsb.tetrate.io/v2
+      kinds:
+      - Tenant
