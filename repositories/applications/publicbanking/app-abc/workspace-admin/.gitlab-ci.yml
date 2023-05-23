@@ -25,6 +25,17 @@ stages:
   - prereq
   - k8s-deploy
   - tsb-deploy
+  - test-curl
+test-curl:
+  artifacts:
+    paths:
+      - output
+  needs:
+    - prereq
+  script:
+    - ./test.sh curl
+  stage: test-curl
+  when: manual
 tsb-deploy:
   artifacts:
     paths:
