@@ -7,9 +7,8 @@ ROOT_DIR="$( cd -- "$(dirname "${0}")" >/dev/null 2>&1 ; pwd -P )"
 TSB_CONFIG_DIR=${ROOT_DIR}/tsb
 WORKSPACE_DIR=${TSB_CONFIG_DIR}/01-workspace
 WORKSPACESETTING_DIR=${TSB_CONFIG_DIR}/02-workspacesetting
-TEAM_DIR=${TSB_CONFIG_DIR}/03-team
-SERVICEACCOUNT_DIR=${TSB_CONFIG_DIR}/04-serviceaccount
-ACCESSBINDING_DIR=${TSB_CONFIG_DIR}/05-accessbinding
+SERVICEACCOUNT_DIR=${TSB_CONFIG_DIR}/03-serviceaccount
+ACCESSBINDING_DIR=${TSB_CONFIG_DIR}/04-accessbinding
 
 OUTPUT_DIR=${ROOT_DIR}/output/tsb
 
@@ -82,14 +81,6 @@ if [[ ${ACTION} = "deploy" ]]; then
   for workspacesetting_file in $(ls -1 ${WORKSPACESETTING_DIR}) ; do
     echo "Applying tsb configuration of '${WORKSPACESETTING_DIR}/${workspacesetting_file}'" ;
     tctl apply -f ${WORKSPACESETTING_DIR}/${workspacesetting_file} ;
-    sleep 1 ;
-  done
-
-  # Configure tsb teams
-  print_info "Configure tsb teams" ;
-  for team_file in $(ls -1 ${TEAM_DIR}) ; do
-    echo "Applying tsb configuration of '${TEAM_DIR}/${team_file}'" ;
-    tctl apply -f ${TEAM_DIR}/${team_file} ;
     sleep 1 ;
   done
 
