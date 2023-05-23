@@ -34,6 +34,7 @@ function print_info {
 #   args:
 #     (1) serviceaccount name
 function login_tsb_serviceaccount {
+  tctl config profiles set-current mgmt ;
   token=$(tctl x sa token ${1} --key-path ${OUTPUT_DIR}/${1}/private-key.jwk --expiration 1h0m0s) ;
   echo "Using token '${token}' for serviceaccount '${1}'"
   tctl config users set ${1} --token ${token} ;
