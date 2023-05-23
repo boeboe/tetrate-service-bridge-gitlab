@@ -12,6 +12,11 @@ INSTALL_REPO_URL=${CI_REGISTRY}/platform/tsb/images
 
 ACTION=${1}
 
+# -e exits on error
+# -u errors on undefined variables
+# -x prints commands before execution
+# -o (for option) pipefail exits on command pipe failures
+set -euo pipefail
 
 # Print info messages
 #   args:

@@ -6,6 +6,12 @@ ROOT_DIR="$( cd -- "$(dirname "${0}")" >/dev/null 2>&1 ; pwd -P )"
 
 ACTION=${1}
 
+# -e exits on error
+# -u errors on undefined variables
+# -x prints commands before execution
+# -o (for option) pipefail exits on command pipe failures
+set -euo pipefail
+
 # Print info messages
 #   args:
 #     (1) message
