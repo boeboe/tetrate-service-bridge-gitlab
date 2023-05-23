@@ -37,6 +37,9 @@ function login_tsb_serviceaccount {
   token=$(tctl x sa token ${1} --key-path ${OUTPUT_DIR}/${1}/private-key.jwk --expiration 1h0m0s);
   echo "Using token '${token}' for serviceaccount '${1}'"
   tctl config users set ${1} --token ${token}
+  tctl config profiles set ${1} --cluster mgmt --username ${1}
+  tctl config profiles set-current ${1}
+  tctl config profiles list
 }
 
 # Revoke all serviceaccount keys
