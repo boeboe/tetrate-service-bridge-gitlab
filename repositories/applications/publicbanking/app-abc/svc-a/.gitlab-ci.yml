@@ -1,0 +1,18 @@
+---
+k8s-deploy:
+  needs:
+    - prereq
+  script:
+    - ./k8s.sh deploy
+  stage: k8s-deploy
+prereq:
+  allow_failure: false
+  script:
+    - ./prereq.sh check
+  stage: prereq
+  timeout: 15m
+stages:
+  - prereq
+  - k8s-deploy
+variables:
+  TERM: xterm
