@@ -4,6 +4,10 @@
     "group_path": "platform/infrastructure",
     "name": "minikube"
   },{
+    "description": "Certificate Management",
+    "group_path": "platform/infrastructure",
+    "name": "certificates"
+  },{
     "description": "Manage LDAP Users and Teams",
     "group_path": "platform/users",
     "name": "ldap"
@@ -16,9 +20,9 @@
     "group_path": "platform/tsb",
     "name": "installation"
   },{
-    "description": "TSB RBAC Management",
+    "description": "TSB Organization Management",
     "group_path": "platform/tsb",
-    "name": "rbac"
+    "name": "organization-admin"
   },{
     "description": "MicroService A of Application ABC for Public Banking",
     "group_path": "applications/publicbanking/app-abc",
@@ -32,7 +36,7 @@
     "group_path": "applications/publicbanking/app-abc",
     "name": "svc-c"
   },{
-    "description": "Workspace Management of Application ABC for Public Banking",
+    "description": "TSB Workspace Management of Application ABC for Public Banking",
     "group_path": "applications/publicbanking/app-abc",
     "name": "workspace-admin"
   },{
@@ -48,11 +52,11 @@
     "group_path": "applications/publicbanking/app-def",
     "name": "svc-f"
   },{
-    "description": "Workspace Management of Application DEF for Public Banking",
+    "description": "TSB Workspace Management of Application DEF for Public Banking",
     "group_path": "applications/publicbanking/app-def",
     "name": "workspace-admin"
   },{
-    "description": "Tenant Management of Public Banking",
+    "description": "TSB Tenant Management of Public Banking",
     "group_path": "applications/publicbanking",
     "name": "tenant-admin"
   },{
@@ -68,7 +72,7 @@
     "group_path": "applications/privatebanking/app-uvw",
     "name": "svc-w"
   },{
-    "description": "Workspace Management of Application UVW for Private Banking",
+    "description": "TSB Workspace Management of Application UVW for Private Banking",
     "group_path": "applications/privatebanking/app-uvw",
     "name": "workspace-admin"
   },{
@@ -84,11 +88,11 @@
     "group_path": "applications/privatebanking/app-xyz",
     "name": "svc-z"
   },{
-    "description": "Workspace Management of Application XYZ for Private Banking",
+    "description": "TSB Workspace Management of Application XYZ for Private Banking",
     "group_path": "applications/privatebanking/app-xyz",
     "name": "workspace-admin"
   },{
-    "description": "Tenant Management of Private Banking",
+    "description": "TSB Tenant Management of Private Banking",
     "group_path": "applications/privatebanking",
     "name": "tenant-admin"
   }

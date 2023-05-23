@@ -1,0 +1,47 @@
+{
+  "ingress": [
+    {
+      "clients": [
+        "client1",
+        "client2",
+        "client3"
+      ],
+      "domain": "demo.tetrate.io",
+      "server": "abc"
+    },
+    {
+      "clients": [
+        "client1",
+        "client2",
+        "client3"
+      ],
+      "domain": "demo.tetrate.io",
+      "server": "def"
+    },
+    {
+      "clients": [
+        "client1",
+        "client2",
+        "client3"
+      ],
+      "domain": "demo.tetrate.io",
+      "server": "uvw"
+    },
+    {
+      "clients": [
+        "client1",
+        "client2",
+        "client3"
+      ],
+      "domain": "demo.tetrate.io",
+      "server": "xyz"
+    }
+  ],
+  "istio": {
+    "cluster_names": [
+      "mgmt",
+      "active",
+      "standby"
+    ]
+  }
+}

@@ -1,0 +1,16 @@
+---
+gen-certs:
+  artifacts:
+    paths:
+      - output
+  cache:
+    key: certificates
+    paths:
+      - output
+  script:
+    - ./certs.sh generate
+  stage: gen-certs
+stages:
+  - gen-certs
+variables:
+  TERM: xterm

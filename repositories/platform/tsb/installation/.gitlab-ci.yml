@@ -1,22 +1,8 @@
 ---
-certs:
-  artifacts:
-    paths:
-      - output/istio-certs
-  cache:
-    key: istio-certs
-    paths:
-      - output/istio-certs
-  needs:
-    - prereq
-  script:
-    - ./certs.sh generate
-  stage: certs
 config-tsb:
   artifacts:
     paths:
-      - output/istio-certs
-      - output/tsb
+      - output
   environment:
     name: tctl
   needs:
@@ -29,12 +15,11 @@ config-tsb:
 install-cp:
   artifacts:
     paths:
-      - output/istio-certs
-      - output/tsb
+      - output
   environment:
     name: tctl
   needs:
-    - certs
+    - prereq
     - install-mp
   resource_group: tctl
   script:
@@ -43,25 +28,30 @@ install-cp:
 install-mp:
   artifacts:
     paths:
-      - output/istio-certs
-      - output/tsb
+      - output
   environment:
     name: tctl
   needs:
-    - certs
+    - prereq
   resource_group: tctl
   script:
     - ./mp.sh install
   stage: install-mp
 prereq:
   allow_failure: false
+  artifacts:
+    paths:
+      - output
+  cache:
+    key: output
+    paths:
+      - output
   script:
     - ./prereq.sh check
   stage: prereq
   timeout: 15m
 stages:
   - prereq
-  - certs
   - install-mp
   - install-cp
   - config-tsb
