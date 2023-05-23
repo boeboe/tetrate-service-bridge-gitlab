@@ -72,7 +72,7 @@ if [[ ${ACTION} = "check" ]]; then
     fi
   done
 
-  print_info "Wait for istio certificate to be available (pipeline platform/infrastructure/certificates)"
+  print_info "Wait for istio certificates to be available (pipeline platform/infrastructure/certificates)"
   while true; do  
     status_platform_infrastructure_certificates=$(gitlab_get_pipeline_status ${CI_API_V4_URL} "01234567890123456789" "platform/infrastructure" "certificates")
     if [[ ${status_platform_infrastructure_certificates} == "success" ]] ; then
@@ -85,7 +85,7 @@ if [[ ${ACTION} = "check" ]]; then
     fi
   done
 
-  print_info "Download and extract istio certificate (latest artifact of pipeline platform/infrastructure/certificates)"
+  print_info "Download and extract istio certificates (latest artifact of pipeline platform/infrastructure/certificates)"
   download_and_extract_project_job_artifact ${CI_API_V4_URL} "01234567890123456789" "platform/infrastructure" "certificates" "gen-certs"
   tree ${ROOT_DIR}/output
 
