@@ -32,6 +32,22 @@ function gitlab_get_pipeline_status {
   curl --silent --request GET --header "PRIVATE-TOKEN: ${2}" --url "${1}/projects/${project_id}/pipelines/latest" | jq -r ".status"
 }
 
+# Get gitlab project's latest pipeline status
+#   args:
+#     (1) gitlab api url
+#     (2) gitlab api token
+#     (3) gitlab group path
+#     (4) gitlab project name
+#     (5) git pipeline job name
+function download_and_extract_project_job_artifact {
+  project_id=$(curl --silent --request GET --header "PRIVATE-TOKEN: ${2}" --url "${1}/projects?per_page=100" | jq ".[] | select(.name==\"${4}\") | select(.namespace.full_path==\"${3}\") " | jq -r '.id')
+  job_id=$(curl --silent --request GET --header "PRIVATE-TOKEN: ${2}" --url "${1}/projects/${project_id}/jobs?per_page=100" | jq "[.[] | select(.status==\"success\") | select(.name==\"${5}\")][0]" | jq -r '.id')
+  rm -f /tmp/artifacts.zip
+  curl --silent --request GET --header "PRIVATE-TOKEN: ${2}" --url "${1}/projects/${project_id}/jobs/${job_id}/artifacts" --output /tmp/artifacts.zip
+  unzip -o /tmp/artifacts.zip -d ${ROOT_DIR}
+}
+
+
 if [[ ${ACTION} = "check" ]]; then
 
   print_info "Wait for TSB organization to be configured correctly (pipeline platform/tsb/organization-admin)"
@@ -47,7 +63,9 @@ if [[ ${ACTION} = "check" ]]; then
     fi
   done
 
-  exit 0
+  print_info "Download and extract tenant serviceaccount key (latest artifact of pipeline platform/tsb/organization-admin)"
+  download_and_extract_project_job_artifact ${CI_API_V4_URL} "01234567890123456789" "platform/tsb" "organization-admin" "tsb-deploy"
+  tree ${ROOT_DIR}/output
 
   exit 0
 fi
