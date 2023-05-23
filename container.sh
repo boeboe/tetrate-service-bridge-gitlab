@@ -16,6 +16,7 @@ registry:2;${CONTAINER_REPO}/registry:2
 gitlab/gitlab-ee:15.11.3-ee.0;${CONTAINER_REPO}/gitlab-ee:15.11.3-ee.0
 gitlab/gitlab-ee:15.11.5-ee.0;${CONTAINER_REPO}/gitlab-ee:15.11.5-ee.0
 gitlab/gitlab-ee:16.0.0-ee.0;${CONTAINER_REPO}/gitlab-ee:16.0.0-ee.0
+dnknth/ldap-ui:latest;${CONTAINER_REPO}/ldap-ui:latest
 "
 
 # Colors

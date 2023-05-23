@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: ldap-ui
-          image: dnknth/ldap-ui
+          image: dnknth/ldap-ui:latest
           imagePullPolicy: IfNotPresent
           env:
             - name: LDAP_URL
