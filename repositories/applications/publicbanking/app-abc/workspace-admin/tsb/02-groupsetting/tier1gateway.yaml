@@ -15,7 +15,7 @@ spec:
     labels:
       app: tier1-gw-abc
   externalServers:
-  - name: abc-https
+  - name: abc-mtls
     hostname: abc.demo.tetrate.io
     port: 443
     tls:
