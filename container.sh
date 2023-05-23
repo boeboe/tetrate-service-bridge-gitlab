@@ -14,6 +14,8 @@ quay.io/metallb/speaker:v0.9.6;${CONTAINER_REPO}/speaker:v0.9.6
 gcr.io/k8s-minikube/kicbase:v0.0.39;${CONTAINER_REPO}/kicbase:v0.0.39
 registry:2;${CONTAINER_REPO}/registry:2
 gitlab/gitlab-ee:15.11.3-ee.0;${CONTAINER_REPO}/gitlab-ee:15.11.3-ee.0
+gitlab/gitlab-ee:15.11.5-ee.0;${CONTAINER_REPO}/gitlab-ee:15.11.5-ee.0
+gitlab/gitlab-ee:16.0.0-ee.0;${CONTAINER_REPO}/gitlab-ee:16.0.0-ee.0
 "
 
 # Colors

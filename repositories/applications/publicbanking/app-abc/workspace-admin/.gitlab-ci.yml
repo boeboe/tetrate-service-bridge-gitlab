@@ -36,6 +36,8 @@ test-curl:
     - ./test.sh curl
   stage: test-curl
   when: manual
+  variables:
+    CURL_COUNT: 20
 tsb-deploy:
   artifacts:
     paths:
