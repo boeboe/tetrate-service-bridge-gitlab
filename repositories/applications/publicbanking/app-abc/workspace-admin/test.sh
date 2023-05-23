@@ -25,8 +25,8 @@ if [[ ${ACTION} = "curl" ]]; then
    # Going to send test traffic using curl
   print_info "Going to send test traffic using curl" ;
   ABC_T1_GW_IP=$(kubectl --context mgmt get svc -n tier1-gw-abc tier1-gw-abc --output jsonpath='{.status.loadBalancer.ingress[0].ip}') ;
-  echo "curl -v -H \"X-B3-Sampled: 1\" --resolve \"abc.demo.tetrate.io:443:${ABC_T1_GW_IP}\" --cacert ${CERTS_BASE_DIR}/root-cert.pem --cert ${CERTS_BASE_DIR}/abc/client1.abc.demo.tetrate.io-cert.pem --key ${CERTS_BASE_DIR}/abc/client1.abc.demo.tetrate.io-key.pem \"https://abc.demo.tetrate.io/proxy/app-b.ns-b/proxy/app-c.ns-c\""
-  curl -v -H "X-B3-Sampled: 1" --resolve "abc.demo.tetrate.io:443:${ABC_T1_GW_IP}" --cacert ${CERTS_BASE_DIR}/root-cert.pem --cert ${CERTS_BASE_DIR}/abc/client1.abc.demo.tetrate.io-cert.pem --key ${CERTS_BASE_DIR}/abc/client1.abc.demo.tetrate.io-key.pem "https://abc.demo.tetrate.io/proxy/app-b.ns-b/proxy/app-c.ns-c" ;
+  echo "curl -v -H \"X-B3-Sampled: 1\" --resolve \"abc.demo.tetrate.io:443:${ABC_T1_GW_IP}\" --cacert ${CERTS_BASE_DIR}/root-cert.pem --cert ${CERTS_BASE_DIR}/client1.abc.demo.tetrate.io-cert.pem --key ${CERTS_BASE_DIR}/client1.abc.demo.tetrate.io-key.pem \"https://abc.demo.tetrate.io/proxy/app-b.ns-b/proxy/app-c.ns-c\""
+  curl -v -H "X-B3-Sampled: 1" --resolve "abc.demo.tetrate.io:443:${ABC_T1_GW_IP}" --cacert ${CERTS_BASE_DIR}/root-cert.pem --cert ${CERTS_BASE_DIR}/client1.abc.demo.tetrate.io-cert.pem --key ${CERTS_BASE_DIR}/client1.abc.demo.tetrate.io-key.pem "https://abc.demo.tetrate.io/proxy/app-b.ns-b/proxy/app-c.ns-c" ;
 
   exit 0
 fi
