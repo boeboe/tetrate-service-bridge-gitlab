@@ -50,9 +50,9 @@ if [[ ${ACTION} = "config" ]]; then
 
   # Configure tsb organization, organizationsettings  and clusters
   print_info "Configure tsb organization, organizationsettings  and clusters" ;
-  for configfile in ${CONFIG_DIR}/* ; do
-    echo "Applying tsb configuration of '${configfile}'" ;
-    tctl apply -f ${configfile} ;
+  for configfile in $(ls -1 ${CONFIG_DIR}) ; do
+    echo "Applying tsb configuration of '${CONFIG_DIR}/${configfile}'" ;
+    tctl apply -f ${CONFIG_DIR}/${configfile} ;
     sleep 5 ;
   done
 
