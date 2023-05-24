@@ -1,0 +1,11 @@
+---
+stages:
+  - sync-imgs
+sync-imgs:
+  script:
+    - ./run.sh sync-imgs
+  stage: sync-imgs
+  tags:
+    - platform-infra
+variables:
+  TERM: xterm

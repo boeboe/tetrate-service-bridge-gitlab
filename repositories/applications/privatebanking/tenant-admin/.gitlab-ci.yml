@@ -1,4 +1,16 @@
 ---
+downstream1:
+  needs:
+    - tsb-deploy
+  stage: post-trigger
+  trigger:
+    project: applications/privatebanking/app-uvw/workspace-admin
+downstream2:
+  needs:
+    - tsb-deploy
+  stage: post-trigger
+  trigger:
+    project: applications/privatebanking/app-xyz/workspace-admin
 k8s-deploy:
   artifacts:
     paths:
@@ -20,17 +32,19 @@ prereq:
   script:
     - ./prereq.sh check
   stage: prereq
-  timeout: 20m
+  timeout: 10m
 stages:
   - prereq
   - k8s-deploy
   - tsb-deploy
+  - post-trigger
 tsb-deploy:
   artifacts:
     paths:
       - output
   environment:
     name: tctl
+    url: https://tctl.demo.tetrate.io
   needs:
     - prereq
     - k8s-deploy
@@ -38,5 +52,7 @@ tsb-deploy:
   script:
     - ./tsb.sh deploy
   stage: tsb-deploy
+  tags:
+    - application-tctl
 variables:
   TERM: xterm

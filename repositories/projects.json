@@ -8,13 +8,13 @@
     "group_path": "platform/infrastructure",
     "name": "certificates"
   },{
+    "description": "TSB Container Images",
+    "group_path": "platform/infrastructure",
+    "name": "images"
+  },{
     "description": "Manage LDAP Users and Teams",
     "group_path": "platform/users",
     "name": "ldap"
-  },{
-    "description": "TSB Container Images",
-    "group_path": "platform/tsb",
-    "name": "images"
   },{
     "description": "TSB Cluster Installation",
     "group_path": "platform/tsb",

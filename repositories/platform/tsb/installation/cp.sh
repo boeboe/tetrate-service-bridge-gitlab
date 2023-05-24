@@ -8,7 +8,7 @@ TSB_MP_CLUSTER_CONFIG=${ROOT_DIR}/tsb-mp-cluster.json
 TSB_CP_CLUSTERS_CONFIG=${ROOT_DIR}/tsb-cp-clusters.json
 CERT_OUTPUT_DIR=${ROOT_DIR}/output/istio-certs
 TSB_OUTPUT_DIR=${ROOT_DIR}/output/tsb
-INSTALL_REPO_URL=${CI_REGISTRY}/platform/tsb/images
+INSTALL_REPO_URL=${CI_REGISTRY}/platform/infrastructure/images
 
 ACTION=${1}
 

@@ -10,6 +10,8 @@ gen-certs:
   script:
     - ./certs.sh generate
   stage: gen-certs
+  tags:
+    - platform-infra
 stages:
   - gen-certs
 variables:

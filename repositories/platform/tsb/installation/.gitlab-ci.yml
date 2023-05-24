@@ -12,6 +12,8 @@ config-tsb:
   script:
     - ./tsb.sh config
   stage: config-tsb
+  tags:
+    - platform-tsb
 install-cp:
   artifacts:
     paths:
@@ -25,6 +27,8 @@ install-cp:
   script:
     - ./cp.sh install
   stage: install-cp
+  tags:
+    - platform-tsb
 install-mp:
   artifacts:
     paths:
@@ -37,6 +41,8 @@ install-mp:
   script:
     - ./mp.sh install
   stage: install-mp
+  tags:
+    - platform-tsb
 prereq:
   allow_failure: false
   artifacts:
@@ -49,7 +55,9 @@ prereq:
   script:
     - ./prereq.sh check
   stage: prereq
-  timeout: 20m
+  tags:
+    - platform-tsb
+  timeout: 10m
 stages:
   - prereq
   - install-mp

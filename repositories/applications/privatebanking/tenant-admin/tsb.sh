@@ -7,8 +7,7 @@ ROOT_DIR="$( cd -- "$(dirname "${0}")" >/dev/null 2>&1 ; pwd -P )"
 TSB_CONFIG_DIR=${ROOT_DIR}/tsb
 WORKSPACE_DIR=${TSB_CONFIG_DIR}/01-workspace
 WORKSPACESETTING_DIR=${TSB_CONFIG_DIR}/02-workspacesetting
-SERVICEACCOUNT_DIR=${TSB_CONFIG_DIR}/03-serviceaccount
-ACCESSBINDING_DIR=${TSB_CONFIG_DIR}/04-accessbinding
+ACCESSBINDING_DIR=${TSB_CONFIG_DIR}/03-accessbinding
 
 OUTPUT_DIR=${ROOT_DIR}/output/tsb
 
@@ -42,25 +41,6 @@ function login_tsb_serviceaccount {
   tctl config profiles list ;
 }
 
-# Revoke all serviceaccount keys
-#   args:
-#     (1) serviceaccount name
-function sa_revoke_all_keys {
-  for key_id in $(tctl get serviceaccount ${1} -o json | jq -r '.spec.keys[].id'); do
-    echo "Revoking key pair with id '${key_id}' from serviceaccount '${1}'"
-    tctl x sa revoke-key ${1} --id ${key_id} ;
-  done
-  
-}
-
-# Generate new serviceaccount key
-#   args:
-#     (1) serviceaccount name
-#     (2) output file
-function sa_generate_new_key {
-  echo "Generating new key pair at '${2}' for serviceaccount '${1}'"
-  tctl x sa gen-key ${1} > ${2}
-}
 
 if [[ ${ACTION} = "deploy" ]]; then
 
@@ -84,21 +64,9 @@ if [[ ${ACTION} = "deploy" ]]; then
     sleep 1 ;
   done
 
-  # Configure tsb serviceaccounts
-  print_info "Configure tsb serviceaccounts" ;
-  for serviceaccount_file in $(ls -1 ${SERVICEACCOUNT_DIR}) ; do
-    echo "Applying tsb configuration of '${SERVICEACCOUNT_DIR}/${serviceaccount_file}'" ;
-    tctl apply -f ${SERVICEACCOUNT_DIR}/${serviceaccount_file} ;
-
-    serviceaccount=$(cat ${SERVICEACCOUNT_DIR}/${serviceaccount_file} | grep "name: " | awk '{print $2}') ;
-    sa_revoke_all_keys ${serviceaccount} ;
-    mkdir -p ${OUTPUT_DIR}/${serviceaccount} ;
-    sa_generate_new_key ${serviceaccount} ${OUTPUT_DIR}/${serviceaccount}/private-key.jwk ;
-    sleep 1 ;
-  done
-
   # Configure tsb accessbindings
   print_info "Configure tsb accessbindings" ;
+  tctl config profiles list ;
   for accessbinding_file in $(ls -1 ${ACCESSBINDING_DIR}) ; do
     echo "Applying tsb configuration of '${ACCESSBINDING_DIR}/${accessbinding_file}'" ;
     tctl apply -f ${ACCESSBINDING_DIR}/${accessbinding_file} ;

@@ -10,7 +10,7 @@ prereq:
   script:
     - ./prereq.sh check
   stage: prereq
-  timeout: 20m
+  timeout: 10m
 stages:
   - prereq
   - k8s-deploy

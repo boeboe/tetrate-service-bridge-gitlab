@@ -3,6 +3,8 @@ minikube-up:
   script:
     - ./minikube.sh up
   stage: minikube-up
+  tags:
+    - platform-infra
 stages:
   - minikube-up
 variables:

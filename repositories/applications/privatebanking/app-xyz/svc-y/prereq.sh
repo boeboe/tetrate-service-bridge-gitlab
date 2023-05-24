@@ -35,10 +35,10 @@ function gitlab_get_pipeline_status {
 
 if [[ ${ACTION} = "check" ]]; then
 
-  print_info "Wait for TSB workspace app-xyz to be configured correctly (pipeline applications/privatebanking/app-xyz/workspace-admin)"
+  print_info "Wait for tenant namespaces to be configured correctly (pipeline applications/privatebanking/tenant-admin)"
   while true; do
-    status_appxyz_workspace=$(gitlab_get_pipeline_status ${CI_API_V4_URL} "01234567890123456789" "applications/privatebanking/app-xyz" "workspace-admin")
-    if [[ ${status_appxyz_workspace} == "success" ]] ; then
+    status_tenant_namespaces=$(gitlab_get_pipeline_status ${CI_API_V4_URL} "01234567890123456789" "applications/privatebanking" "tenant-admin")
+    if [[ ${status_tenant_namespaces} == "success" ]] ; then
       echo "OK"
       break
     else

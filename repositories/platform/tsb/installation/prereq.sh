@@ -50,9 +50,9 @@ function download_and_extract_project_job_artifact {
 
 if [[ ${ACTION} = "check" ]]; then
 
-  print_info "Wait for TSB container images to be available (pipeline platform/tsb/images)"
+  print_info "Wait for TSB container images to be available (pipeline platform/infrastructure/images)"
   while true; do  
-    status_platform_tsb_images=$(gitlab_get_pipeline_status ${CI_API_V4_URL} "01234567890123456789" "platform/tsb" "images")
+    status_platform_tsb_images=$(gitlab_get_pipeline_status ${CI_API_V4_URL} "01234567890123456789" "platform/infrastructure" "images")
     if [[ ${status_platform_tsb_images} == "success" ]] ; then
       echo "OK"
       break

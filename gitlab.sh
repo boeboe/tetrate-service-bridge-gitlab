@@ -21,7 +21,7 @@ TSB_REPO_PW=$(cat ${ROOT_DIR}/env.json | jq -r ".tsb.tetrate_repo.password") ;
 
 GITLAB_HOME=/tmp/gitlab
 GITLAB_RUNNER_WORKDIR=/tmp/gitlab-runner
-GITLAB_RUNNER_COUNT=2
+GITLAB_RUNNER_CONFIG=${ROOT_DIR}/gitlab-runners.json
 GITLAB_RUNNER_CONCURRENCY=10
 GITLAB_NETWORK="gitlab" 
 GITLAB_CONTAINER_NAME="gitlab-ee"
@@ -129,24 +129,30 @@ function start_gitlab_runner {
     sudo service gitlab-runner restart
   fi
 
-  for ((i=0; i<${GITLAB_RUNNER_COUNT}; i++)); do
-    runner_name="shell-runner-$((i+1))"
+  runner_count=$(jq '. | length' ${GITLAB_RUNNER_CONFIG})
+  for ((runner_index=0; runner_index<${runner_count}; runner_index++)); do
+    runner_concurrency=$(jq -r '.['${runner_index}'].concurrency' ${GITLAB_RUNNER_CONFIG})
+    runner_executor=$(jq -r '.['${runner_index}'].executor' ${GITLAB_RUNNER_CONFIG})
+    runner_name=$(jq -r '.['${runner_index}'].name' ${GITLAB_RUNNER_CONFIG})
+    runner_tag=$(jq -r '.['${runner_index}'].tag' ${GITLAB_RUNNER_CONFIG})
     if [[ $(gitlab_get_shared_runner_id ${2} ${3} ${runner_name}) == "" ]] ; then
       echo "Going to register gitlab runner with description '${runner_name}'"
       if [[ -z ${shared_runner_token} ]] ; then
         shared_runner_token=$(gitlab_get_shared_runner_token ${4}) ;
       else
-        echo "Gitlab shared runner token already set, re-using that one..."
+        echo "Gitlab shared runner token already set, re-using '${shared_runner_token}'"
       fi
       sudo gitlab-runner register \
         --env "TETRATE_REGISTRY_USER=${TSB_REPO_USER}" \
         --env "TETRATE_REGISTRY_PASSWORD=${TSB_REPO_PW}" \
         --env "TETRATE_REGISTRY=${TSB_REPO_URL}" \
-        --executor shell \
+        --executor "${runner_executor}" \
         --description "${runner_name}" \
         --non-interactive \
         --url "${2}" \
-        --registration-token "${shared_runner_token}" ;
+        --registration-token "${shared_runner_token}" \
+        --request-concurrency ${runner_concurrency} \
+        --tag-list "${runner_tag}" ;
     else
       echo "Gitlab runner with description '${runner_name}' already registered"
     fi

@@ -1,0 +1,28 @@
+[
+  {
+    "concurrency": 3,
+    "executor": "shell",
+    "name": "PlatformInfraRunner",
+    "tag": "platform-infra"
+  },{
+    "concurrency": 2,
+    "executor": "shell",
+    "name": "PlatformTSBRunner",
+    "tag": "platform-tsb"
+  },{
+    "concurrency": 1,
+    "executor": "shell",
+    "name": "PlatformUsersRunner",
+    "tag": "platform-users"
+  },{
+    "concurrency": 1,
+    "executor": "shell",
+    "name": "ApplicationTCTLRunner",
+    "tag": "application-tctl"
+  },{
+    "concurrency": 0,
+    "executor": "shell",
+    "name": "ApplicationK8sRunner",
+    "tag": ""
+  }
+]

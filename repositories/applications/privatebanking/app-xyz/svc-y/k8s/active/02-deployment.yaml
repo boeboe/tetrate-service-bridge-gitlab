@@ -22,7 +22,7 @@ spec:
       serviceAccountName: sa-app-y
       containers:
         - name: obs-tester
-          image: 192.168.47.2:5050/platform/tsb/images/obs-tester-server:1.0
+          image: 192.168.47.2:5050/platform/infrastructure/images/obs-tester-server:1.0
           imagePullPolicy: IfNotPresent
           args:
             - '--log-output-level=all:debug'
