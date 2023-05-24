@@ -36,8 +36,6 @@ test-curl:
     - ./test.sh curl
   stage: test-curl
   when: manual
-  variables:
-    CURL_COUNT: 20
 tsb-deploy:
   artifacts:
     paths:
@@ -55,3 +53,6 @@ tsb-deploy:
     - application-tctl
 variables:
   TERM: xterm
+  CURL_COUNT:
+    description: number of curl calls to make
+    value: "20"
