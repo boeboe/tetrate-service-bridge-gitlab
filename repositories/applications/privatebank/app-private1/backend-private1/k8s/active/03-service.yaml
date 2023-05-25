@@ -1,0 +1,19 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: back-private1
+  namespace: back-private1
+  labels:
+    app: back-private1
+    service: back-private1
+spec:
+  ports:
+    - port: 80
+      targetPort: 8000
+      name: http
+    - port: 3000
+      targetPort: 3000
+      name: tcp
+  selector:
+    app: back-private1

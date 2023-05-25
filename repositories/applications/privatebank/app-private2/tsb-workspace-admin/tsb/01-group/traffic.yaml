@@ -1,0 +1,17 @@
+---
+apiVersion: traffic.tsb.tetrate.io/v2
+kind: Group
+metadata:
+  organization: tetrate
+  tenant: privatebank
+  workspace: app-xyz
+  name: trafgroup-xyz
+spec:
+  description: Traffic Group for Application XYZ
+  displayName: AppXYZ
+  namespaceSelector:
+    names:
+      - "*/ns-x"
+      - "*/ns-y"
+      - "*/ns-z"
+  configMode: BRIDGED

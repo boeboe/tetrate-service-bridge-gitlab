@@ -1,0 +1,41 @@
+---
+downstream1:
+  needs:
+    - tsb-deploy
+  stage: post-trigger
+  trigger:
+    project: applications/privatebanking/tsb-tenant-admin
+downstream2:
+  needs:
+    - tsb-deploy
+  stage: post-trigger
+  trigger:
+    project: applications/publicbanking/tsb-tenant-admin
+prereq:
+  allow_failure: false
+  script:
+    - ./prereq.sh check
+  stage: prereq
+  tags:
+    - platform-tsb
+  timeout: 20m
+stages:
+  - prereq
+  - tsb-deploy
+  - post-trigger
+tsb-deploy:
+  artifacts:
+    paths:
+      - output
+  environment:
+    name: tctl
+  needs:
+    - prereq
+  resource_group: tctl
+  script:
+    - ./tsb.sh deploy
+  stage: tsb-deploy
+  tags:
+    - platform-tsb
+variables:
+  TERM: xterm

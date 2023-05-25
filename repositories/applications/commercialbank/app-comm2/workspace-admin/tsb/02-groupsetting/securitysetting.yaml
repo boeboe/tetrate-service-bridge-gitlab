@@ -1,0 +1,80 @@
+---
+apiVersion: security.tsb.tetrate.io/v2
+kind: SecuritySetting
+metadata:
+  organization: tetrate
+  tenant: commercialbank
+  workspace: app-def
+  group: secgroup-ingress-def
+  name: tier1-to-ingress
+spec:
+  authenticationSettings:
+    trafficMode: REQUIRED
+  authorization:
+    mode: RULES
+    rules:
+      allow:
+       - from:
+           fqn: organizations/tetrate/tenants/commercialbank/workspaces/app-def/securitygroups/secgroup-tier1-def
+         to:
+           fqn: organizations/tetrate/tenants/commercialbank/workspaces/app-def/securitygroups/secgroup-ingress-def
+---
+apiVersion: security.tsb.tetrate.io/v2
+kind: SecuritySetting
+metadata:
+  organization: tetrate
+  tenant: commercialbank
+  workspace: app-def
+  group: secgroup-d
+  name: ingress-to-d
+spec:
+  authenticationSettings:
+    trafficMode: REQUIRED
+  authorization:
+    mode: RULES
+    rules:
+      allow:
+       - from:
+           fqn: organizations/tetrate/tenants/commercialbank/workspaces/app-def/securitygroups/secgroup-ingress-def
+         to:
+           fqn: organizations/tetrate/tenants/commercialbank/workspaces/app-def/securitygroups/secgroup-d
+---
+apiVersion: security.tsb.tetrate.io/v2
+kind: SecuritySetting
+metadata:
+  organization: tetrate
+  tenant: commercialbank
+  workspace: app-def
+  group: secgroup-e
+  name: d-to-e
+spec:
+  authenticationSettings:
+    trafficMode: REQUIRED
+  authorization:
+    mode: RULES
+    rules:
+      allow:
+       - from:
+           fqn: organizations/tetrate/tenants/commercialbank/workspaces/app-def/securitygroups/secgroup-d
+         to:
+           fqn: organizations/tetrate/tenants/commercialbank/workspaces/app-def/securitygroups/secgroup-e
+---
+apiVersion: security.tsb.tetrate.io/v2
+kind: SecuritySetting
+metadata:
+  organization: tetrate
+  tenant: commercialbank
+  workspace: app-def
+  group: secgroup-f
+  name: e-to-f
+spec:
+  authenticationSettings:
+    trafficMode: REQUIRED
+  authorization:
+    mode: RULES
+    rules:
+      allow:
+       - from:
+           fqn: organizations/tetrate/tenants/commercialbank/workspaces/app-def/securitygroups/secgroup-e
+         to:
+           fqn: organizations/tetrate/tenants/commercialbank/workspaces/app-def/securitygroups/secgroup-f

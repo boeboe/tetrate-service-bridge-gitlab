@@ -1,0 +1,28 @@
+---
+apiVersion: gateway.tsb.tetrate.io/v2
+kind: IngressGateway
+metadata:
+  organization: tetrate
+  tenant: privatebank
+  workspace: front-private1vw
+  group: gwgroup-ingress-uvw
+  name: ingress-gw-uvw
+spec:
+  description: Ingress Gateway for Application UVW
+  displayName: IngressGwUVW
+  workloadSelector:
+    namespace: gateway-uvw
+    labels:
+      app: ingress-gw-uvw
+  http:
+  - name: uvw
+    hostname: uvw.demo.tetrate.io
+    port: 443
+    tls:
+      mode: SIMPLE
+      secretName: front-private1vw-cert
+    routing:
+      rules:
+      - route:
+          host: ns-u/front-private1.ns-u.svc.cluster.local
+          port: 80

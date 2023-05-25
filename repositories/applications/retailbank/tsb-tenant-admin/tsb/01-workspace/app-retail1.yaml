@@ -1,0 +1,17 @@
+---
+apiversion: api.tsb.tetrate.io/v2
+kind: Workspace
+metadata:
+  organization: tetrate
+  tenant: retailbank
+  name: app-retail1
+spec:
+  description: Workspace for Application Cash1
+  displayName: AppCash1
+  namespaceSelector:
+    names:
+      - "mgmt/tier1-gw-retail1"
+      - "*/gateway-abc"
+      - "*/ns-retail1a"
+      - "*/ns-retail1b"
+      - "*/ns-retail1c"

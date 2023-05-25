@@ -1,0 +1,8 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  annotations:
+    tsb-tenant: cashmgmt
+    tsb-workspace: app-cash1
+  name: tier1-gw-cash1

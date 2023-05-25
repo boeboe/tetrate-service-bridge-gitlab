@@ -1,0 +1,17 @@
+---
+apiVersion: traffic.tsb.tetrate.io/v2
+kind: Group
+metadata:
+  organization: tetrate
+  tenant: privatebank
+  workspace: front-private1vw
+  name: trafgroup-uvw
+spec:
+  description: Traffic Group for Application UVW
+  displayName: AppUVW
+  namespaceSelector:
+    names:
+      - "*/ns-u"
+      - "*/mid-private1"
+      - "*/back-private1"
+  configMode: BRIDGED

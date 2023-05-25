@@ -1,0 +1,31 @@
+---
+ldap-sync:
+  needs:
+    - prereq
+  script:
+    - ./ldap.sh ldap-sync
+  stage: ldap-sync
+  tags:
+    - platform-users
+ldap-ui:
+  needs:
+    - prereq
+  script:
+    - ./ldap.sh ldap-ui
+  stage: ldap-ui
+  tags:
+    - platform-users
+prereq:
+  allow_failure: false
+  script:
+    - ./prereq.sh check
+  stage: prereq
+  tags:
+    - platform-users
+  timeout: 20m
+stages:
+  - prereq
+  - ldap-sync
+  - ldap-ui
+variables:
+  TERM: xterm

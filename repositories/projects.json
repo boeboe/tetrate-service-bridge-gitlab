@@ -1,99 +1,243 @@
 [
   {
-    "description": "Minikube Cluster Management",
-    "group_path": "platform/infrastructure",
-    "name": "minikube"
-  },{
     "description": "Certificate Management",
-    "group_path": "platform/infrastructure",
+    "group_path": "platform",
     "name": "certificates"
   },{
-    "description": "TSB Container Images",
-    "group_path": "platform/infrastructure",
-    "name": "images"
+    "description": "Minikube Cluster Management",
+    "group_path": "platform",
+    "name": "infra-minikube"
   },{
     "description": "Manage LDAP Users and Teams",
-    "group_path": "platform/users",
-    "name": "ldap"
+    "group_path": "platform",
+    "name": "ldap-users"
+  },{
+    "description": "TSB Container Images",
+    "group_path": "platform",
+    "name": "tsb-images"
   },{
     "description": "TSB Cluster Installation",
-    "group_path": "platform/tsb",
-    "name": "installation"
+    "group_path": "platform",
+    "name": "tsb-installation"
   },{
     "description": "TSB Organization Management",
-    "group_path": "platform/tsb",
-    "name": "organization-admin"
+    "group_path": "platform",
+    "name": "tsb-organization-admin"
   },{
-    "description": "MicroService A of Application ABC for Public Banking",
-    "group_path": "applications/publicbanking/app-abc",
-    "name": "svc-a"
+    "description": "Frontend of Application Cash1 for Cash Management BU",
+    "group_path": "applications/cashmgmt/app-cash1",
+    "name": "frontend-cash1"
   },{
-    "description": "MicroService B of Application ABC for Public Banking",
-    "group_path": "applications/publicbanking/app-abc",
-    "name": "svc-b"
+    "description": "Middleware of Application Cash1 for Cash Management BU",
+    "group_path": "applications/cashmgmt/app-cash1",
+    "name": "middleware-cash1"
   },{
-    "description": "MicroService C of Application ABC for Public Banking",
-    "group_path": "applications/publicbanking/app-abc",
-    "name": "svc-c"
+    "description": "Backend of Application Cash1 for Cash Management BU",
+    "group_path": "applications/cashmgmt/app-cash1",
+    "name": "backend-cash1"
   },{
-    "description": "TSB Workspace Management of Application ABC for Public Banking",
-    "group_path": "applications/publicbanking/app-abc",
-    "name": "workspace-admin"
+    "description": "TSB Workspace Management of Application Cash1 for Cash Management BU",
+    "group_path": "applications/cashmgmt/app-cash1",
+    "name": "tsb-workspace-admin"
   },{
-    "description": "MicroService D of Application DEF for Public Banking",
-    "group_path": "applications/publicbanking/app-def",
-    "name": "svc-d"
+    "description": "Frontend of Application Cash2 for Cash Management BU",
+    "group_path": "applications/cashmgmt/app-cash2",
+    "name": "frontend-cash2"
   },{
-    "description": "MicroService E of Application DEF for Public Banking",
-    "group_path": "applications/publicbanking/app-def",
-    "name": "svc-e"
+    "description": "Middleware of Application Cash2 for Cash Management BU",
+    "group_path": "applications/cashmgmt/app-cash2",
+    "name": "middleware-cash2"
   },{
-    "description": "MicroService F of Application DEF for Public Banking",
-    "group_path": "applications/publicbanking/app-def",
-    "name": "svc-f"
+    "description": "Backend of Application Cash2 for Cash Management BU",
+    "group_path": "applications/cashmgmt/app-cash2",
+    "name": "backend-cash2"
   },{
-    "description": "TSB Workspace Management of Application DEF for Public Banking",
-    "group_path": "applications/publicbanking/app-def",
-    "name": "workspace-admin"
+    "description": "TSB Workspace Management of Application Cash2 for Cash Management BU",
+    "group_path": "applications/cashmgmt/app-cash2",
+    "name": "tsb-workspace-admin"
   },{
-    "description": "TSB Tenant Management of Public Banking",
-    "group_path": "applications/publicbanking",
-    "name": "tenant-admin"
+    "description": "TSB Tenant Management of Cash Management BU",
+    "group_path": "applications/cashmgmt",
+    "name": "tsb-tenant-admin"
   },{
-    "description": "MicroService U of Application UVW for Private Banking",
-    "group_path": "applications/privatebanking/app-uvw",
-    "name": "svc-u"
+    "description": "Frontend of Application Comm1 for Commercial Bank BU",
+    "group_path": "applications/commercialbank/app-comm1",
+    "name": "frontend-comm1"
   },{
-    "description": "MicroService V of Application UVW for Private Banking",
-    "group_path": "applications/privatebanking/app-uvw",
-    "name": "svc-v"
+    "description": "Middleware of Application Comm1 for Commercial Bank BU",
+    "group_path": "applications/commercialbank/app-comm1",
+    "name": "middleware-comm1"
   },{
-    "description": "MicroService W of Application UVW for Private Banking",
-    "group_path": "applications/privatebanking/app-uvw",
-    "name": "svc-w"
+    "description": "Backend of Application Comm1 for Commercial Bank BU",
+    "group_path": "applications/commercialbank/app-comm1",
+    "name": "backend-comm1"
   },{
-    "description": "TSB Workspace Management of Application UVW for Private Banking",
-    "group_path": "applications/privatebanking/app-uvw",
-    "name": "workspace-admin"
+    "description": "TSB Workspace Management of Application Comm1 for Commercial Bank BU",
+    "group_path": "applications/commercialbank/app-comm1",
+    "name": "tsb-workspace-admin"
   },{
-    "description": "MicroService X of Application XYZ for Private Banking",
-    "group_path": "applications/privatebanking/app-xyz",
-    "name": "svc-x"
+    "description": "Frontend of Application Comm2 for Commercial Bank BU",
+    "group_path": "applications/commercialbank/app-comm2",
+    "name": "frontend-comm2"
   },{
-    "description": "MicroService Y of Application XYZ for Private Banking",
-    "group_path": "applications/privatebanking/app-xyz",
-    "name": "svc-y"
+    "description": "Middleware of Application Comm2 for Commercial Bank BU",
+    "group_path": "applications/commercialbank/app-comm2",
+    "name": "middleware-comm2"
   },{
-    "description": "MicroService Z of Application XYZ for Private Banking",
-    "group_path": "applications/privatebanking/app-xyz",
-    "name": "svc-z"
+    "description": "Backend of Application Comm2 for Commercial Bank BU",
+    "group_path": "applications/commercialbank/app-comm2",
+    "name": "backend-comm2"
   },{
-    "description": "TSB Workspace Management of Application XYZ for Private Banking",
-    "group_path": "applications/privatebanking/app-xyz",
-    "name": "workspace-admin"
+    "description": "TSB Workspace Management of Application Comm2 for Commercial Bank BU",
+    "group_path": "applications/commercialbank/app-comm2",
+    "name": "tsb-workspace-admin"
   },{
-    "description": "TSB Tenant Management of Private Banking",
-    "group_path": "applications/privatebanking",
-    "name": "tenant-admin"
+    "description": "TSB Tenant Management of Commercial Bank BU",
+    "group_path": "applications/commercialbank",
+    "name": "tsb-tenant-admin"
+  },{
+    "description": "Frontend of Application Invest1 for Investment Bank BU",
+    "group_path": "applications/investmentbank/app-invest1",
+    "name": "frontend-invest1"
+  },{
+    "description": "Middleware of Application Invest1 for Investment Bank BU",
+    "group_path": "applications/investmentbank/app-invest1",
+    "name": "middleware-invest1"
+  },{
+    "description": "Backend of Application Invest1 for Investment Bank BU",
+    "group_path": "applications/investmentbank/app-invest1",
+    "name": "backend-invest1"
+  },{
+    "description": "TSB Workspace Management of Application Invest1 for Investment Bank BU",
+    "group_path": "applications/investmentbank/app-invest1",
+    "name": "tsb-workspace-admin"
+  },{
+    "description": "Frontend of Application Invest2 for Investment Bank BU",
+    "group_path": "applications/investmentbank/app-invest2",
+    "name": "frontend-invest2"
+  },{
+    "description": "Middleware of Application Invest2 for Investment Bank BU",
+    "group_path": "applications/investmentbank/app-invest2",
+    "name": "middleware-invest2"
+  },{
+    "description": "Backend of Application Invest2 for Investment Bank BU",
+    "group_path": "applications/investmentbank/app-invest2",
+    "name": "backend-invest2"
+  },{
+    "description": "TSB Workspace Management of Application Invest2 for Investment Bank BU",
+    "group_path": "applications/investmentbank/app-invest2",
+    "name": "tsb-workspace-admin"
+  },{
+    "description": "TSB Tenant Management of Investment Bank BU",
+    "group_path": "applications/investmentbank",
+    "name": "tsb-tenant-admin"
+  },{
+    "description": "Frontend of Application Private1 for Private Bank BU",
+    "group_path": "applications/privatebank/app-private1",
+    "name": "frontend-private1"
+  },{
+    "description": "Middleware of Application Private1 for Private Bank BU",
+    "group_path": "applications/privatebank/app-private1",
+    "name": "middleware-private1"
+  },{
+    "description": "Backend of Application Private1 for Private Bank BU",
+    "group_path": "applications/privatebank/app-private1",
+    "name": "backend-private1"
+  },{
+    "description": "TSB Workspace Management of Application Private1 for Private Bank BU",
+    "group_path": "applications/privatebank/app-private1",
+    "name": "tsb-workspace-admin"
+  },{
+    "description": "Frontend of Application Private2 for Private Bank BU",
+    "group_path": "applications/privatebank/app-private2",
+    "name": "frontend-private2"
+  },{
+    "description": "Middleware of Application Private2 for Private Bank BU",
+    "group_path": "applications/privatebank/app-private2",
+    "name": "middleware-private2"
+  },{
+    "description": "Backend of Application Private2 for Private Bank BU",
+    "group_path": "applications/privatebank/app-private2",
+    "name": "backend-private2"
+  },{
+    "description": "TSB Workspace Management of Application Private2 for Private Bank BU",
+    "group_path": "applications/privatebank/app-private2",
+    "name": "tsb-workspace-admin"
+  },{
+    "description": "TSB Tenant Management of Private Bank BU",
+    "group_path": "applications/privatebank",
+    "name": "tsb-tenant-admin"
+  },{
+    "description": "Frontend of Application Retail1 for Retail Bank BU",
+    "group_path": "applications/retailbank/app-retail1",
+    "name": "frontend-retail1"
+  },{
+    "description": "Middleware of Application Retail1 for Retail Bank BU",
+    "group_path": "applications/retailbank/app-retail1",
+    "name": "middleware-retail1"
+  },{
+    "description": "Backend of Application Retail1 for Retail Bank BU",
+    "group_path": "applications/retailbank/app-retail1",
+    "name": "backend-retail1"
+  },{
+    "description": "TSB Workspace Management of Application Retail1 for Retail Bank BU",
+    "group_path": "applications/retailbank/app-retail1",
+    "name": "tsb-workspace-admin"
+  },{
+    "description": "Frontend of Application Retail2 for Retail Bank BU",
+    "group_path": "applications/retailbank/app-retail2",
+    "name": "frontend-retail2"
+  },{
+    "description": "Middleware of Application Retail2 for Retail Bank BU",
+    "group_path": "applications/retailbank/app-retail2",
+    "name": "middleware-retail2"
+  },{
+    "description": "Backend of Application Retail2 for Retail Bank BU",
+    "group_path": "applications/retailbank/app-retail2",
+    "name": "backend-retail2"
+  },{
+    "description": "TSB Workspace Management of Application Retail2 for Retail Bank BU",
+    "group_path": "applications/retailbank/app-retail2",
+    "name": "tsb-workspace-admin"
+  },{
+    "description": "TSB Tenant Management of Retail Bank BU",
+    "group_path": "applications/retailbank",
+    "name": "tsb-tenant-admin"
+  },{
+    "description": "Frontend of Application Wealth1 for Wealth Management BU",
+    "group_path": "applications/wealthmgmt/app-wealth1",
+    "name": "frontend-wealth1"
+  },{
+    "description": "Middleware of Application Wealth1 for Wealth Management BU",
+    "group_path": "applications/wealthmgmt/app-wealth1",
+    "name": "middleware-wealth1"
+  },{
+    "description": "Backend of Application Wealth1 for Wealth Management BU",
+    "group_path": "applications/wealthmgmt/app-wealth1",
+    "name": "backend-wealth1"
+  },{
+    "description": "TSB Workspace Management of Application Wealth1 for Wealth Management BU",
+    "group_path": "applications/wealthmgmt/app-wealth1",
+    "name": "tsb-workspace-admin"
+  },{
+    "description": "Frontend of Application Wealth2 for Wealth Management BU",
+    "group_path": "applications/wealthmgmt/app-wealth2",
+    "name": "frontend-wealth2"
+  },{
+    "description": "Middleware of Application Wealth2 for Wealth Management BU",
+    "group_path": "applications/wealthmgmt/app-wealth2",
+    "name": "middleware-wealth2"
+  },{
+    "description": "Backend of Application Wealth2 for Wealth Management BU",
+    "group_path": "applications/wealthmgmt/app-wealth2",
+    "name": "backend-wealth2"
+  },{
+    "description": "TSB Workspace Management of Application Wealth2 for Wealth Management BU",
+    "group_path": "applications/wealthmgmt/app-wealth2",
+    "name": "tsb-workspace-admin"
+  },{
+    "description": "TSB Tenant Management of Wealth Management BU",
+    "group_path": "applications/wealthmgmt",
+    "name": "tsb-tenant-admin"
   }
 ]

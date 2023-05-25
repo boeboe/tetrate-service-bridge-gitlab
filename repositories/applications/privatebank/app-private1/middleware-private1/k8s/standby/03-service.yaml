@@ -1,0 +1,19 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mid-private1
+  namespace: mid-private1
+  labels:
+    app: mid-private1
+    service: mid-private1
+spec:
+  ports:
+    - port: 80
+      targetPort: 8000
+      name: http
+    - port: 3000
+      targetPort: 3000
+      name: tcp
+  selector:
+    app: mid-private1

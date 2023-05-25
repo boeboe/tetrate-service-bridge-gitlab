@@ -15,7 +15,7 @@ TSB_REPO_PW=$(cat ${ROOT_DIR}/env.json | jq -r ".tsb.tetrate_repo.password") ;
 
 if [[ ${ACTION} = "check" ]]; then
 
-  DEPENDENCIES=( tctl minikube expect docker kubectl jq awk curl nc unzip gitlab-runner )
+  DEPENDENCIES=( tctl minikube expect docker kubectl jq awk curl nc unzip tree gitlab-runner )
 
   # check necessary dependencies are installed
   echo "Checking if all software dependencies installed : ok"
@@ -68,7 +68,7 @@ if [[ ${ACTION} = "install" ]]; then
 
   print_info "Installing apt packages"
   sudo apt-get -y update ; sudo apt-get -y upgrade ;
-  sudo apt-get -y install curl docker.io jq expect net-tools ;
+  sudo apt-get -y install curl docker.io jq expect net-tools tree unzip ;
   sudo systemctl enable docker ;
   sudo systemctl start docker ;
   sudo usermod -aG docker $USER ;

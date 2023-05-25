@@ -1,0 +1,22 @@
+---
+apiVersion: rbac.tsb.tetrate.io/v2
+kind: AccessBindings
+metadata:
+  fqn: organizations/tetrate/tenants/cashmgmt/workspaces/app-cash1
+spec:
+  allow:
+  - role: rbac/admin
+    subjects:
+    - serviceAccount: organizations/tetrate/serviceaccounts/sa-cash1
+    - user: organizations/tetrate/users/cash1-tl
+---
+apiVersion: rbac.tsb.tetrate.io/v2
+kind: AccessBindings
+metadata:
+  fqn: organizations/tetrate/tenants/cashmgmt/workspaces/app-cash2
+spec:
+  allow:
+  - role: rbac/admin
+    subjects:
+    - serviceAccount: organizations/tetrate/serviceaccounts/sa-cash2
+    - user: organizations/tetrate/users/cash2-tl

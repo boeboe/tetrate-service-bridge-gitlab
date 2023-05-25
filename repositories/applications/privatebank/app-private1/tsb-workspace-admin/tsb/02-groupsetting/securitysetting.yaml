@@ -1,0 +1,80 @@
+---
+apiVersion: security.tsb.tetrate.io/v2
+kind: SecuritySetting
+metadata:
+  organization: tetrate
+  tenant: privatebank
+  workspace: front-private1vw
+  group: secgroup-ingress-uvw
+  name: tier1-to-ingress
+spec:
+  authenticationSettings:
+    trafficMode: REQUIRED
+  authorization:
+    mode: RULES
+    rules:
+      allow:
+       - from:
+           fqn: organizations/tetrate/tenants/privatebank/workspaces/front-private1vw/securitygroups/secgroup-tier1-uvw
+         to:
+           fqn: organizations/tetrate/tenants/privatebank/workspaces/front-private1vw/securitygroups/secgroup-ingress-uvw
+---
+apiVersion: security.tsb.tetrate.io/v2
+kind: SecuritySetting
+metadata:
+  organization: tetrate
+  tenant: privatebank
+  workspace: front-private1vw
+  group: secgroup-u
+  name: ingress-to-u
+spec:
+  authenticationSettings:
+    trafficMode: REQUIRED
+  authorization:
+    mode: RULES
+    rules:
+      allow:
+       - from:
+           fqn: organizations/tetrate/tenants/privatebank/workspaces/front-private1vw/securitygroups/secgroup-ingress-uvw
+         to:
+           fqn: organizations/tetrate/tenants/privatebank/workspaces/front-private1vw/securitygroups/secgroup-u
+---
+apiVersion: security.tsb.tetrate.io/v2
+kind: SecuritySetting
+metadata:
+  organization: tetrate
+  tenant: privatebank
+  workspace: front-private1vw
+  group: secgroup-v
+  name: u-to-v
+spec:
+  authenticationSettings:
+    trafficMode: REQUIRED
+  authorization:
+    mode: RULES
+    rules:
+      allow:
+       - from:
+           fqn: organizations/tetrate/tenants/privatebank/workspaces/front-private1vw/securitygroups/secgroup-u
+         to:
+           fqn: organizations/tetrate/tenants/privatebank/workspaces/front-private1vw/securitygroups/secgroup-v
+---
+apiVersion: security.tsb.tetrate.io/v2
+kind: SecuritySetting
+metadata:
+  organization: tetrate
+  tenant: privatebank
+  workspace: front-private1vw
+  group: secgroup-w
+  name: v-to-w
+spec:
+  authenticationSettings:
+    trafficMode: REQUIRED
+  authorization:
+    mode: RULES
+    rules:
+      allow:
+       - from:
+           fqn: organizations/tetrate/tenants/privatebank/workspaces/front-private1vw/securitygroups/secgroup-v
+         to:
+           fqn: organizations/tetrate/tenants/privatebank/workspaces/front-private1vw/securitygroups/secgroup-w

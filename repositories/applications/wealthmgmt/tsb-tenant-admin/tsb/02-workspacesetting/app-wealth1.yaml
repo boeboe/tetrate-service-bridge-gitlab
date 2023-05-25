@@ -1,0 +1,32 @@
+---
+apiVersion: api.tsb.tetrate.io/v2
+kind: WorkspaceSetting
+metadata:
+  organization: tetrate
+  tenant: wealthmgmt
+  workspace: app-wealth1
+  name: app-wealth1-setting
+spec:
+  defaultEastWestGatewaySettings:
+    - workloadSelector:
+        namespace: gateway-wealth1
+        labels:
+          app: eastwest-gw-wealth1
+      exposedServices:
+      - serviceLabels:
+          app: app-wealth1a
+          service: app-wealth1a
+      - serviceLabels:
+          app: app-wealth1b
+          service: app-wealth1b
+      - serviceLabels:
+          app: app-wealth1c
+          service: app-wealth1c
+  defaultTrafficSetting:
+    reachability:
+      hosts:
+      - gateway-wealth1/*
+      - ns-wealth1a/*
+      - ns-wealth1b/*
+      - ns-wealth1c/*
+      mode: CUSTOM

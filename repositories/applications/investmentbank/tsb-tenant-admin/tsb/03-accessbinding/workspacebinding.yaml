@@ -1,0 +1,22 @@
+---
+apiVersion: rbac.tsb.tetrate.io/v2
+kind: AccessBindings
+metadata:
+  fqn: organizations/tetrate/tenants/investmentbank/workspaces/app-invest1
+spec:
+  allow:
+  - role: rbac/admin
+    subjects:
+    - serviceAccount: organizations/tetrate/serviceaccounts/sa-invest1
+    - user: organizations/tetrate/users/invest1-tl
+---
+apiVersion: rbac.tsb.tetrate.io/v2
+kind: AccessBindings
+metadata:
+  fqn: organizations/tetrate/tenants/investmentbank/workspaces/app-invest2
+spec:
+  allow:
+  - role: rbac/admin
+    subjects:
+    - serviceAccount: organizations/tetrate/serviceaccounts/sa-invest2
+    - user: organizations/tetrate/users/invest2-tl

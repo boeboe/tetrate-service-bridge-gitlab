@@ -1,8 +1,0 @@
----
-apiVersion: api.tsb.tetrate.io/v2
-kind: TenantSetting
-metadata:
-  name: privatebanking-settings
-  organization: tetrate
-  tenant: privatebanking
-spec: {}

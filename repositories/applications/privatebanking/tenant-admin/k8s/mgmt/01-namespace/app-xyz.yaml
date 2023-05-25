@@ -1,8 +1,0 @@
----
-apiVersion: v1
-kind: Namespace
-metadata:
-  annotations:
-    tsb-tenant: privatebanking
-    tsb-workspace: app-xyz
-  name: tier1-gw-xyz

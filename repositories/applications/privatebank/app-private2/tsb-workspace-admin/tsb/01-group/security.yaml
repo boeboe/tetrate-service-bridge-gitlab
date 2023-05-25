@@ -1,0 +1,75 @@
+---
+apiVersion: security.tsb.tetrate.io/v2
+kind: Group
+metadata:
+  organization: tetrate
+  tenant: privatebank
+  workspace: app-xyz
+  name: secgroup-tier1-xyz
+spec:
+  description: Security Group for Tier1Gateway XYZ
+  displayName: Tier1XYZ
+  namespaceSelector:
+    names:
+      - "mgmt/tier1-gw-xyz"
+  configMode: BRIDGED
+---
+apiVersion: security.tsb.tetrate.io/v2
+kind: Group
+metadata:
+  organization: tetrate
+  tenant: privatebank
+  workspace: app-xyz
+  name: secgroup-ingress-xyz
+spec:
+  description: Security Group for IngressGateway XYZ
+  displayName: IngressXYZ
+  namespaceSelector:
+    names:
+      - "*/gateway-xyz"
+  configMode: BRIDGED
+---
+apiVersion: security.tsb.tetrate.io/v2
+kind: Group
+metadata:
+  organization: tetrate
+  tenant: privatebank
+  workspace: app-xyz
+  name: secgroup-x
+spec:
+  description: Security Group for MicroService X
+  displayName: AppX
+  namespaceSelector:
+    names:
+      - "*/ns-x"
+  configMode: BRIDGED
+---
+apiVersion: security.tsb.tetrate.io/v2
+kind: Group
+metadata:
+  organization: tetrate
+  tenant: privatebank
+  workspace: app-xyz
+  name: secgroup-y
+spec:
+  description: Security Group for MicroService Y
+  displayName: AppY
+  namespaceSelector:
+    names:
+      - "*/ns-y"
+  configMode: BRIDGED
+---
+apiVersion: security.tsb.tetrate.io/v2
+kind: Group
+metadata:
+  organization: tetrate
+  tenant: privatebank
+  workspace: app-xyz
+  name: secgroup-z
+spec:
+  description: Security Group for MicroService Z
+  displayName: AppZ
+  namespaceSelector:
+    names:
+      - "*/ns-z"
+  configMode: BRIDGED
