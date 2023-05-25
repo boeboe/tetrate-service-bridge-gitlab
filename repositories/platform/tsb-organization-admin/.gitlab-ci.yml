@@ -47,7 +47,7 @@ stages:
   - prereq
   - tsb-deploy
   - post-trigger
-tsb-deploy:
+tetrate-organization:
   artifacts:
     paths:
       - output
