@@ -22,7 +22,7 @@ TSB_REPO_PW=$(cat ${ROOT_DIR}/env.json | jq -r ".tsb.tetrate_repo.password") ;
 GITLAB_HOME=/tmp/gitlab
 GITLAB_RUNNER_WORKDIR=/tmp/gitlab-runner
 GITLAB_RUNNER_CONFIG=${ROOT_DIR}/gitlab-runners.json
-GITLAB_RUNNER_CONCURRENCY=10
+GITLAB_RUNNER_CONCURRENCY=24
 GITLAB_NETWORK="gitlab" 
 GITLAB_CONTAINER_NAME="gitlab-ee"
 GITLAB_DOCKER_PORT=5050
@@ -133,6 +133,7 @@ function start_gitlab_runner {
   for ((runner_index=0; runner_index<${runner_count}; runner_index++)); do
     runner_concurrency=$(jq -r '.['${runner_index}'].concurrency' ${GITLAB_RUNNER_CONFIG})
     runner_executor=$(jq -r '.['${runner_index}'].executor' ${GITLAB_RUNNER_CONFIG})
+    runner_limit=$(jq -r '.['${runner_index}'].limit' ${GITLAB_RUNNER_CONFIG})
     runner_name=$(jq -r '.['${runner_index}'].name' ${GITLAB_RUNNER_CONFIG})
     runner_tag=$(jq -r '.['${runner_index}'].tag' ${GITLAB_RUNNER_CONFIG})
     if [[ $(gitlab_get_shared_runner_id ${2} ${3} ${runner_name}) == "" ]] ; then
@@ -148,6 +149,7 @@ function start_gitlab_runner {
         --env "TETRATE_REGISTRY=${TSB_REPO_URL}" \
         --executor "${runner_executor}" \
         --description "${runner_name}" \
+        --limit "${runner_limit}" \
         --non-interactive \
         --url "${2}" \
         --registration-token "${shared_runner_token}" \

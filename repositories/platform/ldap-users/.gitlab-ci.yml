@@ -22,7 +22,7 @@ prereq:
   stage: prereq
   tags:
     - platform-users
-  timeout: 20m
+  timeout: 30m
 stages:
   - prereq
   - ldap-sync

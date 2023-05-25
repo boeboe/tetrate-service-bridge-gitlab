@@ -18,7 +18,7 @@ prereq:
   stage: prereq
   tags:
     - platform-tsb
-  timeout: 20m
+  timeout: 30m
 stages:
   - prereq
   - tsb-deploy
