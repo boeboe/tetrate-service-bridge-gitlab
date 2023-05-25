@@ -1,4 +1,10 @@
 ---
+downstream:
+  needs:
+    - ldap-sync
+  stage: post-trigger
+  trigger:
+    project: platform/tsb-organization-admin
 ldap-sync:
   needs:
     - prereq
@@ -27,5 +33,6 @@ stages:
   - prereq
   - ldap-sync
   - ldap-ui
+  - post-trigger
 variables:
   TERM: xterm
