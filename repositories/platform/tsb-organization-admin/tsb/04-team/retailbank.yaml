@@ -3,17 +3,17 @@ apiVersion: api.tsb.tetrate.io/v2
 kind: Team
 metadata:
   organization: tetrate
-  name: commercialbank
+  name: retailbank
 spec:
   members:
-  - organizations/tetrate/users/mngr-commercialbank
-  - organizations/tetrate/users/tl-comm1
-  - organizations/tetrate/users/tl-comm2
-  - organizations/tetrate/users/dev-comm1
-  - organizations/tetrate/users/dev-comm2
-  - organizations/tetrate/users/dev-comm1-frontend
-  - organizations/tetrate/users/dev-comm2-frontend
-  - organizations/tetrate/users/dev-comm1-middleware
-  - organizations/tetrate/users/dev-comm2-middleware
-  - organizations/tetrate/users/dev-comm1-backend
-  - organizations/tetrate/users/dev-comm2-backend
+  - organizations/tetrate/users/mngr-retailbank
+  - organizations/tetrate/users/tl-retail1
+  - organizations/tetrate/users/tl-retail2
+  - organizations/tetrate/users/dev-retail1
+  - organizations/tetrate/users/dev-retail2
+  - organizations/tetrate/users/dev-retail1-frontend
+  - organizations/tetrate/users/dev-retail2-frontend
+  - organizations/tetrate/users/dev-retail1-middleware
+  - organizations/tetrate/users/dev-retail2-middleware
+  - organizations/tetrate/users/dev-retail1-backend
+  - organizations/tetrate/users/dev-retail2-backend
