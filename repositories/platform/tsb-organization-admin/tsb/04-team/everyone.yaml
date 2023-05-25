@@ -6,7 +6,7 @@ metadata:
   name: everyone
 spec:
   members:
-  - organizations/tetrate/users/tsb-platform-mngr
+  - organizations/tetrate/users/mngr-tsb-platform
 
   - organizations/tetrate/users/mngr-cashmgmt
   - organizations/tetrate/users/mngr-commercialbank
@@ -15,18 +15,18 @@ spec:
   - organizations/tetrate/users/mngr-retailbank
   - organizations/tetrate/users/mngr-wealthmgmt
 
-  - organizations/tetrate/users/cash1-tl
-  - organizations/tetrate/users/cash2-tl
-  - organizations/tetrate/users/comm1-tl
-  - organizations/tetrate/users/comm2-tl
-  - organizations/tetrate/users/invest1-tl
-  - organizations/tetrate/users/invest2-tl
-  - organizations/tetrate/users/private1-tl
-  - organizations/tetrate/users/private2-tl
-  - organizations/tetrate/users/retail1-tl
-  - organizations/tetrate/users/retail2-tl
-  - organizations/tetrate/users/wealth1-tl
-  - organizations/tetrate/users/wealth2-tl
+  - organizations/tetrate/users/tl-cash1
+  - organizations/tetrate/users/tl-cash2
+  - organizations/tetrate/users/tl-comm1
+  - organizations/tetrate/users/tl-comm2
+  - organizations/tetrate/users/tl-invest1
+  - organizations/tetrate/users/tl-invest2
+  - organizations/tetrate/users/tl-private1
+  - organizations/tetrate/users/tl-private2
+  - organizations/tetrate/users/tl-retail1
+  - organizations/tetrate/users/tl-retail2
+  - organizations/tetrate/users/tl-wealth1
+  - organizations/tetrate/users/tl-wealth2
 
   - organizations/tetrate/users/dev-cash1
   - organizations/tetrate/users/dev-cash1-frontend
