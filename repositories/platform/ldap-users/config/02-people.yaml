@@ -20,7 +20,7 @@ data:
     sn: Butcher
     uid: zack
     mail: zack@tetrate.io
-    userpassword: zack-pass
+    userpassword: zack
 
     dn: cn=Ignasi Barrera,ou=People,dc=tetrate,dc=io
     objectclass: person
@@ -32,7 +32,7 @@ data:
     sn: Barrera
     uid: nacx
     mail: ignasi@tetrate.io
-    userpassword: nacx-pass
+    userpassword: nacx
 
     dn: cn=Wu Sheng,ou=People,dc=tetrate,dc=io
     objectclass: person
@@ -44,7 +44,7 @@ data:
     sn: Sheng
     uid: wusheng
     mail: wusheng@tetrate.io
-    userpassword: wusheng-pass
+    userpassword: wusheng
 
     dn: cn=Bart Van Bos,ou=People,dc=tetrate,dc=io
     objectclass: person
@@ -56,232 +56,822 @@ data:
     sn: Van Bos
     uid: bart
     mail: bart@tetrate.io
-    userpassword: bart-pass
+    userpassword: bart
 
-    #################################### publicbanking ####################################
+    #################################### platform managers ####################################
 
-    dn: cn=Manager PubBank,ou=People,dc=tetrate,dc=io
+    dn: cn=Manager TsbPlatform,ou=People,dc=tetrate,dc=io
     objectclass: person
     objectclass: organizationalPerson
     objectclass: inetOrgPerson
     objectclass: top
-    cn: Manager PubBank
+    cn: Manager TsbPlatform
     givenname: Manager
-    sn: PubBank
-    uid: mngr-pubbank
-    mail: mngr-pubbank@tetrate.io
-    userpassword: mngr-pubbank-pass
+    sn: TsbPlatformMngr
+    uid: tsb-platform-mngr
+    mail: tsb-platform-mngr@tetrate.io
+    userpassword: tsb-platform-mngr
 
-    ################## ABC ##################
+    #################################### tenant/bu managers ####################################
 
-    dn: cn=Developer AppA,ou=People,dc=tetrate,dc=io
+    dn: cn=Manager CashMgmt,ou=People,dc=tetrate,dc=io
     objectclass: person
     objectclass: organizationalPerson
     objectclass: inetOrgPerson
     objectclass: top
-    cn: Developer AppA
-    givenname: Developer
-    sn: AppA
-    uid: dev-a
-    mail: dev-a@tetrate.io
-    userpassword: dev-a-pass
-
-    dn: cn=Developer AppB,ou=People,dc=tetrate,dc=io
-    objectclass: person
-    objectclass: organizationalPerson
-    objectclass: inetOrgPerson
-    objectclass: top
-    cn: Developer AppB
-    givenname: Developer
-    sn: AppB
-    uid: dev-b
-    mail: dev-b@tetrate.io
-    userpassword: dev-b-pass
-
-    dn: cn=Developer AppC,ou=People,dc=tetrate,dc=io
-    objectclass: person
-    objectclass: organizationalPerson
-    objectclass: inetOrgPerson
-    objectclass: top
-    cn: Developer AppC
-    givenname: Developer
-    sn: AppC
-    uid: dev-c
-    mail: dev-c@tetrate.io
-    userpassword: dev-c-pass
-
-    dn: cn=Manager AppABC,ou=People,dc=tetrate,dc=io
-    objectclass: person
-    objectclass: organizationalPerson
-    objectclass: inetOrgPerson
-    objectclass: top
-    cn: Manager AppABC
+    cn: Manager CashMgmt
     givenname: Manager
-    sn: AppABC
-    uid: mngr-abc
-    mail: mngr-abc@tetrate.io
-    userpassword: mngr-abc-pass
+    sn: CashMgmt
+    uid: mngr-cashmgmt
+    mail: mngr-cashmgmt@tetrate.io
+    userpassword: mngr-cashmgmt
 
-    ################## DEF ##################
-
-    dn: cn=Developer AppD,ou=People,dc=tetrate,dc=io
+    dn: cn=Manager CommercialBank,ou=People,dc=tetrate,dc=io
     objectclass: person
     objectclass: organizationalPerson
     objectclass: inetOrgPerson
     objectclass: top
-    cn: Developer AppD
-    givenname: Developer
-    sn: AppD
-    uid: dev-d
-    mail: dev-d@tetrate.io
-    userpassword: dev-d-pass
-
-    dn: cn=Developer AppE,ou=People,dc=tetrate,dc=io
-    objectclass: person
-    objectclass: organizationalPerson
-    objectclass: inetOrgPerson
-    objectclass: top
-    cn: Developer AppE
-    givenname: Developer
-    sn: AppE
-    uid: dev-e
-    mail: dev-e@tetrate.io
-    userpassword: dev-e-pass
-
-    dn: cn=Developer AppF,ou=People,dc=tetrate,dc=io
-    objectclass: person
-    objectclass: organizationalPerson
-    objectclass: inetOrgPerson
-    objectclass: top
-    cn: Developer AppF
-    givenname: Developer
-    sn: AppF
-    uid: dev-f
-    mail: dev-f@tetrate.io
-    userpassword: dev-f-pass
-
-    dn: cn=Manager AppDEF,ou=People,dc=tetrate,dc=io
-    objectclass: person
-    objectclass: organizationalPerson
-    objectclass: inetOrgPerson
-    objectclass: top
-    cn: Manager AppDEF
+    cn: Manager CommercialBank
     givenname: Manager
-    sn: AppDEF
-    uid: mngr-def
-    mail: mngr-def@tetrate.io
-    userpassword: mngr-def-pass
+    sn: CommercialBank
+    uid: mngr-commercialbank
+    mail: mngr-commercialbank@tetrate.io
+    userpassword: mngr-commercialbank
 
-    #################################### privatebanking ####################################
-
-    dn: cn=Manager PrivBank,ou=People,dc=tetrate,dc=io
+    dn: cn=Manager InvestmentBank,ou=People,dc=tetrate,dc=io
     objectclass: person
     objectclass: organizationalPerson
     objectclass: inetOrgPerson
     objectclass: top
-    cn: Manager PrivBank
+    cn: Manager InvestmentBank
     givenname: Manager
-    sn: PrivBank
-    uid: mngr-privbank
-    mail: mngr-privbank@tetrate.io
-    userpassword: mngr-privbank-pass
+    sn: InvestmentBank
+    uid: mngr-investmentbank
+    mail: mngr-investmentbank@tetrate.io
+    userpassword: mngr-investmentbank
 
-    ################## UVW ##################
-
-    dn: cn=Developer AppU,ou=People,dc=tetrate,dc=io
+    dn: cn=Manager PrivateBank,ou=People,dc=tetrate,dc=io
     objectclass: person
     objectclass: organizationalPerson
     objectclass: inetOrgPerson
     objectclass: top
-    cn: Developer AppU
-    givenname: Developer
-    sn: AppU
-    uid: dev-u
-    mail: dev-u@tetrate.io
-    userpassword: dev-u-pass
-
-    dn: cn=Developer AppV,ou=People,dc=tetrate,dc=io
-    objectclass: person
-    objectclass: organizationalPerson
-    objectclass: inetOrgPerson
-    objectclass: top
-    cn: Developer AppV
-    givenname: Developer
-    sn: AppV
-    uid: dev-v
-    mail: dev-v@tetrate.io
-    userpassword: dev-v-pass
-
-    dn: cn=Developer AppW,ou=People,dc=tetrate,dc=io
-    objectclass: person
-    objectclass: organizationalPerson
-    objectclass: inetOrgPerson
-    objectclass: top
-    cn: Developer AppW
-    givenname: Developer
-    sn: AppW
-    uid: dev-w
-    mail: dev-w@tetrate.io
-    userpassword: dev-w-pass
-
-    dn: cn=Manager AppUVW,ou=People,dc=tetrate,dc=io
-    objectclass: person
-    objectclass: organizationalPerson
-    objectclass: inetOrgPerson
-    objectclass: top
-    cn: Manager AppUVW
+    cn: Manager PrivateBank
     givenname: Manager
-    sn: AppUVW
-    uid: mngr-uvw
-    mail: mngr-uvw@tetrate.io
-    userpassword: mngr-uvw-pass
+    sn: PrivateBank
+    uid: mngr-privatebank
+    mail: mngr-privatebank@tetrate.io
+    userpassword: mngr-privatebank
 
-    ################## XYZ ##################
-
-    dn: cn=Developer AppX,ou=People,dc=tetrate,dc=io
+    dn: cn=Manager RetailBank,ou=People,dc=tetrate,dc=io
     objectclass: person
     objectclass: organizationalPerson
     objectclass: inetOrgPerson
     objectclass: top
-    cn: Developer AppX
-    givenname: Developer
-    sn: AppX
-    uid: dev-x
-    mail: dev-x@tetrate.io
-    userpassword: dev-x-pass
-
-    dn: cn=Developer AppY,ou=People,dc=tetrate,dc=io
-    objectclass: person
-    objectclass: organizationalPerson
-    objectclass: inetOrgPerson
-    objectclass: top
-    cn: Developer AppY
-    givenname: Developer
-    sn: AppY
-    uid: dev-y
-    mail: dev-y@tetrate.io
-    userpassword: dev-y-pass
-
-    dn: cn=Developer AppZ,ou=People,dc=tetrate,dc=io
-    objectclass: person
-    objectclass: organizationalPerson
-    objectclass: inetOrgPerson
-    objectclass: top
-    cn: Developer AppZ
-    givenname: Developer
-    sn: AppZ
-    uid: dev-z
-    mail: dev-z@tetrate.io
-    userpassword: dev-z-pass
-
-    dn: cn=Manager AppXYZ,ou=People,dc=tetrate,dc=io
-    objectclass: person
-    objectclass: organizationalPerson
-    objectclass: inetOrgPerson
-    objectclass: top
-    cn: Manager AppXYZ
+    cn: Manager RetailBank
     givenname: Manager
-    sn: AppXYZ
-    uid: mngr-xyz
-    mail: mngr-xyz@tetrate.io
-    userpassword: mngr-xyz-pass
+    sn: RetailBank
+    uid: mngr-retailbank
+    mail: mngr-retailbank@tetrate.io
+    userpassword: mngr-retailbank
+
+    dn: cn=Manager WealthMgmt,ou=People,dc=tetrate,dc=io
+    objectclass: person
+    objectclass: organizationalPerson
+    objectclass: inetOrgPerson
+    objectclass: top
+    cn: Manager WealthMgmt
+    givenname: Manager
+    sn: WealthMgmt
+    uid: mngr-wealthmgmt
+    mail: mngr-wealthmgmt@tetrate.io
+    userpassword: mngr-wealthmgmt
+
+    #################################### application/workspace teamleads ####################################
+
+    dn: cn=TeamLead Cash1,ou=People,dc=tetrate,dc=io
+    objectclass: person
+    objectclass: organizationalPerson
+    objectclass: inetOrgPerson
+    objectclass: top
+    cn: TeamLead Cash1
+    givenname: TeamLead
+    sn: Cash1
+    uid: tl-cash1
+    mail: tl-cash1@tetrate.io
+    userpassword: tl-cash1
+    
+    dn: cn=TeamLead Cash2,ou=People,dc=tetrate,dc=io
+    objectclass: person
+    objectclass: organizationalPerson
+    objectclass: inetOrgPerson
+    objectclass: top
+    cn: TeamLead Cash2
+    givenname: TeamLead
+    sn: Cash2
+    uid: tl-cash2
+    mail: tl-cash2@tetrate.io
+    userpassword: tl-cash2
+    
+    dn: cn=TeamLead Comm1,ou=People,dc=tetrate,dc=io
+    objectclass: person
+    objectclass: organizationalPerson
+    objectclass: inetOrgPerson
+    objectclass: top
+    cn: TeamLead Comm1
+    givenname: TeamLead
+    sn: Comm1
+    uid: tl-comm1
+    mail: tl-comm1@tetrate.io
+    userpassword: tl-comm1
+    
+    dn: cn=TeamLead Comm2,ou=People,dc=tetrate,dc=io
+    objectclass: person
+    objectclass: organizationalPerson
+    objectclass: inetOrgPerson
+    objectclass: top
+    cn: TeamLead Comm2
+    givenname: TeamLead
+    sn: Comm2
+    uid: tl-comm2
+    mail: tl-comm2@tetrate.io
+    userpassword: tl-comm2
+    
+    dn: cn=TeamLead Invest1,ou=People,dc=tetrate,dc=io
+    objectclass: person
+    objectclass: organizationalPerson
+    objectclass: inetOrgPerson
+    objectclass: top
+    cn: TeamLead Invest1
+    givenname: TeamLead
+    sn: Invest1
+    uid: tl-invest1
+    mail: tl-invest1@tetrate.io
+    userpassword: tl-invest1
+    
+    dn: cn=TeamLead Invest2,ou=People,dc=tetrate,dc=io
+    objectclass: person
+    objectclass: organizationalPerson
+    objectclass: inetOrgPerson
+    objectclass: top
+    cn: TeamLead Invest2
+    givenname: TeamLead
+    sn: Invest2
+    uid: tl-invest2
+    mail: tl-invest2@tetrate.io
+    userpassword: tl-invest2
+    
+    dn: cn=TeamLead Private1,ou=People,dc=tetrate,dc=io
+    objectclass: person
+    objectclass: organizationalPerson
+    objectclass: inetOrgPerson
+    objectclass: top
+    cn: TeamLead Private1
+    givenname: TeamLead
+    sn: Private1
+    uid: tl-private1
+    mail: tl-private1@tetrate.io
+    userpassword: tl-private1
+    
+    dn: cn=TeamLead Private2,ou=People,dc=tetrate,dc=io
+    objectclass: person
+    objectclass: organizationalPerson
+    objectclass: inetOrgPerson
+    objectclass: top
+    cn: TeamLead Private2
+    givenname: TeamLead
+    sn: Private2
+    uid: tl-private2
+    mail: tl-private2@tetrate.io
+    userpassword: tl-private2
+    
+    dn: cn=TeamLead Retail1,ou=People,dc=tetrate,dc=io
+    objectclass: person
+    objectclass: organizationalPerson
+    objectclass: inetOrgPerson
+    objectclass: top
+    cn: TeamLead Retail1
+    givenname: TeamLead
+    sn: Retail1
+    uid: tl-retail1
+    mail: tl-retail1@tetrate.io
+    userpassword: tl-retail1
+    
+    dn: cn=TeamLead Retail2,ou=People,dc=tetrate,dc=io
+    objectclass: person
+    objectclass: organizationalPerson
+    objectclass: inetOrgPerson
+    objectclass: top
+    cn: TeamLead Retail2
+    givenname: TeamLead
+    sn: Retail2
+    uid: tl-retail2
+    mail: tl-retail2@tetrate.io
+    userpassword: tl-retail2
+    
+    dn: cn=TeamLead Wealth1,ou=People,dc=tetrate,dc=io
+    objectclass: person
+    objectclass: organizationalPerson
+    objectclass: inetOrgPerson
+    objectclass: top
+    cn: TeamLead Wealth1
+    givenname: TeamLead
+    sn: Wealth1
+    uid: tl-wealth1
+    mail: tl-wealth1@tetrate.io
+    userpassword: tl-wealth1
+    
+    dn: cn=TeamLead Wealth2,ou=People,dc=tetrate,dc=io
+    objectclass: person
+    objectclass: organizationalPerson
+    objectclass: inetOrgPerson
+    objectclass: top
+    cn: TeamLead Wealth2
+    givenname: TeamLead
+    sn: Wealth2
+    uid: tl-wealth2
+    mail: tl-wealth2@tetrate.io
+    userpassword: tl-wealth2
+
+    #################################### full-stack developers ####################################
+
+    dn: cn=Developer Cash1,ou=People,dc=tetrate,dc=io
+    objectclass: person
+    objectclass: organizationalPerson
+    objectclass: inetOrgPerson
+    objectclass: top
+    cn: Developer Cash1
+    givenname: Developer
+    sn: Cash1
+    uid: dev-cash1
+    mail: dev-cash1@tetrate.io
+    userpassword: dev-cash1
+
+    dn: cn=Developer Cash2,ou=People,dc=tetrate,dc=io
+    objectclass: person
+    objectclass: organizationalPerson
+    objectclass: inetOrgPerson
+    objectclass: top
+    cn: Developer Cash2
+    givenname: Developer
+    sn: Cash2
+    uid: dev-cash2
+    mail: dev-cash2@tetrate.io
+    userpassword: dev-cash2
+
+    dn: cn=Developer Comm1,ou=People,dc=tetrate,dc=io
+    objectclass: person
+    objectclass: organizationalPerson
+    objectclass: inetOrgPerson
+    objectclass: top
+    cn: Developer Comm1
+    givenname: Developer
+    sn: Comm1
+    uid: dev-comm1
+    mail: dev-comm1@tetrate.io
+    userpassword: dev-comm1
+
+    dn: cn=Developer Comm2,ou=People,dc=tetrate,dc=io
+    objectclass: person
+    objectclass: organizationalPerson
+    objectclass: inetOrgPerson
+    objectclass: top
+    cn: Developer Comm2
+    givenname: Developer
+    sn: Comm2
+    uid: dev-comm2
+    mail: dev-comm2@tetrate.io
+    userpassword: dev-comm2
+
+    dn: cn=Developer Invest1,ou=People,dc=tetrate,dc=io
+    objectclass: person
+    objectclass: organizationalPerson
+    objectclass: inetOrgPerson
+    objectclass: top
+    cn: Developer Invest1
+    givenname: Developer
+    sn: Invest1
+    uid: dev-invest1
+    mail: dev-invest1@tetrate.io
+    userpassword: dev-invest1
+
+    dn: cn=Developer Invest2,ou=People,dc=tetrate,dc=io
+    objectclass: person
+    objectclass: organizationalPerson
+    objectclass: inetOrgPerson
+    objectclass: top
+    cn: Developer Invest2
+    givenname: Developer
+    sn: Invest2
+    uid: dev-invest2
+    mail: dev-invest2@tetrate.io
+    userpassword: dev-invest2
+
+    dn: cn=Developer Private1,ou=People,dc=tetrate,dc=io
+    objectclass: person
+    objectclass: organizationalPerson
+    objectclass: inetOrgPerson
+    objectclass: top
+    cn: Developer Private1
+    givenname: Developer
+    sn: Private1
+    uid: dev-private1
+    mail: dev-private1@tetrate.io
+    userpassword: dev-private1
+
+    dn: cn=Developer Private2,ou=People,dc=tetrate,dc=io
+    objectclass: person
+    objectclass: organizationalPerson
+    objectclass: inetOrgPerson
+    objectclass: top
+    cn: Developer Private2
+    givenname: Developer
+    sn: Private2
+    uid: dev-private2
+    mail: dev-private2@tetrate.io
+    userpassword: dev-private2
+
+    dn: cn=Developer Retail1,ou=People,dc=tetrate,dc=io
+    objectclass: person
+    objectclass: organizationalPerson
+    objectclass: inetOrgPerson
+    objectclass: top
+    cn: Developer Retail1
+    givenname: Developer
+    sn: Retail1
+    uid: dev-retail1
+    mail: dev-retail1@tetrate.io
+    userpassword: dev-retail1
+
+    dn: cn=Developer Retail2,ou=People,dc=tetrate,dc=io
+    objectclass: person
+    objectclass: organizationalPerson
+    objectclass: inetOrgPerson
+    objectclass: top
+    cn: Developer Retail2
+    givenname: Developer
+    sn: Retail2
+    uid: dev-retail2
+    mail: dev-retail2@tetrate.io
+    userpassword: dev-retail2
+
+    dn: cn=Developer Wealth1,ou=People,dc=tetrate,dc=io
+    objectclass: person
+    objectclass: organizationalPerson
+    objectclass: inetOrgPerson
+    objectclass: top
+    cn: Developer Wealth1
+    givenname: Developer
+    sn: Wealth1
+    uid: dev-wealth1
+    mail: dev-wealth1@tetrate.io
+    userpassword: dev-wealth1
+
+    dn: cn=Developer Wealth2,ou=People,dc=tetrate,dc=io
+    objectclass: person
+    objectclass: organizationalPerson
+    objectclass: inetOrgPerson
+    objectclass: top
+    cn: Developer Wealth2
+    givenname: Developer
+    sn: Wealth2
+    uid: dev-wealth2
+    mail: dev-wealth2@tetrate.io
+    userpassword: dev-wealth2
+
+    #################################### frontend developers ####################################
+
+    dn: cn=Developer Cash1 Frontend,ou=People,dc=tetrate,dc=io
+    objectclass: person
+    objectclass: organizationalPerson
+    objectclass: inetOrgPerson
+    objectclass: top
+    cn: Developer Cash1 Frontend
+    givenname: Developer
+    sn: Cash1 Frontend
+    uid: dev-cash1-frontend
+    mail: dev-cash1-frontend@tetrate.io
+    userpassword: dev-cash1-frontend
+
+    dn: cn=Developer Cash2 Frontend,ou=People,dc=tetrate,dc=io
+    objectclass: person
+    objectclass: organizationalPerson
+    objectclass: inetOrgPerson
+    objectclass: top
+    cn: Developer Cash2 Frontend
+    givenname: Developer
+    sn: Cash2 Frontend
+    uid: dev-cash2-frontend
+    mail: dev-cash2-frontend@tetrate.io
+    userpassword: dev-cash2-frontend
+
+    dn: cn=Developer Comm1 Frontend,ou=People,dc=tetrate,dc=io
+    objectclass: person
+    objectclass: organizationalPerson
+    objectclass: inetOrgPerson
+    objectclass: top
+    cn: Developer Comm1 Frontend
+    givenname: Developer
+    sn: Comm1 Frontend
+    uid: dev-comm1-frontend
+    mail: dev-comm1-frontend@tetrate.io
+    userpassword: dev-comm1-frontend
+
+    dn: cn=Developer Comm2 Frontend,ou=People,dc=tetrate,dc=io
+    objectclass: person
+    objectclass: organizationalPerson
+    objectclass: inetOrgPerson
+    objectclass: top
+    cn: Developer Comm2 Frontend
+    givenname: Developer
+    sn: Comm2 Frontend
+    uid: dev-comm2-frontend
+    mail: dev-comm2-frontend@tetrate.io
+    userpassword: dev-comm2-frontend
+
+    dn: cn=Developer Invest1 Frontend,ou=People,dc=tetrate,dc=io
+    objectclass: person
+    objectclass: organizationalPerson
+    objectclass: inetOrgPerson
+    objectclass: top
+    cn: Developer Invest1 Frontend
+    givenname: Developer
+    sn: Invest1 Frontend
+    uid: dev-invest1-frontend
+    mail: dev-invest1-frontend@tetrate.io
+    userpassword: dev-invest1-frontend
+
+    dn: cn=Developer Invest2 Frontend,ou=People,dc=tetrate,dc=io
+    objectclass: person
+    objectclass: organizationalPerson
+    objectclass: inetOrgPerson
+    objectclass: top
+    cn: Developer Invest2 Frontend
+    givenname: Developer
+    sn: Invest2 Frontend
+    uid: dev-invest2-frontend
+    mail: dev-invest2-frontend@tetrate.io
+    userpassword: dev-invest2-frontend
+
+    dn: cn=Developer Private1 Frontend,ou=People,dc=tetrate,dc=io
+    objectclass: person
+    objectclass: organizationalPerson
+    objectclass: inetOrgPerson
+    objectclass: top
+    cn: Developer Private1 Frontend
+    givenname: Developer
+    sn: Private1 Frontend
+    uid: dev-private1-frontend
+    mail: dev-private1-frontend@tetrate.io
+    userpassword: dev-private1-frontend
+
+    dn: cn=Developer Private2 Frontend,ou=People,dc=tetrate,dc=io
+    objectclass: person
+    objectclass: organizationalPerson
+    objectclass: inetOrgPerson
+    objectclass: top
+    cn: Developer Private2 Frontend
+    givenname: Developer
+    sn: Private2 Frontend
+    uid: dev-private2-frontend
+    mail: dev-private2-frontend@tetrate.io
+    userpassword: dev-private2-frontend
+
+    dn: cn=Developer Retail1 Frontend,ou=People,dc=tetrate,dc=io
+    objectclass: person
+    objectclass: organizationalPerson
+    objectclass: inetOrgPerson
+    objectclass: top
+    cn: Developer Retail1 Frontend
+    givenname: Developer
+    sn: Retail1 Frontend
+    uid: dev-retail1-frontend
+    mail: dev-retail1-frontend@tetrate.io
+    userpassword: dev-retail1-frontend
+
+    dn: cn=Developer Retail2 Frontend,ou=People,dc=tetrate,dc=io
+    objectclass: person
+    objectclass: organizationalPerson
+    objectclass: inetOrgPerson
+    objectclass: top
+    cn: Developer Retail2 Frontend
+    givenname: Developer
+    sn: Retail2 Frontend
+    uid: dev-retail2-frontend
+    mail: dev-retail2-frontend@tetrate.io
+    userpassword: dev-retail2-frontend
+
+    dn: cn=Developer Wealth1 Frontend,ou=People,dc=tetrate,dc=io
+    objectclass: person
+    objectclass: organizationalPerson
+    objectclass: inetOrgPerson
+    objectclass: top
+    cn: Developer Wealth1 Frontend
+    givenname: Developer
+    sn: Wealth1 Frontend
+    uid: dev-wealth1-frontend
+    mail: dev-wealth1-frontend@tetrate.io
+    userpassword: dev-wealth1-frontend
+
+    dn: cn=Developer Wealth2 Frontend,ou=People,dc=tetrate,dc=io
+    objectclass: person
+    objectclass: organizationalPerson
+    objectclass: inetOrgPerson
+    objectclass: top
+    cn: Developer Wealth2 Frontend
+    givenname: Developer
+    sn: Wealth2 Frontend
+    uid: dev-wealth2-frontend
+    mail: dev-wealth2-frontend@tetrate.io
+    userpassword: dev-wealth2-frontend
+
+    #################################### middleware developers ####################################
+
+    dn: cn=Developer Cash1 Middleware,ou=People,dc=tetrate,dc=io
+    objectclass: person
+    objectclass: organizationalPerson
+    objectclass: inetOrgPerson
+    objectclass: top
+    cn: Developer Cash1 Middleware
+    givenname: Developer
+    sn: Cash1 Middleware
+    uid: dev-cash1-middleware
+    mail: dev-cash1-middleware@tetrate.io
+    userpassword: dev-cash1-middleware
+
+    dn: cn=Developer Cash2 Middleware,ou=People,dc=tetrate,dc=io
+    objectclass: person
+    objectclass: organizationalPerson
+    objectclass: inetOrgPerson
+    objectclass: top
+    cn: Developer Cash2 Middleware
+    givenname: Developer
+    sn: Cash2 Middleware
+    uid: dev-cash2-middleware
+    mail: dev-cash2-middleware@tetrate.io
+    userpassword: dev-cash2-middleware
+
+    dn: cn=Developer Comm1 Middleware,ou=People,dc=tetrate,dc=io
+    objectclass: person
+    objectclass: organizationalPerson
+    objectclass: inetOrgPerson
+    objectclass: top
+    cn: Developer Comm1 Middleware
+    givenname: Developer
+    sn: Comm1 Middleware
+    uid: dev-comm1-middleware
+    mail: dev-comm1-middleware@tetrate.io
+    userpassword: dev-comm1-middleware
+
+    dn: cn=Developer Comm2 Middleware,ou=People,dc=tetrate,dc=io
+    objectclass: person
+    objectclass: organizationalPerson
+    objectclass: inetOrgPerson
+    objectclass: top
+    cn: Developer Comm2 Middleware
+    givenname: Developer
+    sn: Comm2 Middleware
+    uid: dev-comm2-middleware
+    mail: dev-comm2-middleware@tetrate.io
+    userpassword: dev-comm2-middleware
+
+    dn: cn=Developer Invest1 Middleware,ou=People,dc=tetrate,dc=io
+    objectclass: person
+    objectclass: organizationalPerson
+    objectclass: inetOrgPerson
+    objectclass: top
+    cn: Developer Invest1 Middleware
+    givenname: Developer
+    sn: Invest1 Middleware
+    uid: dev-invest1-middleware
+    mail: dev-invest1-middleware@tetrate.io
+    userpassword: dev-invest1-middleware
+
+    dn: cn=Developer Invest2 Middleware,ou=People,dc=tetrate,dc=io
+    objectclass: person
+    objectclass: organizationalPerson
+    objectclass: inetOrgPerson
+    objectclass: top
+    cn: Developer Invest2 Middleware
+    givenname: Developer
+    sn: Invest2 Middleware
+    uid: dev-invest2-middleware
+    mail: dev-invest2-middleware@tetrate.io
+    userpassword: dev-invest2-middleware
+
+    dn: cn=Developer Private1 Middleware,ou=People,dc=tetrate,dc=io
+    objectclass: person
+    objectclass: organizationalPerson
+    objectclass: inetOrgPerson
+    objectclass: top
+    cn: Developer Private1 Middleware
+    givenname: Developer
+    sn: Private1 Middleware
+    uid: dev-private1-middleware
+    mail: dev-private1-middleware@tetrate.io
+    userpassword: dev-private1-middleware
+
+    dn: cn=Developer Private2 Middleware,ou=People,dc=tetrate,dc=io
+    objectclass: person
+    objectclass: organizationalPerson
+    objectclass: inetOrgPerson
+    objectclass: top
+    cn: Developer Private2 Middleware
+    givenname: Developer
+    sn: Private2 Middleware
+    uid: dev-private2-middleware
+    mail: dev-private2-middleware@tetrate.io
+    userpassword: dev-private2-middleware
+
+    dn: cn=Developer Retail1 Middleware,ou=People,dc=tetrate,dc=io
+    objectclass: person
+    objectclass: organizationalPerson
+    objectclass: inetOrgPerson
+    objectclass: top
+    cn: Developer Retail1 Middleware
+    givenname: Developer
+    sn: Retail1 Middleware
+    uid: dev-retail1-middleware
+    mail: dev-retail1-middleware@tetrate.io
+    userpassword: dev-retail1-middleware
+
+    dn: cn=Developer Retail2 Middleware,ou=People,dc=tetrate,dc=io
+    objectclass: person
+    objectclass: organizationalPerson
+    objectclass: inetOrgPerson
+    objectclass: top
+    cn: Developer Retail2 Middleware
+    givenname: Developer
+    sn: Retail2 Middleware
+    uid: dev-retail2-middleware
+    mail: dev-retail2-middleware@tetrate.io
+    userpassword: dev-retail2-middleware
+
+    dn: cn=Developer Wealth1 Middleware,ou=People,dc=tetrate,dc=io
+    objectclass: person
+    objectclass: organizationalPerson
+    objectclass: inetOrgPerson
+    objectclass: top
+    cn: Developer Wealth1 Middleware
+    givenname: Developer
+    sn: Wealth1 Middleware
+    uid: dev-wealth1-middleware
+    mail: dev-wealth1-middleware@tetrate.io
+    userpassword: dev-wealth1-middleware
+
+    dn: cn=Developer Wealth2 Middleware,ou=People,dc=tetrate,dc=io
+    objectclass: person
+    objectclass: organizationalPerson
+    objectclass: inetOrgPerson
+    objectclass: top
+    cn: Developer Wealth2 Middleware
+    givenname: Developer
+    sn: Wealth2 Middleware
+    uid: dev-wealth2-middleware
+    mail: dev-wealth2-middleware@tetrate.io
+    userpassword: dev-wealth2-middleware
+
+    #################################### backend developers ####################################
+
+    dn: cn=Developer Cash1 Backend,ou=People,dc=tetrate,dc=io
+    objectclass: person
+    objectclass: organizationalPerson
+    objectclass: inetOrgPerson
+    objectclass: top
+    cn: Developer Cash1 Backend
+    givenname: Developer
+    sn: Cash1 Backend
+    uid: dev-cash1-backend
+    mail: dev-cash1-backend@tetrate.io
+    userpassword: dev-cash1-backend
+
+    dn: cn=Developer Cash2 Backend,ou=People,dc=tetrate,dc=io
+    objectclass: person
+    objectclass: organizationalPerson
+    objectclass: inetOrgPerson
+    objectclass: top
+    cn: Developer Cash2 Backend
+    givenname: Developer
+    sn: Cash2 Backend
+    uid: dev-cash2-backend
+    mail: dev-cash2-backend@tetrate.io
+    userpassword: dev-cash2-backend
+
+    dn: cn=Developer Comm1 Backend,ou=People,dc=tetrate,dc=io
+    objectclass: person
+    objectclass: organizationalPerson
+    objectclass: inetOrgPerson
+    objectclass: top
+    cn: Developer Comm1 Backend
+    givenname: Developer
+    sn: Comm1 Backend
+    uid: dev-comm1-backend
+    mail: dev-comm1-backend@tetrate.io
+    userpassword: dev-comm1-backend
+
+    dn: cn=Developer Comm2 Backend,ou=People,dc=tetrate,dc=io
+    objectclass: person
+    objectclass: organizationalPerson
+    objectclass: inetOrgPerson
+    objectclass: top
+    cn: Developer Comm2 Backend
+    givenname: Developer
+    sn: Comm2 Backend
+    uid: dev-comm2-backend
+    mail: dev-comm2-backend@tetrate.io
+    userpassword: dev-comm2-backend
+
+    dn: cn=Developer Invest1 Backend,ou=People,dc=tetrate,dc=io
+    objectclass: person
+    objectclass: organizationalPerson
+    objectclass: inetOrgPerson
+    objectclass: top
+    cn: Developer Invest1 Backend
+    givenname: Developer
+    sn: Invest1 Backend
+    uid: dev-invest1-backend
+    mail: dev-invest1-backend@tetrate.io
+    userpassword: dev-invest1-backend
+
+    dn: cn=Developer Invest2 Backend,ou=People,dc=tetrate,dc=io
+    objectclass: person
+    objectclass: organizationalPerson
+    objectclass: inetOrgPerson
+    objectclass: top
+    cn: Developer Invest2 Backend
+    givenname: Developer
+    sn: Invest2 Backend
+    uid: dev-invest2-backend
+    mail: dev-invest2-backend@tetrate.io
+    userpassword: dev-invest2-backend
+
+    dn: cn=Developer Private1 Backend,ou=People,dc=tetrate,dc=io
+    objectclass: person
+    objectclass: organizationalPerson
+    objectclass: inetOrgPerson
+    objectclass: top
+    cn: Developer Private1 Backend
+    givenname: Developer
+    sn: Private1 Backend
+    uid: dev-private1-backend
+    mail: dev-private1-backend@tetrate.io
+    userpassword: dev-private1-backend
+
+    dn: cn=Developer Private2 Backend,ou=People,dc=tetrate,dc=io
+    objectclass: person
+    objectclass: organizationalPerson
+    objectclass: inetOrgPerson
+    objectclass: top
+    cn: Developer Private2 Backend
+    givenname: Developer
+    sn: Private2 Backend
+    uid: dev-private2-backend
+    mail: dev-private2-backend@tetrate.io
+    userpassword: dev-private2-backend
+
+    dn: cn=Developer Retail1 Backend,ou=People,dc=tetrate,dc=io
+    objectclass: person
+    objectclass: organizationalPerson
+    objectclass: inetOrgPerson
+    objectclass: top
+    cn: Developer Retail1 Backend
+    givenname: Developer
+    sn: Retail1 Backend
+    uid: dev-retail1-backend
+    mail: dev-retail1-backend@tetrate.io
+    userpassword: dev-retail1-backend
+
+    dn: cn=Developer Retail2 Backend,ou=People,dc=tetrate,dc=io
+    objectclass: person
+    objectclass: organizationalPerson
+    objectclass: inetOrgPerson
+    objectclass: top
+    cn: Developer Retail2 Backend
+    givenname: Developer
+    sn: Retail2 Backend
+    uid: dev-retail2-backend
+    mail: dev-retail2-backend@tetrate.io
+    userpassword: dev-retail2-backend
+
+    dn: cn=Developer Wealth1 Backend,ou=People,dc=tetrate,dc=io
+    objectclass: person
+    objectclass: organizationalPerson
+    objectclass: inetOrgPerson
+    objectclass: top
+    cn: Developer Wealth1 Backend
+    givenname: Developer
+    sn: Wealth1 Backend
+    uid: dev-wealth1-backend
+    mail: dev-wealth1-backend@tetrate.io
+    userpassword: dev-wealth1-backend
+
+    dn: cn=Developer Wealth2 Backend,ou=People,dc=tetrate,dc=io
+    objectclass: person
+    objectclass: organizationalPerson
+    objectclass: inetOrgPerson
+    objectclass: top
+    cn: Developer Wealth2 Backend
+    givenname: Developer
+    sn: Wealth2 Backend
+    uid: dev-wealth2-backend
+    mail: dev-wealth2-backend@tetrate.io
+    userpassword: dev-wealth2-backend
