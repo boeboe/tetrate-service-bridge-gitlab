@@ -36,13 +36,20 @@ if [[ ${ACTION} = "ldap-sync" ]]; then
   kubectl --context mgmt patch deployment ldap --patch-file ${PATCH_DIR}/ldap-deployment.yaml -n tsb ;
   kubectl --context mgmt rollout restart deployment ldap -n tsb ;
 
-  # Force TSB to sync users and teams from LDAP
-  print_info "Force TSB to sync users and teams from LDAP" ;
-  job_name="teamsync-$(date +%Y-%m-%d-%H-%M-%S)"
-  kubectl --context mgmt create job --from=cronjob/teamsync ${job_name} -n tsb ;
+  # Wait for auto triggered job teamsync-first-run to finish
+  while ! kubectl --context mgmt get job/teamsync-first-run -n tsb &>/dev/null; do sleep 0.1; done ;
+  kubectl --context mgmt wait --for=condition=complete --timeout=10m job/teamsync-first-run -n tsb ;
 
-  print_info "Wait for TSB job to sync users and teams from LDAP" ;
-  kubectl --context mgmt wait --for=condition=complete --timeout=10m job/${job_name} -n tsb ;
+  # Print auto triggered job teamsync-first-run status
+  kubectl --context mgmt get job/teamsync-first-run -n tsb -o jsonpath={.status} | jq
+
+  # # Force TSB to sync users and teams from LDAP
+  # print_info "Force TSB to sync users and teams from LDAP" ;
+  # job_name="teamsync-$(date +%Y-%m-%d-%H-%M-%S)"
+  # kubectl --context mgmt create job --from=cronjob/teamsync ${job_name} -n tsb ;
+
+  # print_info "Wait for TSB job to sync users and teams from LDAP" ;
+  # kubectl --context mgmt wait --for=condition=complete --timeout=10m job/${job_name} -n tsb ;
 
   exit 0
 fi
