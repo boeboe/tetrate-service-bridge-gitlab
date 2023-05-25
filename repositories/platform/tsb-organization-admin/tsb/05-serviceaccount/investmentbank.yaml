@@ -1,0 +1,9 @@
+---
+apiVersion: api.tsb.tetrate.io/v2
+kind: ServiceAccount
+metadata: 
+  name: investmentbank
+  organization: tetrate
+spec:
+  displayName: InvestmentBankSA
+  description: ServiceAccount used for CICD driven TSB Management of Tenant InvestmentBank

@@ -1,9 +1,0 @@
----
-apiVersion: api.tsb.tetrate.io/v2
-kind: ServiceAccount
-metadata:
-  name: sa-abc
-  organization: tetrate
-spec:
-  displayName: AppABC_SA
-  description: ServiceAccount used for CICD driven TSB Management of AppABC

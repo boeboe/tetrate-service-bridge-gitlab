@@ -1,0 +1,9 @@
+---
+apiVersion: api.tsb.tetrate.io/v2
+kind: ServiceAccount
+metadata:
+  name: retailbank
+  organization: tetrate
+spec:
+  displayName: RetailBankSA
+  description: ServiceAccount used for CICD driven TSB Management of Tenant RetailBank

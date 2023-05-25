@@ -1,0 +1,9 @@
+---
+apiVersion: api.tsb.tetrate.io/v2
+kind: ServiceAccount
+metadata:
+  name: wealthmgmt
+  organization: tetrate
+spec:
+  displayName: WealthMgmtSA
+  description: ServiceAccount used for CICD driven TSB Management of Tenant WealthMgmt
