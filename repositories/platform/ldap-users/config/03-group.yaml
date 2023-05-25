@@ -36,6 +36,36 @@ data:
     uniquemember: cn=Zack Butcher,ou=People,dc=tetrate,dc=io
     uniquemember: cn=Bart Van Bos,ou=People,dc=tetrate,dc=io
 
+    dn: cn=Managers,ou=Engineering,dc=tetrate,dc=io
+    objectclass: groupOfUniqueNames
+    objectclass: top
+    cn: Managers
+    owner: cn=Zack Butcher,ou=People,dc=tetrate,dc=io
+    uniquemember: cn=Manager CashMgmt,ou=People,dc=tetrate,dc=io
+    uniquemember: cn=Manager CommercialBank,ou=People,dc=tetrate,dc=io
+    uniquemember: cn=Manager InvestmentBank,ou=People,dc=tetrate,dc=io
+    uniquemember: cn=Manager PrivateBank,ou=People,dc=tetrate,dc=io
+    uniquemember: cn=Manager RetailBank,ou=People,dc=tetrate,dc=io
+    uniquemember: cn=Manager WealthMgmt,ou=People,dc=tetrate,dc=io
+
+    dn: cn=TeamLeads,ou=Engineering,dc=tetrate,dc=io
+    objectclass: groupOfUniqueNames
+    objectclass: top
+    cn: TeamLeads
+    owner: cn=Ignasi Barrera,ou=People,dc=tetrate,dc=io
+    uniquemember: cn=TeamLead Cash1,ou=People,dc=tetrate,dc=io
+    uniquemember: cn=TeamLead Cash2,ou=People,dc=tetrate,dc=io
+    uniquemember: cn=TeamLead Comm1,ou=People,dc=tetrate,dc=io
+    uniquemember: cn=TeamLead Comm2,ou=People,dc=tetrate,dc=io
+    uniquemember: cn=TeamLead Invest1,ou=People,dc=tetrate,dc=io
+    uniquemember: cn=TeamLead Invest2,ou=People,dc=tetrate,dc=io
+    uniquemember: cn=TeamLead Private1,ou=People,dc=tetrate,dc=io
+    uniquemember: cn=TeamLead Private2,ou=People,dc=tetrate,dc=io
+    uniquemember: cn=TeamLead Retail1,ou=People,dc=tetrate,dc=io
+    uniquemember: cn=TeamLead Retail2,ou=People,dc=tetrate,dc=io
+    uniquemember: cn=TeamLead Wealth1,ou=People,dc=tetrate,dc=io
+    uniquemember: cn=TeamLead Wealth2,ou=People,dc=tetrate,dc=io
+
     dn: cn=Developers,ou=Engineering,dc=tetrate,dc=io
     objectclass: groupOfUniqueNames
     objectclass: top
