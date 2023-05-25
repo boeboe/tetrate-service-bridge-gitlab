@@ -1,16 +1,16 @@
 ---
-downstream1:
+retail1-workspace:
   needs:
     - tsb-deploy
   stage: post-trigger
   trigger:
-    project: applications/retailbank/app-abc/tsb-workspace-admin
-downstream2:
+    project: applications/cashmgmt/app-retail1/tsb-workspace-admin
+retail2-workspace:
   needs:
     - tsb-deploy
   stage: post-trigger
   trigger:
-    project: applications/retailbank/app-def/tsb-workspace-admin
+    project: applications/cashmgmt/app-retail2/tsb-workspace-admin
 k8s-deploy:
   artifacts:
     paths:

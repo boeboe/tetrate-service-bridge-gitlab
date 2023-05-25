@@ -1,16 +1,16 @@
 ---
-downstream1:
+private1-workspace:
   needs:
     - tsb-deploy
   stage: post-trigger
   trigger:
-    project: applications/privatebank/app-uvw/tsb-workspace-admin
-downstream2:
+    project: applications/cashmgmt/app-private1/tsb-workspace-admin
+private2-workspace:
   needs:
     - tsb-deploy
   stage: post-trigger
   trigger:
-    project: applications/privatebank/app-xyz/tsb-workspace-admin
+    project: applications/cashmgmt/app-private2/tsb-workspace-admin
 k8s-deploy:
   artifacts:
     paths:

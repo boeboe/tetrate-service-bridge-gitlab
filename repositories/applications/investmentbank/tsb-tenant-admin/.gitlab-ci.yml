@@ -1,16 +1,16 @@
 ---
-downstream1:
+invest1-workspace:
   needs:
     - tsb-deploy
   stage: post-trigger
   trigger:
-    project: applications/investmentbank/app-abc/tsb-workspace-admin
-downstream2:
+    project: applications/cashmgmt/app-invest1/tsb-workspace-admin
+invest2-workspace:
   needs:
     - tsb-deploy
   stage: post-trigger
   trigger:
-    project: applications/investmentbank/app-def/tsb-workspace-admin
+    project: applications/cashmgmt/app-invest2/tsb-workspace-admin
 k8s-deploy:
   artifacts:
     paths:
