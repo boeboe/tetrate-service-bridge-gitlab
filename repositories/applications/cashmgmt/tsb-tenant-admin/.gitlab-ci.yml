@@ -1,13 +1,13 @@
 ---
 cash1-workspace:
   needs:
-    - tsb-deploy
+    - cashmgmt-tenant
   stage: post-trigger
   trigger:
     project: applications/cashmgmt/app-cash1/tsb-workspace-admin
 cash2-workspace:
   needs:
-    - tsb-deploy
+    - cashmgmt-tenant
   stage: post-trigger
   trigger:
     project: applications/cashmgmt/app-cash2/tsb-workspace-admin
@@ -38,7 +38,7 @@ stages:
   - k8s-deploy
   - tsb-deploy
   - post-trigger
-tsb-deploy:
+cashmgmt-tenant:
   artifacts:
     paths:
       - output
