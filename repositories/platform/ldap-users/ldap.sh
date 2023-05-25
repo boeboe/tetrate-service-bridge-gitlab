@@ -28,7 +28,7 @@ function print_info {
 if [[ ${ACTION} = "ldap-sync" ]]; then
 
    # Create LDAP configmaps
-  print_info "Create LDAP configmaps containing organization, people and groups" ;
+  print_info "Create/update LDAP configmaps containing organization, people and groups" ;
   kubectl --context mgmt apply -f ${CONFIG_DIR} ;
 
   # Patch LDAP deployment

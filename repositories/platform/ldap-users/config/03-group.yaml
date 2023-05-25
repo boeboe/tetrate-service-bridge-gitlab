@@ -35,3 +35,57 @@ data:
     uniquemember: cn=Wu Sheng,ou=People,dc=tetrate,dc=io
     uniquemember: cn=Zack Butcher,ou=People,dc=tetrate,dc=io
     uniquemember: cn=Bart Van Bos,ou=People,dc=tetrate,dc=io
+
+    dn: cn=Developers,ou=Engineering,dc=tetrate,dc=io
+    objectclass: groupOfUniqueNames
+    objectclass: top
+    cn: Developers
+    owner: cn=Bart Van Bos,ou=People,dc=tetrate,dc=io
+    uniquemember: cn=Developer Cash1,ou=People,dc=tetrate,dc=io
+    uniquemember: cn=Developer Cash1 Frontend,ou=People,dc=tetrate,dc=io
+    uniquemember: cn=Developer Cash1 Middleware,ou=People,dc=tetrate,dc=io
+    uniquemember: cn=Developer Cash1 Backend,ou=People,dc=tetrate,dc=io
+    uniquemember: cn=Developer Cash2,ou=People,dc=tetrate,dc=io
+    uniquemember: cn=Developer Cash2 Frontend,ou=People,dc=tetrate,dc=io
+    uniquemember: cn=Developer Cash2 Middleware,ou=People,dc=tetrate,dc=io
+    uniquemember: cn=Developer Cash2 Backend,ou=People,dc=tetrate,dc=io
+    uniquemember: cn=Developer Comm1,ou=People,dc=tetrate,dc=io
+    uniquemember: cn=Developer Comm1 Frontend,ou=People,dc=tetrate,dc=io
+    uniquemember: cn=Developer Comm1 Middleware,ou=People,dc=tetrate,dc=io
+    uniquemember: cn=Developer Comm1 Backend,ou=People,dc=tetrate,dc=io
+    uniquemember: cn=Developer Comm2,ou=People,dc=tetrate,dc=io
+    uniquemember: cn=Developer Comm2 Frontend,ou=People,dc=tetrate,dc=io
+    uniquemember: cn=Developer Comm2 Middleware,ou=People,dc=tetrate,dc=io
+    uniquemember: cn=Developer Comm2 Backend,ou=People,dc=tetrate,dc=io
+    uniquemember: cn=Developer Invest1,ou=People,dc=tetrate,dc=io
+    uniquemember: cn=Developer Invest1 Frontend,ou=People,dc=tetrate,dc=io
+    uniquemember: cn=Developer Invest1 Middleware,ou=People,dc=tetrate,dc=io
+    uniquemember: cn=Developer Invest1 Backend,ou=People,dc=tetrate,dc=io
+    uniquemember: cn=Developer Invest2,ou=People,dc=tetrate,dc=io
+    uniquemember: cn=Developer Invest2 Frontend,ou=People,dc=tetrate,dc=io
+    uniquemember: cn=Developer Invest2 Middleware,ou=People,dc=tetrate,dc=io
+    uniquemember: cn=Developer Invest2 Backend,ou=People,dc=tetrate,dc=io
+    uniquemember: cn=Developer Private1,ou=People,dc=tetrate,dc=io
+    uniquemember: cn=Developer Private1 Frontend,ou=People,dc=tetrate,dc=io
+    uniquemember: cn=Developer Private1 Middleware,ou=People,dc=tetrate,dc=io
+    uniquemember: cn=Developer Private1 Backend,ou=People,dc=tetrate,dc=io
+    uniquemember: cn=Developer Private2,ou=People,dc=tetrate,dc=io
+    uniquemember: cn=Developer Private2 Frontend,ou=People,dc=tetrate,dc=io
+    uniquemember: cn=Developer Private2 Middleware,ou=People,dc=tetrate,dc=io
+    uniquemember: cn=Developer Private2 Backend,ou=People,dc=tetrate,dc=io
+    uniquemember: cn=Developer Retail1,ou=People,dc=tetrate,dc=io
+    uniquemember: cn=Developer Retail1 Frontend,ou=People,dc=tetrate,dc=io
+    uniquemember: cn=Developer Retail1 Middleware,ou=People,dc=tetrate,dc=io
+    uniquemember: cn=Developer Retail1 Backend,ou=People,dc=tetrate,dc=io
+    uniquemember: cn=Developer Retail2,ou=People,dc=tetrate,dc=io
+    uniquemember: cn=Developer Retail2 Frontend,ou=People,dc=tetrate,dc=io
+    uniquemember: cn=Developer Retail2 Middleware,ou=People,dc=tetrate,dc=io
+    uniquemember: cn=Developer Retail2 Backend,ou=People,dc=tetrate,dc=io
+    uniquemember: cn=Developer Wealth1,ou=People,dc=tetrate,dc=io
+    uniquemember: cn=Developer Wealth1 Frontend,ou=People,dc=tetrate,dc=io
+    uniquemember: cn=Developer Wealth1 Middleware,ou=People,dc=tetrate,dc=io
+    uniquemember: cn=Developer Wealth1 Backend,ou=People,dc=tetrate,dc=io
+    uniquemember: cn=Developer Wealth2,ou=People,dc=tetrate,dc=io
+    uniquemember: cn=Developer Wealth2 Frontend,ou=People,dc=tetrate,dc=io
+    uniquemember: cn=Developer Wealth2 Middleware,ou=People,dc=tetrate,dc=io
+    uniquemember: cn=Developer Wealth2 Backend,ou=People,dc=tetrate,dc=io
