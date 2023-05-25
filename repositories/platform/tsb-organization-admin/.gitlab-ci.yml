@@ -1,37 +1,37 @@
 ---
 cashmgmt-tenant:
   needs:
-    - tsb-deploy
+    - tetrate-organization
   stage: post-trigger
   trigger:
     project: applications/cashmgmt/tsb-tenant-admin
 commercialbank-tenant:
   needs:
-    - tsb-deploy
+    - tetrate-organization
   stage: post-trigger
   trigger:
     project: applications/commercialbank/tsb-tenant-admin
 investmentbank-tenant:
   needs:
-    - tsb-deploy
+    - tetrate-organization
   stage: post-trigger
   trigger:
     project: applications/investmentbank/tsb-tenant-admin
 privatebank-tenant:
   needs:
-    - tsb-deploy
+    - tetrate-organization
   stage: post-trigger
   trigger:
     project: applications/privatebank/tsb-tenant-admin
 retailbank-tenant:
   needs:
-    - tsb-deploy
+    - tetrate-organization
   stage: post-trigger
   trigger:
     project: applications/retailbank/tsb-tenant-admin
 wealthmgmt-tenant:
   needs:
-    - tsb-deploy
+    - tetrate-organization
   stage: post-trigger
   trigger:
     project: applications/wealthmgmt/tsb-tenant-admin
