@@ -68,9 +68,9 @@ data:
     cn: Manager TsbPlatform
     givenname: Manager
     sn: TsbPlatformMngr
-    uid: tsb-platform-mngr
-    mail: tsb-platform-mngr@tetrate.io
-    userpassword: tsb-platform-mngr
+    uid: mngr-tsb-platform
+    mail: mngr-tsb-platform@tetrate.io
+    userpassword: mngr-tsb-platform
 
     #################################### tenant/bu managers ####################################
 

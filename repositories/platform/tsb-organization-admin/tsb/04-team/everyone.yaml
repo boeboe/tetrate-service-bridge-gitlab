@@ -8,12 +8,12 @@ spec:
   members:
   - organizations/tetrate/users/tsb-platform-mngr
 
-  - organizations/tetrate/users/cashmgmt-mngr
-  - organizations/tetrate/users/commercialbank-mngr
-  - organizations/tetrate/users/investmentbank-mngr
-  - organizations/tetrate/users/privatebank-mngr
-  - organizations/tetrate/users/retailbank-mngr
-  - organizations/tetrate/users/wealthmgmt-mngr
+  - organizations/tetrate/users/mngr-cashmgmt
+  - organizations/tetrate/users/mngr-commercialbank
+  - organizations/tetrate/users/mngr-investmentbank
+  - organizations/tetrate/users/mngr-privatebank
+  - organizations/tetrate/users/mngr-retailbank
+  - organizations/tetrate/users/mngr-wealthmgmt
 
   - organizations/tetrate/users/cash1-tl
   - organizations/tetrate/users/cash2-tl
