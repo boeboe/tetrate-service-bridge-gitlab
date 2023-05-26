@@ -4,7 +4,7 @@ kind: Tier1Gateway
 metadata:
   organization: tetrate
   tenant: privatebank
-  workspace: front-private1vw
+  workspace: private1
   group: tier1-private1
   name: tier1-gw-private1
 spec:
@@ -15,12 +15,12 @@ spec:
     labels:
       app: tier1-gw-private1
   externalServers:
-  - name: uvw-mtls
-    hostname: uvw.demo.tetrate.io
+  - name: private1-mtls
+    hostname: private1.demo.tetrate.io
     port: 443
     tls:
       mode: MUTUAL
-      secretName: front-private1vw-cert
+      secretName: private1-cert
     clusters:
     - name: active
     - name: standby
