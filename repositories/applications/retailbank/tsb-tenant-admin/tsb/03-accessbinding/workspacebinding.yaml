@@ -2,21 +2,21 @@
 apiVersion: rbac.tsb.tetrate.io/v2
 kind: AccessBindings
 metadata:
-  fqn: organizations/tetrate/tenants/retailbank/workspaces/app-retail1
+  fqn: organizations/tetrate/tenants/retailbank/workspaces/retail1
 spec:
   allow:
   - role: rbac/admin
     subjects:
-    - serviceAccount: organizations/tetrate/serviceaccounts/sa-retail1
+    - serviceAccount: organizations/tetrate/serviceaccounts/retail1
     - user: organizations/tetrate/users/tl-retail1
 ---
 apiVersion: rbac.tsb.tetrate.io/v2
 kind: AccessBindings
 metadata:
-  fqn: organizations/tetrate/tenants/retailbank/workspaces/app-retail2
+  fqn: organizations/tetrate/tenants/retailbank/workspaces/retail2
 spec:
   allow:
   - role: rbac/admin
     subjects:
-    - serviceAccount: organizations/tetrate/serviceaccounts/sa-retail2
+    - serviceAccount: organizations/tetrate/serviceaccounts/retail2
     - user: organizations/tetrate/users/tl-retail2
