@@ -7,9 +7,7 @@ ROOT_DIR="$( cd -- "$(dirname "${0}")" >/dev/null 2>&1 ; pwd -P )"
 TSB_CONFIG_DIR=${ROOT_DIR}/tsb
 GROUP_DIR=${TSB_CONFIG_DIR}/01-group
 GROUPSETTING_DIR=${TSB_CONFIG_DIR}/02-groupsetting
-TEAM_DIR=${TSB_CONFIG_DIR}/03-team
-SERVICEACCOUNT_DIR=${TSB_CONFIG_DIR}/04-serviceaccount
-ACCESSBINDING_DIR=${TSB_CONFIG_DIR}/05-accessbinding
+ACCESSBINDING_DIR=${TSB_CONFIG_DIR}/03-accessbinding
 
 OUTPUT_DIR=${ROOT_DIR}/output/tsb
 
@@ -80,27 +78,6 @@ if [[ ${ACTION} = "deploy" ]]; then
   for groupsetting_file in $(ls -1 ${GROUPSETTING_DIR}) ; do
     echo "Applying tsb configuration of '${GROUPSETTING_DIR}/${groupsetting_file}'" ;
     tctl apply -f ${GROUPSETTING_DIR}/${groupsetting_file} ;
-    sleep 1 ;
-  done
-
-  # Configure tsb teams
-  print_info "Configure tsb teams" ;
-  for team_file in $(ls -1 ${TEAM_DIR}) ; do
-    echo "Applying tsb configuration of '${TEAM_DIR}/${team_file}'" ;
-    tctl apply -f ${TEAM_DIR}/${team_file} ;
-    sleep 1 ;
-  done
-
-  # Configure tsb serviceaccounts
-  print_info "Configure tsb serviceaccounts" ;
-  for serviceaccount_file in $(ls -1 ${SERVICEACCOUNT_DIR}) ; do
-    echo "Applying tsb configuration of '${SERVICEACCOUNT_DIR}/${serviceaccount_file}'" ;
-    tctl apply -f ${SERVICEACCOUNT_DIR}/${serviceaccount_file} ;
-
-    serviceaccount=$(cat ${SERVICEACCOUNT_DIR}/${serviceaccount_file} | grep "name: " | awk '{print $2}') ;
-    sa_revoke_all_keys ${serviceaccount} ;
-    mkdir -p ${OUTPUT_DIR}/${serviceaccount} ;
-    sa_generate_new_key ${serviceaccount} ${OUTPUT_DIR}/${serviceaccount}/private-key.jwk ;
     sleep 1 ;
   done
 
