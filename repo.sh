@@ -86,6 +86,7 @@ if [[ ${ACTION} = "config-repos" ]]; then
 
     print_info "Going add, commit and push new code to repo '${repo_name}' in group with path '${repo_group_path}'"
     cd ${GITLAB_REPOSITORIES_TEMPDIR}/${repo_group_path}/${repo_name}
+    rm -rf ${GITLAB_REPOSITORIES_TEMPDIR}/${repo_group_path}/${repo_name}/*
     cp -a ${GITLAB_REPOSITORIES_DIR}/${repo_group_path}/${repo_name}/. ${GITLAB_REPOSITORIES_TEMPDIR}/${repo_group_path}/${repo_name}
     git add -A
     git commit -m "This is an automated commit"

@@ -4,8 +4,8 @@ kind: WorkspaceSetting
 metadata:
   organization: tetrate
   tenant: retailbank
-  workspace: app-retail1
-  name: app-retail1-setting
+  workspace: retail1
+  name: retail1-setting
 spec:
   defaultEastWestGatewaySettings:
     - workloadSelector:
