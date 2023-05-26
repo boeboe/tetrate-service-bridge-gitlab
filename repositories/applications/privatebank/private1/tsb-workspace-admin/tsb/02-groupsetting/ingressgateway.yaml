@@ -15,7 +15,7 @@ spec:
     labels:
       app: ingress-gw-private1
   http:
-  - name: private1
+  - name: private1-https
     hostname: private1.demo.tetrate.io
     port: 443
     tls:
