@@ -5,7 +5,7 @@ metadata:
   organization: tetrate
   tenant: privatebank
   workspace: front-private1vw
-  group: gwgroup-tier1-private1
+  group: tier1-private1
   name: tier1-gw-private1
 spec:
   description: Tier1 Gateway Group for Application Private1
