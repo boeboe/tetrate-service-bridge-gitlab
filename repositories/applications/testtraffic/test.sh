@@ -10,7 +10,7 @@ CERTS_BASE_DIR=${ROOT_DIR}/output/ingress-certs/client/${TARGET}
 ACTION=${1}
 COUNT="${COUNT:-100}"
 
-ALL_APPS="
+ALL_TARGETS="
 cash1
 cash2
 comm1
@@ -70,7 +70,7 @@ if [[ ${ACTION} = "curl" ]]; then
   if [[ "${TARGET}" == "all" ]] ; then
     print_info "Going to send test traffic (count: ${COUNT}) to all applications using curl" ;
 
-    for targ in ${TARGET} ; do
+    for targ in ${ALL_TARGETS} ; do
       print_info "Going to send test traffic (count: ${COUNT}) to application ${targ} using curl" ;
       send_curl_traffic ${targ} ${COUNT}
     done
