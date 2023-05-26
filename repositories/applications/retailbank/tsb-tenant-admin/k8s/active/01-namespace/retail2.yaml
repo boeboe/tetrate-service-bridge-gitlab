@@ -7,7 +7,7 @@ metadata:
     tsb-workspace: retail2
   labels:
     istio-injection: enabled
-  name: ns-retail2a
+  name: front-retail
 ---
 apiVersion: v1
 kind: Namespace
@@ -17,7 +17,7 @@ metadata:
     tsb-workspace: retail2
   labels:
     istio-injection: enabled
-  name: ns-retail2b
+  name: mid-retail
 ---
 apiVersion: v1
 kind: Namespace
@@ -27,7 +27,7 @@ metadata:
     tsb-workspace: retail2
   labels:
     istio-injection: enabled
-  name: ns-retail2c
+  name: back-retail
 ---
 apiVersion: v1
 kind: Namespace

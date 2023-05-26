@@ -7,7 +7,7 @@ metadata:
     tsb-workspace: wealth1
   labels:
     istio-injection: enabled
-  name: ns-wealth1a
+  name: front-wealth
 ---
 apiVersion: v1
 kind: Namespace
@@ -17,7 +17,7 @@ metadata:
     tsb-workspace: wealth1
   labels:
     istio-injection: enabled
-  name: ns-wealth1b
+  name: mid-wealth
 ---
 apiVersion: v1
 kind: Namespace
@@ -27,7 +27,7 @@ metadata:
     tsb-workspace: wealth1
   labels:
     istio-injection: enabled
-  name: ns-wealth1c
+  name: back-wealth
 ---
 apiVersion: v1
 kind: Namespace
