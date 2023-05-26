@@ -4,13 +4,13 @@ wealth1-workspace:
     - wealthmgmt-tenant
   stage: post-trigger
   trigger:
-    project: applications/cashmgmt/app-wealth1/tsb-workspace-admin
+    project: applications/cashmgmt/wealth1/tsb-workspace-admin
 wealth2-workspace:
   needs:
     - wealthmgmt-tenant
   stage: post-trigger
   trigger:
-    project: applications/cashmgmt/app-wealth2/tsb-workspace-admin
+    project: applications/cashmgmt/wealth2/tsb-workspace-admin
 k8s-deploy:
   artifacts:
     paths:

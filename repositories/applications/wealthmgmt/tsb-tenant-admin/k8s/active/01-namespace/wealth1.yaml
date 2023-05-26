@@ -1,0 +1,38 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  annotations:
+    tsb-tenant: wealthmgmt
+    tsb-workspace: wealth1
+  labels:
+    istio-injection: enabled
+  name: ns-wealth1a
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  annotations:
+    tsb-tenant: wealthmgmt
+    tsb-workspace: wealth1
+  labels:
+    istio-injection: enabled
+  name: ns-wealth1b
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  annotations:
+    tsb-tenant: wealthmgmt
+    tsb-workspace: wealth1
+  labels:
+    istio-injection: enabled
+  name: ns-wealth1c
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  annotations:
+    tsb-tenant: wealthmgmt
+    tsb-workspace: wealth1
+  name: gateway-wealth1

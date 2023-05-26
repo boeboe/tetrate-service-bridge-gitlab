@@ -1,8 +1,0 @@
----
-apiVersion: v1
-kind: Namespace
-metadata:
-  annotations:
-    tsb-tenant: investmentbank
-    tsb-workspace: app-invest2
-  name: tier1-gw-invest2

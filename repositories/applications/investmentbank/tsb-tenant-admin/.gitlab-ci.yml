@@ -4,13 +4,13 @@ invest1-workspace:
     - investmentbank-tenant
   stage: post-trigger
   trigger:
-    project: applications/cashmgmt/app-invest1/tsb-workspace-admin
+    project: applications/cashmgmt/invest1/tsb-workspace-admin
 invest2-workspace:
   needs:
     - investmentbank-tenant
   stage: post-trigger
   trigger:
-    project: applications/cashmgmt/app-invest2/tsb-workspace-admin
+    project: applications/cashmgmt/invest2/tsb-workspace-admin
 k8s-deploy:
   artifacts:
     paths:

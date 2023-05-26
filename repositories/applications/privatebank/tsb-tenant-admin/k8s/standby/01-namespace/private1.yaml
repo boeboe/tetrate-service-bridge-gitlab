@@ -1,0 +1,38 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  annotations:
+    tsb-tenant: privatebank
+    tsb-workspace: private1
+  labels:
+    istio-injection: enabled
+  name: ns-private1a
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  annotations:
+    tsb-tenant: privatebank
+    tsb-workspace: private1
+  labels:
+    istio-injection: enabled
+  name: ns-private1b
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  annotations:
+    tsb-tenant: privatebank
+    tsb-workspace: private1
+  labels:
+    istio-injection: enabled
+  name: ns-private1c
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  annotations:
+    tsb-tenant: privatebank
+    tsb-workspace: private1
+  name: gateway-private1

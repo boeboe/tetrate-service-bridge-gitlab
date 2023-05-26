@@ -1,0 +1,38 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  annotations:
+    tsb-tenant: retailbank
+    tsb-workspace: retail1
+  labels:
+    istio-injection: enabled
+  name: ns-retail1a
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  annotations:
+    tsb-tenant: retailbank
+    tsb-workspace: retail1
+  labels:
+    istio-injection: enabled
+  name: ns-retail1b
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  annotations:
+    tsb-tenant: retailbank
+    tsb-workspace: retail1
+  labels:
+    istio-injection: enabled
+  name: ns-retail1c
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  annotations:
+    tsb-tenant: retailbank
+    tsb-workspace: retail1
+  name: gateway-retail1
