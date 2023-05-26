@@ -111,6 +111,7 @@ if [[ ${ACTION} = "deploy" ]]; then
       sa_revoke_all_keys ${serviceaccount} ;
       mkdir -p ${OUTPUT_DIR}/${serviceaccount} ;
       sa_generate_new_key ${serviceaccount} ${OUTPUT_DIR}/${serviceaccount}/private-key.jwk ;
+      touch "${OUTPUT_DIR}/${serviceaccount}/$(date +"%Y-%m-%d_%T")" ;
       sleep 1 ;
     done
   done
