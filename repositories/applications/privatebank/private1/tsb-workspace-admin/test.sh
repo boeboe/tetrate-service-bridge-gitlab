@@ -10,6 +10,12 @@ CERTS_BASE_DIR=${ROOT_DIR}/output/ingress-certs/client/private1
 ACTION=${1}
 COUNT="${COUNT:-100}"
 
+# -e exits on error
+# -u errors on undefined variables
+# -x prints commands before execution
+# -o (for option) pipefail exits on command pipe failures
+set -euo pipefail
+
 # Print info messages
 #   args:
 #     (1) message
