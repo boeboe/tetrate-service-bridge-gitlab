@@ -2,19 +2,19 @@
   {
     "concurrency": 3,
     "executor": "shell",
-    "limit": 0,
+    "limit": 3,
     "name": "PlatformInfraRunner",
     "tag": "platform-infra"
   },{
     "concurrency": 2,
     "executor": "shell",
-    "limit": 0,
+    "limit": 2,
     "name": "PlatformTSBRunner",
     "tag": "platform-tsb"
   },{
     "concurrency": 1,
     "executor": "shell",
-    "limit": 0,
+    "limit": 1,
     "name": "PlatformUsersRunner",
     "tag": "platform-users"
   },{
@@ -24,9 +24,9 @@
     "name": "ApplicationTCTLRunner",
     "tag": "application-tctl"
   },{
-    "concurrency": 0,
+    "concurrency": 13,
     "executor": "shell",
-    "limit": 0,
+    "limit": 13,
     "name": "ApplicationK8sRunner",
     "tag": ""
   }
