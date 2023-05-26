@@ -4,13 +4,13 @@ private1-workspace:
     - privatebank-tenant
   stage: post-trigger
   trigger:
-    project: applications/cashmgmt/private1/tsb-workspace-admin
+    project: applications/privatebank/private1/tsb-workspace-admin
 private2-workspace:
   needs:
     - privatebank-tenant
   stage: post-trigger
   trigger:
-    project: applications/cashmgmt/private2/tsb-workspace-admin
+    project: applications/privatebank/private2/tsb-workspace-admin
 k8s-deploy:
   artifacts:
     paths:

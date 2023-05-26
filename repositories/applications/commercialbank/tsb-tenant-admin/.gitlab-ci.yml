@@ -4,13 +4,13 @@ comm1-workspace:
     - commercialbank-tenant
   stage: post-trigger
   trigger:
-    project: applications/cashmgmt/comm1/tsb-workspace-admin
+    project: applications/commercialbank/comm1/tsb-workspace-admin
 comm2-workspace:
   needs:
     - commercialbank-tenant
   stage: post-trigger
   trigger:
-    project: applications/cashmgmt/comm2/tsb-workspace-admin
+    project: applications/commercialbank/comm2/tsb-workspace-admin
 k8s-deploy:
   artifacts:
     paths:

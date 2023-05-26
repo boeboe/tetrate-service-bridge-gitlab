@@ -4,13 +4,13 @@ retail1-workspace:
     - retailbank-tenant
   stage: post-trigger
   trigger:
-    project: applications/cashmgmt/retail1/tsb-workspace-admin
+    project: applications/retailbank/retail1/tsb-workspace-admin
 retail2-workspace:
   needs:
     - retailbank-tenant
   stage: post-trigger
   trigger:
-    project: applications/cashmgmt/retail2/tsb-workspace-admin
+    project: applications/retailbank/retail2/tsb-workspace-admin
 k8s-deploy:
   artifacts:
     paths:
