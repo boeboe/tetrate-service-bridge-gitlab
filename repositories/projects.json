@@ -24,6 +24,10 @@
     "group_path": "platform",
     "name": "tsb-organization-admin"
   },{
+    "description": "Test Traffic Management",
+    "group_path": "applications",
+    "name": "testtraffic"
+  },{
     "description": "Frontend of Application Cash1 for Cash Management BU",
     "group_path": "applications/cashmgmt/cash1",
     "name": "frontend-cash1"
