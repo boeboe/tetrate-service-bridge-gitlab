@@ -1,0 +1,17 @@
+---
+apiversion: api.tsb.tetrate.io/v2
+kind: Workspace
+metadata:
+  organization: tetrate
+  tenant: privatebank
+  name: private1
+spec:
+  description: Workspace for Application Private1
+  displayName: Private1
+  namespaceSelector:
+    names:
+      - "mgmt/tier1-gw-private1"
+      - "*/gateway-private1"
+      - "*/frontend-private1"
+      - "*/middleware-private1"
+      - "*/backend-private1"

@@ -1,0 +1,32 @@
+---
+apiVersion: api.tsb.tetrate.io/v2
+kind: WorkspaceSetting
+metadata:
+  organization: tetrate
+  tenant: investmentbank
+  workspace: invest2
+  name: invest2-setting
+spec:
+  defaultEastWestGatewaySettings:
+    - workloadSelector:
+        namespace: gateway-invest2
+        labels:
+          app: eastwest-gw-invest2
+      exposedServices:
+      - serviceLabels:
+          app: frontend-invest2
+          service: frontend-invest2
+      - serviceLabels:
+          app: middleware-invest2
+          service: middleware-invest2
+      - serviceLabels:
+          app: backend-invest2
+          service: backend-invest2
+  defaultTrafficSetting:
+    reachability:
+      hosts:
+      - gateway-invest2/*
+      - frontend-invest2/*
+      - middleware-invest2/*
+      - backend-invest2/*
+      mode: CUSTOM

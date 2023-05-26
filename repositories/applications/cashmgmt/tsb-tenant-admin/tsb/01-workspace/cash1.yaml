@@ -1,0 +1,17 @@
+---
+apiversion: api.tsb.tetrate.io/v2
+kind: Workspace
+metadata:
+  organization: tetrate
+  tenant: cashmgmt
+  name: cash1
+spec:
+  description: Workspace for Application Cash1
+  displayName: Cash1
+  namespaceSelector:
+    names:
+      - "mgmt/tier1-gw-cash1"
+      - "*/gateway-cash1"
+      - "*/frontend-cash1"
+      - "*/middleware-cash1"
+      - "*/backend-cash1"

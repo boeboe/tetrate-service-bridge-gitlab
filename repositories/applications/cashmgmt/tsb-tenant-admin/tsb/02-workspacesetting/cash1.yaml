@@ -1,0 +1,32 @@
+---
+apiVersion: api.tsb.tetrate.io/v2
+kind: WorkspaceSetting
+metadata:
+  organization: tetrate
+  tenant: cashmgmt
+  workspace: cash1
+  name: cash1-setting
+spec:
+  defaultEastWestGatewaySettings:
+    - workloadSelector:
+        namespace: gateway-cash1
+        labels:
+          app: eastwest-gw-cash1
+      exposedServices:
+      - serviceLabels:
+          app: frontend-cash1
+          service: frontend-cash1
+      - serviceLabels:
+          app: middleware-cash1
+          service: middleware-cash1
+      - serviceLabels:
+          app: backend-cash1
+          service: backend-cash1
+  defaultTrafficSetting:
+    reachability:
+      hosts:
+      - gateway-cash1/*
+      - frontend-cash1/*
+      - middleware-cash1/*
+      - backend-cash1/*
+      mode: CUSTOM

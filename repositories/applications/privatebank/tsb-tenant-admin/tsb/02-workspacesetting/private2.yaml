@@ -1,0 +1,32 @@
+---
+apiVersion: api.tsb.tetrate.io/v2
+kind: WorkspaceSetting
+metadata:
+  organization: tetrate
+  tenant: privatebank
+  workspace: private2
+  name: private2-setting
+spec:
+  defaultEastWestGatewaySettings:
+    - workloadSelector:
+        namespace: gateway-private2
+        labels:
+          app: eastwest-gw-private2
+      exposedServices:
+      - serviceLabels:
+          app: frontend-private2
+          service: frontend-private2
+      - serviceLabels:
+          app: middleware-private2
+          service: middleware-private2
+      - serviceLabels:
+          app: backend-private2
+          service: backend-private2
+  defaultTrafficSetting:
+    reachability:
+      hosts:
+      - gateway-private2/*
+      - frontend-private2/*
+      - middleware-private2/*
+      - backend-private2/*
+      mode: CUSTOM

@@ -1,0 +1,17 @@
+---
+apiversion: api.tsb.tetrate.io/v2
+kind: Workspace
+metadata:
+  organization: tetrate
+  tenant: commercialbank
+  name: comm1
+spec:
+  description: Workspace for Application Comm1
+  displayName: Comm1
+  namespaceSelector:
+    names:
+      - "mgmt/tier1-gw-comm1"
+      - "*/gateway-comm1"
+      - "*/frontend-comm1"
+      - "*/middleware-comm1"
+      - "*/backend-comm1"

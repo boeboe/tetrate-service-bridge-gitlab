@@ -1,0 +1,17 @@
+---
+apiversion: api.tsb.tetrate.io/v2
+kind: Workspace
+metadata:
+  organization: tetrate
+  tenant: wealthmgmt
+  name: wealth2
+spec:
+  description: Workspace for Application Wealth2
+  displayName: Wealth2
+  namespaceSelector:
+    names:
+      - "mgmt/tier1-gw-wealth2"
+      - "*/gateway-wealth2"
+      - "*/frontend-wealth2"
+      - "*/middleware-wealth2"
+      - "*/backend-wealth2"

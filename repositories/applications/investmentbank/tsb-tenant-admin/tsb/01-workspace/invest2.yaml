@@ -1,0 +1,17 @@
+---
+apiversion: api.tsb.tetrate.io/v2
+kind: Workspace
+metadata:
+  organization: tetrate
+  tenant: investmentbank
+  name: invest2
+spec:
+  description: Workspace for Application Invest2
+  displayName: Invest2
+  namespaceSelector:
+    names:
+      - "mgmt/tier1-gw-invest2"
+      - "*/gateway-invest2"
+      - "*/frontend-invest2"
+      - "*/middleware-invest2"
+      - "*/backend-invest2"
