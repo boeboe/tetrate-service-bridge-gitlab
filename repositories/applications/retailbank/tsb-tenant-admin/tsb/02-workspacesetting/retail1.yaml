@@ -1,0 +1,32 @@
+---
+apiVersion: api.tsb.tetrate.io/v2
+kind: WorkspaceSetting
+metadata:
+  organization: tetrate
+  tenant: retailbank
+  workspace: app-retail1
+  name: app-retail1-setting
+spec:
+  defaultEastWestGatewaySettings:
+    - workloadSelector:
+        namespace: gateway-retail1
+        labels:
+          app: eastwest-gw-retail1
+      exposedServices:
+      - serviceLabels:
+          app: frontend-retail1
+          service: frontend-retail1
+      - serviceLabels:
+          app: middleware-retail1
+          service: middleware-retail1
+      - serviceLabels:
+          app: backend-retail1
+          service: backend-retail1
+  defaultTrafficSetting:
+    reachability:
+      hosts:
+      - gateway-retail1/*
+      - frontend-retail1/*
+      - middleware-retail1/*
+      - backend-retail1/*
+      mode: CUSTOM

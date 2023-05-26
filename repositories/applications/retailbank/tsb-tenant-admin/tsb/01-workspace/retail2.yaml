@@ -1,0 +1,17 @@
+---
+apiversion: api.tsb.tetrate.io/v2
+kind: Workspace
+metadata:
+  organization: tetrate
+  tenant: retailbank
+  name: retail2
+spec:
+  description: Workspace for Application Retail2
+  displayName: Retail2
+  namespaceSelector:
+    names:
+      - "mgmt/tier1-gw-retail2"
+      - "*/gateway-retail2"
+      - "*/frontend-retail2"
+      - "*/middleware-retail2"
+      - "*/backend-retail2"
