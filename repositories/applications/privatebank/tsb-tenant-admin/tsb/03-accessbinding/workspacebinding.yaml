@@ -2,21 +2,21 @@
 apiVersion: rbac.tsb.tetrate.io/v2
 kind: AccessBindings
 metadata:
-  fqn: organizations/tetrate/tenants/privatebank/workspaces/app-private1
+  fqn: organizations/tetrate/tenants/privatebank/workspaces/private1
 spec:
   allow:
   - role: rbac/admin
     subjects:
-    - serviceAccount: organizations/tetrate/serviceaccounts/sa-private1
-    - user: organizations/tetrate/users/private1-tl
+    - serviceAccount: organizations/tetrate/serviceaccounts/private1
+    - user: organizations/tetrate/users/tl-private1
 ---
 apiVersion: rbac.tsb.tetrate.io/v2
 kind: AccessBindings
 metadata:
-  fqn: organizations/tetrate/tenants/privatebank/workspaces/app-private2
+  fqn: organizations/tetrate/tenants/privatebank/workspaces/private2
 spec:
   allow:
   - role: rbac/admin
     subjects:
-    - serviceAccount: organizations/tetrate/serviceaccounts/sa-private2
-    - user: organizations/tetrate/users/private2-tl
+    - serviceAccount: organizations/tetrate/serviceaccounts/private2
+    - user: organizations/tetrate/users/tl-private2

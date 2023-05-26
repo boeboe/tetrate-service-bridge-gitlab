@@ -2,21 +2,21 @@
 apiVersion: rbac.tsb.tetrate.io/v2
 kind: AccessBindings
 metadata:
-  fqn: organizations/tetrate/tenants/commercialbank/workspaces/app-comm1
+  fqn: organizations/tetrate/tenants/commercialbank/workspaces/comm1
 spec:
   allow:
   - role: rbac/admin
     subjects:
-    - serviceAccount: organizations/tetrate/serviceaccounts/sa-comm1
-    - user: organizations/tetrate/users/comm1-tl
+    - serviceAccount: organizations/tetrate/serviceaccounts/comm1
+    - user: organizations/tetrate/users/tl-comm1
 ---
 apiVersion: rbac.tsb.tetrate.io/v2
 kind: AccessBindings
 metadata:
-  fqn: organizations/tetrate/tenants/commercialbank/workspaces/app-comm2
+  fqn: organizations/tetrate/tenants/commercialbank/workspaces/comm2
 spec:
   allow:
   - role: rbac/admin
     subjects:
-    - serviceAccount: organizations/tetrate/serviceaccounts/sa-comm2
-    - user: organizations/tetrate/users/comm2-tl
+    - serviceAccount: organizations/tetrate/serviceaccounts/comm2
+    - user: organizations/tetrate/users/tl-comm2

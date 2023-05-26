@@ -33,7 +33,7 @@ function print_info {
 #     (1) serviceaccount name
 function login_tsb_serviceaccount {
   tctl config profiles set-current mgmt ;
-  echo "Generating token with private key of serviceaccount '${1}' at location '${OUTPUT_DIR}/${1}/private-key.jwk'"
+  echo "Generating token with private json web key of serviceaccount '${1}' at location '${OUTPUT_DIR}/${1}/private-key.jwk'"
   token=$(tctl x sa token ${1} --key-path ${OUTPUT_DIR}/${1}/private-key.jwk --expiration 1h0m0s) ;
   echo "Using token for serviceaccount '${1}' with value '${token}'"
   tctl config users set ${1} --token ${token} ;

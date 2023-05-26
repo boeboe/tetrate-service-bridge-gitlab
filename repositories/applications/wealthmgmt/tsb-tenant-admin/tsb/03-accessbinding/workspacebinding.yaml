@@ -2,21 +2,21 @@
 apiVersion: rbac.tsb.tetrate.io/v2
 kind: AccessBindings
 metadata:
-  fqn: organizations/tetrate/tenants/wealthmgmt/workspaces/app-wealth1
+  fqn: organizations/tetrate/tenants/wealthmgmt/workspaces/wealth1
 spec:
   allow:
   - role: rbac/admin
     subjects:
-    - serviceAccount: organizations/tetrate/serviceaccounts/sa-wealth1
-    - user: organizations/tetrate/users/wealth1-tl
+    - serviceAccount: organizations/tetrate/serviceaccounts/wealth1
+    - user: organizations/tetrate/users/tl-wealth1
 ---
 apiVersion: rbac.tsb.tetrate.io/v2
 kind: AccessBindings
 metadata:
-  fqn: organizations/tetrate/tenants/wealthmgmt/workspaces/app-wealth2
+  fqn: organizations/tetrate/tenants/wealthmgmt/workspaces/wealth2
 spec:
   allow:
   - role: rbac/admin
     subjects:
-    - serviceAccount: organizations/tetrate/serviceaccounts/sa-wealth2
-    - user: organizations/tetrate/users/wealth2-tl
+    - serviceAccount: organizations/tetrate/serviceaccounts/wealth2
+    - user: organizations/tetrate/users/tl-wealth2
