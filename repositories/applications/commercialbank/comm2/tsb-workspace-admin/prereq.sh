@@ -50,6 +50,19 @@ function download_and_extract_project_job_artifact {
 
 if [[ ${ACTION} = "check" ]]; then
 
+  print_info "Wait for TSB organization to be configured correctly (pipeline platform/tsb-organization-admin)"
+  while true; do
+    status_platform_tsb_rbac=$(gitlab_get_pipeline_status ${CI_API_V4_URL} "01234567890123456789" "platform" "tsb-organization-admin")
+    if [[ ${status_platform_tsb_rbac} == "success" ]] ; then
+      echo "OK"
+      break
+    else
+      echo -n "."
+      sleep 5 ;
+      continue
+    fi
+  done
+
   print_info "Wait for TSB tenant commercialbank to be configured correctly (pipeline applications/commercialbank/tsb-tenant-admin)"
   while true; do
     status_commercialbank_tenant=$(gitlab_get_pipeline_status ${CI_API_V4_URL} "01234567890123456789" "applications/commercialbank" "tsb-tenant-admin")
@@ -75,6 +88,10 @@ if [[ ${ACTION} = "check" ]]; then
       continue
     fi
   done
+
+  print_info "Download and extract workspace serviceaccount key (latest artifact of pipeline platform/tsb-organization-admin)"
+  download_and_extract_project_job_artifact ${CI_API_V4_URL} "01234567890123456789" "platform" "tsb-organization-admin" "tetrate-organization"
+  tree ${ROOT_DIR}/output
 
   print_info "Download and extract istio certificates (latest artifact of pipeline platform/certificates)"
   download_and_extract_project_job_artifact ${CI_API_V4_URL} "01234567890123456789" "platform" "certificates" "gen-certs"

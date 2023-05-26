@@ -28,23 +28,26 @@ function print_info {
   echo -e "${purpleb}${1}${end}"
 }
 
-# Login as admin into tsb
+# Login as a serviceaccount into tsb
 #   args:
-#     (1) organization
-function login_tsb_admin {
-  expect <<DONE
-  spawn tctl login --username admin --password admin --org ${1}
-  expect "Tenant:" { send "\\r" }
-  expect eof
-DONE
+#     (1) serviceaccount name
+function login_tsb_serviceaccount {
+  tctl config profiles set-current mgmt ;
+  echo "Generating token with private json web key of serviceaccount '${1}' at location '${OUTPUT_DIR}/${1}/private-key.jwk'"
+  token=$(tctl x sa token ${1} --key-path ${OUTPUT_DIR}/${1}/private-key.jwk --expiration 1h0m0s) ;
+  echo "Using token for serviceaccount '${1}' with value '${token}'"
+  tctl config users set ${1} --token ${token} ;
+  tctl config profiles set ${1} --cluster mgmt --username ${1} ;
+  tctl config profiles set-current ${1} ;
+  tctl config profiles list ;
 }
 
 
 if [[ ${ACTION} = "deploy" ]]; then
 
-   # Login again as tsb admin in case of a session time-out
-  print_info "Login again as tsb admin in case of a session time-out" ;
-  login_tsb_admin tetrate ;
+   # Login with tsb serviceaccount retail2
+  print_info "Login with tsb serviceaccount 'retail2'" ;
+  login_tsb_serviceaccount retail2 ;
 
   # Configure tsb groups
   print_info "Configure tsb groups" ;
