@@ -39,25 +39,6 @@ function login_tsb_admin {
 DONE
 }
 
-# Revoke all serviceaccount keys
-#   args:
-#     (1) serviceaccount name
-function sa_revoke_all_keys {
-  for key_id in $(tctl get serviceaccount ${1} -o json | jq -r '.spec.keys[].id'); do
-    echo "Revoking key pair with id '${key_id}' from serviceaccount '${1}'"
-    tctl x sa revoke-key ${1} --id ${key_id} ;
-  done
-  
-}
-
-# Generate new serviceaccount key
-#   args:
-#     (1) serviceaccount name
-#     (2) output file
-function sa_generate_new_key {
-  echo "Generating new key pair at '${2}' for serviceaccount '${1}'"
-  tctl x sa gen-key ${1} > ${2}
-}
 
 if [[ ${ACTION} = "deploy" ]]; then
 
