@@ -50,7 +50,7 @@ function download_and_extract_project_job_artifact {
 
 if [[ ${ACTION} = "check" ]]; then
 
-  print_info "Wait for TSB organization to be configured correctly (pipeline platform/tsb/tsb-organization-admin)"
+  print_info "Wait for TSB organization to be configured correctly (pipeline platform/tsb-organization-admin)"
   while true; do
     status_platform_tsb_rbac=$(gitlab_get_pipeline_status ${CI_API_V4_URL} "01234567890123456789" "platform" "tsb-organization-admin")
     if [[ ${status_platform_tsb_rbac} == "success" ]] ; then
@@ -63,8 +63,8 @@ if [[ ${ACTION} = "check" ]]; then
     fi
   done
 
-  print_info "Download and extract tenant serviceaccount key (latest artifact of pipeline platform/tsb/tsb-organization-admin)"
-  download_and_extract_project_job_artifact ${CI_API_V4_URL} "01234567890123456789" "platform" "tsb-organization-admin" "tsb-deploy"
+  print_info "Download and extract tenant serviceaccount key (latest artifact of pipeline platform/tsb-organization-admin)"
+  download_and_extract_project_job_artifact ${CI_API_V4_URL} "01234567890123456789" "platform" "tsb-organization-admin" "tetrate-organization"
   tree ${ROOT_DIR}/output
 
   exit 0
