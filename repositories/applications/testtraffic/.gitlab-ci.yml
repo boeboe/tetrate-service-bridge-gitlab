@@ -33,6 +33,7 @@ variables:
   TARGET:
     value: "cash1"
     options:
+      - "all"
       - "cash1"
       - "cash2"
       - "comm1"
