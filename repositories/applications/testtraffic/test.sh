@@ -10,6 +10,21 @@ CERTS_BASE_DIR=${ROOT_DIR}/output/ingress-certs/client/${TARGET}
 ACTION=${1}
 COUNT="${COUNT:-100}"
 
+ALL_APPS="
+cash1
+cash2
+comm1
+comm2
+invest1
+invest2
+private1
+private2
+retail1
+retail2
+wealth1
+wealth2
+"
+
 # -e exits on error
 # -u errors on undefined variables
 # -x prints commands before execution
@@ -34,17 +49,35 @@ function print_command {
   echo -e "${yellowb}${1}${end}"
 }
 
-if [[ ${ACTION} = "curl" ]]; then
+# Send curl test traffic to application
+#   args:
+#     (1) application name
+#     (2) count
+function send_curl_traffic {
+  target_t1_gw_ip=$(kubectl --context mgmt get svc -n tier1-gw-${1} tier1-gw-${1} --output jsonpath='{.status.loadBalancer.ingress[0].ip}') ;
+  print_command "curl -v -H \"X-B3-Sampled: 1\" --resolve \"${1}.demo.tetrate.io:443:${target_t1_gw_ip}\" --cacert ${CERTS_BASE_DIR}/root-cert.pem --cert ${CERTS_BASE_DIR}/client1.${1}.demo.tetrate.io-cert.pem --key ${CERTS_BASE_DIR}/client1.${1}.demo.tetrate.io-key.pem \"https://${1}.demo.tetrate.io/proxy/mid-${1}.mid-${1}/proxy/back-${1}.back-${1}\""
 
-   # Going to send test traffic using curl
-  print_info "Going to send test traffic (count: ${COUNT}) to application ${TARGET} using curl" ;
-  target_t1_gw_ip=$(kubectl --context mgmt get svc -n tier1-gw-${TARGET} tier1-gw-${TARGET} --output jsonpath='{.status.loadBalancer.ingress[0].ip}') ;
-  print_command "curl -v -H \"X-B3-Sampled: 1\" --resolve \"${TARGET}.demo.tetrate.io:443:${target_t1_gw_ip}\" --cacert ${CERTS_BASE_DIR}/root-cert.pem --cert ${CERTS_BASE_DIR}/client1.${TARGET}.demo.tetrate.io-cert.pem --key ${CERTS_BASE_DIR}/client1.${TARGET}.demo.tetrate.io-key.pem \"https://${TARGET}.demo.tetrate.io/proxy/mid-${TARGET}.mid-${TARGET}/proxy/back-${TARGET}.back-${TARGET}\""
-
-  for ((i=0; i<${COUNT}; i++)); do
-    curl -v -H "X-B3-Sampled: 1" --resolve "${TARGET}.demo.tetrate.io:443:${target_t1_gw_ip}" --cacert ${CERTS_BASE_DIR}/root-cert.pem --cert ${CERTS_BASE_DIR}/client1.${TARGET}.demo.tetrate.io-cert.pem --key ${CERTS_BASE_DIR}/client1.${TARGET}.demo.tetrate.io-key.pem "https://${TARGET}.demo.tetrate.io/proxy/mid-${TARGET}.mid-${TARGET}/proxy/back-${TARGET}.back-${TARGET}" ;
+  for ((i=0; i<${2}; i++)); do
+    curl -v -H "X-B3-Sampled: 1" --resolve "${1}.demo.tetrate.io:443:${target_t1_gw_ip}" --cacert ${CERTS_BASE_DIR}/root-cert.pem --cert ${CERTS_BASE_DIR}/client1.${1}.demo.tetrate.io-cert.pem --key ${CERTS_BASE_DIR}/client1.${1}.demo.tetrate.io-key.pem "https://${1}.demo.tetrate.io/proxy/mid-${1}.mid-${1}/proxy/back-${1}.back-${1}" ;
     sleep 1 ;
   done
+}
+
+
+
+if [[ ${ACTION} = "curl" ]]; then
+
+  if [[ "${TARGET}" == "all" ]] ; then
+    print_info "Going to send test traffic (count: ${COUNT}) to all applications using curl" ;
+
+    for targ in ${TARGET} ; do
+      print_info "Going to send test traffic (count: ${COUNT}) to application ${targ} using curl" ;
+      send_curl_traffic ${targ} ${COUNT}
+    done
+  else
+    print_info "Going to send test traffic (count: ${COUNT}) to application ${TARGET} using curl" ;
+    send_curl_traffic ${TARGET} ${COUNT}
+  fi
 
   exit 0
 fi
