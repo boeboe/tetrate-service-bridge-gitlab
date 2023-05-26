@@ -2,7 +2,7 @@
 apiVersion: install.tetrate.io/v1alpha1
 kind: IngressGateway
 metadata:
-  name: ingress-gw-uvw
-  namespace: gateway-uvw
+  name: ingress-gw-private1
+  namespace: gateway-private1
 spec:
   eastWestOnly: false

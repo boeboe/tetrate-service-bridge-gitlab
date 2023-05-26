@@ -7,7 +7,7 @@ metadata:
     tsb-workspace: private2
   labels:
     istio-injection: enabled
-  name: frontend-private2
+  name: front-private2
 ---
 apiVersion: v1
 kind: Namespace
@@ -17,7 +17,7 @@ metadata:
     tsb-workspace: private2
   labels:
     istio-injection: enabled
-  name: middleware-private2
+  name: mid-private2
 ---
 apiVersion: v1
 kind: Namespace
@@ -27,7 +27,7 @@ metadata:
     tsb-workspace: private2
   labels:
     istio-injection: enabled
-  name: backend-private2
+  name: back-private2
 ---
 apiVersion: v1
 kind: Namespace

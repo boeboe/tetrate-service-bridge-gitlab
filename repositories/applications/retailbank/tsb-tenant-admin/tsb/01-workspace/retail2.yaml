@@ -12,6 +12,6 @@ spec:
     names:
       - "mgmt/tier1-gw-retail2"
       - "*/gateway-retail2"
-      - "*/frontend-retail2"
-      - "*/middleware-retail2"
-      - "*/backend-retail2"
+      - "*/front-retail2"
+      - "*/mid-retail2"
+      - "*/back-retail2"

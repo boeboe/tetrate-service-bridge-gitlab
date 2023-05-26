@@ -12,6 +12,6 @@ spec:
     names:
       - "mgmt/tier1-gw-invest2"
       - "*/gateway-invest2"
-      - "*/frontend-invest2"
-      - "*/middleware-invest2"
-      - "*/backend-invest2"
+      - "*/front-invest2"
+      - "*/mid-invest2"
+      - "*/back-invest2"

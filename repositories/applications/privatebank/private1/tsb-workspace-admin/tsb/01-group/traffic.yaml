@@ -4,14 +4,14 @@ kind: Group
 metadata:
   organization: tetrate
   tenant: privatebank
-  workspace: front-private1vw
-  name: trafgroup-uvw
+  workspace: private1
+  name: private1
 spec:
-  description: Traffic Group for Application UVW
-  displayName: AppUVW
+  description: Traffic Group for Application Private1
+  displayName: Private1
   namespaceSelector:
     names:
-      - "*/ns-u"
+      - "*/front-private1"
       - "*/mid-private1"
       - "*/back-private1"
   configMode: BRIDGED

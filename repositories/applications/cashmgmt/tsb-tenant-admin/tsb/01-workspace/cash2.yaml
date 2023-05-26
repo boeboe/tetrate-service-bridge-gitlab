@@ -12,6 +12,6 @@ spec:
     names:
       - "mgmt/tier1-gw-cash2"
       - "*/gateway-cash2"
-      - "*/frontend-cash2"
-      - "*/middleware-cash2"
-      - "*/backend-cash2"
+      - "*/front-cash2"
+      - "*/mid-cash2"
+      - "*/back-cash2"

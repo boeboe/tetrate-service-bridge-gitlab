@@ -4,25 +4,25 @@ kind: IngressGateway
 metadata:
   organization: tetrate
   tenant: privatebank
-  workspace: front-private1vw
-  group: gwgroup-ingress-uvw
-  name: ingress-gw-uvw
+  workspace: private1
+  group: ingress-private1
+  name: ingress-gw-private1
 spec:
-  description: Ingress Gateway for Application UVW
-  displayName: IngressGwUVW
+  description: Ingress Gateway for Application Private1
+  displayName: IngressGwPrivate1
   workloadSelector:
-    namespace: gateway-uvw
+    namespace: gateway-private1
     labels:
-      app: ingress-gw-uvw
+      app: ingress-gw-private1
   http:
   - name: uvw
-    hostname: uvw.demo.tetrate.io
+    hostname: private1.demo.tetrate.io
     port: 443
     tls:
       mode: SIMPLE
-      secretName: front-private1vw-cert
+      secretName: private1-cert
     routing:
       rules:
       - route:
-          host: ns-u/front-private1.ns-u.svc.cluster.local
+          host: front-private1/front-private1.front-private1.svc.cluster.local
           port: 80

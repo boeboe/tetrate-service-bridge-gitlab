@@ -5,15 +5,15 @@ metadata:
   organization: tetrate
   tenant: privatebank
   workspace: front-private1vw
-  group: gwgroup-tier1-uvw
-  name: tier1-gw-uvw
+  group: gwgroup-tier1-private1
+  name: tier1-gw-private1
 spec:
-  description: Tier1 Gateway Group for Application UVW
-  displayName: Tier1GwUVW
+  description: Tier1 Gateway Group for Application Private1
+  displayName: Tier1GwPrivate1
   workloadSelector:
-    namespace: tier1-gw-uvw
+    namespace: tier1-gw-private1
     labels:
-      app: tier1-gw-uvw
+      app: tier1-gw-private1
   externalServers:
   - name: uvw-mtls
     hostname: uvw.demo.tetrate.io

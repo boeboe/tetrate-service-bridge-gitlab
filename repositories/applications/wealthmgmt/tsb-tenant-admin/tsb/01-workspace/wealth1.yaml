@@ -12,6 +12,6 @@ spec:
     names:
       - "mgmt/tier1-gw-wealth1"
       - "*/gateway-wealth1"
-      - "*/frontend-wealth1"
-      - "*/middleware-wealth1"
-      - "*/backend-wealth1"
+      - "*/front-wealth1"
+      - "*/mid-wealth1"
+      - "*/back-wealth1"

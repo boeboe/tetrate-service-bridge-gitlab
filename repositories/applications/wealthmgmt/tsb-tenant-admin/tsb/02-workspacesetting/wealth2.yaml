@@ -14,19 +14,19 @@ spec:
           app: eastwest-gw-wealth2
       exposedServices:
       - serviceLabels:
-          app: frontend-wealth2
-          service: frontend-wealth2
+          app: front-wealth2
+          service: front-wealth2
       - serviceLabels:
-          app: middleware-wealth2
-          service: middleware-wealth2
+          app: mid-wealth2
+          service: mid-wealth2
       - serviceLabels:
-          app: backend-wealth2
-          service: backend-wealth2
+          app: back-wealth2
+          service: back-wealth2
   defaultTrafficSetting:
     reachability:
       hosts:
       - gateway-wealth2/*
-      - frontend-wealth2/*
-      - middleware-wealth2/*
-      - backend-wealth2/*
+      - front-wealth2/*
+      - mid-wealth2/*
+      - back-wealth2/*
       mode: CUSTOM

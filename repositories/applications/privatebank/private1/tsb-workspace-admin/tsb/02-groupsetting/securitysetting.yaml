@@ -4,8 +4,8 @@ kind: SecuritySetting
 metadata:
   organization: tetrate
   tenant: privatebank
-  workspace: front-private1vw
-  group: secgroup-ingress-uvw
+  workspace: private1
+  group: ingress-private1
   name: tier1-to-ingress
 spec:
   authenticationSettings:
@@ -15,18 +15,18 @@ spec:
     rules:
       allow:
        - from:
-           fqn: organizations/tetrate/tenants/privatebank/workspaces/front-private1vw/securitygroups/secgroup-tier1-uvw
+           fqn: organizations/tetrate/tenants/privatebank/workspaces/private1/securitygroups/tier1-private1
          to:
-           fqn: organizations/tetrate/tenants/privatebank/workspaces/front-private1vw/securitygroups/secgroup-ingress-uvw
+           fqn: organizations/tetrate/tenants/privatebank/workspaces/private1/securitygroups/ingress-private1
 ---
 apiVersion: security.tsb.tetrate.io/v2
 kind: SecuritySetting
 metadata:
   organization: tetrate
   tenant: privatebank
-  workspace: front-private1vw
-  group: secgroup-u
-  name: ingress-to-u
+  workspace: private1
+  group: front-private1
+  name: ingress-to-front
 spec:
   authenticationSettings:
     trafficMode: REQUIRED
@@ -35,18 +35,18 @@ spec:
     rules:
       allow:
        - from:
-           fqn: organizations/tetrate/tenants/privatebank/workspaces/front-private1vw/securitygroups/secgroup-ingress-uvw
+           fqn: organizations/tetrate/tenants/privatebank/workspaces/private1/securitygroups/ingress-private1
          to:
-           fqn: organizations/tetrate/tenants/privatebank/workspaces/front-private1vw/securitygroups/secgroup-u
+           fqn: organizations/tetrate/tenants/privatebank/workspaces/private1/securitygroups/front-private1
 ---
 apiVersion: security.tsb.tetrate.io/v2
 kind: SecuritySetting
 metadata:
   organization: tetrate
   tenant: privatebank
-  workspace: front-private1vw
-  group: secgroup-v
-  name: u-to-v
+  workspace: private1
+  group: mid-private1
+  name: front-to-mid
 spec:
   authenticationSettings:
     trafficMode: REQUIRED
@@ -55,18 +55,18 @@ spec:
     rules:
       allow:
        - from:
-           fqn: organizations/tetrate/tenants/privatebank/workspaces/front-private1vw/securitygroups/secgroup-u
+           fqn: organizations/tetrate/tenants/privatebank/workspaces/private1/securitygroups/front-private1
          to:
-           fqn: organizations/tetrate/tenants/privatebank/workspaces/front-private1vw/securitygroups/secgroup-v
+           fqn: organizations/tetrate/tenants/privatebank/workspaces/private1/securitygroups/mid-private1
 ---
 apiVersion: security.tsb.tetrate.io/v2
 kind: SecuritySetting
 metadata:
   organization: tetrate
   tenant: privatebank
-  workspace: front-private1vw
-  group: secgroup-w
-  name: v-to-w
+  workspace: private1
+  group: back-private1
+  name: mid-to-back
 spec:
   authenticationSettings:
     trafficMode: REQUIRED
@@ -75,6 +75,6 @@ spec:
     rules:
       allow:
        - from:
-           fqn: organizations/tetrate/tenants/privatebank/workspaces/front-private1vw/securitygroups/secgroup-v
+           fqn: organizations/tetrate/tenants/privatebank/workspaces/private1/securitygroups/mid-private1
          to:
-           fqn: organizations/tetrate/tenants/privatebank/workspaces/front-private1vw/securitygroups/secgroup-w
+           fqn: organizations/tetrate/tenants/privatebank/workspaces/private1/securitygroups/back-private1

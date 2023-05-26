@@ -12,6 +12,6 @@ spec:
     names:
       - "mgmt/tier1-gw-private2"
       - "*/gateway-private2"
-      - "*/frontend-private2"
-      - "*/middleware-private2"
-      - "*/backend-private2"
+      - "*/front-private2"
+      - "*/mid-private2"
+      - "*/back-private2"

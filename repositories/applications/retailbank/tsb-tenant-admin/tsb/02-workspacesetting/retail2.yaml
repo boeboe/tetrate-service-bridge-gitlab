@@ -14,19 +14,19 @@ spec:
           app: eastwest-gw-retail2
       exposedServices:
       - serviceLabels:
-          app: frontend-retail2
-          service: frontend-retail2
+          app: front-retail2
+          service: front-retail2
       - serviceLabels:
-          app: middleware-retail2
-          service: middleware-retail2
+          app: mid-retail2
+          service: mid-retail2
       - serviceLabels:
-          app: backend-retail2
-          service: backend-retail2
+          app: back-retail2
+          service: back-retail2
   defaultTrafficSetting:
     reachability:
       hosts:
       - gateway-retail2/*
-      - frontend-retail2/*
-      - middleware-retail2/*
-      - backend-retail2/*
+      - front-retail2/*
+      - mid-retail2/*
+      - back-retail2/*
       mode: CUSTOM

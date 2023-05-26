@@ -14,19 +14,19 @@ spec:
           app: eastwest-gw-invest1
       exposedServices:
       - serviceLabels:
-          app: frontend-invest1
-          service: frontend-invest1
+          app: front-invest1
+          service: front-invest1
       - serviceLabels:
-          app: middleware-invest1
-          service: middleware-invest1
+          app: mid-invest1
+          service: mid-invest1
       - serviceLabels:
-          app: backend-invest1
-          service: backend-invest1
+          app: back-invest1
+          service: back-invest1
   defaultTrafficSetting:
     reachability:
       hosts:
       - gateway-invest1/*
-      - frontend-invest1/*
-      - middleware-invest1/*
-      - backend-invest1/*
+      - front-invest1/*
+      - mid-invest1/*
+      - back-invest1/*
       mode: CUSTOM

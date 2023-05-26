@@ -14,19 +14,19 @@ spec:
           app: eastwest-gw-comm2
       exposedServices:
       - serviceLabels:
-          app: frontend-comm2
-          service: frontend-comm2
+          app: front-comm2
+          service: front-comm2
       - serviceLabels:
-          app: middleware-comm2
-          service: middleware-comm2
+          app: mid-comm2
+          service: mid-comm2
       - serviceLabels:
-          app: backend-comm2
-          service: backend-comm2
+          app: back-comm2
+          service: back-comm2
   defaultTrafficSetting:
     reachability:
       hosts:
       - gateway-comm2/*
-      - frontend-comm2/*
-      - middleware-comm2/*
-      - backend-comm2/*
+      - front-comm2/*
+      - mid-comm2/*
+      - back-comm2/*
       mode: CUSTOM

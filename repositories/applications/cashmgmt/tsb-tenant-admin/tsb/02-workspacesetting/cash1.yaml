@@ -14,19 +14,19 @@ spec:
           app: eastwest-gw-cash1
       exposedServices:
       - serviceLabels:
-          app: frontend-cash1
-          service: frontend-cash1
+          app: front-cash1
+          service: front-cash1
       - serviceLabels:
-          app: middleware-cash1
-          service: middleware-cash1
+          app: mid-cash1
+          service: mid-cash1
       - serviceLabels:
-          app: backend-cash1
-          service: backend-cash1
+          app: back-cash1
+          service: back-cash1
   defaultTrafficSetting:
     reachability:
       hosts:
       - gateway-cash1/*
-      - frontend-cash1/*
-      - middleware-cash1/*
-      - backend-cash1/*
+      - front-cash1/*
+      - mid-cash1/*
+      - back-cash1/*
       mode: CUSTOM

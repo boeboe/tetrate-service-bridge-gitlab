@@ -12,6 +12,6 @@ spec:
     names:
       - "mgmt/tier1-gw-comm2"
       - "*/gateway-comm2"
-      - "*/frontend-comm2"
-      - "*/middleware-comm2"
-      - "*/backend-comm2"
+      - "*/front-comm2"
+      - "*/mid-comm2"
+      - "*/back-comm2"

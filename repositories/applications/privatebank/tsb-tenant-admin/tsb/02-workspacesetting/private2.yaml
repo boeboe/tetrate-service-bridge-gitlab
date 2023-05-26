@@ -14,19 +14,19 @@ spec:
           app: eastwest-gw-private2
       exposedServices:
       - serviceLabels:
-          app: frontend-private2
-          service: frontend-private2
+          app: front-private2
+          service: front-private2
       - serviceLabels:
-          app: middleware-private2
-          service: middleware-private2
+          app: mid-private2
+          service: mid-private2
       - serviceLabels:
-          app: backend-private2
-          service: backend-private2
+          app: back-private2
+          service: back-private2
   defaultTrafficSetting:
     reachability:
       hosts:
       - gateway-private2/*
-      - frontend-private2/*
-      - middleware-private2/*
-      - backend-private2/*
+      - front-private2/*
+      - mid-private2/*
+      - back-private2/*
       mode: CUSTOM
