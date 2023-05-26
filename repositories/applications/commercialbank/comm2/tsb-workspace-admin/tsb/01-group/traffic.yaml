@@ -1,0 +1,17 @@
+---
+apiVersion: traffic.tsb.tetrate.io/v2
+kind: Group
+metadata:
+  organization: tetrate
+  tenant: commercialbank
+  workspace: comm2
+  name: comm2
+spec:
+  description: Traffic Group for Application Comm2
+  displayName: Comm2
+  namespaceSelector:
+    names:
+      - "*/front-comm2"
+      - "*/mid-comm2"
+      - "*/back-comm2"
+  configMode: BRIDGED

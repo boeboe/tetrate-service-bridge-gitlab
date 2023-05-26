@@ -1,0 +1,80 @@
+---
+apiVersion: security.tsb.tetrate.io/v2
+kind: SecuritySetting
+metadata:
+  organization: tetrate
+  tenant: wealthmgmt
+  workspace: wealth2
+  group: ingress-wealth2
+  name: tier1-to-ingress
+spec:
+  authenticationSettings:
+    trafficMode: REQUIRED
+  authorization:
+    mode: RULES
+    rules:
+      allow:
+       - from:
+           fqn: organizations/tetrate/tenants/wealthmgmt/workspaces/wealth2/securitygroups/tier1-wealth2
+         to:
+           fqn: organizations/tetrate/tenants/wealthmgmt/workspaces/wealth2/securitygroups/ingress-wealth2
+---
+apiVersion: security.tsb.tetrate.io/v2
+kind: SecuritySetting
+metadata:
+  organization: tetrate
+  tenant: wealthmgmt
+  workspace: wealth2
+  group: front-wealth2
+  name: ingress-to-front
+spec:
+  authenticationSettings:
+    trafficMode: REQUIRED
+  authorization:
+    mode: RULES
+    rules:
+      allow:
+       - from:
+           fqn: organizations/tetrate/tenants/wealthmgmt/workspaces/wealth2/securitygroups/ingress-wealth2
+         to:
+           fqn: organizations/tetrate/tenants/wealthmgmt/workspaces/wealth2/securitygroups/front-wealth2
+---
+apiVersion: security.tsb.tetrate.io/v2
+kind: SecuritySetting
+metadata:
+  organization: tetrate
+  tenant: wealthmgmt
+  workspace: wealth2
+  group: mid-wealth2
+  name: front-to-mid
+spec:
+  authenticationSettings:
+    trafficMode: REQUIRED
+  authorization:
+    mode: RULES
+    rules:
+      allow:
+       - from:
+           fqn: organizations/tetrate/tenants/wealthmgmt/workspaces/wealth2/securitygroups/front-wealth2
+         to:
+           fqn: organizations/tetrate/tenants/wealthmgmt/workspaces/wealth2/securitygroups/mid-wealth2
+---
+apiVersion: security.tsb.tetrate.io/v2
+kind: SecuritySetting
+metadata:
+  organization: tetrate
+  tenant: wealthmgmt
+  workspace: wealth2
+  group: back-wealth2
+  name: mid-to-back
+spec:
+  authenticationSettings:
+    trafficMode: REQUIRED
+  authorization:
+    mode: RULES
+    rules:
+      allow:
+       - from:
+           fqn: organizations/tetrate/tenants/wealthmgmt/workspaces/wealth2/securitygroups/mid-wealth2
+         to:
+           fqn: organizations/tetrate/tenants/wealthmgmt/workspaces/wealth2/securitygroups/back-wealth2

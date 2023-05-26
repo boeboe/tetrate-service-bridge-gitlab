@@ -1,0 +1,8 @@
+---
+apiVersion: install.tetrate.io/v1alpha1
+kind: IngressGateway
+metadata:
+  name: eastwest-gw-invest2
+  namespace: gateway-invest2
+spec:
+  eastWestOnly: true

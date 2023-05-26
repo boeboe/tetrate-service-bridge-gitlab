@@ -1,0 +1,26 @@
+---
+apiVersion: gateway.tsb.tetrate.io/v2
+kind: Tier1Gateway
+metadata:
+  organization: tetrate
+  tenant: cashmgmt
+  workspace: cash2
+  group: tier1-cash2
+  name: tier1-gw-cash2
+spec:
+  description: Tier1 Gateway Group for Application Cash2
+  displayName: Tier1GwCash2
+  workloadSelector:
+    namespace: tier1-gw-cash2
+    labels:
+      app: tier1-gw-cash2
+  externalServers:
+  - name: cash2-mtls
+    hostname: cash2.demo.tetrate.io
+    port: 443
+    tls:
+      mode: MUTUAL
+      secretName: cash2-cert
+    clusters:
+    - name: active
+    - name: standby

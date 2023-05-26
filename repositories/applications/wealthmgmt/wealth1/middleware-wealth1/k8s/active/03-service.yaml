@@ -1,0 +1,19 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mid-wealth1
+  namespace: mid-wealth1
+  labels:
+    app: mid-wealth1
+    service: mid-wealth1
+spec:
+  ports:
+    - port: 80
+      targetPort: 8000
+      name: http
+    - port: 3000
+      targetPort: 3000
+      name: tcp
+  selector:
+    app: mid-wealth1

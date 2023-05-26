@@ -1,0 +1,30 @@
+---
+apiVersion: gateway.tsb.tetrate.io/v2
+kind: Group
+metadata:
+  organization: tetrate
+  tenant: retailbank
+  workspace: retail2
+  name: tier1-retail2
+spec:
+  description: Tier1 Gateway Group for Application Retail2
+  displayName: Tier1Retail2
+  namespaceSelector:
+    names:
+      - "mgmt/tier1-gw-retail2"
+  configMode: BRIDGED
+---
+apiVersion: gateway.tsb.tetrate.io/v2
+kind: Group
+metadata:
+  organization: tetrate
+  tenant: retailbank
+  workspace: retail2
+  name: ingress-retail2
+spec:
+  description: Ingress Gateway Group for Application Retail2
+  displayName: IngressRetail2
+  namespaceSelector:
+    names:
+      - "*/gateway-retail2"
+  configMode: BRIDGED

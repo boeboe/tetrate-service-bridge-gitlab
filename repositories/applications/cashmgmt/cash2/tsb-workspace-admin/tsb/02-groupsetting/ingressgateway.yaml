@@ -1,0 +1,28 @@
+---
+apiVersion: gateway.tsb.tetrate.io/v2
+kind: IngressGateway
+metadata:
+  organization: tetrate
+  tenant: cashmgmt
+  workspace: cash2
+  group: ingress-cash2
+  name: ingress-gw-cash2
+spec:
+  description: Ingress Gateway for Application Cash2
+  displayName: IngressGwCash2
+  workloadSelector:
+    namespace: gateway-cash2
+    labels:
+      app: ingress-gw-cash2
+  http:
+  - name: cash2-https
+    hostname: cash2.demo.tetrate.io
+    port: 443
+    tls:
+      mode: SIMPLE
+      secretName: cash2-cert
+    routing:
+      rules:
+      - route:
+          host: front-cash2/front-cash2.front-cash2.svc.cluster.local
+          port: 80

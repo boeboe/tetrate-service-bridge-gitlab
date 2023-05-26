@@ -1,0 +1,80 @@
+---
+apiVersion: security.tsb.tetrate.io/v2
+kind: SecuritySetting
+metadata:
+  organization: tetrate
+  tenant: commercialbank
+  workspace: comm2
+  group: ingress-comm2
+  name: tier1-to-ingress
+spec:
+  authenticationSettings:
+    trafficMode: REQUIRED
+  authorization:
+    mode: RULES
+    rules:
+      allow:
+       - from:
+           fqn: organizations/tetrate/tenants/commercialbank/workspaces/comm2/securitygroups/tier1-comm2
+         to:
+           fqn: organizations/tetrate/tenants/commercialbank/workspaces/comm2/securitygroups/ingress-comm2
+---
+apiVersion: security.tsb.tetrate.io/v2
+kind: SecuritySetting
+metadata:
+  organization: tetrate
+  tenant: commercialbank
+  workspace: comm2
+  group: front-comm2
+  name: ingress-to-front
+spec:
+  authenticationSettings:
+    trafficMode: REQUIRED
+  authorization:
+    mode: RULES
+    rules:
+      allow:
+       - from:
+           fqn: organizations/tetrate/tenants/commercialbank/workspaces/comm2/securitygroups/ingress-comm2
+         to:
+           fqn: organizations/tetrate/tenants/commercialbank/workspaces/comm2/securitygroups/front-comm2
+---
+apiVersion: security.tsb.tetrate.io/v2
+kind: SecuritySetting
+metadata:
+  organization: tetrate
+  tenant: commercialbank
+  workspace: comm2
+  group: mid-comm2
+  name: front-to-mid
+spec:
+  authenticationSettings:
+    trafficMode: REQUIRED
+  authorization:
+    mode: RULES
+    rules:
+      allow:
+       - from:
+           fqn: organizations/tetrate/tenants/commercialbank/workspaces/comm2/securitygroups/front-comm2
+         to:
+           fqn: organizations/tetrate/tenants/commercialbank/workspaces/comm2/securitygroups/mid-comm2
+---
+apiVersion: security.tsb.tetrate.io/v2
+kind: SecuritySetting
+metadata:
+  organization: tetrate
+  tenant: commercialbank
+  workspace: comm2
+  group: back-comm2
+  name: mid-to-back
+spec:
+  authenticationSettings:
+    trafficMode: REQUIRED
+  authorization:
+    mode: RULES
+    rules:
+      allow:
+       - from:
+           fqn: organizations/tetrate/tenants/commercialbank/workspaces/comm2/securitygroups/mid-comm2
+         to:
+           fqn: organizations/tetrate/tenants/commercialbank/workspaces/comm2/securitygroups/back-comm2

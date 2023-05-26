@@ -1,0 +1,26 @@
+---
+apiVersion: gateway.tsb.tetrate.io/v2
+kind: Tier1Gateway
+metadata:
+  organization: tetrate
+  tenant: retailbank
+  workspace: retail2
+  group: tier1-retail2
+  name: tier1-gw-retail2
+spec:
+  description: Tier1 Gateway Group for Application Retail2
+  displayName: Tier1GwRetail2
+  workloadSelector:
+    namespace: tier1-gw-retail2
+    labels:
+      app: tier1-gw-retail2
+  externalServers:
+  - name: retail2-mtls
+    hostname: retail2.demo.tetrate.io
+    port: 443
+    tls:
+      mode: MUTUAL
+      secretName: retail2-cert
+    clusters:
+    - name: active
+    - name: standby

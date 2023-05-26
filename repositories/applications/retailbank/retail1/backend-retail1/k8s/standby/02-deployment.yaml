@@ -1,0 +1,48 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: back-retail1-v1
+  namespace: back-retail1
+  labels:
+    app: back-retail1
+    version: v1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: back-retail1
+      version: v1
+  template:
+    metadata:
+      labels:
+        app: back-retail1
+        version: v1
+    spec:
+      serviceAccountName: sa-back-retail1
+      containers:
+        - name: obs-tester
+          image: 192.168.47.2:5050/platform/tsb-images/obs-tester-server:1.0
+          imagePullPolicy: IfNotPresent
+          args:
+            - '--log-output-level=all:debug'
+            - '--http-listen-address=:8000' # address the http server in the container listens on
+            - '--tcp-listen-address=:3000' # address the tcp server in the container listens on
+            - '--ep-duration=0' # the default latency used for handling requests to / (echo handler)
+            - '--ep-errors=0' # the default percentage of errors injected when handling echo requests
+            - '--ep-headers=0' # the default percentage of double headers injected when handling echo requests
+            - '--zipkin-reporter-endpoint=http://zipkin.istio-system.svc.cluster.local:9411/api/v2/spans'
+            - '--zipkin-sample-rate=1.0' # When we originate client request, this is the sample rate we use.
+            - '--zipkin-singlehost-spans' # Envoy does not work well with Zipkin's default shared spans
+          env:
+            - name: SVCNAME
+              value: back-retail1
+          ports:
+            - name: http
+              containerPort: 8000
+            - name: tcp
+              containerPort: 3000
+          resources:
+            limits:
+              memory: "64Mi"
+              cpu: "128m"

@@ -1,0 +1,19 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mid-retail2
+  namespace: mid-retail2
+  labels:
+    app: mid-retail2
+    service: mid-retail2
+spec:
+  ports:
+    - port: 80
+      targetPort: 8000
+      name: http
+    - port: 3000
+      targetPort: 3000
+      name: tcp
+  selector:
+    app: mid-retail2

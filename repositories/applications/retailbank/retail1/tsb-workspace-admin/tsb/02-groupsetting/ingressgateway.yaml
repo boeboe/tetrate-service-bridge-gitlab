@@ -1,0 +1,28 @@
+---
+apiVersion: gateway.tsb.tetrate.io/v2
+kind: IngressGateway
+metadata:
+  organization: tetrate
+  tenant: retailbank
+  workspace: retail1
+  group: ingress-retail1
+  name: ingress-gw-retail1
+spec:
+  description: Ingress Gateway for Application Retail1
+  displayName: IngressGwRetail1
+  workloadSelector:
+    namespace: gateway-retail1
+    labels:
+      app: ingress-gw-retail1
+  http:
+  - name: retail1-https
+    hostname: retail1.demo.tetrate.io
+    port: 443
+    tls:
+      mode: SIMPLE
+      secretName: retail1-cert
+    routing:
+      rules:
+      - route:
+          host: front-retail1/front-retail1.front-retail1.svc.cluster.local
+          port: 80

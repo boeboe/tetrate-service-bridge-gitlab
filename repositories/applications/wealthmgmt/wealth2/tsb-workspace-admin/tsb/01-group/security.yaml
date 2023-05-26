@@ -1,0 +1,75 @@
+---
+apiVersion: security.tsb.tetrate.io/v2
+kind: Group
+metadata:
+  organization: tetrate
+  tenant: wealthmgmt
+  workspace: wealth2
+  name: tier1-wealth2
+spec:
+  description: Security Group for Tier1Gateway Wealth2
+  displayName: Tier1Wealth2
+  namespaceSelector:
+    names:
+      - "mgmt/tier1-gw-wealth2"
+  configMode: BRIDGED
+---
+apiVersion: security.tsb.tetrate.io/v2
+kind: Group
+metadata:
+  organization: tetrate
+  tenant: wealthmgmt
+  workspace: wealth2
+  name: ingress-wealth2
+spec:
+  description: Security Group for IngressGateway Wealth2
+  displayName: IngressWealth2
+  namespaceSelector:
+    names:
+      - "*/gateway-wealth2"
+  configMode: BRIDGED
+---
+apiVersion: security.tsb.tetrate.io/v2
+kind: Group
+metadata:
+  organization: tetrate
+  tenant: wealthmgmt
+  workspace: wealth2
+  name: front-wealth2
+spec:
+  description: Security Group for Frontend of Wealth2 Application
+  displayName: FrontWealth2
+  namespaceSelector:
+    names:
+      - "*/front-wealth2"
+  configMode: BRIDGED
+---
+apiVersion: security.tsb.tetrate.io/v2
+kind: Group
+metadata:
+  organization: tetrate
+  tenant: wealthmgmt
+  workspace: wealth2
+  name: mid-wealth2
+spec:
+  description: Security Group for Middleware of Wealth2 Application
+  displayName: MidWealth2
+  namespaceSelector:
+    names:
+      - "*/mid-wealth2"
+  configMode: BRIDGED
+---
+apiVersion: security.tsb.tetrate.io/v2
+kind: Group
+metadata:
+  organization: tetrate
+  tenant: wealthmgmt
+  workspace: wealth2
+  name: back-wealth2
+spec:
+  description: Security Group for Backend of Wealth2 Application
+  displayName: BackWealth2
+  namespaceSelector:
+    names:
+      - "*/back-wealth2"
+  configMode: BRIDGED

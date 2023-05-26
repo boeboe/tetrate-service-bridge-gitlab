@@ -1,0 +1,80 @@
+---
+apiVersion: security.tsb.tetrate.io/v2
+kind: SecuritySetting
+metadata:
+  organization: tetrate
+  tenant: retailbank
+  workspace: retail2
+  group: ingress-retail2
+  name: tier1-to-ingress
+spec:
+  authenticationSettings:
+    trafficMode: REQUIRED
+  authorization:
+    mode: RULES
+    rules:
+      allow:
+       - from:
+           fqn: organizations/tetrate/tenants/retailbank/workspaces/retail2/securitygroups/tier1-retail2
+         to:
+           fqn: organizations/tetrate/tenants/retailbank/workspaces/retail2/securitygroups/ingress-retail2
+---
+apiVersion: security.tsb.tetrate.io/v2
+kind: SecuritySetting
+metadata:
+  organization: tetrate
+  tenant: retailbank
+  workspace: retail2
+  group: front-retail2
+  name: ingress-to-front
+spec:
+  authenticationSettings:
+    trafficMode: REQUIRED
+  authorization:
+    mode: RULES
+    rules:
+      allow:
+       - from:
+           fqn: organizations/tetrate/tenants/retailbank/workspaces/retail2/securitygroups/ingress-retail2
+         to:
+           fqn: organizations/tetrate/tenants/retailbank/workspaces/retail2/securitygroups/front-retail2
+---
+apiVersion: security.tsb.tetrate.io/v2
+kind: SecuritySetting
+metadata:
+  organization: tetrate
+  tenant: retailbank
+  workspace: retail2
+  group: mid-retail2
+  name: front-to-mid
+spec:
+  authenticationSettings:
+    trafficMode: REQUIRED
+  authorization:
+    mode: RULES
+    rules:
+      allow:
+       - from:
+           fqn: organizations/tetrate/tenants/retailbank/workspaces/retail2/securitygroups/front-retail2
+         to:
+           fqn: organizations/tetrate/tenants/retailbank/workspaces/retail2/securitygroups/mid-retail2
+---
+apiVersion: security.tsb.tetrate.io/v2
+kind: SecuritySetting
+metadata:
+  organization: tetrate
+  tenant: retailbank
+  workspace: retail2
+  group: back-retail2
+  name: mid-to-back
+spec:
+  authenticationSettings:
+    trafficMode: REQUIRED
+  authorization:
+    mode: RULES
+    rules:
+      allow:
+       - from:
+           fqn: organizations/tetrate/tenants/retailbank/workspaces/retail2/securitygroups/mid-retail2
+         to:
+           fqn: organizations/tetrate/tenants/retailbank/workspaces/retail2/securitygroups/back-retail2

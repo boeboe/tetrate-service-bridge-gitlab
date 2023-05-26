@@ -1,0 +1,30 @@
+---
+apiVersion: gateway.tsb.tetrate.io/v2
+kind: Group
+metadata:
+  organization: tetrate
+  tenant: wealthmgmt
+  workspace: wealth2
+  name: tier1-wealth2
+spec:
+  description: Tier1 Gateway Group for Application Wealth2
+  displayName: Tier1Wealth2
+  namespaceSelector:
+    names:
+      - "mgmt/tier1-gw-wealth2"
+  configMode: BRIDGED
+---
+apiVersion: gateway.tsb.tetrate.io/v2
+kind: Group
+metadata:
+  organization: tetrate
+  tenant: wealthmgmt
+  workspace: wealth2
+  name: ingress-wealth2
+spec:
+  description: Ingress Gateway Group for Application Wealth2
+  displayName: IngressWealth2
+  namespaceSelector:
+    names:
+      - "*/gateway-wealth2"
+  configMode: BRIDGED

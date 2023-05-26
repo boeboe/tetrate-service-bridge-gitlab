@@ -1,8 +1,0 @@
----
-apiVersion: install.tetrate.io/v1alpha1
-kind: IngressGateway
-metadata:
-  name: eastwest-gw-abc
-  namespace: gateway-abc
-spec:
-  eastWestOnly: true

@@ -1,0 +1,30 @@
+---
+apiVersion: gateway.tsb.tetrate.io/v2
+kind: Group
+metadata:
+  organization: tetrate
+  tenant: cashmgmt
+  workspace: cash1
+  name: tier1-cash1
+spec:
+  description: Tier1 Gateway Group for Application Cash1
+  displayName: Tier1Cash1
+  namespaceSelector:
+    names:
+      - "mgmt/tier1-gw-cash1"
+  configMode: BRIDGED
+---
+apiVersion: gateway.tsb.tetrate.io/v2
+kind: Group
+metadata:
+  organization: tetrate
+  tenant: cashmgmt
+  workspace: cash1
+  name: ingress-cash1
+spec:
+  description: Ingress Gateway Group for Application Cash1
+  displayName: IngressCash1
+  namespaceSelector:
+    names:
+      - "*/gateway-cash1"
+  configMode: BRIDGED

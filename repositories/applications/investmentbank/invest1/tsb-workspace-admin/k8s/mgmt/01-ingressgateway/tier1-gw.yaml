@@ -1,0 +1,7 @@
+---
+apiVersion: install.tetrate.io/v1alpha1
+kind: Tier1Gateway
+metadata:
+  name: tier1-gw-invest1
+  namespace: tier1-gw-invest1
+spec: {}

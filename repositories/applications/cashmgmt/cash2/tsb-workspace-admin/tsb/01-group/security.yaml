@@ -1,0 +1,75 @@
+---
+apiVersion: security.tsb.tetrate.io/v2
+kind: Group
+metadata:
+  organization: tetrate
+  tenant: cashmgmt
+  workspace: cash2
+  name: tier1-cash2
+spec:
+  description: Security Group for Tier1Gateway Cash2
+  displayName: Tier1Cash2
+  namespaceSelector:
+    names:
+      - "mgmt/tier1-gw-cash2"
+  configMode: BRIDGED
+---
+apiVersion: security.tsb.tetrate.io/v2
+kind: Group
+metadata:
+  organization: tetrate
+  tenant: cashmgmt
+  workspace: cash2
+  name: ingress-cash2
+spec:
+  description: Security Group for IngressGateway Cash2
+  displayName: IngressCash2
+  namespaceSelector:
+    names:
+      - "*/gateway-cash2"
+  configMode: BRIDGED
+---
+apiVersion: security.tsb.tetrate.io/v2
+kind: Group
+metadata:
+  organization: tetrate
+  tenant: cashmgmt
+  workspace: cash2
+  name: front-cash2
+spec:
+  description: Security Group for Frontend of Cash2 Application
+  displayName: FrontCash2
+  namespaceSelector:
+    names:
+      - "*/front-cash2"
+  configMode: BRIDGED
+---
+apiVersion: security.tsb.tetrate.io/v2
+kind: Group
+metadata:
+  organization: tetrate
+  tenant: cashmgmt
+  workspace: cash2
+  name: mid-cash2
+spec:
+  description: Security Group for Middleware of Cash2 Application
+  displayName: MidCash2
+  namespaceSelector:
+    names:
+      - "*/mid-cash2"
+  configMode: BRIDGED
+---
+apiVersion: security.tsb.tetrate.io/v2
+kind: Group
+metadata:
+  organization: tetrate
+  tenant: cashmgmt
+  workspace: cash2
+  name: back-cash2
+spec:
+  description: Security Group for Backend of Cash2 Application
+  displayName: BackCash2
+  namespaceSelector:
+    names:
+      - "*/back-cash2"
+  configMode: BRIDGED

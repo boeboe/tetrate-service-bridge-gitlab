@@ -1,0 +1,28 @@
+---
+apiVersion: gateway.tsb.tetrate.io/v2
+kind: IngressGateway
+metadata:
+  organization: tetrate
+  tenant: commercialbank
+  workspace: comm1
+  group: ingress-comm1
+  name: ingress-gw-comm1
+spec:
+  description: Ingress Gateway for Application Comm1
+  displayName: IngressGwComm1
+  workloadSelector:
+    namespace: gateway-comm1
+    labels:
+      app: ingress-gw-comm1
+  http:
+  - name: comm1-https
+    hostname: comm1.demo.tetrate.io
+    port: 443
+    tls:
+      mode: SIMPLE
+      secretName: comm1-cert
+    routing:
+      rules:
+      - route:
+          host: front-comm1/front-comm1.front-comm1.svc.cluster.local
+          port: 80

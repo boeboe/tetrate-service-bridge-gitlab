@@ -1,0 +1,17 @@
+---
+apiVersion: traffic.tsb.tetrate.io/v2
+kind: Group
+metadata:
+  organization: tetrate
+  tenant: retailbank
+  workspace: retail2
+  name: retail2
+spec:
+  description: Traffic Group for Application Retail2
+  displayName: Retail2
+  namespaceSelector:
+    names:
+      - "*/front-retail2"
+      - "*/mid-retail2"
+      - "*/back-retail2"
+  configMode: BRIDGED

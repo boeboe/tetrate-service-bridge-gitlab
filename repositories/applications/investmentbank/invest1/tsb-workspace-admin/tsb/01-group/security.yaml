@@ -1,0 +1,75 @@
+---
+apiVersion: security.tsb.tetrate.io/v2
+kind: Group
+metadata:
+  organization: tetrate
+  tenant: investmentbank
+  workspace: invest1
+  name: tier1-invest1
+spec:
+  description: Security Group for Tier1Gateway Invest1
+  displayName: Tier1Invest1
+  namespaceSelector:
+    names:
+      - "mgmt/tier1-gw-invest1"
+  configMode: BRIDGED
+---
+apiVersion: security.tsb.tetrate.io/v2
+kind: Group
+metadata:
+  organization: tetrate
+  tenant: investmentbank
+  workspace: invest1
+  name: ingress-invest1
+spec:
+  description: Security Group for IngressGateway Invest1
+  displayName: IngressInvest1
+  namespaceSelector:
+    names:
+      - "*/gateway-invest1"
+  configMode: BRIDGED
+---
+apiVersion: security.tsb.tetrate.io/v2
+kind: Group
+metadata:
+  organization: tetrate
+  tenant: investmentbank
+  workspace: invest1
+  name: front-invest1
+spec:
+  description: Security Group for Frontend of Invest1 Application
+  displayName: FrontInvest1
+  namespaceSelector:
+    names:
+      - "*/front-invest1"
+  configMode: BRIDGED
+---
+apiVersion: security.tsb.tetrate.io/v2
+kind: Group
+metadata:
+  organization: tetrate
+  tenant: investmentbank
+  workspace: invest1
+  name: mid-invest1
+spec:
+  description: Security Group for Middleware of Invest1 Application
+  displayName: MidInvest1
+  namespaceSelector:
+    names:
+      - "*/mid-invest1"
+  configMode: BRIDGED
+---
+apiVersion: security.tsb.tetrate.io/v2
+kind: Group
+metadata:
+  organization: tetrate
+  tenant: investmentbank
+  workspace: invest1
+  name: back-invest1
+spec:
+  description: Security Group for Backend of Invest1 Application
+  displayName: BackInvest1
+  namespaceSelector:
+    names:
+      - "*/back-invest1"
+  configMode: BRIDGED

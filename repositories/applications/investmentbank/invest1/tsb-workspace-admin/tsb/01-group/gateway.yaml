@@ -1,0 +1,30 @@
+---
+apiVersion: gateway.tsb.tetrate.io/v2
+kind: Group
+metadata:
+  organization: tetrate
+  tenant: investmentbank
+  workspace: invest1
+  name: tier1-invest1
+spec:
+  description: Tier1 Gateway Group for Application Invest1
+  displayName: Tier1Invest1
+  namespaceSelector:
+    names:
+      - "mgmt/tier1-gw-invest1"
+  configMode: BRIDGED
+---
+apiVersion: gateway.tsb.tetrate.io/v2
+kind: Group
+metadata:
+  organization: tetrate
+  tenant: investmentbank
+  workspace: invest1
+  name: ingress-invest1
+spec:
+  description: Ingress Gateway Group for Application Invest1
+  displayName: IngressInvest1
+  namespaceSelector:
+    names:
+      - "*/gateway-invest1"
+  configMode: BRIDGED

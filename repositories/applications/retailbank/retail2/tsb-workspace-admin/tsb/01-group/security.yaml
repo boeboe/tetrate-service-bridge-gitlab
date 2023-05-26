@@ -1,0 +1,75 @@
+---
+apiVersion: security.tsb.tetrate.io/v2
+kind: Group
+metadata:
+  organization: tetrate
+  tenant: retailbank
+  workspace: retail2
+  name: tier1-retail2
+spec:
+  description: Security Group for Tier1Gateway Retail2
+  displayName: Tier1Retail2
+  namespaceSelector:
+    names:
+      - "mgmt/tier1-gw-retail2"
+  configMode: BRIDGED
+---
+apiVersion: security.tsb.tetrate.io/v2
+kind: Group
+metadata:
+  organization: tetrate
+  tenant: retailbank
+  workspace: retail2
+  name: ingress-retail2
+spec:
+  description: Security Group for IngressGateway Retail2
+  displayName: IngressRetail2
+  namespaceSelector:
+    names:
+      - "*/gateway-retail2"
+  configMode: BRIDGED
+---
+apiVersion: security.tsb.tetrate.io/v2
+kind: Group
+metadata:
+  organization: tetrate
+  tenant: retailbank
+  workspace: retail2
+  name: front-retail2
+spec:
+  description: Security Group for Frontend of Retail2 Application
+  displayName: FrontRetail2
+  namespaceSelector:
+    names:
+      - "*/front-retail2"
+  configMode: BRIDGED
+---
+apiVersion: security.tsb.tetrate.io/v2
+kind: Group
+metadata:
+  organization: tetrate
+  tenant: retailbank
+  workspace: retail2
+  name: mid-retail2
+spec:
+  description: Security Group for Middleware of Retail2 Application
+  displayName: MidRetail2
+  namespaceSelector:
+    names:
+      - "*/mid-retail2"
+  configMode: BRIDGED
+---
+apiVersion: security.tsb.tetrate.io/v2
+kind: Group
+metadata:
+  organization: tetrate
+  tenant: retailbank
+  workspace: retail2
+  name: back-retail2
+spec:
+  description: Security Group for Backend of Retail2 Application
+  displayName: BackRetail2
+  namespaceSelector:
+    names:
+      - "*/back-retail2"
+  configMode: BRIDGED

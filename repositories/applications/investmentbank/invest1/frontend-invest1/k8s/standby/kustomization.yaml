@@ -1,0 +1,23 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+- 01-serviceaccount.yaml
+- 02-deployment.yaml
+- 03-service.yaml
+
+patches:
+  - patch: |-
+      - op: add
+        path: /metadata/annotations/tetrateio.api.tsb.v2~1Organization
+        value: tetrate
+      - op: add
+        path: /metadata/annotations/tetrateio.api.tsb.v2~1Tenant
+        value: investmentbank
+      - op: add
+        path: /metadata/annotations/tetrateio.api.tsb.v2~1Workspace
+        value: front-invest1vw
+    target:
+      kind: .*
+      name: .*

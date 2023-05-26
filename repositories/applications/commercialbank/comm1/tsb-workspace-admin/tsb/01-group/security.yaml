@@ -1,0 +1,75 @@
+---
+apiVersion: security.tsb.tetrate.io/v2
+kind: Group
+metadata:
+  organization: tetrate
+  tenant: commercialbank
+  workspace: comm1
+  name: tier1-comm1
+spec:
+  description: Security Group for Tier1Gateway Comm1
+  displayName: Tier1Comm1
+  namespaceSelector:
+    names:
+      - "mgmt/tier1-gw-comm1"
+  configMode: BRIDGED
+---
+apiVersion: security.tsb.tetrate.io/v2
+kind: Group
+metadata:
+  organization: tetrate
+  tenant: commercialbank
+  workspace: comm1
+  name: ingress-comm1
+spec:
+  description: Security Group for IngressGateway Comm1
+  displayName: IngressComm1
+  namespaceSelector:
+    names:
+      - "*/gateway-comm1"
+  configMode: BRIDGED
+---
+apiVersion: security.tsb.tetrate.io/v2
+kind: Group
+metadata:
+  organization: tetrate
+  tenant: commercialbank
+  workspace: comm1
+  name: front-comm1
+spec:
+  description: Security Group for Frontend of Comm1 Application
+  displayName: FrontComm1
+  namespaceSelector:
+    names:
+      - "*/front-comm1"
+  configMode: BRIDGED
+---
+apiVersion: security.tsb.tetrate.io/v2
+kind: Group
+metadata:
+  organization: tetrate
+  tenant: commercialbank
+  workspace: comm1
+  name: mid-comm1
+spec:
+  description: Security Group for Middleware of Comm1 Application
+  displayName: MidComm1
+  namespaceSelector:
+    names:
+      - "*/mid-comm1"
+  configMode: BRIDGED
+---
+apiVersion: security.tsb.tetrate.io/v2
+kind: Group
+metadata:
+  organization: tetrate
+  tenant: commercialbank
+  workspace: comm1
+  name: back-comm1
+spec:
+  description: Security Group for Backend of Comm1 Application
+  displayName: BackComm1
+  namespaceSelector:
+    names:
+      - "*/back-comm1"
+  configMode: BRIDGED

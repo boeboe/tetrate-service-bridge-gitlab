@@ -1,0 +1,26 @@
+---
+apiVersion: gateway.tsb.tetrate.io/v2
+kind: Tier1Gateway
+metadata:
+  organization: tetrate
+  tenant: commercialbank
+  workspace: comm2
+  group: tier1-comm2
+  name: tier1-gw-comm2
+spec:
+  description: Tier1 Gateway Group for Application Comm2
+  displayName: Tier1GwComm2
+  workloadSelector:
+    namespace: tier1-gw-comm2
+    labels:
+      app: tier1-gw-comm2
+  externalServers:
+  - name: comm2-mtls
+    hostname: comm2.demo.tetrate.io
+    port: 443
+    tls:
+      mode: MUTUAL
+      secretName: comm2-cert
+    clusters:
+    - name: active
+    - name: standby
