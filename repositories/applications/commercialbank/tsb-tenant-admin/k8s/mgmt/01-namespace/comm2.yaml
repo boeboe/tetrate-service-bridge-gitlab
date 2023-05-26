@@ -4,5 +4,5 @@ kind: Namespace
 metadata:
   annotations:
     tsb-tenant: commercialbank
-    tsb-workspace: invest2
-  name: tier1-gw-invest2
+    tsb-workspace: comm2
+  name: tier1-gw-comm2
