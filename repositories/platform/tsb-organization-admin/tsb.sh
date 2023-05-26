@@ -107,11 +107,12 @@ if [[ ${ACTION} = "deploy" ]]; then
     echo "Applying tsb configuration of '${SERVICEACCOUNT_DIR}/${serviceaccount_file}'" ;
     tctl apply -f ${SERVICEACCOUNT_DIR}/${serviceaccount_file} ;
 
-    serviceaccount=$(cat ${SERVICEACCOUNT_DIR}/${serviceaccount_file} | grep "name: " | awk '{print $2}') ;
-    sa_revoke_all_keys ${serviceaccount} ;
-    mkdir -p ${OUTPUT_DIR}/${serviceaccount} ;
-    sa_generate_new_key ${serviceaccount} ${OUTPUT_DIR}/${serviceaccount}/private-key.jwk ;
-    sleep 1 ;
+    for serviceaccount in $(cat ${SERVICEACCOUNT_DIR}/${serviceaccount_file} | grep "name: " | awk '{print $2}') ; do
+      sa_revoke_all_keys ${serviceaccount} ;
+      mkdir -p ${OUTPUT_DIR}/${serviceaccount} ;
+      sa_generate_new_key ${serviceaccount} ${OUTPUT_DIR}/${serviceaccount}/private-key.jwk ;
+      sleep 1 ;
+    done
   done
 
   # Configure tsb accessbindings
