@@ -9,7 +9,7 @@ K8S_CONFIG_DIR=${ROOT_DIR}/k8s
 INGRESSGATEWAY_DIR="01-ingressgateway"
 
 OUTPUT_DIR=${ROOT_DIR}/output/k8s
-CERTS_BASE_DIR=${ROOT_DIR}/output/ingress-certs/server/uvw
+CERTS_BASE_DIR=${ROOT_DIR}/output/ingress-certs/server/private1
 
 ACTION=${1}
 
@@ -33,24 +33,24 @@ if [[ ${ACTION} = "deploy" ]]; then
 
   # Configure k8s secrets
   print_info "Configure tier1 gateway k8s mutual tls secrets" ;
-  if kubectl --context mgmt -n tier1-gw-uvw get secret front-private1vw-cert &>/dev/null; then
-    echo "Secret 'front-private1vw-cert' in namespace 'tier1-gw-uvw' already exists in cluster 'mgmt'"
+  if kubectl --context mgmt -n tier1-gw-private1 get secret private1-cert &>/dev/null; then
+    echo "Secret 'private1-certt' in namespace 'tier1-gw-private1' already exists in cluster 'mgmt'"
   else
-    echo "Creating secret 'front-private1vw-cert' in namespace 'tier1-gw-uvw' in cluster 'mgmt'"
-    kubectl --context mgmt create secret generic front-private1vw-cert -n tier1-gw-uvw \
-      --from-file=tls.key=${CERTS_BASE_DIR}/uvw.demo.tetrate.io-key.pem \
-      --from-file=tls.crt=${CERTS_BASE_DIR}/uvw.demo.tetrate.io-cert.pem \
+    echo "Creating secret 'private1-cert' in namespace 'tier1-gw-private1' in cluster 'mgmt'"
+    kubectl --context mgmt create secret generic private1-cert -n tier1-gw-private1 \
+      --from-file=tls.key=${CERTS_BASE_DIR}/private1.demo.tetrate.io-key.pem \
+      --from-file=tls.crt=${CERTS_BASE_DIR}/private1.demo.tetrate.io-cert.pem \
       --from-file=ca.crt=${CERTS_BASE_DIR}/root-cert.pem ;
   fi
   print_info "Configure ingress gateway k8s single tls secrets" ;
   for cluster_name in active standby ; do
-    if kubectl --context ${cluster_name} -n gateway-uvw get secret front-private1vw-cert &>/dev/null; then
-      echo "Secret 'front-private1vw-cert' in namespace 'gateway-uvw' already exists in cluster '${cluster_name}'"
+    if kubectl --context ${cluster_name} -n gateway-private1 get secret private1-cert &>/dev/null; then
+      echo "Secret 'private1-cert' in namespace 'gateway-private1' already exists in cluster '${cluster_name}'"
     else
-      echo "Creating secret 'front-private1vw-cert' in namespace 'gateway-uvw' in cluster '${cluster_name}'"
-      kubectl --context ${cluster_name} create secret tls front-private1vw-cert -n gateway-uvw \
-        --key ${CERTS_BASE_DIR}/uvw.demo.tetrate.io-key.pem \
-        --cert ${CERTS_BASE_DIR}/uvw.demo.tetrate.io-cert.pem ;
+      echo "Creating secret 'private1-cert' in namespace 'gateway-private1' in cluster '${cluster_name}'"
+      kubectl --context ${cluster_name} create secret tls private1-cert -n gateway-private1 \
+        --key ${CERTS_BASE_DIR}/private1.demo.tetrate.io-key.pem \
+        --cert ${CERTS_BASE_DIR}/private1.demo.tetrate.io-cert.pem ;
     fi
   done
 

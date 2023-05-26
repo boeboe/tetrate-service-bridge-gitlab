@@ -7,7 +7,7 @@
         "client3"
       ],
       "domain": "demo.tetrate.io",
-      "server": "abc"
+      "server": "cash1"
     },
     {
       "clients": [
@@ -16,7 +16,7 @@
         "client3"
       ],
       "domain": "demo.tetrate.io",
-      "server": "def"
+      "server": "cash2"
     },
     {
       "clients": [
@@ -25,7 +25,7 @@
         "client3"
       ],
       "domain": "demo.tetrate.io",
-      "server": "uvw"
+      "server": "comm1"
     },
     {
       "clients": [
@@ -34,7 +34,79 @@
         "client3"
       ],
       "domain": "demo.tetrate.io",
-      "server": "xyz"
+      "server": "comm2"
+    },
+    {
+      "clients": [
+        "client1",
+        "client2",
+        "client3"
+      ],
+      "domain": "demo.tetrate.io",
+      "server": "invest1"
+    },
+    {
+      "clients": [
+        "client1",
+        "client2",
+        "client3"
+      ],
+      "domain": "demo.tetrate.io",
+      "server": "invest2"
+    },
+    {
+      "clients": [
+        "client1",
+        "client2",
+        "client3"
+      ],
+      "domain": "demo.tetrate.io",
+      "server": "private1"
+    },
+    {
+      "clients": [
+        "client1",
+        "client2",
+        "client3"
+      ],
+      "domain": "demo.tetrate.io",
+      "server": "private2"
+    },
+    {
+      "clients": [
+        "client1",
+        "client2",
+        "client3"
+      ],
+      "domain": "demo.tetrate.io",
+      "server": "retail1"
+    },
+    {
+      "clients": [
+        "client1",
+        "client2",
+        "client3"
+      ],
+      "domain": "demo.tetrate.io",
+      "server": "retail2"
+    },
+    {
+      "clients": [
+        "client1",
+        "client2",
+        "client3"
+      ],
+      "domain": "demo.tetrate.io",
+      "server": "wealth1"
+    },
+    {
+      "clients": [
+        "client1",
+        "client2",
+        "client3"
+      ],
+      "domain": "demo.tetrate.io",
+      "server": "wealth2"
     }
   ],
   "istio": {
