@@ -53,6 +53,6 @@ tsb-deploy:
     - application-tctl
 variables:
   TERM: xterm
-  CURL_COUNT:
+  COUNT:
     description: number of curl calls to make
     value: "20"
