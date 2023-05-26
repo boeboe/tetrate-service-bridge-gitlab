@@ -2,11 +2,11 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: app-x
-  namespace: ns-x
+  name: front-private2
+  namespace: front-private2
   labels:
-    app: app-x
-    service: app-x
+    app: front-private2
+    service: front-private2
 spec:
   ports:
     - port: 80
@@ -16,4 +16,4 @@ spec:
       targetPort: 3000
       name: tcp
   selector:
-    app: app-x
+    app: front-private2

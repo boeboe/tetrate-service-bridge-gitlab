@@ -2,11 +2,11 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: app-z
-  namespace: ns-z
+  name: back-private2
+  namespace: back-private2
   labels:
-    app: app-z
-    service: app-z
+    app: back-private2
+    service: back-private2
 spec:
   ports:
     - port: 80
@@ -16,4 +16,4 @@ spec:
       targetPort: 3000
       name: tcp
   selector:
-    app: app-z
+    app: back-private2

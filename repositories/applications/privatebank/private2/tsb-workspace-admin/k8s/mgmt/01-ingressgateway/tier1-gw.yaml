@@ -2,6 +2,6 @@
 apiVersion: install.tetrate.io/v1alpha1
 kind: Tier1Gateway
 metadata:
-  name: tier1-gw-xyz
-  namespace: tier1-gw-xyz
+  name: tier1-gw-private2
+  namespace: tier1-gw-private2
 spec: {}

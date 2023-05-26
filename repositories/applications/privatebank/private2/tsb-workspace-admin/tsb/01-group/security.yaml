@@ -4,14 +4,14 @@ kind: Group
 metadata:
   organization: tetrate
   tenant: privatebank
-  workspace: app-xyz
-  name: secgroup-tier1-xyz
+  workspace: private2
+  name: tier1-private2
 spec:
-  description: Security Group for Tier1Gateway XYZ
-  displayName: Tier1XYZ
+  description: Security Group for Tier1Gateway Private2
+  displayName: Tier1Private2
   namespaceSelector:
     names:
-      - "mgmt/tier1-gw-xyz"
+      - "mgmt/tier1-gw-private2"
   configMode: BRIDGED
 ---
 apiVersion: security.tsb.tetrate.io/v2
@@ -19,14 +19,14 @@ kind: Group
 metadata:
   organization: tetrate
   tenant: privatebank
-  workspace: app-xyz
-  name: secgroup-ingress-xyz
+  workspace: private2
+  name: ingress-private2
 spec:
-  description: Security Group for IngressGateway XYZ
-  displayName: IngressXYZ
+  description: Security Group for IngressGateway Private2
+  displayName: IngressPrivate2
   namespaceSelector:
     names:
-      - "*/gateway-xyz"
+      - "*/gateway-private2"
   configMode: BRIDGED
 ---
 apiVersion: security.tsb.tetrate.io/v2
@@ -34,14 +34,14 @@ kind: Group
 metadata:
   organization: tetrate
   tenant: privatebank
-  workspace: app-xyz
-  name: secgroup-x
+  workspace: private2
+  name: front-private2
 spec:
-  description: Security Group for MicroService X
-  displayName: AppX
+  description: Security Group for Frontend of Private2 Application
+  displayName: FrontPrivate2
   namespaceSelector:
     names:
-      - "*/ns-x"
+      - "*/front-private2"
   configMode: BRIDGED
 ---
 apiVersion: security.tsb.tetrate.io/v2
@@ -49,14 +49,14 @@ kind: Group
 metadata:
   organization: tetrate
   tenant: privatebank
-  workspace: app-xyz
-  name: secgroup-y
+  workspace: private2
+  name: mid-private2
 spec:
-  description: Security Group for MicroService Y
-  displayName: AppY
+  description: Security Group for Middleware of Private2 Application
+  displayName: MidPrivate2
   namespaceSelector:
     names:
-      - "*/ns-y"
+      - "*/mid-private2"
   configMode: BRIDGED
 ---
 apiVersion: security.tsb.tetrate.io/v2
@@ -64,12 +64,12 @@ kind: Group
 metadata:
   organization: tetrate
   tenant: privatebank
-  workspace: app-xyz
-  name: secgroup-z
+  workspace: private2
+  name: back-private2
 spec:
-  description: Security Group for MicroService Z
-  displayName: AppZ
+  description: Security Group for Backend of Private2 Application
+  displayName: BackPrivate2
   namespaceSelector:
     names:
-      - "*/ns-z"
+      - "*/back-private2"
   configMode: BRIDGED

@@ -27,14 +27,20 @@ function print_info {
 if [[ ${ACTION} = "deploy" ]]; then
 
   # Configure k8s objects
+  # print_info "Configure k8s objects" ;
+  # for cluster in $(ls -1 ${K8S_CONFIG_DIR}); do
+  #   print_info "Configure k8s object in cluster '${cluster}'" ;
+  #   for k8s_file in $(ls -1 ${K8S_CONFIG_DIR}/${cluster}) ; do
+  #     echo "Applying k8s configuration of '${K8S_CONFIG_DIR}/${cluster}/${k8s_file}' in cluster '${cluster}'" ;
+  #     kubectl --context ${cluster} apply -f ${K8S_CONFIG_DIR}/${cluster}/${k8s_file} ;
+  #     sleep 1 ;
+  #   done
+  # done
+
   print_info "Configure k8s objects" ;
   for cluster in $(ls -1 ${K8S_CONFIG_DIR}); do
     print_info "Configure k8s object in cluster '${cluster}'" ;
-    for k8s_file in $(ls -1 ${K8S_CONFIG_DIR}/${cluster}) ; do
-      echo "Applying k8s configuration of '${K8S_CONFIG_DIR}/${cluster}/${k8s_file}' in cluster '${cluster}'" ;
-      kubectl --context ${cluster} apply -f ${K8S_CONFIG_DIR}/${cluster}/${k8s_file} ;
-      sleep 1 ;
-    done    
+    kubectl --context ${cluster} apply -k ${K8S_CONFIG_DIR}/${cluster} ;
   done
 
   exit 0

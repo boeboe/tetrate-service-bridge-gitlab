@@ -4,14 +4,14 @@ kind: Group
 metadata:
   organization: tetrate
   tenant: privatebank
-  workspace: app-xyz
-  name: gwgroup-tier1-xyz
+  workspace: private2
+  name: tier1-private2
 spec:
-  description: Tier1 Gateway Group for Application XYZ
-  displayName: Tier1XYZ
+  description: Tier1 Gateway Group for Application Private2
+  displayName: Tier1Private2
   namespaceSelector:
     names:
-      - "mgmt/tier1-gw-xyz"
+      - "mgmt/tier1-gw-private2"
   configMode: BRIDGED
 ---
 apiVersion: gateway.tsb.tetrate.io/v2
@@ -19,12 +19,12 @@ kind: Group
 metadata:
   organization: tetrate
   tenant: privatebank
-  workspace: app-xyz
-  name: gwgroup-ingress-xyz
+  workspace: private2
+  name: ingress-private2
 spec:
-  description: Ingress Gateway Group for Application XYZ
-  displayName: IngressXYZ
+  description: Ingress Gateway Group for Application Private2
+  displayName: IngressPrivate2
   namespaceSelector:
     names:
-      - "*/gateway-xyz"
+      - "*/gateway-private2"
   configMode: BRIDGED

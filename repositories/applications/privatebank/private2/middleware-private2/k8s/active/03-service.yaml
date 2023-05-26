@@ -2,11 +2,11 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: app-y
-  namespace: ns-y
+  name: mid-private2
+  namespace: mid-private2
   labels:
-    app: app-y
-    service: app-y
+    app: mid-private2
+    service: mid-private2
 spec:
   ports:
     - port: 80
@@ -16,4 +16,4 @@ spec:
       targetPort: 3000
       name: tcp
   selector:
-    app: app-y
+    app: mid-private2

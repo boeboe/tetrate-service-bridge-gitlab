@@ -4,8 +4,8 @@ kind: SecuritySetting
 metadata:
   organization: tetrate
   tenant: privatebank
-  workspace: app-xyz
-  group: secgroup-ingress-xyz
+  workspace: private2
+  group: ingress-private2
   name: tier1-to-ingress
 spec:
   authenticationSettings:
@@ -15,18 +15,18 @@ spec:
     rules:
       allow:
        - from:
-           fqn: organizations/tetrate/tenants/privatebank/workspaces/app-xyz/securitygroups/secgroup-tier1-xyz
+           fqn: organizations/tetrate/tenants/privatebank/workspaces/private2/securitygroups/tier1-private2
          to:
-           fqn: organizations/tetrate/tenants/privatebank/workspaces/app-xyz/securitygroups/secgroup-ingress-xyz
+           fqn: organizations/tetrate/tenants/privatebank/workspaces/private2/securitygroups/ingress-private2
 ---
 apiVersion: security.tsb.tetrate.io/v2
 kind: SecuritySetting
 metadata:
   organization: tetrate
   tenant: privatebank
-  workspace: app-xyz
-  group: secgroup-x
-  name: ingress-to-x
+  workspace: private2
+  group: front-private2
+  name: ingress-to-front
 spec:
   authenticationSettings:
     trafficMode: REQUIRED
@@ -35,18 +35,18 @@ spec:
     rules:
       allow:
        - from:
-           fqn: organizations/tetrate/tenants/privatebank/workspaces/app-xyz/securitygroups/secgroup-ingress-xyz
+           fqn: organizations/tetrate/tenants/privatebank/workspaces/private2/securitygroups/ingress-private2
          to:
-           fqn: organizations/tetrate/tenants/privatebank/workspaces/app-xyz/securitygroups/secgroup-x
+           fqn: organizations/tetrate/tenants/privatebank/workspaces/private2/securitygroups/front-private2
 ---
 apiVersion: security.tsb.tetrate.io/v2
 kind: SecuritySetting
 metadata:
   organization: tetrate
   tenant: privatebank
-  workspace: app-xyz
-  group: secgroup-y
-  name: x-to-y
+  workspace: private2
+  group: mid-private2
+  name: front-to-mid
 spec:
   authenticationSettings:
     trafficMode: REQUIRED
@@ -55,18 +55,18 @@ spec:
     rules:
       allow:
        - from:
-           fqn: organizations/tetrate/tenants/privatebank/workspaces/app-xyz/securitygroups/secgroup-x
+           fqn: organizations/tetrate/tenants/privatebank/workspaces/private2/securitygroups/front-private2
          to:
-           fqn: organizations/tetrate/tenants/privatebank/workspaces/app-xyz/securitygroups/secgroup-y
+           fqn: organizations/tetrate/tenants/privatebank/workspaces/private2/securitygroups/mid-private2
 ---
 apiVersion: security.tsb.tetrate.io/v2
 kind: SecuritySetting
 metadata:
   organization: tetrate
   tenant: privatebank
-  workspace: app-xyz
-  group: secgroup-z
-  name: y-to-z
+  workspace: private2
+  group: back-private2
+  name: mid-to-back
 spec:
   authenticationSettings:
     trafficMode: REQUIRED
@@ -75,6 +75,6 @@ spec:
     rules:
       allow:
        - from:
-           fqn: organizations/tetrate/tenants/privatebank/workspaces/app-xyz/securitygroups/secgroup-y
+           fqn: organizations/tetrate/tenants/privatebank/workspaces/private2/securitygroups/mid-private2
          to:
-           fqn: organizations/tetrate/tenants/privatebank/workspaces/app-xyz/securitygroups/secgroup-z
+           fqn: organizations/tetrate/tenants/privatebank/workspaces/private2/securitygroups/back-private2

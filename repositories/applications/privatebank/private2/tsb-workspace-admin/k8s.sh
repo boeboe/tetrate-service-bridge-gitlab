@@ -9,7 +9,7 @@ K8S_CONFIG_DIR=${ROOT_DIR}/k8s
 INGRESSGATEWAY_DIR="01-ingressgateway"
 
 OUTPUT_DIR=${ROOT_DIR}/output/k8s
-CERTS_BASE_DIR=${ROOT_DIR}/output/ingress-certs/server/xyz
+CERTS_BASE_DIR=${ROOT_DIR}/output/ingress-certs/server/private2
 
 ACTION=${1}
 
@@ -33,24 +33,24 @@ if [[ ${ACTION} = "deploy" ]]; then
 
   # Configure k8s secrets
   print_info "Configure tier1 gateway k8s mutual tls secrets" ;
-  if kubectl --context mgmt -n tier1-gw-xyz get secret app-xyz-cert &>/dev/null; then
-    echo "Secret 'app-xyz-cert' in namespace 'tier1-gw-xyz' already exists in cluster 'mgmt'"
+  if kubectl --context mgmt -n tier1-gw-private2 get secret private2-cert &>/dev/null; then
+    echo "Secret 'private2-certt' in namespace 'tier1-gw-private2' already exists in cluster 'mgmt'"
   else
-    echo "Creating secret 'app-xyz-cert' in namespace 'tier1-gw-xyz' in cluster 'mgmt'"
-    kubectl --context mgmt create secret generic app-xyz-cert -n tier1-gw-xyz \
-      --from-file=tls.key=${CERTS_BASE_DIR}/xyz.demo.tetrate.io-key.pem \
-      --from-file=tls.crt=${CERTS_BASE_DIR}/xyz.demo.tetrate.io-cert.pem \
+    echo "Creating secret 'private2-cert' in namespace 'tier1-gw-private2' in cluster 'mgmt'"
+    kubectl --context mgmt create secret generic private2-cert -n tier1-gw-private2 \
+      --from-file=tls.key=${CERTS_BASE_DIR}/private2.demo.tetrate.io-key.pem \
+      --from-file=tls.crt=${CERTS_BASE_DIR}/private2.demo.tetrate.io-cert.pem \
       --from-file=ca.crt=${CERTS_BASE_DIR}/root-cert.pem ;
   fi
   print_info "Configure ingress gateway k8s single tls secrets" ;
   for cluster_name in active standby ; do
-    if kubectl --context ${cluster_name} -n gateway-xyz get secret app-xyz-cert &>/dev/null; then
-      echo "Secret 'app-xyz-cert' in namespace 'gateway-xyz' already exists in cluster '${cluster_name}'"
+    if kubectl --context ${cluster_name} -n gateway-private2 get secret private2-cert &>/dev/null; then
+      echo "Secret 'private2-cert' in namespace 'gateway-private2' already exists in cluster '${cluster_name}'"
     else
-      echo "Creating secret 'app-xyz-cert' in namespace 'gateway-xyz' in cluster '${cluster_name}'"
-      kubectl --context ${cluster_name} create secret tls app-xyz-cert -n gateway-xyz \
-        --key ${CERTS_BASE_DIR}/xyz.demo.tetrate.io-key.pem \
-        --cert ${CERTS_BASE_DIR}/xyz.demo.tetrate.io-cert.pem ;
+      echo "Creating secret 'private2-cert' in namespace 'gateway-private2' in cluster '${cluster_name}'"
+      kubectl --context ${cluster_name} create secret tls private2-cert -n gateway-private2 \
+        --key ${CERTS_BASE_DIR}/private2.demo.tetrate.io-key.pem \
+        --cert ${CERTS_BASE_DIR}/private2.demo.tetrate.io-cert.pem ;
     fi
   done
 

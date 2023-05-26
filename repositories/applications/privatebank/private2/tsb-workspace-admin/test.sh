@@ -5,10 +5,16 @@
 ROOT_DIR="$( cd -- "$(dirname "${0}")" >/dev/null 2>&1 ; pwd -P )"
 
 OUTPUT_DIR=${ROOT_DIR}/output/tsb
-CERTS_BASE_DIR=${ROOT_DIR}/output/ingress-certs/client/xyz
+CERTS_BASE_DIR=${ROOT_DIR}/output/ingress-certs/client/private2
 
 ACTION=${1}
 COUNT="${COUNT:-100}"
+
+# -e exits on error
+# -u errors on undefined variables
+# -x prints commands before execution
+# -o (for option) pipefail exits on command pipe failures
+set -euo pipefail
 
 # Print info messages
 #   args:
@@ -24,11 +30,11 @@ if [[ ${ACTION} = "curl" ]]; then
 
    # Going to send test traffic using curl
   print_info "Going to send test traffic (count: ${COUNT}) using curl" ;
-  XYZ_T1_GW_IP=$(kubectl --context mgmt get svc -n tier1-gw-xyz tier1-gw-xyz --output jsonpath='{.status.loadBalancer.ingress[0].ip}') ;
-  echo "curl -v -H \"X-B3-Sampled: 1\" --resolve \"xyz.demo.tetrate.io:443:${XYZ_T1_GW_IP}\" --cacert ${CERTS_BASE_DIR}/root-cert.pem --cert ${CERTS_BASE_DIR}/client1.xyz.demo.tetrate.io-cert.pem --key ${CERTS_BASE_DIR}/client1.xyz.demo.tetrate.io-key.pem \"https://xyz.demo.tetrate.io/proxy/app-y.ns-y/proxy/app-z.ns-z\""
+  private2_t1_gw_ip=$(kubectl --context mgmt get svc -n tier1-gw-private2 tier1-gw-private2 --output jsonpath='{.status.loadBalancer.ingress[0].ip}') ;
+  echo "curl -v -H \"X-B3-Sampled: 1\" --resolve \"private2.demo.tetrate.io:443:${private2_t1_gw_ip}\" --cacert ${CERTS_BASE_DIR}/root-cert.pem --cert ${CERTS_BASE_DIR}/client1.private2.demo.tetrate.io-cert.pem --key ${CERTS_BASE_DIR}/client1.private2.demo.tetrate.io-key.pem \"https://private2.demo.tetrate.io/proxy/mid-private2.mid-private2/proxy/back-private2.back-private2\""
 
   for ((i=0; i<${COUNT}; i++)); do
-    curl -v -H "X-B3-Sampled: 1" --resolve "xyz.demo.tetrate.io:443:${XYZ_T1_GW_IP}" --cacert ${CERTS_BASE_DIR}/root-cert.pem --cert ${CERTS_BASE_DIR}/client1.xyz.demo.tetrate.io-cert.pem --key ${CERTS_BASE_DIR}/client1.xyz.demo.tetrate.io-key.pem "https://xyz.demo.tetrate.io/proxy/app-y.ns-y/proxy/app-z.ns-z" ;
+    curl -v -H "X-B3-Sampled: 1" --resolve "private2.demo.tetrate.io:443:${private2_t1_gw_ip}" --cacert ${CERTS_BASE_DIR}/root-cert.pem --cert ${CERTS_BASE_DIR}/client1.private2.demo.tetrate.io-cert.pem --key ${CERTS_BASE_DIR}/client1.private2.demo.tetrate.io-key.pem "https://private2.demo.tetrate.io/proxy/mid-private2.mid-private2/proxy/back-private2.back-private2" ;
     sleep 1 ;
   done
 

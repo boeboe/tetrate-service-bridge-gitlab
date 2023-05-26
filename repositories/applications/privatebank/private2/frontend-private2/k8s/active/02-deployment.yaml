@@ -2,24 +2,24 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: app-x-v1
-  namespace: ns-x
+  name: front-private2-v1
+  namespace: front-private2
   labels:
-    app: app-x
+    app: front-private2
     version: v1
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: app-x
+      app: front-private2
       version: v1
   template:
     metadata:
       labels:
-        app: app-x
+        app: front-private2
         version: v1
     spec:
-      serviceAccountName: sa-app-x
+      serviceAccountName: sa-front-private2
       containers:
         - name: obs-tester
           image: 192.168.47.2:5050/platform/tsb-images/obs-tester-server:1.0
@@ -36,7 +36,7 @@ spec:
             - '--zipkin-singlehost-spans' # Envoy does not work well with Zipkin's default shared spans
           env:
             - name: SVCNAME
-              value: app-x
+              value: front-private2
           ports:
             - name: http
               containerPort: 8000

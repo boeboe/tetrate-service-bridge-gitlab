@@ -4,25 +4,25 @@ kind: IngressGateway
 metadata:
   organization: tetrate
   tenant: privatebank
-  workspace: app-xyz
-  group: gwgroup-ingress-xyz
-  name: ingress-gw-xyz
+  workspace: private2
+  group: ingress-private2
+  name: ingress-gw-private2
 spec:
-  description: Ingress Gateway for Application XYZ
-  displayName: IngressGwXYZ
+  description: Ingress Gateway for Application Private2
+  displayName: IngressGwPrivate2
   workloadSelector:
-    namespace: gateway-xyz
+    namespace: gateway-private2
     labels:
-      app: ingress-gw-xyz
+      app: ingress-gw-private2
   http:
-  - name: xyz
-    hostname: xyz.demo.tetrate.io
+  - name: private2-https
+    hostname: private2.demo.tetrate.io
     port: 443
     tls:
       mode: SIMPLE
-      secretName: app-xyz-cert
+      secretName: private2-cert
     routing:
       rules:
       - route:
-          host: ns-x/app-x.ns-x.svc.cluster.local
+          host: front-private2/front-private2.front-private2.svc.cluster.local
           port: 80

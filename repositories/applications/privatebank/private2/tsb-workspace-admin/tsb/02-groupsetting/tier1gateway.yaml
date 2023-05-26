@@ -4,23 +4,23 @@ kind: Tier1Gateway
 metadata:
   organization: tetrate
   tenant: privatebank
-  workspace: app-xyz
-  group: gwgroup-tier1-xyz
-  name: tier1-gw-xyz
+  workspace: private2
+  group: tier1-private2
+  name: tier1-gw-private2
 spec:
-  description: Tier1 Gateway Group for Application XYZ
-  displayName: Tier1GwXYZ
+  description: Tier1 Gateway Group for Application Private2
+  displayName: Tier1GwPrivate2
   workloadSelector:
-    namespace: tier1-gw-xyz
+    namespace: tier1-gw-private2
     labels:
-      app: tier1-gw-xyz
+      app: tier1-gw-private2
   externalServers:
-  - name: xyz-mtls
-    hostname: xyz.demo.tetrate.io
+  - name: private2-mtls
+    hostname: private2.demo.tetrate.io
     port: 443
     tls:
       mode: MUTUAL
-      secretName: app-xyz-cert
+      secretName: private2-cert
     clusters:
     - name: active
     - name: standby
