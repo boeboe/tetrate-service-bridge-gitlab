@@ -8,7 +8,7 @@ spec:
   - role: rbac/admin
     subjects:
     - serviceAccount: organizations/tetrate/serviceaccounts/sa-retail1
-    - user: organizations/tetrate/users/retail1-tl
+    - user: organizations/tetrate/users/tl-retail1
 ---
 apiVersion: rbac.tsb.tetrate.io/v2
 kind: AccessBindings
@@ -19,4 +19,4 @@ spec:
   - role: rbac/admin
     subjects:
     - serviceAccount: organizations/tetrate/serviceaccounts/sa-retail2
-    - user: organizations/tetrate/users/retail2-tl
+    - user: organizations/tetrate/users/tl-retail2

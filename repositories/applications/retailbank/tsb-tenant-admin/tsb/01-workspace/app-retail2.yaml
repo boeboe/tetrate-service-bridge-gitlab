@@ -6,12 +6,12 @@ metadata:
   tenant: retailbank
   name: app-retail2
 spec:
-  description: Workspace for Application Cash2
-  displayName: AppCash2
+  description: Workspace for Application Retail2
+  displayName: AppRetail2
   namespaceSelector:
     names:
       - "mgmt/tier1-gw-retail2"
-      - "*/gateway-abc"
-      - "*/ns-retail2a"
-      - "*/ns-retail2b"
-      - "*/ns-retail2c"
+      - "*/gateway-retail2"
+      - "*/frontend-retail2"
+      - "*/middleware-retail2"
+      - "*/backend-retail2"
