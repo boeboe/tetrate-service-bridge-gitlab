@@ -13,71 +13,71 @@
     "path": "applications/cashmgmt"
   },{
     "description": "Application Cash1 for Cash Management BU",
-    "name": "app-cash1",
-    "path": "applications/cashmgmt/app-cash1"
+    "name": "cash1",
+    "path": "applications/cashmgmt/cash1"
   },{
     "description": "Application Cash2 for Cash Management BU",
-    "name": "app-cash2",
-    "path": "applications/cashmgmt/app-cash2"
+    "name": "cash2",
+    "path": "applications/cashmgmt/cash2"
   },{
     "description": "Application Management for Commercial Bank BU",
     "name": "commercialbank",
     "path": "applications/commercialbank"
   },{
     "description": "Application Comm1 for Commercial Bank BU",
-    "name": "app-comm1",
-    "path": "applications/commercialbank/app-comm1"
+    "name": "comm1",
+    "path": "applications/commercialbank/comm1"
   },{
     "description": "Application Comm2 for Commercial Bank BU",
-    "name": "app-comm2",
-    "path": "applications/commercialbank/app-comm2"
+    "name": "comm2",
+    "path": "applications/commercialbank/comm2"
   },{
     "description": "Application Management for Investment Bank BU",
     "name": "investmentbank",
     "path": "applications/investmentbank"
   },{
     "description": "Application Invest1 for Investment Bank BU",
-    "name": "app-invest1",
-    "path": "applications/investmentbank/app-invest1"
+    "name": "invest1",
+    "path": "applications/investmentbank/invest1"
   },{
     "description": "Application Invest2 for Investment Bank BU",
-    "name": "app-invest2",
-    "path": "applications/investmentbank/app-invest2"
+    "name": "invest2",
+    "path": "applications/investmentbank/invest2"
   },{
     "description": "Application Management for Private Bank BU",
     "name": "privatebank",
     "path": "applications/privatebank"
   },{
     "description": "Application Private1 for Private Bank BU",
-    "name": "app-private1",
-    "path": "applications/privatebank/app-private1"
+    "name": "private1",
+    "path": "applications/privatebank/private1"
   },{
     "description": "Application Private2 for Private Bank BU",
-    "name": "app-private2",
-    "path": "applications/privatebank/app-private2"
+    "name": "private2",
+    "path": "applications/privatebank/private2"
   },{
     "description": "Application Management for Retail Bank BU",
     "name": "retailbank",
     "path": "applications/retailbank"
   },{
     "description": "Application Retail1 for Retail Bank BU",
-    "name": "app-retail1",
-    "path": "applications/retailbank/app-retail1"
+    "name": "retail1",
+    "path": "applications/retailbank/retail1"
   },{
     "description": "Application Retail2 for Retail Bank BU",
-    "name": "app-retail2",
-    "path": "applications/retailbank/app-retail2"
+    "name": "retail2",
+    "path": "applications/retailbank/retail2"
   },{
     "description": "Application Management for Wealth Management BU",
     "name": "wealthmgmt",
     "path": "applications/wealthmgmt"
   },{
     "description": "Application Wealth1 for Wealth Management BU",
-    "name": "app-wealth1",
-    "path": "applications/wealthmgmt/app-wealth1"
+    "name": "wealth1",
+    "path": "applications/wealthmgmt/wealth1"
   },{
     "description": "Application Wealth2 for Wealth Management BU",
-    "name": "app-wealth2",
-    "path": "applications/wealthmgmt/app-wealth2"
+    "name": "wealth2",
+    "path": "applications/wealthmgmt/wealth2"
   }
 ]
