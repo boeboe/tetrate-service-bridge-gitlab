@@ -8,6 +8,7 @@ OUTPUT_DIR=${ROOT_DIR}/output/tsb
 
 ACTION=${1}
 COUNT="${COUNT:-100}"
+TARGET="${TARGET:-all}"
 
 ALL_TARGETS="
 cash1
@@ -72,7 +73,11 @@ if [[ ${ACTION} = "curl" ]]; then
 
     for targ in ${ALL_TARGETS} ; do
       print_info "Going to send test traffic (count: ${COUNT}) to application ${targ} using curl" ;
-      send_curl_traffic ${targ} ${COUNT}
+      send_curl_traffic ${targ} ${COUNT} &
+      pid_${targ}=$!
+    done
+    for targ in ${ALL_TARGETS} ; do
+      wait pid_${targ}
     done
   else
     print_info "Going to send test traffic (count: ${COUNT}) to application ${TARGET} using curl" ;
