@@ -1,10 +1,12 @@
 ---
 deploy-all:
+  script: echo "going to deploy all applications"
   stage: all
   when: manual
 deploy-cashmgmt:
   needs:
     - deploy-all
+  script: echo "going to deploy all cashmgmt applications"
   stage: single-tenant
 deploy-cash1:
   needs:
