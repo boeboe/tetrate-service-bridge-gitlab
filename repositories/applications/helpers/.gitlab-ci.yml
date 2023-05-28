@@ -266,11 +266,11 @@ deploy-wealthmgmt:
 deploy-wealth1:
   needs:
     - deploy-wealthmgmt
+  script: echo "going to deploy the wealth1 application"
   stage: single-application
 deploy-wealth1-frontend:
   needs:
     - deploy-wealth1
-  script: echo "going to deploy the wealth1 application"
   stage: single-microservice
   trigger:
     project: applications/wealthmgmt/wealth1/frontend-wealth1
