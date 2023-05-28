@@ -74,7 +74,7 @@ if [[ ${ACTION} = "curl" ]]; then
     for targ in ${ALL_TARGETS} ; do
       print_info "Going to send test traffic (count: ${COUNT}) to application ${targ} using curl" ;
       send_curl_traffic ${targ} ${COUNT} &
-      pid_${targ}=$!
+      declare pid_${targ}=$!
     done
     for targ in ${ALL_TARGETS} ; do
       wait pid_${targ}
