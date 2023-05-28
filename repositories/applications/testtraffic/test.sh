@@ -59,7 +59,7 @@ function send_curl_traffic {
 
   for ((i=0; i<${2}; i++)); do
     curl -v -H "X-B3-Sampled: 1" --resolve "${1}.demo.tetrate.io:443:${target_t1_gw_ip}" --cacert ${cert_base_dir}/root-cert.pem --cert ${cert_base_dir}/client1.${1}.demo.tetrate.io-cert.pem --key ${cert_base_dir}/client1.${1}.demo.tetrate.io-key.pem "https://${1}.demo.tetrate.io/proxy/mid-${1}.mid-${1}/proxy/back-${1}.back-${1}" ;
-    sleep 1 ;
+    sleep 0.1 ;
   done
 }
 
