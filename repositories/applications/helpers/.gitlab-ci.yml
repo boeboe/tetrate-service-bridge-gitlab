@@ -11,6 +11,7 @@ deploy-cashmgmt:
 deploy-cash1:
   needs:
     - deploy-cashmgmt
+  script: echo "going to deploy the cash1 application"
   stage: single-application
 deploy-cash1-frontend:
   needs:
@@ -33,6 +34,7 @@ deploy-cash1-backend:
 deploy-cash2:
   needs:
     - deploy-cashmgmt
+  script: echo "going to deploy the cash2 application"
   stage: single-application
 deploy-cash2-frontend:
   needs:
@@ -55,10 +57,12 @@ deploy-cash2-backend:
 deploy-commercialbank:
   needs:
     - deploy-all
+  script: echo "going to deploy all commercialbank applications"
   stage: single-tenant
 deploy-comm1:
   needs:
     - deploy-commercialbank
+  script: echo "going to deploy the comm1 application"
   stage: single-application
 deploy-comm1-frontend:
   needs:
@@ -81,6 +85,7 @@ deploy-comm1-backend:
 deploy-comm2:
   needs:
     - deploy-commercialbank
+  script: echo "going to deploy the comm2 application"
   stage: single-application
 deploy-comm2-frontend:
   needs:
@@ -103,10 +108,12 @@ deploy-comm2-backend:
 deploy-investmentbank:
   needs:
     - deploy-all
+  script: echo "going to deploy all investmentbank applications"
   stage: single-tenant
 deploy-invest1:
   needs:
     - deploy-investmentbank
+  script: echo "going to deploy the invest1 application"
   stage: single-application
 deploy-invest1-frontend:
   needs:
@@ -129,6 +136,7 @@ deploy-invest1-backend:
 deploy-invest2:
   needs:
     - deploy-investmentbank
+  script: echo "going to deploy the invest2 application"
   stage: single-application
 deploy-invest2-frontend:
   needs:
@@ -151,10 +159,12 @@ deploy-invest2-backend:
 deploy-privatebank:
   needs:
     - deploy-all
+  script: echo "going to deploy all privatebank applications"
   stage: single-tenant
 deploy-private1:
   needs:
     - deploy-privatebank
+  script: echo "going to deploy the private1 application"
   stage: single-application
 deploy-private1-frontend:
   needs:
@@ -177,6 +187,7 @@ deploy-private1-backend:
 deploy-private2:
   needs:
     - deploy-privatebank
+  script: echo "going to deploy the private2 application"
   stage: single-application
 deploy-private2-frontend:
   needs:
@@ -199,10 +210,12 @@ deploy-private2-backend:
 deploy-retailbank:
   needs:
     - deploy-all
+  script: echo "going to deploy all retailbank applications"
   stage: single-tenant
 deploy-retail1:
   needs:
     - deploy-retailbank
+  script: echo "going to deploy the retail1 application"
   stage: single-application
 deploy-retail1-frontend:
   needs:
@@ -225,6 +238,7 @@ deploy-retail1-backend:
 deploy-retail2:
   needs:
     - deploy-retailbank
+  script: echo "going to deploy the retail2 application"
   stage: single-application
 deploy-retail2-frontend:
   needs:
@@ -247,6 +261,7 @@ deploy-retail2-backend:
 deploy-wealthmgmt:
   needs:
     - deploy-all
+  script: echo "going to deploy all wealthmgmt applications"
   stage: single-tenant
 deploy-wealth1:
   needs:
@@ -255,6 +270,7 @@ deploy-wealth1:
 deploy-wealth1-frontend:
   needs:
     - deploy-wealth1
+  script: echo "going to deploy the wealth1 application"
   stage: single-microservice
   trigger:
     project: applications/wealthmgmt/wealth1/frontend-wealth1
@@ -273,6 +289,7 @@ deploy-wealth1-backend:
 deploy-wealth2:
   needs:
     - deploy-wealthmgmt
+  script: echo "going to deploy the wealth2 application"
   stage: single-application
 deploy-wealth2-frontend:
   needs:
