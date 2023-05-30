@@ -8,6 +8,11 @@ help: ## This help
 
 .DEFAULT_GOAL := help
 
+
+up: gitlab-start repo-config ## Bring up full demo scenario
+clean: gitlab-remove ## Bring down full demo scenario
+
+
 .PHONY: prereq-check
 prereq-check: ## Check if prerequisites are installed
 	@/bin/sh -c './prereq.sh check'
