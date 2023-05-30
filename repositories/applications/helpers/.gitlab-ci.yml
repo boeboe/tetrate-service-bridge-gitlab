@@ -1,0 +1,318 @@
+---
+deploy-all:
+  script: echo "going to deploy all applications"
+  stage: all
+  when: manual
+deploy-cashmgmt:
+  needs:
+    - deploy-all
+  script: echo "going to deploy all cashmgmt applications"
+  stage: single-tenant
+deploy-cash1:
+  needs:
+    - deploy-cashmgmt
+  script: echo "going to deploy the cash1 application"
+  stage: single-application
+deploy-cash1-frontend:
+  needs:
+    - deploy-cash1
+  stage: single-microservice
+  trigger:
+    project: applications/cashmgmt/cash1/frontend-cash1
+deploy-cash1-middleware:
+  needs:
+    - deploy-cash1
+  stage: single-microservice
+  trigger:
+    project: applications/cashmgmt/cash1/middleware-cash1
+deploy-cash1-backend:
+  needs:
+    - deploy-cash1
+  stage: single-microservice
+  trigger:
+    project: applications/cashmgmt/cash1/backend-cash1
+deploy-cash2:
+  needs:
+    - deploy-cashmgmt
+  script: echo "going to deploy the cash2 application"
+  stage: single-application
+deploy-cash2-frontend:
+  needs:
+    - deploy-cash2
+  stage: single-microservice
+  trigger:
+    project: applications/cashmgmt/cash2/frontend-cash2
+deploy-cash2-middleware:
+  needs:
+    - deploy-cash2
+  stage: single-microservice
+  trigger:
+    project: applications/cashmgmt/cash2/middleware-cash2
+deploy-cash2-backend:
+  needs:
+    - deploy-cash2
+  stage: single-microservice
+  trigger:
+    project: applications/cashmgmt/cash2/backend-cash2
+deploy-commercialbank:
+  needs:
+    - deploy-all
+  script: echo "going to deploy all commercialbank applications"
+  stage: single-tenant
+deploy-comm1:
+  needs:
+    - deploy-commercialbank
+  script: echo "going to deploy the comm1 application"
+  stage: single-application
+deploy-comm1-frontend:
+  needs:
+    - deploy-comm1
+  stage: single-microservice
+  trigger:
+    project: applications/commercialbank/comm1/frontend-comm1
+deploy-comm1-middleware:
+  needs:
+    - deploy-comm1
+  stage: single-microservice
+  trigger:
+    project: applications/commercialbank/comm1/middleware-comm1
+deploy-comm1-backend:
+  needs:
+    - deploy-comm1
+  stage: single-microservice
+  trigger:
+    project: applications/commercialbank/comm1/backend-comm1
+deploy-comm2:
+  needs:
+    - deploy-commercialbank
+  script: echo "going to deploy the comm2 application"
+  stage: single-application
+deploy-comm2-frontend:
+  needs:
+    - deploy-comm2
+  stage: single-microservice
+  trigger:
+    project: applications/commercialbank/comm2/frontend-comm2
+deploy-comm2-middleware:
+  needs:
+    - deploy-comm2
+  stage: single-microservice
+  trigger:
+    project: applications/commercialbank/comm2/middleware-comm2
+deploy-comm2-backend:
+  needs:
+    - deploy-comm2
+  stage: single-microservice
+  trigger:
+    project: applications/commercialbank/comm2/backend-comm2
+deploy-investmentbank:
+  needs:
+    - deploy-all
+  script: echo "going to deploy all investmentbank applications"
+  stage: single-tenant
+deploy-invest1:
+  needs:
+    - deploy-investmentbank
+  script: echo "going to deploy the invest1 application"
+  stage: single-application
+deploy-invest1-frontend:
+  needs:
+    - deploy-invest1
+  stage: single-microservice
+  trigger:
+    project: applications/investmentbank/invest1/frontend-invest1
+deploy-invest1-middleware:
+  needs:
+    - deploy-invest1
+  stage: single-microservice
+  trigger:
+    project: applications/investmentbank/invest1/middleware-invest1
+deploy-invest1-backend:
+  needs:
+    - deploy-invest1
+  stage: single-microservice
+  trigger:
+    project: applications/investmentbank/invest1/backend-invest1
+deploy-invest2:
+  needs:
+    - deploy-investmentbank
+  script: echo "going to deploy the invest2 application"
+  stage: single-application
+deploy-invest2-frontend:
+  needs:
+    - deploy-invest2
+  stage: single-microservice
+  trigger:
+    project: applications/investmentbank/invest2/frontend-invest2
+deploy-invest2-middleware:
+  needs:
+    - deploy-invest2
+  stage: single-microservice
+  trigger:
+    project: applications/investmentbank/invest2/middleware-invest2
+deploy-invest2-backend:
+  needs:
+    - deploy-invest2
+  stage: single-microservice
+  trigger:
+    project: applications/investmentbank/invest2/backend-invest2
+deploy-privatebank:
+  needs:
+    - deploy-all
+  script: echo "going to deploy all privatebank applications"
+  stage: single-tenant
+deploy-private1:
+  needs:
+    - deploy-privatebank
+  script: echo "going to deploy the private1 application"
+  stage: single-application
+deploy-private1-frontend:
+  needs:
+    - deploy-private1
+  stage: single-microservice
+  trigger:
+    project: applications/privatebank/private1/frontend-private1
+deploy-private1-middleware:
+  needs:
+    - deploy-private1
+  stage: single-microservice
+  trigger:
+    project: applications/privatebank/private1/middleware-private1
+deploy-private1-backend:
+  needs:
+    - deploy-private1
+  stage: single-microservice
+  trigger:
+    project: applications/privatebank/private1/backend-private1
+deploy-private2:
+  needs:
+    - deploy-privatebank
+  script: echo "going to deploy the private2 application"
+  stage: single-application
+deploy-private2-frontend:
+  needs:
+    - deploy-private2
+  stage: single-microservice
+  trigger:
+    project: applications/privatebank/private2/frontend-private2
+deploy-private2-middleware:
+  needs:
+    - deploy-private2
+  stage: single-microservice
+  trigger:
+    project: applications/privatebank/private2/middleware-private2
+deploy-private2-backend:
+  needs:
+    - deploy-private2
+  stage: single-microservice
+  trigger:
+    project: applications/privatebank/private2/backend-private2
+deploy-retailbank:
+  needs:
+    - deploy-all
+  script: echo "going to deploy all retailbank applications"
+  stage: single-tenant
+deploy-retail1:
+  needs:
+    - deploy-retailbank
+  script: echo "going to deploy the retail1 application"
+  stage: single-application
+deploy-retail1-frontend:
+  needs:
+    - deploy-retail1
+  stage: single-microservice
+  trigger:
+    project: applications/retailbank/retail1/frontend-retail1
+deploy-retail1-middleware:
+  needs:
+    - deploy-retail1
+  stage: single-microservice
+  trigger:
+    project: applications/retailbank/retail1/middleware-retail1
+deploy-retail1-backend:
+  needs:
+    - deploy-retail1
+  stage: single-microservice
+  trigger:
+    project: applications/retailbank/retail1/backend-retail1
+deploy-retail2:
+  needs:
+    - deploy-retailbank
+  script: echo "going to deploy the retail2 application"
+  stage: single-application
+deploy-retail2-frontend:
+  needs:
+    - deploy-retail2
+  stage: single-microservice
+  trigger:
+    project: applications/retailbank/retail2/frontend-retail2
+deploy-retail2-middleware:
+  needs:
+    - deploy-retail2
+  stage: single-microservice
+  trigger:
+    project: applications/retailbank/retail2/middleware-retail2
+deploy-retail2-backend:
+  needs:
+    - deploy-retail2
+  stage: single-microservice
+  trigger:
+    project: applications/retailbank/retail2/backend-retail2
+deploy-wealthmgmt:
+  needs:
+    - deploy-all
+  script: echo "going to deploy all wealthmgmt applications"
+  stage: single-tenant
+deploy-wealth1:
+  needs:
+    - deploy-wealthmgmt
+  script: echo "going to deploy the wealth1 application"
+  stage: single-application
+deploy-wealth1-frontend:
+  needs:
+    - deploy-wealth1
+  stage: single-microservice
+  trigger:
+    project: applications/wealthmgmt/wealth1/frontend-wealth1
+deploy-wealth1-middleware:
+  needs:
+    - deploy-wealth1
+  stage: single-microservice
+  trigger:
+    project: applications/wealthmgmt/wealth1/middleware-wealth1
+deploy-wealth1-backend:
+  needs:
+    - deploy-wealth1
+  stage: single-microservice
+  trigger:
+    project: applications/wealthmgmt/wealth1/backend-wealth1
+deploy-wealth2:
+  needs:
+    - deploy-wealthmgmt
+  script: echo "going to deploy the wealth2 application"
+  stage: single-application
+deploy-wealth2-frontend:
+  needs:
+    - deploy-wealth2
+  stage: single-microservice
+  trigger:
+    project: applications/wealthmgmt/wealth2/frontend-wealth2
+deploy-wealth2-middleware:
+  needs:
+    - deploy-wealth2
+  stage: single-microservice
+  trigger:
+    project: applications/wealthmgmt/wealth2/middleware-wealth2
+deploy-wealth2-backend:
+  needs:
+    - deploy-wealth2
+  stage: single-microservice
+  trigger:
+    project: applications/wealthmgmt/wealth2/backend-wealth2
+stages:
+  - all
+  - single-tenant
+  - single-application
+  - single-microservice
+variables:
+  TERM: xterm

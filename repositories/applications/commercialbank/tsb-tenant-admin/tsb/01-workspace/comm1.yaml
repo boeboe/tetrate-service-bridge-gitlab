@@ -4,14 +4,14 @@ kind: Workspace
 metadata:
   organization: tetrate
   tenant: commercialbank
-  name: invest1
+  name: comm1
 spec:
   description: Workspace for Application Invest1
   displayName: Invest1
   namespaceSelector:
     names:
-      - "mgmt/tier1-gw-invest1"
-      - "*/gateway-invest1"
-      - "*/front-invest1"
-      - "*/mid-invest1"
-      - "*/back-invest1"
+      - "mgmt/tier1-gw-comm1"
+      - "*/gateway-comm1"
+      - "*/front-comm1"
+      - "*/mid-comm1"
+      - "*/back-comm1"

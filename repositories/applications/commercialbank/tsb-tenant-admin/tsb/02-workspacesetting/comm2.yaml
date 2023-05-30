@@ -1,0 +1,32 @@
+---
+apiVersion: api.tsb.tetrate.io/v2
+kind: WorkspaceSetting
+metadata:
+  organization: tetrate
+  tenant: commercialbank
+  workspace: comm2
+  name: comm2-setting
+spec:
+  defaultEastWestGatewaySettings:
+    - workloadSelector:
+        namespace: gateway-comm2
+        labels:
+          app: eastwest-gw-comm2
+      exposedServices:
+      - serviceLabels:
+          app: front-comm2
+          service: front-comm2
+      - serviceLabels:
+          app: mid-comm2
+          service: mid-comm2
+      - serviceLabels:
+          app: back-comm2
+          service: back-comm2
+  defaultTrafficSetting:
+    reachability:
+      hosts:
+      - gateway-comm2/*
+      - front-comm2/*
+      - mid-comm2/*
+      - back-comm2/*
+      mode: CUSTOM

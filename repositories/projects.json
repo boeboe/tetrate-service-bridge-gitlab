@@ -24,6 +24,10 @@
     "group_path": "platform",
     "name": "tsb-organization-admin"
   },{
+    "description": "Demo Helper Tasks",
+    "group_path": "applications",
+    "name": "helpers"
+  },{
     "description": "Test Traffic Management",
     "group_path": "applications",
     "name": "testtraffic"
