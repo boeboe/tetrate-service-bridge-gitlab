@@ -166,6 +166,19 @@ function gitlab_get_project_id_in_group_path {
     | jq ".[] | select(.name==\"${project_name}\") | select(.namespace.full_path==\"${group_path}\")" | jq -r '.id'
 }
 
+# Get gitlab project id without group
+#   args:
+#     (1) gitlab api url
+#     (2) gitlab api token
+#     (3) gitlab project name
+function gitlab_get_project_id {
+  [[ -z "${1}" ]] && echo "Please provide gitlab api url as 1st argument" && return 2 || local base_url="${1}" ;
+  [[ -z "${2}" ]] && echo "Please provide gitlab api token as 2nd argument" && return 2 || local api_token="${2}" ;
+  [[ -z "${3}" ]] && echo "Please provide gitlab project name as 3rd argument" && return 2 || local project_name="${3}" ;
+  curl --url "${base_url}/api/v4/projects?per_page=100" --silent --request GET --header "PRIVATE-TOKEN: ${api_token}" \
+    | jq ".[] | select(.name==\"${project_name}\")" | jq -r '.id'
+}
+
 # Get gitlab project full path list
 #   args:
 #     (1) gitlab api url
@@ -195,7 +208,7 @@ function gitlab_has_project_full_path {
   gitlab_get_projects_full_path_list "${base_url}" "${api_token}" | grep "${group_path}/${project_name}" &>/dev/null
 }
 
-# Create gitlab project
+# Create gitlab project in a group
 #   args:
 #     (1) gitlab api url
 #     (2) gitlab api token
@@ -233,5 +246,37 @@ BODY`
     else
       echo "Gitlab project '${project_name}' (project_id: ${project_id}) already exists in group with path '${group_path}' (group_id: ${group_id})"
     fi
+  fi
+}
+
+# Create gitlab project without a group
+#   args:
+#     (1) gitlab api url
+#     (2) gitlab api token
+#     (3) gitlab project name
+#     (4) gitlab project description
+function gitlab_create_project {
+  [[ -z "${1}" ]] && echo "Please provide gitlab api url as 1st argument" && return 2 || local base_url="${1}" ;
+  [[ -z "${2}" ]] && echo "Please provide gitlab api token as 2nd argument" && return 2 || local api_token="${2}" ;
+  [[ -z "${3}" ]] && echo "Please provide gitlab project name as 3rd argument" && return 2 || local project_name="${3}" ;
+  [[ -z "${4}" ]] && echo "Please provide gitlab project description as 4th argument" && return 2 || local project_description="${4}" ;
+
+  project_id=$(gitlab_get_project_id ${base_url} ${api_token} ${project_name})
+  if [[ ${project_id} == "" ]]; then
+    echo "Going to create gitlab project '${project_name}'"
+    response=`curl --url "${base_url}/api/v4/projects" --silent --request POST --header "PRIVATE-TOKEN: ${api_token}" \
+      --header "Content-Type: application/json" \
+      --data @- <<BODY
+{
+"description": "${project_description}",
+"name": "${project_name}",
+"path": "${project_name}",
+"visibility": "public"
+}
+BODY`
+
+    echo ${response} | jq
+  else
+    echo "Gitlab project '${project_name}' (project_id: ${project_id}) already exists"
   fi
 }
