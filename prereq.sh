@@ -106,13 +106,13 @@ if [[ ${ACTION} = "install" ]]; then
   sudo install /tmp/minikube /usr/local/bin/minikube ;
   rm -f /tmp/minikube ;
 
-  echo "Installing kind"
+  print_info "Installing kind"
   curl -Lo /tmp/kind "https://kind.sigs.k8s.io/dl/latest/kind-linux-amd64" ;
   chmod +x /tmp/kind ;
   sudo install /tmp/kind /usr/local/bin/kind ;
   rm -f /tmp/kind ;
 
-  echo "Installing k3d"
+  print_info "Installing k3d"
   latest_k3d_release=$(curl --silent https://api.github.com/repos/k3d-io/k3d/releases/latest | grep -i "tag_name" | awk -F '"' '{print $4}')
   curl -Lo /tmp/k3d "https://github.com/k3d-io/k3d/releases/download/${latest_k3d_release}/k3d-linux-amd64" ;
   chmod +x /tmp/k3d ;
