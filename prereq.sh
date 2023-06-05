@@ -7,6 +7,7 @@ ACTION=${1}
 if [[ ! -f "${ROOT_DIR}/env.json" ]] ; then echo "env.json not found, exiting..." ; exit 1 ; fi
 ISTIOCTL_VERSION=$(cat ${ROOT_DIR}/env.json | jq -r ".tsb.istio_version") ;
 GITLAB_RUNNER_VERSION=$(cat ${ROOT_DIR}/env.json | jq -r ".gitlab.runner_version") ;
+GITLAB_SERVER_VERSION=$(cat ${ROOT_DIR}/env.json | jq -r ".gitlab.server_version") ;
 TSB_VERSION=$(cat ${ROOT_DIR}/env.json | jq -r ".tsb.version") ;
 TSB_REPO_URL=$(cat ${ROOT_DIR}/env.json | jq -r ".tsb.tetrate_repo.url") ;
 TSB_REPO_USER=$(cat ${ROOT_DIR}/env.json | jq -r ".tsb.tetrate_repo.user") ;
@@ -60,7 +61,18 @@ if [[ ${ACTION} = "check" ]]; then
   fi
   echo "User gitlab-runner exists and is configured"
 
-  print_info "Prerequisites checks OK. You have configured scenario \"$(get_scenario)\" on topology \"$(get_topology)\""
+  if $(docker images | grep "gitlab/gitlab-ee" | grep "${GITLAB_SERVER_VERSION}-ee.0" &>/dev/null) ; then
+    echo "Gitlab docker container 'gitlab/gitlab-ee:${GITLAB_SERVER_VERSION}-ee.0' locally available"
+  else
+    if $(curl --silent "https://hub.docker.com/v2/repositories/gitlab/gitlab-ee/tags/?page_size=100" | jq -r '.results|.[]|.name' | grep "${GITLAB_SERVER_VERSION}-ee.0" &>/dev/null) ; then
+      echo "Gitlab docker container 'gitlab/gitlab-ee:${GITLAB_SERVER_VERSION}-ee.0' remotely available"
+      docker pull gitlab/gitlab-ee:${GITLAB_SERVER_VERSION}-ee.0 ;
+    else
+      return 7 ;
+    fi
+  fi
+
+  print_info "Prerequisites checks OK."
   exit 0
 fi
 
@@ -93,6 +105,19 @@ if [[ ${ACTION} = "install" ]]; then
   chmod +x /tmp/minikube ;
   sudo install /tmp/minikube /usr/local/bin/minikube ;
   rm -f /tmp/minikube ;
+
+  echo "Installing kind"
+  curl -Lo /tmp/kind "https://kind.sigs.k8s.io/dl/latest/kind-linux-amd64" ;
+  chmod +x /tmp/kind ;
+  sudo install /tmp/kind /usr/local/bin/kind ;
+  rm -f /tmp/kind ;
+
+  echo "Installing k3d"
+  local latest_k3d_release=$(curl --silent https://api.github.com/repos/k3d-io/k3d/releases/latest | grep -i "tag_name" | awk -F '"' '{print $4}')
+  curl -Lo /tmp/k3d "https://github.com/k3d-io/k3d/releases/download/${latest_k3d_release}/k3d-linux-amd64" ;
+  chmod +x /tmp/k3d ;
+  sudo install /tmp/k3d /usr/local/bin/k3d ;
+  rm -f /tmp/k3d ;
 
   print_info "Installing istioctl"
   curl -Lo /tmp/istioctl.tar.gz "https://github.com/istio/istio/releases/download/${ISTIOCTL_VERSION}/istioctl-${ISTIOCTL_VERSION}-linux-amd64.tar.gz" ;

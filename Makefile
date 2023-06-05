@@ -24,7 +24,7 @@ prereq-install: ## Install prerequisites
 ###
 
 .PHONY: gitlab-start
-gitlab-start: ## Start gitlab server and runner
+gitlab-start: prereq-check ## Start gitlab server and runner
 	@/bin/sh -c './gitlab.sh start'
 
 .PHONY: gitlab-stop

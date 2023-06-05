@@ -5,8 +5,8 @@
       "password": "Tetrate123.",
       "token": "01234567890123456789"
     },
-    "runner_version": "15.11.0",
-    "server_version": "15.11.5"
+    "runner_version": "16.0.1",
+    "server_version": "16.0.1"
   },
   "tsb": {
     "istio_version": "1.15.7",
@@ -15,6 +15,6 @@
       "url": "containers.dl.tetrate.io",
       "user": "<TSB_REPO_USERNAME>"
     },
-    "version": "1.6.1"
+    "version": "1.6.2"
   }
 }

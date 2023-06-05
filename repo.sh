@@ -52,24 +52,34 @@ if [[ ${ACTION} = "config-repos" ]]; then
 
   # Group creation using Gitlab REST APIs
   group_count=$(jq '. | length' ${GITLAB_GROUPS_CONFIG})
+  existing_group_full_path_list=$(gitlab_get_groups_full_path_list ${GITLAB_HTTP_URL} ${GITLAB_ROOT_TOKEN})
   for ((group_index=0; group_index<${group_count}; group_index++)); do
     group_description=$(jq -r '.['${group_index}'].description' ${GITLAB_GROUPS_CONFIG})
     group_name=$(jq -r '.['${group_index}'].name' ${GITLAB_GROUPS_CONFIG})
     group_path=$(jq -r '.['${group_index}'].path' ${GITLAB_GROUPS_CONFIG})
 
-    print_info "Going configure gitlab group '${group_name}' with path '${group_path}'"
-    gitlab_create_group ${GITLAB_HTTP_URL} ${GITLAB_ROOT_TOKEN} ${group_name} ${group_path} "${group_description}"
+    if $(echo ${existing_group_full_path_list} | grep "${group_path}" &>/dev/null); then
+      print_info "Gitlab group '${group_name}' with path '${group_path}' already exists"
+    else
+      print_info "Going to create gitlab group '${group_name}' with path '${group_path}'"
+      gitlab_create_group ${GITLAB_HTTP_URL} ${GITLAB_ROOT_TOKEN} ${group_name} ${group_path} "${group_description}"
+    fi
   done
 
   # Project creation using Gitlab REST APIs
   project_count=$(jq '. | length' ${GITLAB_PROJECTS_CONFIG})
+  existing_project_full_path_list=$(gitlab_get_projects_full_path_list ${GITLAB_HTTP_URL} ${GITLAB_ROOT_TOKEN})
   for ((project_index=0; project_index<${project_count}; project_index++)); do
     project_description=$(jq -r '.['${project_index}'].description' ${GITLAB_PROJECTS_CONFIG})
     project_group_path=$(jq -r '.['${project_index}'].group_path' ${GITLAB_PROJECTS_CONFIG})
     project_name=$(jq -r '.['${project_index}'].name' ${GITLAB_PROJECTS_CONFIG})
 
-    print_info "Going configure gitlab project '${project_name}' in group with path '${project_group_path}'"
-    gitlab_create_project_in_group_path ${GITLAB_HTTP_URL} ${GITLAB_ROOT_TOKEN} ${project_group_path} ${project_name} "${project_description}" ;
+    if $(echo ${existing_project_full_path_list} | grep "${project_group_path}/${project_name}" &>/dev/null); then
+      print_info "Gitlab project '${project_name}' in group with path '${project_group_path}' already exists"
+    else
+      print_info "Going to create gitlab project '${project_name}' in group with path '${project_group_path}'"
+      gitlab_create_project_in_group_path ${GITLAB_HTTP_URL} ${GITLAB_ROOT_TOKEN} ${project_group_path} ${project_name} "${project_description}" ;
+    fi
   done
 
   # Repo synchronization using git clone, add, commit and push
