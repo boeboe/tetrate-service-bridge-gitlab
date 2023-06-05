@@ -4,9 +4,9 @@
     "group_path": "platform",
     "name": "certificates"
   },{
-    "description": "Minikube Cluster Management",
+    "description": "Kubernetes Cluster Management",
     "group_path": "platform",
-    "name": "infra-minikube"
+    "name": "infra-kubernetes"
   },{
     "description": "Manage LDAP Users and Teams",
     "group_path": "platform",

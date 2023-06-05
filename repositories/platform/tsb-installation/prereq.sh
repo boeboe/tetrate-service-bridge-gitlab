@@ -63,10 +63,10 @@ if [[ ${ACTION} = "check" ]]; then
     fi
   done
 
-  print_info "Wait for minikube based kubernetes clusters to be available (pipeline platform/infra-minikube)"
+  print_info "Wait for local kubernetes clusters to be available (pipeline platform/infra-kubernetes)"
   while true; do  
-    status_platform_infra_minikube=$(gitlab_get_pipeline_status ${CI_API_V4_URL} "01234567890123456789" "platform" "infra-minikube")
-    if [[ ${status_platform_infra_minikube} == "success" ]] ; then
+    status_platform_infra_kubernetes=$(gitlab_get_pipeline_status ${CI_API_V4_URL} "01234567890123456789" "platform" "infra-kubernetes")
+    if [[ ${status_platform_infra_kubernetes} == "success" ]] ; then
       echo "OK"
       break
     else

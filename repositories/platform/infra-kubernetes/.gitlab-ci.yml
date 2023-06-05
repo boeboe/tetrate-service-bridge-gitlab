@@ -1,0 +1,11 @@
+---
+kubernetes-up:
+  script:
+    - ./k8s-local.sh up
+  stage: kubernetes-up
+  tags:
+    - platform-infra
+stages:
+  - kubernetes-up
+variables:
+  TERM: xterm

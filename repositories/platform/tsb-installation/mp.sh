@@ -26,27 +26,19 @@ function print_info {
   echo -e "${purpleb}${1}${end}"
 }
 
-
-# Patch deployment still using dockerhub: tsb/ratelimit-redis
+# Patch affinity rules of management plane (demo only!)
 #   args:
 #     (1) cluster name
-function patch_dockerhub_dep_redis {
-  while ! kubectl --context ${1} -n tsb set image deployment/ratelimit-redis redis=${INSTALL_REPO_URL}/redis:7.0.7-alpine3.17 &>/dev/null;
-  do
+function patch_remove_affinity_mp {
+  while ! kubectl --context ${1} -n tsb get managementplane managementplane &>/dev/null; do
     sleep 1 ;
   done
-  echo "Deployment tsb/ratelimit-redis sucessfully patched"
-}
-
-# Patch deployment still using dockerhub: istio-system/ratelimit-server
-#   args:
-#     (1) cluster name
-function patch_dockerhub_dep_ratelimit {
-  while ! kubectl --context ${1} -n istio-system set image deployment/ratelimit-server ratelimit=${INSTALL_REPO_URL}/ratelimit:f28024e3 &>/dev/null;
-  do
-    sleep 1 ;
+  for tsb_component in apiServer collector frontEnvoy iamServer mpc ngac oap webUI ; do
+    kubectl patch managementplane managementplane -n tsb --type=json \
+      -p="[{'op': 'replace', 'path': '/spec/components/${tsb_component}/kubeSpec/deployment/affinity/podAntiAffinity/requiredDuringSchedulingIgnoredDuringExecution/0/labelSelector/matchExpressions/0/key', 'value': 'platform.tsb.tetrate.io/demo-dummy'}]" \
+      &>/dev/null;
   done
-  echo "Deployment istio-system/ratelimit-server sucessfully patched"
+  echo "Managementplane tsb/managementplane sucessfully patched"
 }
 
 # Login as admin into tsb
@@ -135,9 +127,8 @@ if [[ ${ACTION} = "install" ]]; then
       --from-file=${CERT_OUTPUT_DIR}/${mp_cluster_name}/cert-chain.pem ;
   fi
 
-  # start patching deployments that depend on dockerhub asynchronously
-  patch_dockerhub_dep_redis ${mp_cluster_name} &
-  patch_dockerhub_dep_ratelimit ${mp_cluster_name} &
+  # start patching asynchronously
+  patch_remove_affinity_mp ${mp_cluster_name} &
 
   # install tsb management plane using the demo installation profile
   #   REF: https://docs.tetrate.io/service-bridge/1.6.x/en-us/setup/self_managed/demo-installation

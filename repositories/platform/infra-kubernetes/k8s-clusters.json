@@ -1,17 +1,20 @@
 [
   {
+    "k8s_type": "k3s",
     "k8s_version": "1.25.9",
     "name": "mgmt",
     "region": "region1",
     "zone": "zone1a"
   },
   {
+    "k8s_type": "kind",
     "k8s_version": "1.25.9",
     "name": "active",
     "region": "region1",
     "zone": "zone1a"
   },
   {
+    "k8s_type": "minikube",
     "k8s_version": "1.25.9",
     "name": "standby",
     "region": "region2",

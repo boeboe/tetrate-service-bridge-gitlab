@@ -66,16 +66,6 @@ function start_gitlab {
   fi
 }
 
-# Stop gitlab server
-#   args:
-#     (1) gitlab container name
-function stop_gitlab {
-  if docker inspect ${1} &>/dev/null ; then
-    docker stop ${1} &>/dev/null ;
-    print_info "Local docker repo ${1} stopped"
-  fi
-}
-
 # Remove gitlab server
 #   args:
 #     (1) gitlab docker network
@@ -84,18 +74,14 @@ function remove_gitlab {
   if docker inspect ${2} &>/dev/null ; then
     docker stop ${2} &>/dev/null ;
     docker rm ${2} &>/dev/null ;
-    echo "Local docker repo stopped and removed"
+    echo "Local gitlab container stopped and removed"
   fi
   if docker network inspect ${1} &>/dev/null ; then
     docker network rm ${1} &>/dev/null ;
-    echo "Local docker repo network removed"
+    echo "Local gitlab network removed"
   fi
   sudo rm -rf ${GITLAB_HOME} ;
-
-  for profile in $(sudo -u gitlab-runner minikube profile list -o json | jq -r '.valid[].Name') ; do
-    echo "Deleting minikube profile '${profile}'"
-    sudo -u gitlab-runner minikube --profile ${profile} delete ;
-  done
+  print_info "Removed gitlab container, network and local data"
 }
 
 # Start gitlab local runner
@@ -161,11 +147,6 @@ function start_gitlab_runner {
   done
 }
 
-# Stop gitlab local runner
-function stop_gitlab_runner {
-  sudo gitlab-runner stop ;
-}
-
 # Remove gitlab local runner
 #   args:
 #     (1) gitlab server url
@@ -174,6 +155,7 @@ function remove_gitlab_runner {
   sudo gitlab-runner stop ;
   sudo gitlab-runner uninstall ;
   sudo rm -rf ${GITLAB_RUNNER_WORKDIR} ;
+  print_info "Unregistered, stopped and uninstalled all gitlab runners"
 }
 
 # Get local gitlab http endpoint
@@ -231,6 +213,53 @@ function add_insecure_registry {
   fi
 }
 
+# Remove local kubernetes clusters
+function remove_kubernetes_clusters {
+  for kube_context in $(sudo -u gitlab-runner kubectl config get-contexts --no-headers -o name); do
+    if k8s_provider=$(sudo -u gitlab-runner kubectl config get-contexts ${kube_context} --no-headers 2>/dev/null) ; then
+      cluster_name=${kube_context} ;
+      network_name=${kube_context} ;
+      case ${k8s_provider} in
+        *"k3d"*)
+          echo "Going to remove k3s based kubernetes cluster '${cluster_name}'" ;
+          sudo -u gitlab-runner docker rename "${cluster_name}" "k3d-${cluster_name}-server-0" ;
+          sudo -u gitlab-runner kubectl config rename-context "${cluster_name}" "k3d-${cluster_name}" ;
+          sudo -u gitlab-runner k3d cluster delete "${cluster_name}" ;
+          if $(sudo -u gitlab-runner docker network ls | grep ${network_name} &>/dev/null) ; then
+            echo "Going to remove docker network '${network_name}'" ;
+            sudo -u gitlab-runner docker network rm ${network_name} ;
+          fi
+          ;;
+        *"kind"*)
+          echo "Going to remove kind based kubernetes cluster '${cluster_name}'" ;
+          sudo -u gitlab-runner docker rename "${cluster_name}" "${cluster_name}-control-plane" ;
+          sudo -u gitlab-runner kubectl config rename-context "${cluster_name}" "kind-${cluster_name}" ;
+          sudo -u gitlab-runner kind delete cluster --name "${cluster_name}" ;
+          if $(sudo -u gitlab-runner docker network ls | grep ${network_name} &>/dev/null) ; then
+            echo "Going to remove docker network '${network_name}'" ;
+            sudo -u gitlab-runner docker network rm ${network_name} ;
+          fi
+          ;;
+        *"${context_name}"*)
+          echo "Going to remove minikube based kubernetes cluster '${cluster_name}'" ;
+          sudo -u gitlab-runner minikube delete --profile ${cluster_name} 2>/dev/null ;
+          if $(sudo -u gitlab-runner docker network ls | grep ${network_name} &>/dev/null) ; then
+            echo "Going to remove docker network '${network_name}'" ;
+            sudo -u gitlab-runner docker network rm ${network_name} ;
+          fi
+          ;;
+        *)
+          echo "This kubectl context '${kube_context}' is not a local k3s, kind of minikube cluster" ;
+          continue ;
+          ;;
+      esac
+    else
+      continue ;
+    fi
+  done
+  print_info "All local kubernetes clusters managed by user 'gitlab-runner' removed"
+}
+
 
 if [[ ${ACTION} = "start" ]]; then
   
@@ -248,16 +277,6 @@ if [[ ${ACTION} = "start" ]]; then
   exit 0
 fi
 
-if [[ ${ACTION} = "stop" ]]; then
-
-  # Stop gitlab runner
-  stop_gitlab_runner ;
-
-  # Stop gitlab server
-  stop_gitlab ${GITLAB_CONTAINER_NAME} ;
-  exit 0
-fi
-
 if [[ ${ACTION} = "remove" ]]; then
 
   # Remove gitlab runner
@@ -266,12 +285,15 @@ if [[ ${ACTION} = "remove" ]]; then
 
   # Remove gitlab server
   remove_gitlab ${GITLAB_NETWORK} ${GITLAB_CONTAINER_NAME} ;
+
+  # Remove local kubernetes clusters
+  remove_kubernetes_clusters ;
+
   exit 0
 fi
 
 
 echo "Please specify one of the following action:"
 echo "  - start"
-echo "  - stop"
 echo "  - remove"
 exit 1

@@ -27,10 +27,6 @@ prereq-install: ## Install prerequisites
 gitlab-start: prereq-check ## Start gitlab server and runner
 	@/bin/sh -c './gitlab.sh start'
 
-.PHONY: gitlab-stop
-gitlab-stop: ## Stop gitlab server and runner
-	@/bin/sh -c './gitlab.sh stop'
-
 .PHONY: gitlab-remove
 gitlab-remove: ## Remove gitlab server and runner
 	@/bin/sh -c './gitlab.sh remove'
