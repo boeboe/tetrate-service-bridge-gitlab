@@ -55,7 +55,7 @@ if [[ ${ACTION} = "check" ]]; then
     echo "Failed to list docker containers, check if you have proper docker permissions and docker daemon is running"
     exit 5
   fi
-  if ! ( $(sudo ls "/home/gitlab-runner" &>/dev/null) && $(sudo ls "/etc/sudoers.d/gitlab-runners" &>/dev/null) ) ; then
+  if ! ( $(sudo ls "/home/gitlab-runner" &>/dev/null) && $(sudo ls "/etc/sudoers.d/gitlab-runner" &>/dev/null) ) ; then
     echo "User gitlab-runner does not exist or is not configured properly"
     exit 6
   fi
