@@ -113,7 +113,7 @@ if [[ ${ACTION} = "install" ]]; then
   rm -f /tmp/kind ;
 
   echo "Installing k3d"
-  local latest_k3d_release=$(curl --silent https://api.github.com/repos/k3d-io/k3d/releases/latest | grep -i "tag_name" | awk -F '"' '{print $4}')
+  latest_k3d_release=$(curl --silent https://api.github.com/repos/k3d-io/k3d/releases/latest | grep -i "tag_name" | awk -F '"' '{print $4}')
   curl -Lo /tmp/k3d "https://github.com/k3d-io/k3d/releases/download/${latest_k3d_release}/k3d-linux-amd64" ;
   chmod +x /tmp/k3d ;
   sudo install /tmp/k3d /usr/local/bin/k3d ;
