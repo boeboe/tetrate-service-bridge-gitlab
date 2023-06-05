@@ -98,7 +98,7 @@ if [[ ${ACTION} = "install" ]]; then
   tar xvfz /tmp/k9s.tar.gz -C /tmp ;
   chmod +x /tmp/k9s ;
   sudo install /tmp/k9s /usr/local/bin/k9s ;
-  rm -f /tmp/k9s* ;
+  sudo rm -f /tmp/k9s* ;
 
   print_info "Installing minikube"
   curl -Lo /tmp/minikube "https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64" ;
