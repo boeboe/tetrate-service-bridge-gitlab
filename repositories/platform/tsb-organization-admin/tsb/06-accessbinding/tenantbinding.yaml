@@ -2,39 +2,6 @@
 apiVersion: rbac.tsb.tetrate.io/v2
 kind: AccessBindings
 metadata:
-  fqn: organizations/tetrate/tenants/cashmgmt
-spec:
-  allow:
-  - role: rbac/admin
-    subjects:
-    - serviceAccount: organizations/tetrate/serviceaccounts/cashmgmt
-    - user: organizations/tetrate/users/mngr-cashmgmt
----
-apiVersion: rbac.tsb.tetrate.io/v2
-kind: AccessBindings
-metadata:
-  fqn: organizations/tetrate/tenants/commercialbank
-spec:
-  allow:
-  - role: rbac/admin
-    subjects:
-    - serviceAccount: organizations/tetrate/serviceaccounts/commercialbank
-    - user: organizations/tetrate/users/mngr-commercialbank
----
-apiVersion: rbac.tsb.tetrate.io/v2
-kind: AccessBindings
-metadata:
-  fqn: organizations/tetrate/tenants/investmentbank
-spec:
-  allow:
-  - role: rbac/admin
-    subjects:
-    - serviceAccount: organizations/tetrate/serviceaccounts/investmentbank
-    - user: organizations/tetrate/users/mngr-investmentbank
----
-apiVersion: rbac.tsb.tetrate.io/v2
-kind: AccessBindings
-metadata:
   fqn: organizations/tetrate/tenants/privatebank
 spec:
   allow:
@@ -53,14 +20,3 @@ spec:
     subjects:
     - serviceAccount: organizations/tetrate/serviceaccounts/retailbank
     - user: organizations/tetrate/users/mngr-retailbank
----
-apiVersion: rbac.tsb.tetrate.io/v2
-kind: AccessBindings
-metadata:
-  fqn: organizations/tetrate/tenants/wealthmgmt
-spec:
-  allow:
-  - role: rbac/admin
-    subjects:
-    - serviceAccount: organizations/tetrate/serviceaccounts/wealthmgmt
-    - user: organizations/tetrate/users/mngr-wealthmgmt

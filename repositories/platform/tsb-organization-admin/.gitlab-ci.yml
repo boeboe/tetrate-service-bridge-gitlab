@@ -1,22 +1,4 @@
 ---
-cashmgmt-tenant:
-  needs:
-    - tetrate-organization
-  stage: post-trigger
-  trigger:
-    project: applications/cashmgmt/tsb-tenant-admin
-commercialbank-tenant:
-  needs:
-    - tetrate-organization
-  stage: post-trigger
-  trigger:
-    project: applications/commercialbank/tsb-tenant-admin
-investmentbank-tenant:
-  needs:
-    - tetrate-organization
-  stage: post-trigger
-  trigger:
-    project: applications/investmentbank/tsb-tenant-admin
 privatebank-tenant:
   needs:
     - tetrate-organization
@@ -29,12 +11,6 @@ retailbank-tenant:
   stage: post-trigger
   trigger:
     project: applications/retailbank/tsb-tenant-admin
-wealthmgmt-tenant:
-  needs:
-    - tetrate-organization
-  stage: post-trigger
-  trigger:
-    project: applications/wealthmgmt/tsb-tenant-admin
 prereq:
   allow_failure: false
   script:

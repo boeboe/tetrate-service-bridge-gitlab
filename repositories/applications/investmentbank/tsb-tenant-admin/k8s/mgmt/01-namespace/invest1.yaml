@@ -1,7 +1,0 @@
----
-apiVersion: v1
-kind: Namespace
-metadata:
-  annotations:
-    tsb.tetrate.io/fqn: organizations/tetrate/tenants/investmentbank/workspaces/invest1
-  name: tier1-gw-invest1

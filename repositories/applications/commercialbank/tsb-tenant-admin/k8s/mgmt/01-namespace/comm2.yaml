@@ -1,7 +1,0 @@
----
-apiVersion: v1
-kind: Namespace
-metadata:
-  annotations:
-    tsb.tetrate.io/fqn: organizations/tetrate/tenants/commercialbank/workspaces/comm2
-  name: tier1-gw-comm2

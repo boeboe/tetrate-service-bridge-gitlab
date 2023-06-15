@@ -11,18 +11,10 @@ COUNT="${COUNT:-100}"
 TARGET="${TARGET:-all}"
 
 ALL_TARGETS="
-cash1
-cash2
-comm1
-comm2
-invest1
-invest2
 private1
 private2
 retail1
 retail2
-wealth1
-wealth2
 "
 
 # -e exits on error

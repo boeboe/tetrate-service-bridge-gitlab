@@ -1,8 +1,0 @@
----
-apiVersion: install.tetrate.io/v1alpha1
-kind: IngressGateway
-metadata:
-  name: eastwest-gw-wealth1
-  namespace: gateway-wealth1
-spec:
-  eastWestOnly: true
