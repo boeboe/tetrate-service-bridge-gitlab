@@ -21,3 +21,19 @@ patches:
     target:
       kind: .*
       name: .*
+  - patch: |-
+      - op: add
+        path: /spec/template/metadata/annotations
+        value: {}
+      - op: add
+        path: /spec/template/metadata/annotations/tetrateio.api.tsb.v2~1Organization
+        value: tetrate
+      - op: add
+        path: /spec/template/metadata/annotations/tetrateio.api.tsb.v2~1Tenant
+        value: retailbank
+      - op: add
+        path: /spec/template/metadata/annotations/tetrateio.api.tsb.v2~1Workspace
+        value: retail2
+    target:
+      kind: Deployment
+      name: .*
