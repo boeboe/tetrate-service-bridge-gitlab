@@ -17,7 +17,7 @@ patches:
         value: retailbank
       - op: add
         path: /metadata/annotations/tetrateio.api.tsb.v2~1Workspace
-        value: front-retail1vw
+        value: retail1
     target:
       kind: .*
       name: .*

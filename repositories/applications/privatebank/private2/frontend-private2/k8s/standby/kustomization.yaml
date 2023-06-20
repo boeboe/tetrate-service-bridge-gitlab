@@ -17,7 +17,7 @@ patches:
         value: privatebank
       - op: add
         path: /metadata/annotations/tetrateio.api.tsb.v2~1Workspace
-        value: front-private2vw
+        value: private2
     target:
       kind: .*
       name: .*
