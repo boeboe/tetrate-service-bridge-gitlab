@@ -7,9 +7,9 @@ spec:
   allow:
   - role: rbac/admin
     subjects:
-    - serviceAccount: organizations/tetrate/serviceaccounts/cluster-mgmt
-    - serviceAccount: organizations/tetrate/serviceaccounts/cluster-active
-    - serviceAccount: organizations/tetrate/serviceaccounts/cluster-standby
+    - serviceAccount: organizations/tetrate/serviceaccounts/auto-cluster-mgmt
+    - serviceAccount: organizations/tetrate/serviceaccounts/auto-cluster-active
+    - serviceAccount: organizations/tetrate/serviceaccounts/auto-cluster-standby
   - role: rbac/reader
     subjects:
     - team: organizations/tetrate/teams/everyone
